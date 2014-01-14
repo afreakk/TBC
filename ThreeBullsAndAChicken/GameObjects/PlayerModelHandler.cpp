@@ -1,21 +1,50 @@
 #include "stdafx.h"
 #include "PlayerModelHandler.h"
 
-#include "OgreCore.h"
+#include "../OgreCore/OgreCore.h"
+#include "../Other/UnitCircleMovement.h"
 using namespace Ogre;
 PlayerModelHandler::PlayerModelHandler()
 {
 }
-void PlayerModelHandler::init(Ogre::Vector3 pos)
-{
-	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
-	Entity* playerEntity =  sMgr->createEntity("Player", "ninja.mesh");
-	m_playerNode = sMgr->getRootSceneNode()->createChildSceneNode("PlayerNode", pos);
-	m_playerNode->attachObject(playerEntity);
-	m_playerNode->setScale(Ogre::Vector3(0.1f,0.1f,0.1f));
-}
-
-
 PlayerModelHandler::~PlayerModelHandler()
 {
+}
+
+void PlayerModelHandler::normalTranslate(const Ogre::Real& rInc)
+{
+	m_rad += rInc;
+	normalSetPosition();
+}
+
+Ogre::SceneNode* PlayerModelHandler::getNode()
+{
+	return m_playerNode;
+}
+// initialise entity, node & start position
+void PlayerModelHandler::init(const Real& r, const Real& d, const Real& h) 
+{
+	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
+	m_rad = r, m_dist = d, m_height = h;
+	m_playerEntity = initMesh(sMgr);
+	m_playerNode = initPlayerNode(sMgr, m_playerEntity);
+	normalSetPosition();
+}
+Ogre::Entity* PlayerModelHandler::initMesh(SceneManager* sMgr)
+{
+	Entity* playerEntity =  sMgr->createEntity("Player", "ninja.mesh");
+	return playerEntity;
+}
+
+Ogre::SceneNode* PlayerModelHandler::initPlayerNode(Ogre::SceneManager* sMgr, Ogre::Entity* playerEntity)
+{
+	auto node = sMgr->getRootSceneNode()->createChildSceneNode("PlayerNode");
+	node->attachObject(playerEntity);
+	node->setScale(Ogre::Vector3(0.01,0.01,0.01));
+	return node;
+}
+
+void PlayerModelHandler::normalSetPosition()
+{
+	m_playerNode->setPosition(UnitCircleMovement::posFromR(m_rad, m_dist, m_height));
 }

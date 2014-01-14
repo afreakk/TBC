@@ -15,6 +15,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameObjects", "GameObjects\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Other", "Other\Other.vcxproj", "{F6F7523C-933E-4E68-A4CB-D6E39599E63D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameLevels", "GameLevels\GameLevels.vcxproj", "{88FCF4B9-7968-4532-8228-393610F5938A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Camera", "Camera\Camera.vcxproj", "{EF4CBDEB-D838-4CF2-8178-0104ED8782C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -45,6 +49,14 @@ Global
 		{F6F7523C-933E-4E68-A4CB-D6E39599E63D}.Debug|Win32.Build.0 = Debug|Win32
 		{F6F7523C-933E-4E68-A4CB-D6E39599E63D}.Release|Win32.ActiveCfg = Release|Win32
 		{F6F7523C-933E-4E68-A4CB-D6E39599E63D}.Release|Win32.Build.0 = Release|Win32
+		{88FCF4B9-7968-4532-8228-393610F5938A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{88FCF4B9-7968-4532-8228-393610F5938A}.Debug|Win32.Build.0 = Debug|Win32
+		{88FCF4B9-7968-4532-8228-393610F5938A}.Release|Win32.ActiveCfg = Release|Win32
+		{88FCF4B9-7968-4532-8228-393610F5938A}.Release|Win32.Build.0 = Release|Win32
+		{EF4CBDEB-D838-4CF2-8178-0104ED8782C3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EF4CBDEB-D838-4CF2-8178-0104ED8782C3}.Debug|Win32.Build.0 = Debug|Win32
+		{EF4CBDEB-D838-4CF2-8178-0104ED8782C3}.Release|Win32.ActiveCfg = Release|Win32
+		{EF4CBDEB-D838-4CF2-8178-0104ED8782C3}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

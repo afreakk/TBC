@@ -24,12 +24,18 @@
     <ClInclude Include="OgreCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OISCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OgreCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OISCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

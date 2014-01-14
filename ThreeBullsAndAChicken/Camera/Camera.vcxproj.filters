@@ -21,13 +21,10 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LevelManager.h">
+    <ClInclude Include="PlayerCameraState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ILevel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelListing.h">
+    <ClInclude Include="PlayerCameraStateNormal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,7 +32,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
+    <ClCompile Include="PlayerCameraStateNormal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

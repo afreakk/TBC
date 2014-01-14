@@ -47,7 +47,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\source_ogre_actual\install\include\OGRE;C:\Users\afreakk\Documents\Visual Studio 2013\Projects\ThreeBullsAndAChicken\OgreCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -79,6 +79,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerModelHandler.h" />
     <ClInclude Include="PlayerNormalState.h" />
+    <ClInclude Include="PlayerNormalTranslator.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -86,6 +87,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerModelHandler.cpp" />
     <ClCompile Include="PlayerNormalState.cpp" />
+    <ClCompile Include="PlayerNormalTranslator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

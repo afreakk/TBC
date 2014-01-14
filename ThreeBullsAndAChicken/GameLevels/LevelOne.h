@@ -1,5 +1,5 @@
 #pragma once
-#include "ILevel.h"
+#include "../Levels/ILevel.h"
 #include "../GameObjects/Player.h"
 #include "../Other/LightHandler.h"
 class LevelOne : public ILevel

@@ -24,12 +24,18 @@
     <ClInclude Include="LightHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UnitCircleMovement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LightHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitCircleMovement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

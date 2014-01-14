@@ -55,7 +55,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Libs\boost_1_55_0;C:\source_ogre_actual\install\include\OGRE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,6 +93,12 @@
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Camera\Camera.vcxproj">
+      <Project>{ef4cbdeb-d838-4cf2-8178-0104ed8782c3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GameLevels\GameLevels.vcxproj">
+      <Project>{88fcf4b9-7968-4532-8228-393610f5938a}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\GameObjects\GameObjects.vcxproj">
       <Project>{f720f1ba-79d9-44d1-ada0-7bab3ca26a12}</Project>
     </ProjectReference>

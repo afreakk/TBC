@@ -3,9 +3,10 @@
 
 #include "stdafx.h"
 #include "../Levels/LevelManager.h"
-#include "../Levels/LevelOne.h"
-#include "../Levels/MainUpdate.h"
+#include "../GameLevels/LevelOne.h"
+#include "../GameLevels/MainUpdate.h"
 #include "../OgreCore/OgreCore.h"
+#include "../OgreCore/OISCore.h"
 #include <exception>
 
 void PrintFullPath(char * partialPath)
@@ -27,9 +28,14 @@ int main()
 		OgreCore::getSingletonPtr()->initSceneManager();
 		OgreCore::getSingletonPtr()->initCamera("MainCamera");
 		OgreCore::getSingletonPtr()->initViewport();
+
+		new OISCore();
+		OISCore::getSingletonPtr()->init();
+
 		LevelManager levelMgr(new LevelOne());
-		MainUpdate mainUpdate(&levelMgr);
+		new MainUpdate(&levelMgr);
 		Ogre::Root::getSingletonPtr()->startRendering();
+		delete MainUpdate::getSingletonPtr();
 		delete Ogre::Root::getSingletonPtr();
 	}
 	catch (Ogre::Exception &e)
