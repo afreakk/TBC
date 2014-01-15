@@ -1,19 +1,14 @@
 #pragma once
 #include "PlayerModelHandler.h"
-enum class NormPDir
-{
-	Left,
-	Right,
-	None
-};
+#include "../Other/UnitCircleMovement.h"
 class PlayerNormalTranslator
 {
 public:
 	PlayerNormalTranslator();
 	~PlayerNormalTranslator();
-	void update(PlayerModelHandler& playerModel, NormPDir activeDirection);
+	void update(PlayerModelHandler& playerModel, NormalDirection activeDirection);
 private:
-	void handleVelocity(NormPDir activeDirection);
+	void handleVelocity(NormalDirection activeDirection);
 	void increaseVelocity(const Ogre::Real& ammount);
 
 	Ogre::Real m_velocity;

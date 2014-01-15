@@ -78,9 +78,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="ILevel.h" />
     <ClInclude Include="LevelListing.h" />
     <ClInclude Include="LevelManager.h" />

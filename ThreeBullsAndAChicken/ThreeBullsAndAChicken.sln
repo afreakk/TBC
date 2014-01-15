@@ -11,13 +11,19 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Levels", "Levels\Levels.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OgreCore", "OgreCore\ConsoleApplication1.vcxproj", "{5E252ED9-8A37-40BC-93A6-582AE443DBFB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameObjects", "GameObjects\GameObjects.vcxproj", "{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Other", "Other\Other.vcxproj", "{F6F7523C-933E-4E68-A4CB-D6E39599E63D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameLevels", "GameLevels\GameLevels.vcxproj", "{88FCF4B9-7968-4532-8228-393610F5938A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Camera", "Camera\Camera.vcxproj", "{EF4CBDEB-D838-4CF2-8178-0104ED8782C3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Player", "Player\GameObjects.vcxproj", "{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Enemy", "Enemy\Enemy.vcxproj", "{C864C636-82C7-40E7-8B27-D44A44BA4CB3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayerCamera", "PlayerCamera\PlayerCamera.vcxproj", "{909F2A5F-E0C8-4F87-9BD6-DCA87E9E3BA1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UniversalGameObjects", "UniversalGameObjects\UniversalGameObjects.vcxproj", "{EC74A605-F8CB-48DC-8B0C-CAD1378521CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +47,6 @@ Global
 		{5E252ED9-8A37-40BC-93A6-582AE443DBFB}.Debug|Win32.Build.0 = Debug|Win32
 		{5E252ED9-8A37-40BC-93A6-582AE443DBFB}.Release|Win32.ActiveCfg = Release|Win32
 		{5E252ED9-8A37-40BC-93A6-582AE443DBFB}.Release|Win32.Build.0 = Release|Win32
-		{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}.Debug|Win32.ActiveCfg = Debug|Win32
-		{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}.Debug|Win32.Build.0 = Debug|Win32
-		{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}.Release|Win32.ActiveCfg = Release|Win32
-		{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}.Release|Win32.Build.0 = Release|Win32
 		{F6F7523C-933E-4E68-A4CB-D6E39599E63D}.Debug|Win32.ActiveCfg = Debug|Win32
 		{F6F7523C-933E-4E68-A4CB-D6E39599E63D}.Debug|Win32.Build.0 = Debug|Win32
 		{F6F7523C-933E-4E68-A4CB-D6E39599E63D}.Release|Win32.ActiveCfg = Release|Win32
@@ -57,6 +59,22 @@ Global
 		{EF4CBDEB-D838-4CF2-8178-0104ED8782C3}.Debug|Win32.Build.0 = Debug|Win32
 		{EF4CBDEB-D838-4CF2-8178-0104ED8782C3}.Release|Win32.ActiveCfg = Release|Win32
 		{EF4CBDEB-D838-4CF2-8178-0104ED8782C3}.Release|Win32.Build.0 = Release|Win32
+		{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}.Debug|Win32.Build.0 = Debug|Win32
+		{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}.Release|Win32.ActiveCfg = Release|Win32
+		{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}.Release|Win32.Build.0 = Release|Win32
+		{C864C636-82C7-40E7-8B27-D44A44BA4CB3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C864C636-82C7-40E7-8B27-D44A44BA4CB3}.Debug|Win32.Build.0 = Debug|Win32
+		{C864C636-82C7-40E7-8B27-D44A44BA4CB3}.Release|Win32.ActiveCfg = Release|Win32
+		{C864C636-82C7-40E7-8B27-D44A44BA4CB3}.Release|Win32.Build.0 = Release|Win32
+		{909F2A5F-E0C8-4F87-9BD6-DCA87E9E3BA1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{909F2A5F-E0C8-4F87-9BD6-DCA87E9E3BA1}.Debug|Win32.Build.0 = Debug|Win32
+		{909F2A5F-E0C8-4F87-9BD6-DCA87E9E3BA1}.Release|Win32.ActiveCfg = Release|Win32
+		{909F2A5F-E0C8-4F87-9BD6-DCA87E9E3BA1}.Release|Win32.Build.0 = Release|Win32
+		{EC74A605-F8CB-48DC-8B0C-CAD1378521CD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EC74A605-F8CB-48DC-8B0C-CAD1378521CD}.Debug|Win32.Build.0 = Debug|Win32
+		{EC74A605-F8CB-48DC-8B0C-CAD1378521CD}.Release|Win32.ActiveCfg = Release|Win32
+		{EC74A605-F8CB-48DC-8B0C-CAD1378521CD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

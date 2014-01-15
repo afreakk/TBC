@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PlayerNormalTranslator.h"
+#include "../GameLevels/MainUpdate.h"
 
 
 PlayerNormalTranslator::PlayerNormalTranslator() :m_velocity(0.0), m_speed(0.1)
@@ -11,28 +12,27 @@ PlayerNormalTranslator::~PlayerNormalTranslator()
 {
 }
 
-void PlayerNormalTranslator::update(PlayerModelHandler& playerModel, NormPDir activeDirection)
+void PlayerNormalTranslator::update(PlayerModelHandler& playerModel, NormalDirection activeDirection)
 {
 	handleVelocity(activeDirection);
-	playerModel.normalTranslate(m_velocity);
+	playerModel.normalWalk(m_velocity, activeDirection);
 	m_velocity = 0.0;
 }
-#include "../GameLevels/MainUpdate.h"
 void PlayerNormalTranslator::increaseVelocity(const Ogre::Real& ammount)
 {
 	m_velocity += ammount*MainUpdate::getSingletonPtr()->getDeltaTime();
 }
-void PlayerNormalTranslator::handleVelocity(NormPDir activeDirection)
+void PlayerNormalTranslator::handleVelocity(NormalDirection activeDirection)
 {
 	switch (activeDirection)
 	{
-	case NormPDir::Left:
+	case NormalDirection::Left:
 		increaseVelocity(m_speed);
 		break;
-	case NormPDir::Right:
+	case NormalDirection::Right:
 		increaseVelocity(-m_speed);
 		break;
-	case NormPDir::None:
+	case NormalDirection::None:
 		break;
 	default:
 		assert(0);

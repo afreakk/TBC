@@ -1,7 +1,10 @@
 #pragma once
 #include "../Levels/ILevel.h"
-#include "../GameObjects/Player.h"
+#include "../Player/Player.h"
 #include "../Other/LightHandler.h"
+#include "../PlayerCamera/PlayerCamera.h"
+#include "../Enemy/EnemyHandler.h"
+#include "../UniversalGameObjects/GameRules.h"
 class LevelOne : public ILevel
 {
 public:
@@ -11,5 +14,8 @@ public:
 private:
 	Player m_player;
 	LightHandler m_lightHandler;
+	PlayerCamera* m_currentCamera;
+	EnemyHandler m_enemyHandler;
+	GameRules m_gameRules;
 };
 

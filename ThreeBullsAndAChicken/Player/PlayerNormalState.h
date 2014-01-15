@@ -11,9 +11,9 @@ public:
 	void update(PlayerModelHandler& playerModel) override;
 	~PlayerNormalState();
 private:
-	void handleDirection(NormPDir activeDirection);
-	NormPDir handleInput();
-	NormPDir m_direction;
+	void handleDirection(NormalDirection activeDirection);
+	NormalDirection handleInput();
+	NormalDirection m_direction;
 	PlayerNormalTranslator m_translator;
 
 };

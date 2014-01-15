@@ -72,9 +72,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="LightHandler.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="UnitCircleMovement.h" />

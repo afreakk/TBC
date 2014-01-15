@@ -65,7 +65,7 @@ bool OgreCore::initCamera(const Ogre::String cameraName)
 bool OgreCore::initViewport()
 {
 	m_viewport = m_window->addViewport(m_camera);
-	m_viewport->setBackgroundColour(Ogre::ColourValue(0.02f, 0.01f, 0.3f));
+	m_viewport->setBackgroundColour(Ogre::ColourValue(0.2f, 0.31f, 0.1f));
 	return true;
 }
 //gets

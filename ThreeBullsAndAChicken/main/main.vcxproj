@@ -83,9 +83,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -96,11 +93,11 @@
     <ProjectReference Include="..\Camera\Camera.vcxproj">
       <Project>{ef4cbdeb-d838-4cf2-8178-0104ed8782c3}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Enemy\Enemy.vcxproj">
+      <Project>{c864c636-82c7-40e7-8b27-d44a44ba4cb3}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\GameLevels\GameLevels.vcxproj">
       <Project>{88fcf4b9-7968-4532-8228-393610f5938a}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\GameObjects\GameObjects.vcxproj">
-      <Project>{f720f1ba-79d9-44d1-ada0-7bab3ca26a12}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Levels\Levels.vcxproj">
       <Project>{b688e051-97e1-4c1f-a283-a21a6c218b4f}</Project>
@@ -110,6 +107,15 @@
     </ProjectReference>
     <ProjectReference Include="..\Other\Other.vcxproj">
       <Project>{f6f7523c-933e-4e68-a4cb-d6e39599e63d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\PlayerCamera\PlayerCamera.vcxproj">
+      <Project>{909f2a5f-e0c8-4f87-9bd6-dca87e9e3ba1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Player\GameObjects.vcxproj">
+      <Project>{f720f1ba-79d9-44d1-ada0-7bab3ca26a12}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversalGameObjects\UniversalGameObjects.vcxproj">
+      <Project>{ec74a605-f8cb-48dc-8b0c-cad1378521cd}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

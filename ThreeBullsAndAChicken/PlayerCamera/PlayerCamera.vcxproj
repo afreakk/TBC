@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F720F1BA-79D9-44D1-ADA0-7BAB3CA26A12}</ProjectGuid>
+    <ProjectGuid>{909F2A5F-E0C8-4F87-9BD6-DCA87E9E3BA1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>GameObjects</RootNamespace>
+    <RootNamespace>PlayerCamera</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -63,7 +63,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\source_ogre_actual\install\include\OGRE;C:\Users\afreakk\Documents\Visual Studio 2013\Projects\ThreeBullsAndAChicken\OgreCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -76,18 +75,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerModelHandler.h" />
-    <ClInclude Include="PlayerNormalState.h" />
-    <ClInclude Include="PlayerNormalTranslator.h" />
-    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerCamera.h" />
+    <ClInclude Include="PlayerCameraState.h" />
+    <ClInclude Include="PlayerCameraStateNormal.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerModelHandler.cpp" />
-    <ClCompile Include="PlayerNormalState.cpp" />
-    <ClCompile Include="PlayerNormalTranslator.cpp" />
+    <ClCompile Include="PlayerCamera.cpp" />
+    <ClCompile Include="PlayerCameraStateNormal.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

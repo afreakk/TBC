@@ -18,10 +18,10 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OgreCore.h">
+    <ClInclude Include="UniversalModelHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OISCore.h">
+    <ClInclude Include="GameRules.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,10 +29,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OgreCore.cpp">
+    <ClCompile Include="UniversalModelHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OISCore.cpp">
+    <ClCompile Include="GameRules.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

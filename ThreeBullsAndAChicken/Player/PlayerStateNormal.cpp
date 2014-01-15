@@ -3,7 +3,7 @@
 #include "../OgreCore/OISCore.h"
 #include "../GameLevels/MainUpdate.h"
 
-PlayerNormalState::PlayerNormalState(): m_direction(NormPDir::Right)
+PlayerNormalState::PlayerNormalState():PlayerState(PLAYER_STATES::PlayerNormalState), m_direction(NormalDirection::Right)
 {
 }
 void PlayerNormalState::update(PlayerModelHandler& playerModel)
@@ -12,26 +12,26 @@ void PlayerNormalState::update(PlayerModelHandler& playerModel)
 	handleDirection(activeDirection);
 	m_translator.update(playerModel, activeDirection);
 }
-void PlayerNormalState::handleDirection(NormPDir activeDirection)
+void PlayerNormalState::handleDirection(NormalDirection activeDirection)
 {
-	if (activeDirection != NormPDir::None)
+	if (activeDirection != NormalDirection::None)
 		m_direction = activeDirection;
 }
-NormPDir PlayerNormalState::handleInput()
+NormalDirection PlayerNormalState::handleInput()
 {
 	auto keyboard = OISCore::getSingletonPtr()->getKeyboard();
 
 	char direction = 0;
 	if (keyboard->isKeyDown(OIS::KeyCode::KC_A))
-		direction++;
-	if (keyboard->isKeyDown(OIS::KeyCode::KC_D))
 		direction--;
+	if (keyboard->isKeyDown(OIS::KeyCode::KC_D))
+		direction++;
 
 	if (direction > 0)
-		return NormPDir::Left;
+		return NormalDirection::Left;
 	if (direction < 0)
-		return NormPDir::Right;
-	return NormPDir::None;
+		return NormalDirection::Right;
+	return NormalDirection::None;
 }
 PlayerNormalState::~PlayerNormalState()
 {
