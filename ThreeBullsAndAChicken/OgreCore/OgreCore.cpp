@@ -32,6 +32,7 @@ bool OgreCore::initRoot()
 bool OgreCore::initResources()
 {
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/city", "FileSystem", "CityDir");
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
 	return true;
@@ -58,7 +59,7 @@ bool OgreCore::initSceneManager()
 bool OgreCore::initCamera(const Ogre::String cameraName)
 {
 	m_camera = m_sceneMgr->createCamera(cameraName);
-	m_camera->setNearClipDistance(5);
+	m_camera->setNearClipDistance(0.1);
 	m_camera->setAspectRatio(resolution.x / resolution.y);
 	return true;
 }

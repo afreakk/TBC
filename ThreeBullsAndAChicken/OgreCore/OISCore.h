@@ -1,9 +1,5 @@
 #pragma once
-#include "OISEvents.h"
-#include "OISInputManager.h"
-#include "OISKeyboard.h"
-#include <map>
-#include "OgreSingleton.h"
+#include "stdafx.h"
 class OISCore:public OIS::KeyListener, public Ogre::Singleton<OISCore>
 {
 public:

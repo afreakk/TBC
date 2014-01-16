@@ -2,14 +2,11 @@
 #include "Mutant.h"
 #include "MutantNormalState.h"
 
-Mutant::Mutant()
+Mutant::Mutant(const NormalPosition pos) :m_currentState(MUTANT_STATES::STATE_NORMAL), m_materialName("red")
 {
-	NormalPosition pos;
-	pos.r = 0.1;
-	pos.d = -10.0;
-	pos.h = 0.0;
-	m_mutantModelHandler.init(pos);
-	m_currentState = new MutantNormalState();
+	m_states[MUTANT_STATES::STATE_NORMAL] = new MutantNormalState();
+	m_modelHolder.init(pos);
+	m_modelHolder.getEntity()->setMaterialName(m_materialName);
 }
 
 
@@ -17,7 +14,23 @@ Mutant::~Mutant()
 {
 }
 
+string Mutant::getMaterialName() const
+{
+	return m_materialName;
+}
+MutantModelHandler& Mutant::getModelHandler()
+{
+	return m_modelHolder;
+}
+NormalPosition Mutant::getNormalPos() const
+{
+	return m_modelHolder.getNormalPos();
+}
+void Mutant::setState(MUTANT_STATES newState)
+{
+	m_currentState = newState;
+}
 void Mutant::update()
 {
-	m_currentState->update(&m_mutantModelHandler);
+	m_states[m_currentState]->update(&m_modelHolder);
 }

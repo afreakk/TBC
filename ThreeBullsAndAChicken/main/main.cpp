@@ -7,7 +7,6 @@
 #include "../GameLevels/MainUpdate.h"
 #include "../OgreCore/OgreCore.h"
 #include "../OgreCore/OISCore.h"
-#include <exception>
 
 void PrintFullPath(char * partialPath)
 {
@@ -24,7 +23,7 @@ int main()
 		new OgreCore();
 		OgreCore::getSingletonPtr()->initRoot();
 		OgreCore::getSingletonPtr()->initResources();
-		OgreCore::getSingletonPtr()->initWindow(800,600,"TBC");
+		OgreCore::getSingletonPtr()->initWindow(1024,576,"TBC");
 		OgreCore::getSingletonPtr()->initSceneManager();
 		OgreCore::getSingletonPtr()->initCamera("MainCamera");
 		OgreCore::getSingletonPtr()->initViewport();

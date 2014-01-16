@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "../Levels/ILevel.h"
 #include "../Player/Player.h"
 #include "../Other/LightHandler.h"

@@ -1,6 +1,6 @@
 #pragma once
+#include "stdafx.h"
 #include "PlayerState.h"
-#include "OISKeyboard.h"
 #include "PlayerNormalTranslator.h"
 class PlayerNormalState:public PlayerState
 {

@@ -3,7 +3,7 @@
 #include "../GameLevels/MainUpdate.h"
 
 
-PlayerNormalTranslator::PlayerNormalTranslator() :m_velocity(0.0), m_speed(0.1)
+PlayerNormalTranslator::PlayerNormalTranslator() :m_velocity(0.0), m_speed(1.1)
 {
 }
 
@@ -18,7 +18,7 @@ void PlayerNormalTranslator::update(PlayerModelHandler& playerModel, NormalDirec
 	playerModel.normalWalk(m_velocity, activeDirection);
 	m_velocity = 0.0;
 }
-void PlayerNormalTranslator::increaseVelocity(const Ogre::Real& ammount)
+void PlayerNormalTranslator::increaseVelocity(const Real& ammount)
 {
 	m_velocity += ammount*MainUpdate::getSingletonPtr()->getDeltaTime();
 }

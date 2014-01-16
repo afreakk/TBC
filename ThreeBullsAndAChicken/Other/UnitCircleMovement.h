@@ -1,5 +1,5 @@
 #pragma once
-#include "Ogre.h"
+#include "stdafx.h"
 enum class NormalDirection
 {
 	Left,
@@ -20,3 +20,6 @@ public:
 	static void normalSetDirection(Ogre::SceneNode* node, NormalPosition, NormalDirection);
 };
 
+
+void keepWithinMax(Real*);
+unsigned energyCostOf(NormalPosition, NormalPosition);

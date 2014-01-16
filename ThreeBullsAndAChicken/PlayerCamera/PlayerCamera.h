@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "../Camera/CameraBase.h"
 #include "PlayerCameraStateNormal.h"
 #include "../Player/Player.h"

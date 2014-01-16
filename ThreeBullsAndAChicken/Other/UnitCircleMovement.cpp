@@ -25,3 +25,16 @@ void UnitCircleMovement::normalSetDirection(Ogre::SceneNode* node, NormalPositio
 	}
 	node->lookAt(posFromR(p),Ogre::Node::TransformSpace::TS_WORLD);
 }
+
+void keepWithinMax(Real* d)
+{
+	while (*d > Math::PI*2.0)
+		*d -= Math::PI*2.0;
+	while (*d < 0.0)
+		*d += Math::PI*2.0;
+}
+#include <math.h>
+unsigned energyCostOf(NormalPosition a, NormalPosition b)
+{
+	return static_cast<unsigned>(round( Ogre::Math::Abs(a.r - b.r)*100.0 ));
+}

@@ -1,6 +1,6 @@
 #pragma once
-#include "Ogre.h"
 
+#include "stdafx.h"
 class OgreCore : public Ogre::Singleton<OgreCore>
 {
 public:

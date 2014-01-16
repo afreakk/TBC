@@ -9,9 +9,15 @@ LightHandler::LightHandler()
 
 	Ogre::Light* directionalLight = sMgr->createLight("DirectionalLight");
 	directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
-	directionalLight->setDiffuseColour(Ogre::ColourValue(.25, .25, 0));
-	directionalLight->setSpecularColour(Ogre::ColourValue(.25, .25, 0));
-	directionalLight->setDirection(Ogre::Vector3(0, -1, 1));
+	directionalLight->setDiffuseColour(Ogre::ColourValue(.25, .25, .25));
+	directionalLight->setSpecularColour(Ogre::ColourValue(.25, .25, .25));
+	directionalLight->setDirection(Ogre::Vector3(-1, -1, -1));
+
+	directionalLight = sMgr->createLight("DirectionalLight2");
+	directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
+	directionalLight->setDiffuseColour(Ogre::ColourValue(.25, .25, .25));
+	directionalLight->setSpecularColour(Ogre::ColourValue(.25, .25, .25));
+	directionalLight->setDirection(Ogre::Vector3(1, -1, -1));
 }
 
 

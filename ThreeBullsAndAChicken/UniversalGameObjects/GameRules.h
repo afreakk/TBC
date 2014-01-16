@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "../OgreCore/OISCore.h"
 #include "../Enemy/EnemyHandler.h"
 #include "../Player/Player.h"

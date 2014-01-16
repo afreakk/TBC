@@ -15,6 +15,7 @@ void GameRules::init(EnemyHandler* enemyHandler, Player* player)
 {
 	m_enemyHnd = enemyHandler;
 	m_player = player;
+
 	OISCore::getSingletonPtr()->addKeyListener(this, "GameRules");
 }
 void GameRules::update()

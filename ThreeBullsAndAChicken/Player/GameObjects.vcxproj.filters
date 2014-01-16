@@ -36,6 +36,9 @@
     <ClInclude Include="PlayerSelectionState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerStats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -50,10 +53,13 @@
     <ClCompile Include="PlayerNormalTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerStateNormal.cpp">
+    <ClCompile Include="PlayerSelectionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerSelectionState.cpp">
+    <ClCompile Include="PlayerNormalState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

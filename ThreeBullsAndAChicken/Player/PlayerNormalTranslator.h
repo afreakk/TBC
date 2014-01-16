@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "PlayerModelHandler.h"
 #include "../Other/UnitCircleMovement.h"
 class PlayerNormalTranslator
@@ -9,9 +10,9 @@ public:
 	void update(PlayerModelHandler& playerModel, NormalDirection activeDirection);
 private:
 	void handleVelocity(NormalDirection activeDirection);
-	void increaseVelocity(const Ogre::Real& ammount);
+	void increaseVelocity(const Real& ammount);
 
-	Ogre::Real m_velocity;
-	Ogre::Real m_speed;
+	Real m_velocity;
+	Real m_speed;
 };
 

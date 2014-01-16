@@ -4,7 +4,6 @@
 
 template<> OISCore* Ogre::Singleton<OISCore>::msSingleton = 0;
 #include "OgreCore.h"
-#include "OgreStringConverter.h"
 OISCore::OISCore() : m_keyboard(nullptr), m_ois(nullptr), m_hWnd(0)
 {
 }

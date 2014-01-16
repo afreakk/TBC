@@ -3,7 +3,7 @@
 
 #include "../OgreCore/OgreCore.h"
 using namespace Ogre;
-MutantModelHandler::MutantModelHandler() :UniversalModelHandler("Mutant", "robot.mesh", "Walk", "Mutant")
+MutantModelHandler::MutantModelHandler() :UniversalModelHandler("Mutant", "ninja.mesh", "Walk", "Mutant")
 {
 	
 }

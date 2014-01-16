@@ -5,7 +5,10 @@
 
 #pragma once
 #include <iostream>
+#include "OgreCamera.h"
+#include "OgreSceneNode.h"
 using namespace std;
+using namespace Ogre;
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 
