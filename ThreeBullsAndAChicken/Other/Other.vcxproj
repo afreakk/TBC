@@ -75,6 +75,7 @@
   <ItemGroup>
     <ClInclude Include="DotSceneLoader.h" />
     <ClInclude Include="LightHandler.h" />
+    <ClInclude Include="MovableText.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tinyxml.h" />
     <ClInclude Include="UnitCircleMovement.h" />
@@ -82,6 +83,7 @@
   <ItemGroup>
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="LightHandler.cpp" />
+    <ClCompile Include="MovableText.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

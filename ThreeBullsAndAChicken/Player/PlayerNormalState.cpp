@@ -36,7 +36,7 @@ NormalDirection PlayerNormalState::handleInput()
 PlayerNormalState::~PlayerNormalState()
 {
 }
-void PlayerNormalState::init()
+void PlayerNormalState::init(PlayerModelHandler& modelHandler)
 {
 }
 void PlayerNormalState::exit()

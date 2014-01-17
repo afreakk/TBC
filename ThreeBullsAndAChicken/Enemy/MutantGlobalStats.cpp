@@ -1,0 +1,21 @@
+#include "stdafx.h"
+#include "MutantGlobalStats.h"
+
+template<> MutantGlobalStats* Ogre::Singleton<MutantGlobalStats>::msSingleton = 0;
+MutantGlobalStats::MutantGlobalStats() :m_walkSpeed(0.1)
+{
+}
+
+
+MutantGlobalStats::~MutantGlobalStats()
+{
+}
+
+Ogre::Real MutantGlobalStats::getWalkSpeed() const
+{
+	return m_walkSpeed;
+}
+void MutantGlobalStats::setWalkSpeed(Real newWalkSpeed)
+{
+	m_walkSpeed = newWalkSpeed;
+}

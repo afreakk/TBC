@@ -12,18 +12,22 @@ public:
 	bool initCamera(const Ogre::String cameraName); //fifth
 	bool initViewport();
 	bool initResources();   //second
+	bool initOverlaySystem();
 	//gets
+	Ogre::Vector2		getResolution();
 	Ogre::Root*         getRoot();
 	Ogre::RenderWindow* getWindow();
 	Ogre::SceneManager* getSceneMgr();
 	Ogre::Camera*       getCamera();
 	Ogre::Viewport*     getViewport();
+	Ogre::OverlaySystem*getOverlaySystem();
 private:
 	Ogre::Root*         m_root;
 	Ogre::RenderWindow* m_window;
 	Ogre::SceneManager* m_sceneMgr;
 	Ogre::Camera*       m_camera;
 	Ogre::Viewport*     m_viewport;
-	Ogre::Vector2       resolution;
+	Ogre::Vector2       m_resolution;
+	Ogre::OverlaySystem*m_overlaySystem;
 
 };

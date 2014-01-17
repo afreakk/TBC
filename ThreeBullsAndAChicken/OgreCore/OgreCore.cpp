@@ -31,8 +31,9 @@ bool OgreCore::initRoot()
 
 bool OgreCore::initResources()
 {
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/general", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/city", "FileSystem", "CityDir");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/fonts", "FileSystem", "Fonts");
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
 	return true;
@@ -40,13 +41,13 @@ bool OgreCore::initResources()
 
 bool OgreCore::initWindow(const int xResolution, const int yResolution, const Ogre::String renderWindowName)
 {
-	resolution.x = Ogre::Math::Floor(static_cast<Ogre::Real>(xResolution));
-	resolution.y = Ogre::Math::Floor(static_cast<Ogre::Real>(yResolution));
+	m_resolution.x = Ogre::Math::Floor(static_cast<Ogre::Real>(xResolution));
+	m_resolution.y = Ogre::Math::Floor(static_cast<Ogre::Real>(yResolution));
 	Ogre::NameValuePairList opts;
 	opts["fullscreen"] = "false";
 	opts["title"] = "www";
 	opts["vsync"] = "false";
-	m_window = m_root->createRenderWindow(renderWindowName, static_cast<int>(resolution.x), static_cast<int>(resolution.y), false, &opts);
+	m_window = m_root->createRenderWindow(renderWindowName, static_cast<int>(m_resolution.x), static_cast<int>(m_resolution.y), false, &opts);
 	return true;
 }
 
@@ -56,11 +57,27 @@ bool OgreCore::initSceneManager()
 	return true;
 }
 
+bool OgreCore::initOverlaySystem()
+{
+	m_overlaySystem = new Ogre::OverlaySystem;
+	OgreCore::getSingletonPtr()->getSceneMgr()->addRenderQueueListener(m_overlaySystem);
+	return true;
+}
+
+Ogre::Vector2 OgreCore::getResolution()
+{
+	return m_resolution;
+}
+
+Ogre::OverlaySystem* OgreCore::getOverlaySystem()
+{
+	return m_overlaySystem;
+}
 bool OgreCore::initCamera(const Ogre::String cameraName)
 {
 	m_camera = m_sceneMgr->createCamera(cameraName);
 	m_camera->setNearClipDistance(0.1);
-	m_camera->setAspectRatio(resolution.x / resolution.y);
+	m_camera->setAspectRatio(m_resolution.x / m_resolution.y);
 	return true;
 }
 bool OgreCore::initViewport()

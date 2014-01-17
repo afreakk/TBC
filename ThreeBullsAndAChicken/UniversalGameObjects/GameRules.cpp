@@ -34,7 +34,7 @@ bool GameRules::keyPressed(const OIS::KeyEvent& e)
 		break;
 	case PLAYER_STATES::PlayerSelectionState:
 		break;
-	case PLAYER_STATES::PlayerLerpState:
+	case PLAYER_STATES::PlayerLERPState:
 		break;
 	case PLAYER_STATES::PlayerAttackState:
 		break;

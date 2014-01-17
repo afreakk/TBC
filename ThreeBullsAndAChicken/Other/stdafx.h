@@ -6,6 +6,7 @@
 #pragma once
 #include <iostream>
 #include <Ogre.h>
+#include "Overlay/OgreFontManager.h"
 using namespace std;
 using namespace Ogre;
 

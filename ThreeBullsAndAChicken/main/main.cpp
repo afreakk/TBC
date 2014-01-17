@@ -22,11 +22,12 @@ int main()
 	{
 		new OgreCore();
 		OgreCore::getSingletonPtr()->initRoot();
-		OgreCore::getSingletonPtr()->initResources();
 		OgreCore::getSingletonPtr()->initWindow(1024,576,"TBC");
 		OgreCore::getSingletonPtr()->initSceneManager();
 		OgreCore::getSingletonPtr()->initCamera("MainCamera");
 		OgreCore::getSingletonPtr()->initViewport();
+		OgreCore::getSingletonPtr()->initOverlaySystem();
+		OgreCore::getSingletonPtr()->initResources();
 
 		new OISCore();
 		OISCore::getSingletonPtr()->init();

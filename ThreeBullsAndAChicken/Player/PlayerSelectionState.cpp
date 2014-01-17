@@ -3,7 +3,9 @@
 #include "../Enemy/EnemyHandler.h"
 #include "../OgreCore/OISCore.h"
 #include "PlayerStats.h"
-PlayerSelectionState::PlayerSelectionState() :PlayerState(PLAYER_STATES::PlayerSelectionState), m_selected(0), m_selectedEntity(nullptr)
+#include "../Enemy/MutantGlobalStats.h"
+PlayerSelectionState::PlayerSelectionState() :PlayerState(PLAYER_STATES::PlayerSelectionState), m_selected(0)
+, m_hoveredModelHandler(nullptr)
 {
 }
 
@@ -12,42 +14,50 @@ PlayerSelectionState::~PlayerSelectionState()
 {
 }
 
-void PlayerSelectionState::init()
+void PlayerSelectionState::init(PlayerModelHandler& modelHandler)
 {
+	MutantGlobalStats::getSingleton().setWalkSpeed(MutantGlobalStats::getSingleton().getWalkSpeed() / 16.0);
 	m_spaceReleased = false;
 	getSelectedEntity();
 	OISCore::getSingletonPtr()->addKeyListener(this, "PlayerSelectionState");
 }
 void PlayerSelectionState::exit()
 {
-	m_hoveredEntity.clear();
-	m_selectedEntity = nullptr;
+	MutantGlobalStats::getSingleton().setWalkSpeed(MutantGlobalStats::getSingleton().getWalkSpeed()*16.0);
+	m_hoveredModelHandler = nullptr;
+	m_selectedModelHandlers.clear();
 	OISCore::getSingletonPtr()->removeKeyListener("PlayerSelectionState");
 }
 void PlayerSelectionState::update(PlayerModelHandler& playerModel)
 {
 	m_playerModelHandler = &playerModel;
 	getSelectedEntity();
-	m_selectedEntity->setMaterialName("TransparentTexture");
+	m_hoveredModelHandler->setMaterial("TransparentTexture");
 }
 void PlayerSelectionState::getSelectedEntity()
 {
 	EnemyHandler& enemyHandler = EnemyHandler::getSingleton();
 	std::vector<Mutant>& enemies = enemyHandler.getMutants();
 	m_hoveredModelHandler = &enemies[m_selected].getModelHandler();
-	m_selectedEntity = m_hoveredModelHandler->getEntity();
 }
 bool PlayerSelectionState::keyPressed(const OIS::KeyEvent& e)
 {
 	if (e.key == OIS::KeyCode::KC_TAB)
 	{
-		if (m_selectedEntity!= nullptr)
-			m_selectedEntity->setMaterialName("red");
+		if (m_hoveredModelHandler!= nullptr)
+			m_hoveredModelHandler->setMaterial("red");
 		increaseSelected();
 	}
-	if (e.key == OIS::KeyCode::KC_C&&m_spaceReleased)
+	if (e.key == OIS::KeyCode::KC_SPACE&&m_spaceReleased)
 		select();
+	if (e.key == OIS::KeyCode::KC_RETURN)
+		goLERP();
 	return true;
+}
+void PlayerSelectionState::goLERP()
+{
+	PlayerStats::getSingleton().setAttackList(m_selectedModelHandlers);
+	m_nextState = PLAYER_STATES::PlayerLERPState;
 }
 bool PlayerSelectionState::keyReleased(const OIS::KeyEvent& e)
 {
@@ -65,25 +75,22 @@ void PlayerSelectionState::select()
 unsigned PlayerSelectionState::costOfSelected()
 {
 	unsigned cost = 0;
-	if (m_hoveredEntity.size() == 0)
+	if (m_selectedModelHandlers.size() == 0)
 		cost = energyCostOf(m_playerModelHandler->getNormalPos(), m_hoveredModelHandler->getNormalPos());
 	else
-		cost = energyCostOf(m_hoveredEntity[ m_hoveredEntity.size()-1 ].n, m_hoveredModelHandler->getNormalPos());
+		cost = energyCostOf(m_selectedModelHandlers[ m_selectedModelHandlers.size()-1 ]->getNormalPos() , m_hoveredModelHandler->getNormalPos());
 	return cost;
 }
 void PlayerSelectionState::pushbackSelected(const int cost)
 {
-	for (auto selectedEnemy : m_hoveredEntity)
+	for (auto selectedEntity : m_selectedModelHandlers)
 	{
-		if (selectedEnemy.ent == m_selectedEntity)
+		if ( selectedEntity == m_hoveredModelHandler )
 			return;
 	}
-	SelectedInfo p;
-	p.ent = m_selectedEntity;
-	p.n = m_hoveredModelHandler->getNormalPos();
-	m_hoveredEntity.push_back(p);
+	m_selectedModelHandlers.push_back(m_hoveredModelHandler);
+	m_hoveredModelHandler->markAs(m_selectedModelHandlers.size());
 	PlayerStats::getSingleton().modifyEnergy(-cost);
-
 }
 void PlayerSelectionState::increaseSelected()
 {

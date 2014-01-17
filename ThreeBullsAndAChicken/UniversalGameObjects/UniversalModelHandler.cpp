@@ -23,6 +23,15 @@ Entity* UniversalModelHandler::getEntity() const
 {
 	return m_entity;
 }
+void UniversalModelHandler::setMaterial(const string materialName)
+{
+	m_materialName = materialName;
+	m_entity->setMaterialName(m_materialName);
+}
+string UniversalModelHandler::getMaterial() const
+{
+	return m_materialName;
+}
 void UniversalModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
 	m_animationState->addTime(Ogre::Math::Abs(rInc)*20.0);

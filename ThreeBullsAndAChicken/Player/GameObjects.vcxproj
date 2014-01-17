@@ -75,7 +75,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EnergySubscriber.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerGUI.h" />
+    <ClInclude Include="PlayerLERPState.h" />
     <ClInclude Include="PlayerModelHandler.h" />
     <ClInclude Include="PlayerNormalState.h" />
     <ClInclude Include="PlayerNormalTranslator.h" />
@@ -86,6 +89,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerGUI.cpp" />
+    <ClCompile Include="PlayerLERPState.cpp" />
     <ClCompile Include="PlayerModelHandler.cpp" />
     <ClCompile Include="PlayerSelectionState.cpp" />
     <ClCompile Include="PlayerNormalState.cpp" />

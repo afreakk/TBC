@@ -6,6 +6,7 @@
 #include "../PlayerCamera/PlayerCamera.h"
 #include "../Enemy/EnemyHandler.h"
 #include "../UniversalGameObjects/GameRules.h"
+#include "../Player/PlayerGUI.h"
 class LevelOne : public ILevel
 {
 public:
@@ -18,5 +19,7 @@ private:
 	PlayerCamera* m_currentCamera;
 	EnemyHandler m_enemyHandler;
 	GameRules m_gameRules;
+	PlayerGUI m_playerGUI;
+
 };
 

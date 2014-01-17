@@ -8,6 +8,5 @@ public:
 	~MutantNormalState();
 	void update(MutantModelHandler* )override;
 private:
-	Ogre::Real m_speed;
 };
 

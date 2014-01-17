@@ -11,6 +11,8 @@ public:
 	void normalWalk(const Real& rInc, const NormalDirection& activeDirection);
 	SceneNode* getNode() const ;
 	const NormalPosition& getNormalPos() const ;
+	void setMaterial(const string materialName);
+	string getMaterial() const;
 	Entity* getEntity() const;
 protected:
 	Entity* initMesh(SceneManager* sMgr);
@@ -26,6 +28,8 @@ protected:
 	const string m_fileName;
 	const string m_walkAnimationName;
 	string m_nodeName;
+
+	string m_materialName;
 
 	const int m_id;
 	static int s_count;

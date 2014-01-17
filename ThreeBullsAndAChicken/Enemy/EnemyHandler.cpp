@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "EnemyHandler.h"
-
+#include "MutantGlobalStats.h"
 template<> EnemyHandler* Ogre::Singleton<EnemyHandler>::msSingleton = 0;
 
 EnemyHandler::EnemyHandler() :m_player(nullptr), m_attackDistance(0)
 {
+	new MutantGlobalStats();
 }
 void EnemyHandler::init(const Player* player, const std::vector<NormalPosition>& mutantStartingPositions)
 {
@@ -15,6 +16,7 @@ void EnemyHandler::init(const Player* player, const std::vector<NormalPosition>&
 }
 EnemyHandler::~EnemyHandler()
 {
+	delete MutantGlobalStats::getSingletonPtr();
 }
 
 

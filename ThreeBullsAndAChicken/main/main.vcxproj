@@ -111,6 +111,9 @@
     <ProjectReference Include="..\PlayerCamera\PlayerCamera.vcxproj">
       <Project>{909f2a5f-e0c8-4f87-9bd6-dca87e9e3ba1}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\PlayerGUI\PlayerGUI.vcxproj">
+      <Project>{c8d6c0c3-6def-45db-b4b6-68d486c2fac5}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Player\GameObjects.vcxproj">
       <Project>{f720f1ba-79d9-44d1-ada0-7bab3ca26a12}</Project>
     </ProjectReference>

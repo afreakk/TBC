@@ -5,13 +5,13 @@
 
 #pragma once
 
-#include "Ogre.h"
-#include "OISEvents.h"
-#include "OISInputManager.h"
-#include "OISKeyboard.h"
-#include <map>
-#include "Overlay/OgreOverlaySystem.h"
-
+#include <Ogre.h>
+#include "Overlay/OgreOverlayManager.h"
+#include "Overlay/OgreOverlayContainer.h"
+#include "Overlay/OgreTextAreaOverlayElement.h"
+#include <iostream>
+using namespace Ogre;
+using namespace std;
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 
 
