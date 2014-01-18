@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "EnergySubscriber.h"
+#include "../Enemy/MutantModelHandler.h"
 #include "map"
 class PlayerStats : public Ogre::Singleton<PlayerStats>
 {

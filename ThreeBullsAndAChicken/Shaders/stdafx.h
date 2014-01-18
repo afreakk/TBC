@@ -4,13 +4,12 @@
 //
 
 #pragma once
-#include <iostream>
-#include <Ogre.h>
-#include "Overlay/OgreFontManager.h"
-#include "RTShaderSystem/OgreShaderGenerator.h"
-using namespace std;
-using namespace Ogre;
 
+#include "RTShaderSystem/OgreShaderGenerator.h"
+#include "RTShaderSystem/OgreRTShaderSystem.h"
+#include <iostream>
+using namespace Ogre;
+using namespace std;
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 
 

@@ -22,4 +22,5 @@ public:
 
 
 void keepWithinMax(Real*);
+bool isWithinRange(Real, Real, Real);
 unsigned energyCostOf(NormalPosition, NormalPosition);

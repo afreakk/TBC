@@ -15,11 +15,15 @@ bool OgreCore::initRoot()
 {
 	//Clearing the first two (of three) params will let us specify plugins and resources in code instead of via text file
 	m_root = new Ogre::Root("", "");
-
+#ifdef _DEBUG
 	m_root->loadPlugin("RenderSystem_GL_d");
 	m_root->loadPlugin("Plugin_CgProgramManager_d");
 	m_root->loadPlugin("Plugin_OctreeSceneManager_d");
-
+#else
+	m_root->loadPlugin("RenderSystem_GL");
+	m_root->loadPlugin("Plugin_CgProgramManager");
+	m_root->loadPlugin("Plugin_OctreeSceneManager");
+#endif // !_DEBUG
 	Ogre::RenderSystemList::const_iterator r_it;
 
 	r_it = m_root->getAvailableRenderers().begin();
@@ -31,9 +35,9 @@ bool OgreCore::initRoot()
 
 bool OgreCore::initResources()
 {
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/general", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/city", "FileSystem", "CityDir");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/fonts", "FileSystem", "Fonts");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/general", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/city", "FileSystem", "CityDir");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/fonts", "FileSystem", "Fonts");
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
 	return true;

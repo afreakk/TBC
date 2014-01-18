@@ -36,5 +36,15 @@ void keepWithinMax(Real* d)
 #include <math.h>
 unsigned energyCostOf(NormalPosition a, NormalPosition b)
 {
+	keepWithinMax(&a.r);
+	keepWithinMax(&b.r);
 	return static_cast<unsigned>(round( Ogre::Math::Abs(a.r - b.r)*100.0 ));
+}
+bool isWithinRange(Real r1, Real r2, Real distance)
+{
+	keepWithinMax(&r1);
+	keepWithinMax(&r2);
+	if (r1 >= r2 - distance && r1 <= r2 + distance)
+		return true;
+	return false;
 }

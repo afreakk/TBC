@@ -2,7 +2,7 @@
 #include "Mutant.h"
 #include "MutantNormalState.h"
 
-Mutant::Mutant(const NormalPosition pos) :m_currentState(MUTANT_STATES::STATE_NORMAL), m_materialName("red")
+Mutant::Mutant(const NormalPosition pos) :m_currentState(MUTANT_STATES::STATE_NORMAL), m_materialName("def")
 {
 	m_states[MUTANT_STATES::STATE_NORMAL] = new MutantNormalState();
 	m_modelHolder.init(pos);

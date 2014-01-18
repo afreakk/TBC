@@ -18,7 +18,6 @@ private:
 	const Player* m_player;
 	
 	void instantiateNewEnemies();
-	bool isWithinRange(Real, Real);
 
 };
 

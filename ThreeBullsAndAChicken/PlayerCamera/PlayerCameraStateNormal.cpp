@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerCameraStateNormal.h"
 
-PlayerCameraStateNormal::PlayerCameraStateNormal() :m_camera(nullptr), m_distance(1.2)
+PlayerCameraStateNormal::PlayerCameraStateNormal() :m_camera(nullptr), m_distance(1.25)
 {
 }
 

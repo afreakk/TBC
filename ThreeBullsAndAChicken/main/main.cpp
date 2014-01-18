@@ -7,6 +7,7 @@
 #include "../GameLevels/MainUpdate.h"
 #include "../OgreCore/OgreCore.h"
 #include "../OgreCore/OISCore.h"
+#include "../Shaders/MutantShader.h"
 
 void PrintFullPath(char * partialPath)
 {
@@ -31,6 +32,8 @@ int main()
 
 		new OISCore();
 		OISCore::getSingletonPtr()->init();
+
+		MutantShader mutantShader;
 
 		LevelManager levelMgr(new LevelOne());
 		new MainUpdate(&levelMgr);

@@ -43,9 +43,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\GAME\Bin\$(Configuration)</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\GAME\Bin\$(Configuration)</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -73,13 +77,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Libs\boost_1_55_0;C:\source_ogre_actual\install\include\OGRE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>C:\source_ogre_actual\install\lib\release\OgreMain.lib;C:\Libs\boostOgreLib\release\libboost_thread-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\release\libboost_date_time-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\release\libboost_system-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\release\libboost_chrono-vc120-mt-1_55.lib;C:\source_ogre_actual\install\lib\release\OgreRTShaderSystem.lib;C:\source_ogre_actual\install\lib\release\OgreTerrain.lib;C:\source_ogre_actual\install\lib\release\OgrePaging.lib;C:\source_ogre_actual\install\lib\release\OgreVolume.lib;C:\source_ogre_actual\install\lib\release\OgreOverlay.lib;C:\source_ogre_actual\install\lib\release\OIS.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -116,6 +121,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Player\GameObjects.vcxproj">
       <Project>{f720f1ba-79d9-44d1-ada0-7bab3ca26a12}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Shaders\Shaders.vcxproj">
+      <Project>{8ee48852-f39a-49b0-9148-e2be82aed06e}</Project>
     </ProjectReference>
     <ProjectReference Include="..\UniversalGameObjects\UniversalGameObjects.vcxproj">
       <Project>{ec74a605-f8cb-48dc-8b0c-cad1378521cd}</Project>

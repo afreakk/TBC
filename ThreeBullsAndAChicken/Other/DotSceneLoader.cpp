@@ -665,8 +665,14 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 	Entity *pEntity = 0;
 	try
 	{
-		MeshManager::getSingleton().load(meshFile, m_sGroupName);
+		MeshPtr pMesh= MeshManager::getSingleton().load(meshFile, m_sGroupName, HardwareBuffer::HBU_DYNAMIC_WRITE_ONLY, HardwareBuffer::HBU_STATIC_WRITE_ONLY, true, true);
+		unsigned short src, dest;
+		if (pMesh->suggestTangentVectorBuildParams(VES_TANGENT, src, dest))
+			pMesh->buildTangentVectors(VES_TANGENT, src, dest);
+		else
+			cout << "whine" << endl;
 		pEntity = mSceneMgr->createEntity(name, meshFile);
+		pEntity->setMaterialName("def");
 		pEntity->setCastShadows(castShadows);
 		pParent->attachObject(pEntity);
 		if (!materialFile.empty())
