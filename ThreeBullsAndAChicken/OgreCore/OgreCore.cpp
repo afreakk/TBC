@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "OgreCore.h"
-
 template<> OgreCore* Ogre::Singleton<OgreCore>::msSingleton = 0;
 
 OgreCore::OgreCore() :m_root(NULL), m_window(NULL), m_sceneMgr(NULL), m_camera(NULL), m_viewport(NULL)
@@ -35,9 +34,11 @@ bool OgreCore::initRoot()
 
 bool OgreCore::initResources()
 {
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/hmat", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/general", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/city", "FileSystem", "CityDir");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/fonts", "FileSystem", "Fonts");
+
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
 	return true;
@@ -57,7 +58,7 @@ bool OgreCore::initWindow(const int xResolution, const int yResolution, const Og
 
 bool OgreCore::initSceneManager()
 {
-	m_sceneMgr = m_root->createSceneManager(Ogre::ST_GENERIC);
+	m_sceneMgr = m_root->createSceneManager(Ogre::ST_EXTERIOR_FAR);
 	return true;
 }
 

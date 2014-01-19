@@ -16,6 +16,7 @@ PlayerSelectionState::~PlayerSelectionState()
 
 void PlayerSelectionState::init(PlayerModelHandler& modelHandler)
 {
+	m_nextState = PLAYER_STATES::PlayerSelectionState;
 	MutantGlobalStats::getSingleton().setWalkSpeed(MutantGlobalStats::getSingleton().getWalkSpeed() / 16.0);
 	m_spaceReleased = false;
 	getSelectedEntity();
@@ -25,14 +26,17 @@ void PlayerSelectionState::exit()
 {
 	MutantGlobalStats::getSingleton().setWalkSpeed(MutantGlobalStats::getSingleton().getWalkSpeed()*16.0);
 	m_hoveredModelHandler = nullptr;
+	for (auto& numberMarked : m_selectedModelHandlers)
+		numberMarked->unMarkNumber();
 	m_selectedModelHandlers.clear();
+
 	OISCore::getSingletonPtr()->removeKeyListener("PlayerSelectionState");
 }
 void PlayerSelectionState::update(PlayerModelHandler& playerModel)
 {
 	m_playerModelHandler = &playerModel;
 	getSelectedEntity();
-	m_hoveredModelHandler->setMaterial("TransparentTexture");
+	m_hoveredModelHandler->markSelected(true);
 }
 void PlayerSelectionState::getSelectedEntity()
 {
@@ -45,12 +49,12 @@ bool PlayerSelectionState::keyPressed(const OIS::KeyEvent& e)
 	if (e.key == OIS::KeyCode::KC_TAB)
 	{
 		if (m_hoveredModelHandler!= nullptr)
-			m_hoveredModelHandler->setMaterial("red");
+			m_hoveredModelHandler->markSelected(false);
 		increaseSelected();
 	}
 	if (e.key == OIS::KeyCode::KC_SPACE&&m_spaceReleased)
 		select();
-	if (e.key == OIS::KeyCode::KC_RETURN)
+	if (e.key == OIS::KeyCode::KC_RETURN&&m_selectedModelHandlers.size()>0)
 		goLERP();
 	return true;
 }

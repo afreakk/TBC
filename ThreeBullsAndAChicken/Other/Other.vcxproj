@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CreationRecipes.h" />
     <ClInclude Include="DotSceneLoader.h" />
     <ClInclude Include="LightHandler.h" />
     <ClInclude Include="MovableText.h" />

@@ -33,6 +33,9 @@
     <ClInclude Include="MovableText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CreationRecipes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

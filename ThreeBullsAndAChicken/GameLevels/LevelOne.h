@@ -16,7 +16,7 @@ public:
 private:
 	Player m_player;
 	LightHandler m_lightHandler;
-	PlayerCamera* m_currentCamera;
+	PlayerCamera* m_playerCamera;
 	EnemyHandler m_enemyHandler;
 	GameRules m_gameRules;
 	PlayerGUI m_playerGUI;

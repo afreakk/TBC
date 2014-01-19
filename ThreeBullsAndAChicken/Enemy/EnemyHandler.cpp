@@ -7,7 +7,7 @@ EnemyHandler::EnemyHandler() :m_player(nullptr), m_attackDistance(0)
 {
 	new MutantGlobalStats();
 }
-void EnemyHandler::init(const Player* player, const std::vector<NormalPosition>& mutantStartingPositions)
+void EnemyHandler::init(Player* player, const std::vector<NormalPosition>& mutantStartingPositions)
 {
 	m_player = player;
 	m_attackDistance = Ogre::Math::PI / 8.0;

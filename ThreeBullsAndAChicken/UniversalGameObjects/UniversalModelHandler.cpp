@@ -4,75 +4,74 @@
 
 using namespace Ogre;
 
-int UniversalModelHandler::s_count = 0;
 
-UniversalModelHandler::UniversalModelHandler(string entityName, string fileName, string walkAnimName, string nodeName)
-: m_entity(nullptr), m_node(nullptr), m_animationState(nullptr)
-, m_entityName(entityName), m_fileName(fileName), m_walkAnimationName(walkAnimName), m_nodeName(nodeName)
-, m_id(++s_count)
+UniversalModelHandler::UniversalModelHandler(CreationRecipes* recipe)
+: m_entity(nullptr), m_node(nullptr)
+, m_walkAnim(nullptr), m_attackAnim(nullptr)
+, m_crRecipe(recipe)
 {
-	m_entityName.append(boost::lexical_cast<string> (m_id));
-	m_nodeName.append(boost::lexical_cast<string> (m_id));
-
 }
 UniversalModelHandler::~UniversalModelHandler()
 {
 }
 
-Entity* UniversalModelHandler::getEntity() const
+void UniversalModelHandler::playWalkAnim(const Real howMuch)
 {
-	return m_entity;
-}
-void UniversalModelHandler::setMaterial(const string materialName)
-{
-	m_materialName = materialName;
-	m_entity->setMaterialName(m_materialName);
-}
-string UniversalModelHandler::getMaterial() const
-{
-	return m_materialName;
+	enableAnimation(m_walkAnim);
+	m_walkAnim->addTime(howMuch);
 }
 void UniversalModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
-	m_animationState->addTime(Ogre::Math::Abs(rInc)*20.0);
+	enableAnimation(m_walkAnim);
+	m_walkAnim->addTime(Ogre::Math::Abs(rInc)*20.0);
 	m_normalPosition.r += rInc;
 	UnitCircleMovement::normalSetDirection(m_node, getNormalPos(), activeDirection);
 	UnitCircleMovement::normalSetPosition(m_node, getNormalPos());
+}
+//private
+void UniversalModelHandler::enableAnimation(AnimationState* anim)
+{
+		anim->setEnabled(true);
+}
+void UniversalModelHandler::init(NormalPosition pos) 
+{
+	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
+
+	m_entity		= m_crRecipe->initMesh(sMgr);
+
+	m_attackAnim	= m_crRecipe->getAttack(m_entity);
+	m_walkAnim		= m_crRecipe->getWalk(m_entity);
+
+	m_node			= m_crRecipe->initNode(sMgr);
+	m_node->attachObject(m_entity);
+
+	UnitCircleMovement::normalSetPosition(m_node, pos);
+	m_normalPosition = pos;
 }
 
 Ogre::SceneNode* UniversalModelHandler::getNode() const 
 {
 	return m_node;
 }
-const NormalPosition& UniversalModelHandler::getNormalPos() const 
+const NormalPosition& UniversalModelHandler::getNormalPos() 
 {
 	return m_normalPosition;
 }
 
-// initialise entity, node & start position
-void UniversalModelHandler::init(NormalPosition pos) 
+const Vector3 UniversalModelHandler::getNormalVecPos() const
 {
-	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
-
-	m_normalPosition = pos;
-	m_entity = initMesh(sMgr);
-	m_node = initPlayerNode(sMgr, m_entity);
-	UnitCircleMovement::normalSetPosition(m_node, m_normalPosition);
-}
-Ogre::Entity* UniversalModelHandler::initMesh(SceneManager* sMgr)
-{
-	Entity* playerEntity =  sMgr->createEntity(m_entityName, m_fileName);
-	m_animationState = playerEntity->getAnimationState(m_walkAnimationName);
-	m_animationState->setLoop(true);
-	m_animationState->setEnabled(true);
-
-	return playerEntity;
+	return UnitCircleMovement::posFromR(m_normalPosition);
 }
 
-Ogre::SceneNode* UniversalModelHandler::initPlayerNode(Ogre::SceneManager* sMgr, Ogre::Entity* playerEntity)
+Entity* UniversalModelHandler::getEntity() const
 {
-	auto node = sMgr->getRootSceneNode()->createChildSceneNode(m_nodeName);
-	node->attachObject(playerEntity);
-	node->setScale(Ogre::Vector3(0.001, 0.001, 0.001));
-	return node;
+	return m_entity;
+}
+string UniversalModelHandler::getMaterial() const
+{
+	return m_materialName;
+}
+void UniversalModelHandler::setNormalPos(NormalPosition newPos)
+{
+	m_normalPosition = newPos;
 }

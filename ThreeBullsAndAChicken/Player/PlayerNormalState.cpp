@@ -38,6 +38,7 @@ PlayerNormalState::~PlayerNormalState()
 }
 void PlayerNormalState::init(PlayerModelHandler& modelHandler)
 {
+	cout << "normalState init" << endl;
 }
 void PlayerNormalState::exit()
 {

@@ -80,6 +80,7 @@
     <ClInclude Include="Mutant.h" />
     <ClInclude Include="MutantGlobalStats.h" />
     <ClInclude Include="MutantModelHandler.h" />
+    <ClInclude Include="MutantRecipe.h" />
     <ClInclude Include="MutantState.h" />
     <ClInclude Include="MutantNormalState.h" />
     <ClInclude Include="stdafx.h" />
@@ -90,6 +91,7 @@
     <ClCompile Include="MutantGlobalStats.cpp" />
     <ClCompile Include="MutantModelHandler.cpp" />
     <ClCompile Include="MutantNormalState.cpp" />
+    <ClCompile Include="MutantRecipe.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

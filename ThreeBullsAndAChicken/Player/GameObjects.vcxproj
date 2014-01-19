@@ -83,8 +83,10 @@
     <ClInclude Include="PlayerModelHandler.h" />
     <ClInclude Include="PlayerNormalState.h" />
     <ClInclude Include="PlayerNormalTranslator.h" />
+    <ClInclude Include="PlayerRecipe.h" />
     <ClInclude Include="PlayerSelectionState.h" />
     <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerStateSubscriber.h" />
     <ClInclude Include="PlayerStats.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -93,6 +95,7 @@
     <ClCompile Include="PlayerGUI.cpp" />
     <ClCompile Include="PlayerLERPState.cpp" />
     <ClCompile Include="PlayerModelHandler.cpp" />
+    <ClCompile Include="PlayerRecipe.cpp" />
     <ClCompile Include="PlayerSelectionState.cpp" />
     <ClCompile Include="PlayerNormalState.cpp" />
     <ClCompile Include="PlayerNormalTranslator.cpp" />

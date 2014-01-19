@@ -1,16 +1,21 @@
 #pragma once
 #include "stdafx.h"
 #include "../Camera/CameraBase.h"
-#include "PlayerCameraStateNormal.h"
 #include "../Player/Player.h"
-class PlayerCamera:public CameraBase
+#include <map>
+#include "../Player/PlayerStateSubscriber.h"
+#include "PlayerCameraState.h"
+class PlayerCamera:public PlayerStateSubscriber
 {
 public:
 	PlayerCamera(Player* player);
 	~PlayerCamera();
-	void update() override;
+	void update();
+	void notify(PLAYER_STATES) override;
 private:
-	PlayerCameraState* m_currentState;
+	void setNewState(PLAYER_STATES,bool);
+	PLAYER_STATES m_currentState;
+	std::map<PLAYER_STATES, PlayerCameraState*> m_states;
 	Player* m_player;
 
 };

@@ -2,36 +2,34 @@
 #include "stdafx.h"
 #include "../Other/UnitCircleMovement.h"
 #include "../OgreCore/OgreCore.h"
+#include "../Other/CreationRecipes.h"
 class UniversalModelHandler
 {
 public:
-	UniversalModelHandler(string entityName, string fileName, string walkAnimName, string nodeName);
+	UniversalModelHandler(CreationRecipes* recipe);
 	~UniversalModelHandler();
 	void init(NormalPosition pos);
 	void normalWalk(const Real& rInc, const NormalDirection& activeDirection);
-	SceneNode* getNode() const ;
-	const NormalPosition& getNormalPos() const ;
-	void setMaterial(const string materialName);
-	string getMaterial() const;
-	Entity* getEntity() const;
+	void playWalkAnim(const Real);
 protected:
-	Entity* initMesh(SceneManager* sMgr);
-	SceneNode* initPlayerNode(SceneManager* sMgr, Entity* playerEntity);
+	void enableAnimation(AnimationState*);
+	CreationRecipes* m_crRecipe;
 
 	NormalPosition m_normalPosition;
-
 	Entity* m_entity;
 	SceneNode* m_node;
-	AnimationState* m_animationState;
-
-	string m_entityName;
-	const string m_fileName;
-	const string m_walkAnimationName;
-	string m_nodeName;
-
 	string m_materialName;
 
-	const int m_id;
-	static int s_count;
+	AnimationState* m_walkAnim;
+	AnimationState* m_attackAnim;
+	//getsnsets
+public:
+	string					getMaterial() const;
+	Entity*					getEntity() const;
+	SceneNode*				getNode() const ;
+	const NormalPosition&	getNormalPos() ;
+	void					setNormalPos(NormalPosition newPos);
+	const Vector3			getNormalVecPos() const;
+
 };
 

@@ -11,11 +11,13 @@ public:
 	void init(PlayerModelHandler& modelHandler) override;
 	void exit() override;
 private:
-	void goAttack();
 	std::vector<MutantModelHandler*> m_attackList;
 	Vector3 m_lastPosition;
 	unsigned m_currentTargetIndex;
-	Real m_lerpT;
+	LERP_STATE m_lerpState;
+	bool m_moreEnemies;
+	bool attackEnemies(PlayerModelHandler& modelHandler);
+	bool returnToNormal(PlayerModelHandler& modelHandler);
 
 };
 

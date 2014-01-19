@@ -665,21 +665,16 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 	Entity *pEntity = 0;
 	try
 	{
-		MeshPtr pMesh= MeshManager::getSingleton().load(meshFile, m_sGroupName, HardwareBuffer::HBU_DYNAMIC_WRITE_ONLY, HardwareBuffer::HBU_STATIC_WRITE_ONLY, true, true);
-		unsigned short src, dest;
-		if (pMesh->suggestTangentVectorBuildParams(VES_TANGENT, src, dest))
-			pMesh->buildTangentVectors(VES_TANGENT, src, dest);
-		else
-			cout << "whine" << endl;
+		MeshPtr pMesh= MeshManager::getSingleton().load(meshFile, m_sGroupName);
 		pEntity = mSceneMgr->createEntity(name, meshFile);
-		pEntity->setMaterialName("def");
-		pEntity->setCastShadows(castShadows);
+		pEntity->setCastShadows(true);
 		pParent->attachObject(pEntity);
 		if (!materialFile.empty())
 			pEntity->setMaterialName(materialFile);
 	}
-	catch (Ogre::Exception &/*e*/)
+	catch (Ogre::Exception &e)
 	{
+		cout << e.what() << endl;
 		LogManager::getSingleton().logMessage("[DotSceneLoader] Error loading an entity!");
 	}
 	// Process userDataReference (?)
