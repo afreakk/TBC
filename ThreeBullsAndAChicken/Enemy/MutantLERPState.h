@@ -10,7 +10,6 @@ public:
 	void init(MutantModelHandler*) override;
 	void exit() override;
 private:
-	Ogre::Vector3 m_startingPos;
 	LERP_STATE m_lerpState;
 };
 

@@ -24,6 +24,11 @@ Ogre::Entity* MutantRecipe::initMesh(Ogre::SceneManager* sMgr)
 	return sMgr->createEntity(m_entityName, m_fileName);
 }
 
+Ogre::AnimationState* MutantRecipe::getDie(Ogre::Entity* entity)
+{
+	return entity->getAnimationState("Death1");
+}
+
 Ogre::AnimationState* MutantRecipe::getWalk(Ogre::Entity* entity)
 {
 	return entity->getAnimationState(m_walkAnimationName);

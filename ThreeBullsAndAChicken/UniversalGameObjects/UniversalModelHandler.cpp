@@ -7,9 +7,8 @@ using namespace Ogre;
 
 UniversalModelHandler::UniversalModelHandler(CreationRecipes* recipe)
 : m_entity(nullptr), m_node(nullptr)
-, m_walkAnim(nullptr), m_attackAnim(nullptr)
+, m_walkAnim(nullptr), m_attackAnim(nullptr), m_deathAnim(nullptr)
 , m_crRecipe(recipe)
-, m_lerpVal(0.0)
 {
 }
 UniversalModelHandler::~UniversalModelHandler()
@@ -34,9 +33,15 @@ void UniversalModelHandler::enableAnimation(AnimationState* anim)
 {
 		anim->setEnabled(true);
 }
-LERP_STATE UniversalModelHandler::lerpAttack(const Ogre::Vector3& lastPosition, const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+void UniversalModelHandler::fallAndDie(Real dt)
 {
-	lerp(lastPosition, nextPosition, dt);
+	enableAnimation(m_deathAnim);
+	m_deathAnim->setLoop(false);
+	m_deathAnim->addTime(dt);
+}
+LERP_STATE UniversalModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+{
+	lerp(nextPosition, dt);
 	enableAnimation(m_attackAnim);
 	m_attackAnim->addTime(dt*10.0);
 	auto ADistance = m_node->getPosition().distance(nextPosition);
@@ -45,9 +50,9 @@ LERP_STATE UniversalModelHandler::lerpAttack(const Ogre::Vector3& lastPosition, 
 	return LERP_STATE::LERP_WALK;
 
 }
-LERP_STATE UniversalModelHandler::lerpWalk(const Ogre::Vector3& lastPosition, const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+LERP_STATE UniversalModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
-	lerp(lastPosition, nextPosition, dt);
+	lerp(nextPosition, dt);
 	enableAnimation(m_walkAnim);
 	m_walkAnim->addTime(dt*10.0);
 	auto ADistance = m_node->getPosition().distance(nextPosition);
@@ -55,17 +60,8 @@ LERP_STATE UniversalModelHandler::lerpWalk(const Ogre::Vector3& lastPosition, co
 		return LERP_STATE::LERP_WALK;
 	return LERP_STATE::LERP_ATTACK;
 }
-void UniversalModelHandler::resetLerp()
+void UniversalModelHandler::lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
-	m_lerpVal = 0.0;
-}
-void UniversalModelHandler::lerp(const Ogre::Vector3& lastPosition, const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
-{
-	/*auto SFDistance = lastPosition.distance(nextPosition);
-	if (SFDistance > 0.0)
-		m_lerpVal += dt/SFDistance;
-	m_node->setPosition(Ogre::Math::lerp(lastPosition, nextPosition,m_lerpVal));
-	m_node->lookAt(Ogre::Math::lerp(lastPosition, nextPosition, m_lerpVal+0.1),Ogre::Node::TransformSpace::TS_WORLD);*/
 	m_node->lookAt(nextPosition,Ogre::Node::TransformSpace::TS_WORLD);
 	m_node->translate(Vector3(0.0, 0.0, -dt), Ogre::Node::TS_LOCAL);
 }
@@ -77,6 +73,7 @@ void UniversalModelHandler::init(NormalPosition pos)
 
 	m_attackAnim	= m_crRecipe->getAttack(m_entity);
 	m_walkAnim		= m_crRecipe->getWalk(m_entity);
+	m_deathAnim		= m_crRecipe->getDie(m_entity);
 
 	m_node			= m_crRecipe->initNode(sMgr);
 	m_node->attachObject(m_entity);

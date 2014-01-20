@@ -30,13 +30,12 @@ bool PlayerLERPState::attackEnemies(PlayerModelHandler& modelHandler)
 {
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
 	if (m_lerpState == LERP_STATE::LERP_WALK)
-		m_lerpState = modelHandler.lerpWalk(m_lastPosition, m_attackList[m_currentTargetIndex]->getNode()->getPosition(), dt);
+		m_lerpState = modelHandler.lerpWalk(m_attackList[m_currentTargetIndex]->getNode()->getPosition(), dt);
 	else if (m_lerpState == LERP_STATE::LERP_ATTACK)
 	{
-		m_lerpState = modelHandler.lerpAttack(m_lastPosition, m_attackList[m_currentTargetIndex]->getNode()->getPosition(), dt);
+		m_lerpState = modelHandler.lerpAttack(m_attackList[m_currentTargetIndex]->getNode()->getPosition(), dt);
 		if (m_lerpState == LERP_STATE::LERP_WALK)
 		{
-			modelHandler.resetLerp();
 			m_lastPosition = modelHandler.getNode()->getPosition();
 			if (m_currentTargetIndex + 1 < m_attackList.size())
 				m_currentTargetIndex++;
@@ -54,7 +53,6 @@ bool PlayerLERPState::returnToNormal(PlayerModelHandler& modelHandler)
 void PlayerLERPState::init(PlayerModelHandler& modelHandler)
 {
 	cout << "init LerpState" << endl;
-	modelHandler.resetLerp();
 	m_currentTargetIndex = 0;
 	m_nextState = PLAYER_STATES::PlayerLERPState;
 	m_moreEnemies = true;

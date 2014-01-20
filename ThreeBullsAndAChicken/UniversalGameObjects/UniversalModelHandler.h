@@ -16,11 +16,11 @@ public:
 	virtual void init(NormalPosition pos);
 	void normalWalk(const Real& rInc, const NormalDirection& activeDirection);
 	void playWalkAnim(const Real);
-	void resetLerp();
-	LERP_STATE lerpAttack(const Ogre::Vector3&, const Ogre::Vector3&, const Ogre::Real&);
-	LERP_STATE lerpWalk(const Ogre::Vector3&, const Ogre::Vector3&, const Ogre::Real&);
+	LERP_STATE lerpAttack(const Ogre::Vector3&, const Ogre::Real&);
+	LERP_STATE lerpWalk(const Ogre::Vector3&, const Ogre::Real&);
+	void fallAndDie(Real dt);
 private:
-	void lerp(const Ogre::Vector3&, const Ogre::Vector3&, const Ogre::Real&);
+	void lerp(const Ogre::Vector3&, const Ogre::Real&);
 protected:
 	void enableAnimation(AnimationState*);
 	CreationRecipes* m_crRecipe;
@@ -28,10 +28,10 @@ protected:
 	NormalPosition m_normalPosition;
 	Entity* m_entity;
 	SceneNode* m_node;
-	Real m_lerpVal;
 
 	AnimationState* m_walkAnim;
 	AnimationState* m_attackAnim;
+	AnimationState* m_deathAnim;
 	//getsnsets
 public:
 	Entity*					getEntity() const;

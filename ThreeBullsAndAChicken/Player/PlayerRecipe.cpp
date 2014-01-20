@@ -17,6 +17,10 @@ Ogre::Entity* PlayerRecipe::initMesh(Ogre::SceneManager* sMgr)
 	return sMgr->createEntity(m_entityName, m_fileName);
 }
 
+Ogre::AnimationState* PlayerRecipe::getDie(Ogre::Entity* entity)
+{
+	return entity->getAnimationState("Death1");
+}
 Ogre::AnimationState* PlayerRecipe::getWalk(Ogre::Entity* entity)
 {
 	return entity->getAnimationState(m_walkAnimationName);

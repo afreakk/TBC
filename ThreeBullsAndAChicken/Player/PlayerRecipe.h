@@ -10,6 +10,7 @@ public:
 	Ogre::SceneNode* initNode(Ogre::SceneManager* sMgr) override;
 	Ogre::AnimationState* getWalk(Ogre::Entity*) override;
 	Ogre::AnimationState* getAttack(Ogre::Entity*) override;
+	Ogre::AnimationState* getDie(Ogre::Entity*) override;
 	Ogre::AnimationState* getBlock(Ogre::Entity*);
 private:
 };

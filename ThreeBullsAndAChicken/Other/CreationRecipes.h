@@ -7,6 +7,7 @@ public:
 	virtual Ogre::SceneNode* initNode(Ogre::SceneManager* )=0;
 	virtual Ogre::AnimationState* getWalk(Ogre::Entity*) = 0;
 	virtual Ogre::AnimationState* getAttack(Ogre::Entity*) = 0;
+	virtual Ogre::AnimationState* getDie(Ogre::Entity*) = 0;
 	string getNodeName() const
 	{
 		return m_nodeName;
