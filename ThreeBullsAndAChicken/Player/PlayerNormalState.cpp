@@ -8,8 +8,9 @@ PlayerNormalState::PlayerNormalState():PlayerState(PLAYER_STATES::PlayerNormalSt
 }
 void PlayerNormalState::update(PlayerModelHandler& playerModel)
 {
-	auto activeDirection = handleInput();
+	auto activeDirection = getDirection();
 	handleDirection(activeDirection);
+	handleBlock(playerModel);
 	m_translator.update(playerModel, activeDirection);
 }
 void PlayerNormalState::handleDirection(NormalDirection activeDirection)
@@ -17,7 +18,17 @@ void PlayerNormalState::handleDirection(NormalDirection activeDirection)
 	if (activeDirection != NormalDirection::None)
 		m_direction = activeDirection;
 }
-NormalDirection PlayerNormalState::handleInput()
+void PlayerNormalState::handleBlock(PlayerModelHandler& modelHandler)
+{
+	auto dt = MainUpdate::getSingleton().getDeltaTime();
+	auto keyboard = OISCore::getSingletonPtr()->getKeyboard();
+	if (keyboard->isKeyDown(OIS::KeyCode::KC_LCONTROL))
+		modelHandler.block(dt);
+	else
+		modelHandler.unBlock();
+
+}
+NormalDirection PlayerNormalState::getDirection()
 {
 	auto keyboard = OISCore::getSingletonPtr()->getKeyboard();
 

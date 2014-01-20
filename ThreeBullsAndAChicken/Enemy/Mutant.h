@@ -13,6 +13,10 @@ public:
 	NormalPosition getNormalPos() ;
 	MutantModelHandler& getModelHandler();
 	string getMaterialName()const;
+	MutantState* getCurrentState()
+	{
+		return m_states[m_currentState];
+	}
 private:
 	MutantModelHandler m_modelHolder;
 	std::map<MUTANT_STATES, MutantState*> m_states;

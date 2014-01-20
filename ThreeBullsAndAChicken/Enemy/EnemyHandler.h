@@ -14,10 +14,13 @@ public:
 private:
 	std::vector<Mutant> m_mutants;
 	std::vector<NormalPosition> m_mutantStartingPositions;
+
+	Real m_spawnDistance;
 	Real m_attackDistance;
 	Player* m_player;
 	
 	void instantiateNewEnemies();
+	void enemyGO();
 
 };
 

@@ -3,7 +3,7 @@
 #include "../GameLevels/MainUpdate.h"
 
 
-PlayerNormalTranslator::PlayerNormalTranslator() :m_velocity(0.0), m_speed(1.1)
+PlayerNormalTranslator::PlayerNormalTranslator() :m_velocity(0.0), m_speed(0.2)
 {
 }
 

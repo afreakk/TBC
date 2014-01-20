@@ -18,13 +18,12 @@ MutantShader::MutantShader()
 	sMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE_INTEGRATED);
 	sMgr->setShadowTextureSize(2048*2);*/
 	sMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-	sMgr->setShadowCasterRenderBackFaces(true);
+
 	Ogre::Light* directionalLight = sMgr->createLight("DirectionalLight");
 	directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
 	directionalLight->setDiffuseColour(Ogre::ColourValue(.5, .5, .5));
 	directionalLight->setSpecularColour(Ogre::ColourValue(.5, .5, .5));
-	directionalLight->setDirection(Ogre::Vector3(-10, -10, -10));
-	directionalLight->setPosition(Ogre::Vector3(20, 20, 20));
+	directionalLight->setDirection(Ogre::Vector3(-1, -1, -1));
 
 }
 

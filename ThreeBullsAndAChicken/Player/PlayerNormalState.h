@@ -12,7 +12,9 @@ public:
 	~PlayerNormalState();
 private:
 	void handleDirection(NormalDirection activeDirection);
-	NormalDirection handleInput();
+	NormalDirection getDirection();
+	void handleBlock(PlayerModelHandler& modelHandler);
+
 	NormalDirection m_direction;
 	PlayerNormalTranslator m_translator;
 

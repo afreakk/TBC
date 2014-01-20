@@ -32,3 +32,7 @@ Ogre::SceneNode* PlayerRecipe::initNode(Ogre::SceneManager* sMgr)
 	node->setScale(Ogre::Vector3(0.001, 0.001, 0.001));
 	return node;
 }
+Ogre::AnimationState* PlayerRecipe::getBlock(Ogre::Entity* entity)
+{
+	return entity->getAnimationState("Block");
+}

@@ -7,6 +7,8 @@ public:
 	MutantNormalState();
 	~MutantNormalState();
 	void update(MutantModelHandler* )override;
+	void init(MutantModelHandler*)override;
+	void exit()override;
 private:
 };
 

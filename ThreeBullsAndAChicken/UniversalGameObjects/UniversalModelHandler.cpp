@@ -9,6 +9,7 @@ UniversalModelHandler::UniversalModelHandler(CreationRecipes* recipe)
 : m_entity(nullptr), m_node(nullptr)
 , m_walkAnim(nullptr), m_attackAnim(nullptr)
 , m_crRecipe(recipe)
+, m_lerpVal(0.0)
 {
 }
 UniversalModelHandler::~UniversalModelHandler()
@@ -32,6 +33,41 @@ void UniversalModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirec
 void UniversalModelHandler::enableAnimation(AnimationState* anim)
 {
 		anim->setEnabled(true);
+}
+LERP_STATE UniversalModelHandler::lerpAttack(const Ogre::Vector3& lastPosition, const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+{
+	lerp(lastPosition, nextPosition, dt);
+	enableAnimation(m_attackAnim);
+	m_attackAnim->addTime(dt*10.0);
+	auto ADistance = m_node->getPosition().distance(nextPosition);
+	if (ADistance > 0.05)
+		return LERP_STATE::LERP_ATTACK;
+	return LERP_STATE::LERP_WALK;
+
+}
+LERP_STATE UniversalModelHandler::lerpWalk(const Ogre::Vector3& lastPosition, const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+{
+	lerp(lastPosition, nextPosition, dt);
+	enableAnimation(m_walkAnim);
+	m_walkAnim->addTime(dt*10.0);
+	auto ADistance = m_node->getPosition().distance(nextPosition);
+	if (ADistance > 0.125)
+		return LERP_STATE::LERP_WALK;
+	return LERP_STATE::LERP_ATTACK;
+}
+void UniversalModelHandler::resetLerp()
+{
+	m_lerpVal = 0.0;
+}
+void UniversalModelHandler::lerp(const Ogre::Vector3& lastPosition, const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+{
+	/*auto SFDistance = lastPosition.distance(nextPosition);
+	if (SFDistance > 0.0)
+		m_lerpVal += dt/SFDistance;
+	m_node->setPosition(Ogre::Math::lerp(lastPosition, nextPosition,m_lerpVal));
+	m_node->lookAt(Ogre::Math::lerp(lastPosition, nextPosition, m_lerpVal+0.1),Ogre::Node::TransformSpace::TS_WORLD);*/
+	m_node->lookAt(nextPosition,Ogre::Node::TransformSpace::TS_WORLD);
+	m_node->translate(Vector3(0.0, 0.0, -dt), Ogre::Node::TS_LOCAL);
 }
 void UniversalModelHandler::init(NormalPosition pos) 
 {
@@ -66,10 +102,6 @@ const Vector3 UniversalModelHandler::getNormalVecPos() const
 Entity* UniversalModelHandler::getEntity() const
 {
 	return m_entity;
-}
-string UniversalModelHandler::getMaterial() const
-{
-	return m_materialName;
 }
 void UniversalModelHandler::setNormalPos(NormalPosition newPos)
 {

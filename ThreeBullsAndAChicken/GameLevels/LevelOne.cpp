@@ -22,7 +22,7 @@ LevelOne::LevelOne() : ILevel(LevelID::LEVEL_ONE)
 	for (int i = 0; i < enemyCount; i++)
 	{
 		mutantStartingPositions.push_back(NormalPosition());
-		mutantStartingPositions[i].r = floor(static_cast<float>(i)) * ((Math::PI/2.0) / floor(static_cast<float>(enemyCount)));
+		mutantStartingPositions[i].r = floor(static_cast<float>(i)) * ((Math::PI/2.0) / floor(static_cast<float>(enemyCount)))+Math::PI/4.0;
 		mutantStartingPositions[i].h = 0.0;
 		mutantStartingPositions[i].d = -4.5;
 	}
