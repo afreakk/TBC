@@ -17,11 +17,3 @@ void MutantDeadState::update(MutantModelHandler* mutantModel)
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
 	mutantModel->fallAndDie(dt);
 }
-void MutantDeadState::init(MutantModelHandler* mutantModel)
-{
-
-}
-void MutantDeadState::exit()
-{
-
-}

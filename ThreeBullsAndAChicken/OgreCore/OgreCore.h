@@ -22,12 +22,12 @@ public:
 	Ogre::Viewport*     getViewport();
 	Ogre::OverlaySystem*getOverlaySystem();
 private:
-	Ogre::Root*         m_root;
+	unique_ptr<Ogre::Root>m_root;
 	Ogre::RenderWindow* m_window;
 	Ogre::SceneManager* m_sceneMgr;
 	Ogre::Camera*       m_camera;
 	Ogre::Viewport*     m_viewport;
 	Ogre::Vector2       m_resolution;
-	Ogre::OverlaySystem*m_overlaySystem;
+	unique_ptr<Ogre::OverlaySystem>m_overlaySystem;
 
 };

@@ -1,10 +1,11 @@
 #pragma once
 #include "stdafx.h"
-class PlayerCameraState
+class PlayerCameraState : boost::noncopyable
 {
 public:
+	virtual ~PlayerCameraState()
+	{
+	}
 	virtual void update()=0;
-	virtual void init(SceneNode*) = 0;
-	virtual void exit() = 0;
 };
 

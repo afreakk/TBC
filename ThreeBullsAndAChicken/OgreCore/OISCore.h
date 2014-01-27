@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-class OISCore:public OIS::KeyListener, public Ogre::Singleton<OISCore>
+class OISCore:public OIS::KeyListener, public Ogre::Singleton<OISCore>, boost::noncopyable
 {
 public:
 	OISCore();

@@ -11,6 +11,9 @@
 #include "OISKeyboard.h"
 #include <map>
 #include "Overlay/OgreOverlaySystem.h"
+#include <memory>
+#include "boost/noncopyable.hpp"
+using namespace std;
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 

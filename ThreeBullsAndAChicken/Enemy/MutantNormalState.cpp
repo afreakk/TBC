@@ -11,14 +11,6 @@ MutantNormalState::MutantNormalState() : MutantState(MUTANT_STATES::STATE_NORMAL
 MutantNormalState::~MutantNormalState()
 {
 }
-void MutantNormalState::init(MutantModelHandler* mutantModel)
-{
-
-}
-void MutantNormalState::exit()
-{
-
-}
 void MutantNormalState::update(MutantModelHandler* enemyModel)
 {
 	auto walkSpeed = MutantGlobalStats::getSingletonPtr()->getWalkSpeed();

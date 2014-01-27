@@ -8,6 +8,11 @@
 #include <iostream>
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
+#include <memory>
+#include <vector>
+#include <map>
+#include "boost/utility.hpp"
+#include "boost/lexical_cast.hpp"
 using namespace std;
 using namespace Ogre;
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers

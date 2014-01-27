@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "MutantRecipe.h"
-#include "boost/lexical_cast.hpp"
 int MutantRecipe::s_count = 0;
 MutantRecipe::MutantRecipe()
 : m_id(++s_count)
@@ -16,7 +15,7 @@ MutantRecipe::MutantRecipe()
 
 MutantRecipe::~MutantRecipe()
 {
-
+	cout << "mutant recipe destrucotr" << endl;
 }
 
 Ogre::Entity* MutantRecipe::initMesh(Ogre::SceneManager* sMgr)

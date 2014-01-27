@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "../Other/CreationRecipes.h"
-class MutantRecipe:public CreationRecipes
+class MutantRecipe:public CreationRecipes, boost::noncopyable
 {
 public:
 	MutantRecipe();

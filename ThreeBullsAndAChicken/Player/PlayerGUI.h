@@ -9,7 +9,6 @@ public:
 	PlayerGUI();
 	~PlayerGUI();
 	void energyRefresh(unsigned) override;
-	void init();
 private:
 	PlayerGUIStyle m_guiStyle;
 };

@@ -21,7 +21,7 @@ int main()
 {
 	try
 	{
-		new OgreCore();
+		unique_ptr<OgreCore> ogreCore(new OgreCore());
 		OgreCore::getSingletonPtr()->initRoot();
 		OgreCore::getSingletonPtr()->initWindow(1024,576,"TBC");
 		OgreCore::getSingletonPtr()->initSceneManager();
@@ -30,16 +30,14 @@ int main()
 		OgreCore::getSingletonPtr()->initOverlaySystem();
 		OgreCore::getSingletonPtr()->initResources();
 
-		new OISCore();
-		OISCore::getSingletonPtr()->init();
+		unique_ptr<OISCore> oisCore(new OISCore());
+		oisCore->init();
 
 		MutantShader mutantShader;
 
 		LevelManager levelMgr(new LevelOne());
-		new MainUpdate(&levelMgr);
+		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(&levelMgr));
 		Ogre::Root::getSingletonPtr()->startRendering();
-		delete MainUpdate::getSingletonPtr();
-		delete Ogre::Root::getSingletonPtr();
 	}
 	catch (Ogre::Exception &e)
 	{

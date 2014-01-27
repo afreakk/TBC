@@ -44,6 +44,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\GAME\Bin\$(Configuration)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -53,7 +54,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0;$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0;$(VCInstallDir)UnitTest\include;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
     </ClCompile>
@@ -61,6 +62,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\source_ogre_actual\install\lib\debug\OgreMain_d.lib;C:\Libs\boostOgreLib\debug\libboost_thread-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_date_time-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_system-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_chrono-vc120-mt-gd-1_55.lib;C:\source_ogre_actual\install\lib\debug\OgreRTShaderSystem_d.lib;C:\source_ogre_actual\install\lib\debug\OgreTerrain_d.lib;C:\source_ogre_actual\install\lib\debug\OgrePaging_d.lib;C:\source_ogre_actual\install\lib\debug\OgreVolume_d.lib;C:\source_ogre_actual\install\lib\debug\OgreOverlay_d.lib;C:\source_ogre_actual\install\lib\debug\OIS_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,7 +72,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
     </ClCompile>
@@ -80,6 +82,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\source_ogre_actual\install\lib\debug\OgreMain.lib;C:\Libs\boostOgreLib\debug\libboost_thread-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_date_time-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_system-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_chrono-vc120-mt-gd-1_55.lib;C:\source_ogre_actual\install\lib\debug\OgreRTShaderSystem_d.lib;C:\source_ogre_actual\install\lib\debug\OgreTerrain_d.lib;C:\source_ogre_actual\install\lib\debug\OgrePaging_d.lib;C:\source_ogre_actual\install\lib\debug\OgreVolume_d.lib;C:\source_ogre_actual\install\lib\debug\OgreOverlay_d.lib;C:\source_ogre_actual\install\lib\debug\OIS_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -93,8 +96,35 @@
     <ClCompile Include="TestLevels.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Camera\Camera.vcxproj">
+      <Project>{ef4cbdeb-d838-4cf2-8178-0104ed8782c3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Enemy\Enemy.vcxproj">
+      <Project>{c864c636-82c7-40e7-8b27-d44a44ba4cb3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GameLevels\GameLevels.vcxproj">
+      <Project>{88fcf4b9-7968-4532-8228-393610f5938a}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Levels\Levels.vcxproj">
       <Project>{b688e051-97e1-4c1f-a283-a21a6c218b4f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\OgreCore\ConsoleApplication1.vcxproj">
+      <Project>{5e252ed9-8a37-40bc-93a6-582ae443dbfb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Other\Other.vcxproj">
+      <Project>{f6f7523c-933e-4e68-a4cb-d6e39599e63d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\PlayerCamera\PlayerCamera.vcxproj">
+      <Project>{909f2a5f-e0c8-4f87-9bd6-dca87e9e3ba1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\PlayerGUI\PlayerGUI.vcxproj">
+      <Project>{c8d6c0c3-6def-45db-b4b6-68d486c2fac5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Player\GameObjects.vcxproj">
+      <Project>{f720f1ba-79d9-44d1-ada0-7bab3ca26a12}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversalGameObjects\UniversalGameObjects.vcxproj">
+      <Project>{ec74a605-f8cb-48dc-8b0c-cad1378521cd}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

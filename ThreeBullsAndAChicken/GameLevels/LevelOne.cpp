@@ -1,47 +1,41 @@
 #include "stdafx.h"
 #include "LevelOne.h"
 #include "../OgreCore/OgreCore.h"
-#include "../Other/DotSceneLoader.h"
-#include "../Player/PlayerStats.h"
-#include "Overlay/OgreOverlay.h"
-#include "Overlay/OgreOverlaySystem.h"
-using namespace Ogre;
-LevelOne::LevelOne() : ILevel(LevelID::LEVEL_ONE)
+
+LevelOne::LevelOne() : ILevel(LevelID::LEVEL_ONE), m_playerCamera(&m_player), m_playerStats(new PlayerStats())
 {
-	new PlayerStats();
-	m_playerCamera = new PlayerCamera(&m_player);
 
 	//temporary for reference of space
 	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
-	auto dotSceneLoader = new DotSceneLoader();
-	dotSceneLoader->parseDotScene("Cityblock.scene", "CityDir", sMgr);
+	m_dotSceneLoader.parseDotScene("Cityblock.scene", "CityDir", sMgr);
 
 	m_gameRules.init(&m_enemyHandler, &m_player);
-	std::vector<NormalPosition> mutantStartingPositions;
+	std::vector<PolarCoordinates> mutantStartingPositions;
 	int enemyCount = 8;
 	for (int i = 0; i < enemyCount; i++)
 	{
-		mutantStartingPositions.push_back(NormalPosition());
+		mutantStartingPositions.push_back(PolarCoordinates());
 		mutantStartingPositions[i].r = floor(static_cast<float>(i)) * ((Math::PI/2.0) / floor(static_cast<float>(enemyCount)))+Math::PI/4.0;
-		mutantStartingPositions[i].h = 0.0;
-		mutantStartingPositions[i].d = -4.5;
+		mutantStartingPositions[i].h = 0.2;
+		mutantStartingPositions[i].d = 5.5;
 	}
 	m_enemyHandler.init(&m_player, mutantStartingPositions);
-	m_playerGUI.init();
-	m_player.addSubsriber(m_playerCamera, "playerCamera");
+	PlayerStats::getSingletonPtr()->registerEnergySubscriber(&m_playerGUI, "PlayerGUI");
+	m_player.addSubsriber(&m_playerCamera, "playerCamera");
 }
 
 
 LevelOne::~LevelOne()
 {
 	m_player.removeSubscriber("playerCamera");
-	delete PlayerStats::getSingletonPtr();
+	PlayerStats::getSingletonPtr()->removeEnergySubscriber("PlayerGUI");
 }
 
 bool LevelOne::update()
 {
 	m_player.update();
 	m_enemyHandler.update();
-	m_playerCamera->update();
+	m_playerCamera.update();
+	m_gameRules.update();
 	return false;
 }

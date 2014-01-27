@@ -4,35 +4,40 @@
 #include "PlayerCameraStateNormal.h"
 #include "PlayerCameraStateSelection.h"
 #include "PlayerCameraStateLERP.h"
-PlayerCamera::PlayerCamera(Player* player) :m_player(player)
+PlayerCamera::PlayerCamera(Player* player) :m_player(player), m_currentState{nullptr} 
 {
-	m_states[PLAYER_STATES::PlayerNormalState] = new PlayerCameraStateNormal();
-	m_states[PLAYER_STATES::PlayerSelectionState] = new PlayerCameraStateSelection();
-	m_states[PLAYER_STATES::PlayerLERPState] = new PlayerCameraStateLERP();
-	setNewState(PLAYER_STATES::PlayerNormalState,false);
 }
 
 
 PlayerCamera::~PlayerCamera()
 {
-	m_states[m_currentState]->exit();
-	for (auto& itt : m_states)
-		delete itt.second;
 }
 
 void PlayerCamera::update()
 {
-	m_states[m_currentState]->update();
+	m_currentState->update();
 }
 
 void PlayerCamera::notify(PLAYER_STATES newState)
 {
-	setNewState(newState,true);
+	setNewState(newState);
 }
-void PlayerCamera::setNewState(PLAYER_STATES newState,bool exitLast)
+void PlayerCamera::setNewState(PLAYER_STATES newState)
 {
-	if (exitLast)
-		m_states[m_currentState]->exit();
-	m_currentState = newState;
-	m_states[m_currentState]->init(m_player->getNode());
+	m_currentState.reset();
+	switch (newState)
+	{
+	case PLAYER_STATES::PlayerNormalState:
+		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal( m_player->getNode()) };
+		break;
+	case PLAYER_STATES::PlayerSelectionState:
+		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateSelection() };
+		break;
+	case PLAYER_STATES::PlayerLERPState:
+		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateLERP(m_player->getNode()) };
+		break;
+	default:
+		assert(0);
+		break;
+	}
 }

@@ -1,7 +1,7 @@
 #pragma once
-#include "LevelListing.h"
 #include "stdafx.h"
-class ILevel
+#include "LevelListing.h"
+class ILevel : public boost::noncopyable
 {
 public:
 	ILevel(LevelID levelID) :m_levelID(levelID)

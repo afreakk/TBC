@@ -7,6 +7,9 @@
 #include <iostream>
 #include "OgreCamera.h"
 #include "OgreSceneNode.h"
+#include <map>
+#include <memory>
+#include "boost/noncopyable.hpp"
 using namespace std;
 using namespace Ogre;
 

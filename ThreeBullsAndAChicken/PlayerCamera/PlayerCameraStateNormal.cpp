@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerCameraStateNormal.h"
-
-PlayerCameraStateNormal::PlayerCameraStateNormal() :m_camera(nullptr), m_distance(1.4)
+#include "../OgreCore/OgreCore.h"
+PlayerCameraStateNormal::PlayerCameraStateNormal(SceneNode* playerNode) :m_playerNode(playerNode),m_camera(OgreCore::getSingleton().getCamera()), m_distance(1.4)
 {
 }
 
@@ -14,14 +14,4 @@ void PlayerCameraStateNormal::update()
 {
 	m_camera->setPosition(m_playerNode->getPosition()*m_distance+Vector3(0.0, 0.5, 0.0));
 	m_camera->lookAt(Vector3::ZERO);
-}
-#include "../OgreCore/OgreCore.h"
-void PlayerCameraStateNormal::init(SceneNode* playerNode)
-{
-	m_playerNode = playerNode;
-	m_camera = OgreCore::getSingletonPtr()->getCamera();
-}
-void PlayerCameraStateNormal::exit()
-{
-
 }

@@ -6,8 +6,6 @@ class PlayerNormalState:public PlayerState
 {
 public:
 	PlayerNormalState();
-	void init(PlayerModelHandler& modelHandler) override;
-	void exit() override;
 	void update(PlayerModelHandler& playerModel) override;
 	~PlayerNormalState();
 private:

@@ -1,23 +1,19 @@
 #pragma once
 #include "stdafx.h"
 #include "PlayerState.h"
-#include "../Enemy/MutantModelHandler.h"
 class PlayerLERPState:public PlayerState
 {
 public:
-	PlayerLERPState();
+	PlayerLERPState(SceneNode* target);
 	~PlayerLERPState();
 	void update(PlayerModelHandler& ) override;
-	void init(PlayerModelHandler& modelHandler) override;
-	void exit() override;
+	bool nextTarget() const;
 private:
-	std::vector<MutantModelHandler*> m_attackList;
-	Vector3 m_lastPosition;
-	unsigned m_currentTargetIndex;
 	LERP_STATE m_lerpState;
-	bool m_moreEnemies;
-	bool attackEnemies(PlayerModelHandler& modelHandler);
-	bool returnToNormal(PlayerModelHandler& modelHandler);
+	SceneNode*const m_target;
+	bool m_goNextTarget;
+
+	bool attackEnemy(PlayerModelHandler& modelHandler);
 
 };
 

@@ -9,6 +9,7 @@ MutantGlobalStats::MutantGlobalStats() :m_walkSpeed(0.1)
 
 MutantGlobalStats::~MutantGlobalStats()
 {
+	cout << "mutant GlobalSTATS destrucotr" << endl;
 }
 
 Ogre::Real MutantGlobalStats::getWalkSpeed() const

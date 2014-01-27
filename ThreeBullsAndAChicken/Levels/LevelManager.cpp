@@ -8,7 +8,6 @@ LevelManager::LevelManager(ILevel* initialLevel) : m_currentLevel(initialLevel)
 
 LevelManager::~LevelManager()
 {
-	delete m_currentLevel;
 }
 void LevelManager::update()
 {
@@ -20,7 +19,6 @@ const LevelID LevelManager::getCurrentLevelID()
 }
 void LevelManager::changeLevel(ILevel* nextLevel)
 {
-	delete m_currentLevel;
-	m_currentLevel = nullptr;
-	m_currentLevel = nextLevel;
+	m_currentLevel.reset();
+	m_currentLevel = unique_ptr<ILevel>{ nextLevel };
 }

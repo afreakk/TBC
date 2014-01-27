@@ -3,6 +3,10 @@
 class CreationRecipes
 {
 public:
+	virtual ~CreationRecipes()
+	{
+
+	}
 	virtual Ogre::Entity* initMesh(Ogre::SceneManager* )=0;
 	virtual Ogre::SceneNode* initNode(Ogre::SceneManager* )=0;
 	virtual Ogre::AnimationState* getWalk(Ogre::Entity*) = 0;

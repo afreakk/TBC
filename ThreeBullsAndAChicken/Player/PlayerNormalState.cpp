@@ -5,6 +5,11 @@
 
 PlayerNormalState::PlayerNormalState():PlayerState(PLAYER_STATES::PlayerNormalState), m_direction(NormalDirection::Right)
 {
+	cout << "normalState init" << endl;
+}
+PlayerNormalState::~PlayerNormalState()
+{
+	cout << "normalState destrucotr" << endl;
 }
 void PlayerNormalState::update(PlayerModelHandler& playerModel)
 {
@@ -37,20 +42,9 @@ NormalDirection PlayerNormalState::getDirection()
 		direction--;
 	if (keyboard->isKeyDown(OIS::KeyCode::KC_D))
 		direction++;
-
 	if (direction > 0)
 		return NormalDirection::Left;
 	if (direction < 0)
 		return NormalDirection::Right;
 	return NormalDirection::None;
-}
-PlayerNormalState::~PlayerNormalState()
-{
-}
-void PlayerNormalState::init(PlayerModelHandler& modelHandler)
-{
-	cout << "normalState init" << endl;
-}
-void PlayerNormalState::exit()
-{
 }

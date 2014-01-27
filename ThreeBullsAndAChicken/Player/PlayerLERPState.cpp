@@ -3,7 +3,8 @@
 #include "PlayerStats.h"
 
 #include "../GameLevels/MainUpdate.h"
-PlayerLERPState::PlayerLERPState() :PlayerState(PLAYER_STATES::PlayerLERPState), m_currentTargetIndex(0), m_moreEnemies(true), m_lerpState(LERP_STATE::LERP_WALK)
+PlayerLERPState::PlayerLERPState(SceneNode* target) :PlayerState(PLAYER_STATES::PlayerLERPState), m_lerpState(LERP_STATE::LERP_WALK), m_target(target)
+, m_goNextTarget(false)
 {
 }
 
@@ -12,54 +13,39 @@ PlayerLERPState::~PlayerLERPState()
 {
 }
 
+bool PlayerLERPState::nextTarget() const
+{
+	return m_goNextTarget;
+}
 void PlayerLERPState::update(PlayerModelHandler& modelHandler)
 {
-	if (m_moreEnemies)
-		m_moreEnemies = attackEnemies(modelHandler);
-	else
-	{
-		if (returnToNormal(modelHandler))
-		{
-			auto newPos = m_attackList[m_currentTargetIndex]->getNormalPos();
-			modelHandler.setNormalPos(newPos);
-			m_nextState = PLAYER_STATES::PlayerNormalState;
-		}
-	}
+	if (attackEnemy(modelHandler))
+		m_goNextTarget = true;
+
 }
-bool PlayerLERPState::attackEnemies(PlayerModelHandler& modelHandler)
+bool PlayerLERPState::attackEnemy(PlayerModelHandler& modelHandler)
 {
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
+	const Ogre::Vector3& tPos = m_target->getPosition();
 	if (m_lerpState == LERP_STATE::LERP_WALK)
-		m_lerpState = modelHandler.lerpWalk(m_attackList[m_currentTargetIndex]->getNode()->getPosition(), dt);
+		m_lerpState = modelHandler.lerpWalk(tPos, dt);
 	else if (m_lerpState == LERP_STATE::LERP_ATTACK)
 	{
-		m_lerpState = modelHandler.lerpAttack(m_attackList[m_currentTargetIndex]->getNode()->getPosition(), dt);
+		m_lerpState = modelHandler.lerpAttack(tPos, dt);
 		if (m_lerpState == LERP_STATE::LERP_WALK)
 		{
-			m_lastPosition = modelHandler.getNode()->getPosition();
-			if (m_currentTargetIndex + 1 < m_attackList.size())
-				m_currentTargetIndex++;
-			else
-				return false;
+			return true;
 		}
 	}
-	return true;
+	return false;
 }
+/*
 bool PlayerLERPState::returnToNormal(PlayerModelHandler& modelHandler)
 {
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
+	auto newPos = m_target->getNormalPos();
+	modelHandler.setNormalPos(newPos);
+	m_nextState = PLAYER_STATES::PlayerNormalState;
 	return true; // lol
 }
-void PlayerLERPState::init(PlayerModelHandler& modelHandler)
-{
-	cout << "init LerpState" << endl;
-	m_currentTargetIndex = 0;
-	m_nextState = PLAYER_STATES::PlayerLERPState;
-	m_moreEnemies = true;
-	m_lerpState = LERP_STATE::LERP_WALK;
-	m_lastPosition = modelHandler.getNode()->getPosition();
-	m_attackList = PlayerStats::getSingletonPtr()->getAttackList();
-}
-void PlayerLERPState::exit()
-{
-}
+*/

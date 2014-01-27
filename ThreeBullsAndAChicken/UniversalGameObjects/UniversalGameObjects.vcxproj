@@ -48,7 +48,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
-      <AdditionalOptions>/Zm128 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/Zm144 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -65,7 +65,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
-      <AdditionalOptions>/Zm128 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/Zm144 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -76,11 +76,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GameRules.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameStateLERP.h" />
+    <ClInclude Include="GameStateNormal.h" />
+    <ClInclude Include="GameStateSelection.h" />
+    <ClInclude Include="GameStateSelectionHandler.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="UniversalModelHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameRules.cpp" />
+    <ClCompile Include="GameStateLERP.cpp" />
+    <ClCompile Include="GameStateNormal.cpp" />
+    <ClCompile Include="GameStateSelection.cpp" />
+    <ClCompile Include="GameStateSelectionHandler.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

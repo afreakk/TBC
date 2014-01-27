@@ -4,12 +4,11 @@
 class MutantLERPState : public MutantState
 {
 public:
-	MutantLERPState();
+	MutantLERPState(Ogre::SceneNode* playerNode);
 	~MutantLERPState();
 	void update(MutantModelHandler*) override;
-	void init(MutantModelHandler*) override;
-	void exit() override;
 private:
 	LERP_STATE m_lerpState;
+	Ogre::SceneNode* const m_playerNode;
 };
 

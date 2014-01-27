@@ -1,8 +1,9 @@
 #pragma once
-class ILevel;
+#include "stdafx.h"
 #include "LevelListing.h"
+class ILevel;
 
-class LevelManager
+class LevelManager : public boost::noncopyable
 {
 public:
 	LevelManager(ILevel* initialLevel);
@@ -11,7 +12,7 @@ public:
 	void changeLevel(ILevel* nextLevel);
 	const LevelID getCurrentLevelID();
 protected:
-	ILevel* m_currentLevel;
+	unique_ptr<ILevel> m_currentLevel;
 
 };
 

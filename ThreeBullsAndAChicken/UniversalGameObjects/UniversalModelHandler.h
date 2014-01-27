@@ -8,37 +8,41 @@ enum class LERP_STATE
 	LERP_WALK,
 	LERP_ATTACK
 };
-class UniversalModelHandler
+enum class ANIMATIONS
+{
+	WALK,
+	ATTACK,
+	DIE,
+	BLOCK
+};
+class UniversalModelHandler : boost::noncopyable
 {
 public:
-	UniversalModelHandler(CreationRecipes* recipe);
-	~UniversalModelHandler();
-	virtual void init(NormalPosition pos);
+	UniversalModelHandler(CreationRecipes* recipe, PolarCoordinates normalPos);
+	virtual ~UniversalModelHandler();
 	void normalWalk(const Real& rInc, const NormalDirection& activeDirection);
-	void playWalkAnim(const Real);
 	LERP_STATE lerpAttack(const Ogre::Vector3&, const Ogre::Real&);
 	LERP_STATE lerpWalk(const Ogre::Vector3&, const Ogre::Real&);
 	void fallAndDie(Real dt);
-private:
-	void lerp(const Ogre::Vector3&, const Ogre::Real&);
 protected:
-	void enableAnimation(AnimationState*);
+	void updateNormalPos();
+	void lerp(const Ogre::Vector3&, const Ogre::Real&);
+	virtual void init();
+	void enableAnimation(ANIMATIONS);
+
 	CreationRecipes* m_crRecipe;
+	Entity*const m_entity;
+	SceneNode*const m_node;
+	PolarCoordinates m_normalPosition;
 
-	NormalPosition m_normalPosition;
-	Entity* m_entity;
-	SceneNode* m_node;
-
-	AnimationState* m_walkAnim;
-	AnimationState* m_attackAnim;
-	AnimationState* m_deathAnim;
+	std::map<ANIMATIONS, AnimationState*> m_animations;
 	//getsnsets
 public:
-	Entity*					getEntity() const;
-	SceneNode*				getNode() const ;
-	const NormalPosition&	getNormalPos() ;
-	void					setNormalPos(NormalPosition newPos);
-	const Vector3			getNormalVecPos() const;
+	virtual Entity*					getEntity() const;
+	virtual SceneNode*				getNode() const ;
+	virtual const PolarCoordinates&	getNormalPos() ;
+	virtual void					setNormalPos(PolarCoordinates newPos);
+	virtual const Vector3			getNormalVecPos() const;
 
 };
 

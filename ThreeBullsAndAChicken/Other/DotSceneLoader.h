@@ -1,7 +1,6 @@
 ﻿#pragma once
 // Includes
 #include "stdafx.h"
-#include <vector>
 // Forward declarations
 class TiXmlElement;
 namespace Ogre

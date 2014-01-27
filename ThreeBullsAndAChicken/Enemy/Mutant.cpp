@@ -4,35 +4,45 @@
 #include "MutantLERPState.h"
 #include "MutantDeadState.h"
 
-Mutant::Mutant(const NormalPosition pos) :m_currentState(MUTANT_STATES::STATE_NORMAL)
+Mutant::Mutant(const PolarCoordinates pos, Ogre::SceneNode* playerNode) :m_currentState(nullptr), m_modelHolder(pos), m_playerNode(playerNode)
 {
-	m_states[MUTANT_STATES::STATE_NORMAL] = new MutantNormalState();
-	m_states[MUTANT_STATES::STATE_LERP] = new MutantLERPState();
-	m_states[MUTANT_STATES::STATE_DEAD] = new MutantDeadState();
-	m_modelHolder.init(pos);
-	m_states[m_currentState]->init(&m_modelHolder);
+	setState(MUTANT_STATES::STATE_NORMAL);
 }
 
 
 Mutant::~Mutant()
 {
+	cout << "mutant destrocutor" << endl;
 }
 
-MutantModelHandler& Mutant::getModelHandler()
+const MutantModelHandler& Mutant::getModelHandler() const
 {
 	return m_modelHolder;
 }
-NormalPosition Mutant::getNormalPos() 
+MutantModelHandler& Mutant::getModelHandler() 
 {
-	return m_modelHolder.getNormalPos();
+	return m_modelHolder;
 }
 void Mutant::setState(MUTANT_STATES newState)
 {
-	m_states[m_currentState]->exit();
-	m_currentState = newState;
-	m_states[m_currentState]->init(&m_modelHolder);
+	m_currentState.reset();
+	switch (newState)
+	{
+	case MUTANT_STATES::STATE_NORMAL:
+		m_currentState = unique_ptr<MutantState> { new MutantNormalState() };
+		break;
+	case MUTANT_STATES::STATE_LERP:
+		m_currentState = unique_ptr<MutantLERPState> {new MutantLERPState(m_playerNode) };
+		break;
+	case MUTANT_STATES::STATE_DEAD:
+		m_currentState = unique_ptr<MutantState> { new MutantDeadState() };
+		break;
+	default:
+		assert(0);
+		break;
+	}
 }
 void Mutant::update()
 {
-	m_states[m_currentState]->update(&m_modelHolder);
+	m_currentState->update(&m_modelHolder);
 }

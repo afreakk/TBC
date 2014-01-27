@@ -1,6 +1,4 @@
 #pragma once
-#include "string"
-#include "map"
 enum class LevelID
 {
 	LEVEL_ONE,

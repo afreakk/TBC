@@ -2,18 +2,17 @@
 #include "OgreCore.h"
 template<> OgreCore* Ogre::Singleton<OgreCore>::msSingleton = 0;
 
-OgreCore::OgreCore() :m_root(NULL), m_window(NULL), m_sceneMgr(NULL), m_camera(NULL), m_viewport(NULL)
+OgreCore::OgreCore() :m_root(nullptr), m_window(nullptr), m_sceneMgr(nullptr), m_camera(nullptr), m_viewport(nullptr)
 {
 }
 OgreCore::~OgreCore()
 {
-	delete m_root;
 }
 
 bool OgreCore::initRoot()
 {
 	//Clearing the first two (of three) params will let us specify plugins and resources in code instead of via text file
-	m_root = new Ogre::Root("", "");
+	m_root = unique_ptr<Ogre::Root>{ new Ogre::Root("", "") };
 #ifdef _DEBUG
 	m_root->loadPlugin("RenderSystem_GL_d");
 	m_root->loadPlugin("Plugin_CgProgramManager_d");
@@ -64,8 +63,8 @@ bool OgreCore::initSceneManager()
 
 bool OgreCore::initOverlaySystem()
 {
-	m_overlaySystem = new Ogre::OverlaySystem;
-	OgreCore::getSingletonPtr()->getSceneMgr()->addRenderQueueListener(m_overlaySystem);
+	m_overlaySystem = unique_ptr<Ogre::OverlaySystem>{ new Ogre::OverlaySystem };
+	OgreCore::getSingletonPtr()->getSceneMgr()->addRenderQueueListener(m_overlaySystem.get());
 	return true;
 }
 
@@ -76,7 +75,7 @@ Ogre::Vector2 OgreCore::getResolution()
 
 Ogre::OverlaySystem* OgreCore::getOverlaySystem()
 {
-	return m_overlaySystem;
+	return m_overlaySystem.get();
 }
 bool OgreCore::initCamera(const Ogre::String cameraName)
 {
@@ -96,7 +95,7 @@ Ogre::RenderWindow* OgreCore::getWindow(){
 	return m_window;
 }
 Ogre::Root* OgreCore::getRoot(){
-	return m_root;
+	return m_root.get();
 }
 Ogre::SceneManager* OgreCore::getSceneMgr(){
 	return m_sceneMgr;

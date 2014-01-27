@@ -5,8 +5,11 @@
 
 #pragma once
 
+#include "OISKeyboard.h"
 #include <iostream>
 #include "OgreSceneManager.h"
+#include <memory>
+#include "boost\lexical_cast.hpp"
 using namespace std;
 using namespace Ogre;
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers

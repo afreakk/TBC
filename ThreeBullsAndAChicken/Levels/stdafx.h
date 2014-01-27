@@ -5,7 +5,11 @@
 
 #pragma once
 
+#include <string>
+#include <map>
 #include <iostream>
+#include "boost/utility.hpp"
+#include <memory>
 using namespace std;
 
 

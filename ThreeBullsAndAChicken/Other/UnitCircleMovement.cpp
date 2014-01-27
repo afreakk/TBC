@@ -1,15 +1,15 @@
 #include "stdafx.h"
 #include "UnitCircleMovement.h"
 using namespace Ogre;
-Ogre::Vector3 UnitCircleMovement::posFromR(NormalPosition p)
+Ogre::Vector3 UnitCircleMovement::posFromR(PolarCoordinates p)
 {
 	return Ogre::Vector3(Ogre::Math::Sin(p.r)*p.d,p.h,Ogre::Math::Cos(p.r)*p.d);
 }
-void UnitCircleMovement::normalSetPosition(Ogre::SceneNode* node, NormalPosition p)
+void UnitCircleMovement::normalSetPosition(Ogre::SceneNode* node, PolarCoordinates p)
 {
 	node->setPosition(posFromR(p));
 }
-void UnitCircleMovement::normalSetDirection(Ogre::SceneNode* node, NormalPosition p, NormalDirection direction)
+void UnitCircleMovement::normalSetDirection(Ogre::SceneNode* node, PolarCoordinates p, NormalDirection direction)
 {
 	switch (direction)
 	{
@@ -34,7 +34,7 @@ void keepWithinMax(Real* d)
 		*d += Math::PI*2.0;
 }
 #include <math.h>
-unsigned energyCostOf(NormalPosition a, NormalPosition b)
+unsigned energyCostOf(PolarCoordinates a, PolarCoordinates b)
 {
 	keepWithinMax(&a.r);
 	keepWithinMax(&b.r);
@@ -47,4 +47,9 @@ bool isWithinRange(Real r1, Real r2, Real distance)
 	if (r1 >= r2 - distance && r1 <= r2 + distance)
 		return true;
 	return false;
+}
+void vectorToNormal(const Vector3 vec, PolarCoordinates& norm)
+{
+	norm.r = atan2(vec.x , vec.z);
+	norm.d = sqrt(vec.z*vec.z + vec.x*vec.x);
 }

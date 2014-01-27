@@ -1,49 +1,57 @@
 #include "stdafx.h"
 #include "UniversalModelHandler.h"
-#include "boost\lexical_cast.hpp"
 
 using namespace Ogre;
 
 
-UniversalModelHandler::UniversalModelHandler(CreationRecipes* recipe)
-: m_entity(nullptr), m_node(nullptr)
-, m_walkAnim(nullptr), m_attackAnim(nullptr), m_deathAnim(nullptr)
-, m_crRecipe(recipe)
+UniversalModelHandler::UniversalModelHandler(CreationRecipes* recipe, PolarCoordinates normalPos)
+: m_crRecipe(recipe)
+, m_entity(m_crRecipe->initMesh(OgreCore::getSingletonPtr()->getSceneMgr()))
+, m_node(m_crRecipe->initNode(OgreCore::getSingletonPtr()->getSceneMgr()))
+, m_normalPosition(normalPos)
 {
+	init();
 }
 UniversalModelHandler::~UniversalModelHandler()
 {
+	cout << "UniversalModelHandler destrucotr " << endl;
 }
 
-void UniversalModelHandler::playWalkAnim(const Real howMuch)
+void UniversalModelHandler::init() 
 {
-	enableAnimation(m_walkAnim);
-	m_walkAnim->addTime(howMuch);
+	m_node->attachObject(m_entity);
+	m_animations[ANIMATIONS::ATTACK]= m_crRecipe->getAttack(m_entity);
+	m_animations[ANIMATIONS::WALK]	= m_crRecipe->getWalk(m_entity);
+	m_animations[ANIMATIONS::DIE]	= m_crRecipe->getDie(m_entity);
+	UnitCircleMovement::normalSetPosition(m_node, m_normalPosition);
 }
+
 void UniversalModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
-	enableAnimation(m_walkAnim);
-	m_walkAnim->addTime(Ogre::Math::Abs(rInc)*20.0);
+	enableAnimation(ANIMATIONS::WALK);
+	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*20.0);
 	m_normalPosition.r += rInc;
-	UnitCircleMovement::normalSetDirection(m_node, getNormalPos(), activeDirection);
-	UnitCircleMovement::normalSetPosition(m_node, getNormalPos());
+	UnitCircleMovement::normalSetDirection(m_node, m_normalPosition, activeDirection);
+	UnitCircleMovement::normalSetPosition(m_node, m_normalPosition);
 }
 //private
-void UniversalModelHandler::enableAnimation(AnimationState* anim)
+void UniversalModelHandler::enableAnimation(ANIMATIONS animation)
 {
-		anim->setEnabled(true);
+	for (auto& animation : m_animations)
+		animation.second->setEnabled(false);
+	m_animations[animation]->setEnabled(true);
 }
 void UniversalModelHandler::fallAndDie(Real dt)
 {
-	enableAnimation(m_deathAnim);
-	m_deathAnim->setLoop(false);
-	m_deathAnim->addTime(dt);
+	enableAnimation(ANIMATIONS::DIE);
+	m_animations[ANIMATIONS::DIE]->setLoop(false);
+	m_animations[ANIMATIONS::DIE]->addTime(dt);
 }
 LERP_STATE UniversalModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
 	lerp(nextPosition, dt);
-	enableAnimation(m_attackAnim);
-	m_attackAnim->addTime(dt*10.0);
+	enableAnimation(ANIMATIONS::ATTACK);
+	m_animations[ANIMATIONS::ATTACK]->addTime(dt*10.0);
 	auto ADistance = m_node->getPosition().distance(nextPosition);
 	if (ADistance > 0.05)
 		return LERP_STATE::LERP_ATTACK;
@@ -53,8 +61,8 @@ LERP_STATE UniversalModelHandler::lerpAttack( const Ogre::Vector3& nextPosition,
 LERP_STATE UniversalModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
 	lerp(nextPosition, dt);
-	enableAnimation(m_walkAnim);
-	m_walkAnim->addTime(dt*10.0);
+	enableAnimation(ANIMATIONS::WALK);
+	m_animations[ANIMATIONS::WALK]->addTime(dt*10.0);
 	auto ADistance = m_node->getPosition().distance(nextPosition);
 	if (ADistance > 0.125)
 		return LERP_STATE::LERP_WALK;
@@ -64,29 +72,14 @@ void UniversalModelHandler::lerp(const Ogre::Vector3& nextPosition, const Ogre::
 {
 	m_node->lookAt(nextPosition,Ogre::Node::TransformSpace::TS_WORLD);
 	m_node->translate(Vector3(0.0, 0.0, -dt), Ogre::Node::TS_LOCAL);
-}
-void UniversalModelHandler::init(NormalPosition pos) 
-{
-	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
-
-	m_entity		= m_crRecipe->initMesh(sMgr);
-
-	m_attackAnim	= m_crRecipe->getAttack(m_entity);
-	m_walkAnim		= m_crRecipe->getWalk(m_entity);
-	m_deathAnim		= m_crRecipe->getDie(m_entity);
-
-	m_node			= m_crRecipe->initNode(sMgr);
-	m_node->attachObject(m_entity);
-
-	UnitCircleMovement::normalSetPosition(m_node, pos);
-	m_normalPosition = pos;
+	updateNormalPos();
 }
 
 Ogre::SceneNode* UniversalModelHandler::getNode() const 
 {
 	return m_node;
 }
-const NormalPosition& UniversalModelHandler::getNormalPos() 
+const PolarCoordinates& UniversalModelHandler::getNormalPos() 
 {
 	return m_normalPosition;
 }
@@ -100,7 +93,11 @@ Entity* UniversalModelHandler::getEntity() const
 {
 	return m_entity;
 }
-void UniversalModelHandler::setNormalPos(NormalPosition newPos)
+void UniversalModelHandler::setNormalPos(PolarCoordinates newPos)
 {
 	m_normalPosition = newPos;
+}
+void UniversalModelHandler::updateNormalPos()
+{
+	vectorToNormal(m_node->getPosition(), m_normalPosition);
 }

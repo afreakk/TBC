@@ -8,6 +8,9 @@
 #include <Ogre.h>
 #include "Overlay/OgreFontManager.h"
 #include "RTShaderSystem/OgreShaderGenerator.h"
+#include <memory>
+#include "boost/utility.hpp"
+#include <vector>
 using namespace std;
 using namespace Ogre;
 

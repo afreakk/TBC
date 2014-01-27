@@ -1,13 +1,11 @@
 #include "stdafx.h"
 #include "EnemyHandler.h"
-#include "MutantGlobalStats.h"
 template<> EnemyHandler* Ogre::Singleton<EnemyHandler>::msSingleton = 0;
 
-EnemyHandler::EnemyHandler() :m_player(nullptr), m_spawnDistance(0), m_attackDistance(0.0)
+EnemyHandler::EnemyHandler() :m_player(nullptr), m_spawnDistance(0), m_attackDistance(0.0), m_mutantGlobalStats(new MutantGlobalStats())
 {
-	new MutantGlobalStats();
 }
-void EnemyHandler::init(Player* player, const std::vector<NormalPosition>& mutantStartingPositions)
+void EnemyHandler::init(Player* player, const std::vector<PolarCoordinates> mutantStartingPositions)
 {
 	m_player = player;
 	m_spawnDistance = Ogre::Math::PI / 8.0;
@@ -17,50 +15,43 @@ void EnemyHandler::init(Player* player, const std::vector<NormalPosition>& mutan
 }
 EnemyHandler::~EnemyHandler()
 {
-	delete MutantGlobalStats::getSingletonPtr();
+	cout << "enemyhandler destrucotr" << endl;
 }
 
 
 void EnemyHandler::update()
 {
 	instantiateNewEnemies();
-	enemyGO();
-	for (auto& mutant : m_mutants)
-	{
-		mutant.update();
-		if (mutant.getCurrentState()->getNextState() != mutant.getCurrentState()->getState())
-			mutant.setState(mutant.getCurrentState()->getNextState());
-	}
+	for (auto& mutantHandler : m_mutantHandlers)
+		mutantHandler->update();
 }
 void EnemyHandler::instantiateNewEnemies()
 {
-	for (unsigned i = 0; i < m_mutantStartingPositions.size(); i++)
+	for (std::vector<PolarCoordinates>::iterator posIter = begin(m_mutantStartingPositions); posIter != end(m_mutantStartingPositions); ++posIter)
 	{
-		if (isWithinRange(m_player->getNormalPosition().r, m_mutantStartingPositions[i].r, m_spawnDistance))
+		if (isWithinRange(m_player->getNormalPosition().r, (*posIter).r, m_spawnDistance))
 		{
-			m_mutants.push_back(Mutant(m_mutantStartingPositions[i]));
-			m_mutantStartingPositions.erase(m_mutantStartingPositions.begin() + i);
+//			m_mutants.push_back( unique_ptr<Mutant>( new Mutant(*posIter, m_player->getNode() ) ) );
+			m_mutantHandlers.push_back( unique_ptr<MutantHandler>(new  MutantHandler(*posIter, m_player->getNode())  ) );
+			cout << "spawning new enemy" << endl;
+			m_mutantStartingPositions.erase(posIter);
+			return;
 		}
 	}
 }
-
+/*
 void EnemyHandler::enemyGO()
 {
 	for (auto& mutant : m_mutants)
 	{
-		if (mutant.getCurrentState()->getState() == MUTANT_STATES::STATE_NORMAL)
+		if (mutant->getCurrentState()->getState() == MUTANT_STATES::STATE_NORMAL)
 		{
-			if (mutant.getModelHandler().getNode()->getPosition().distance(m_player->getNode()->getPosition()) < m_attackDistance)
+			if (mutant->getModelHandler().getNode()->getPosition().distance(m_player->getNode()->getPosition()) < m_attackDistance)
 			{
-				mutant.setState(MUTANT_STATES::STATE_LERP);
-				mutant.getCurrentState()->setPlayer(m_player);
+				mutant->setState(MUTANT_STATES::STATE_LERP);
 			}
 		}
 	}
 
 }
-
-std::vector<Mutant>& EnemyHandler::getMutants()
-{
-	return m_mutants;
-}
+*/

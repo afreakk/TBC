@@ -15,7 +15,7 @@
 
 namespace Ogre {
 
-	class MovableText : public MovableObject, public Renderable
+	class MovableText : public MovableObject, public Renderable, boost::noncopyable
 	{
 		/******************************** MovableText data ****************************/
 	public:

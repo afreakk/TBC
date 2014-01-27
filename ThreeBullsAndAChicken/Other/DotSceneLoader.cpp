@@ -11,7 +11,7 @@ void DotSceneLoader::parseDotScene(const String &SceneName, const String &groupN
 	m_sPrependNode = sPrependNode;
 	staticObjects.clear();
 	dynamicObjects.clear();
-	TiXmlDocument   *XMLDoc = 0;
+	unique_ptr<TiXmlDocument> XMLDoc{ nullptr };
 	TiXmlElement   *XMLRoot;
 	try
 	{
@@ -24,7 +24,7 @@ void DotSceneLoader::parseDotScene(const String &SceneName, const String &groupN
 		// openResource( SceneName, groupName );
 		String data = pStream->getAsString();
 		// Open the .scene File
-		XMLDoc = new TiXmlDocument();
+		XMLDoc = unique_ptr<TiXmlDocument>{ new TiXmlDocument() };
 		XMLDoc->Parse(data.c_str());
 		pStream->close();
 		pStream.setNull();
@@ -32,7 +32,6 @@ void DotSceneLoader::parseDotScene(const String &SceneName, const String &groupN
 		{
 			//We'll just log, and continue on gracefully
 			LogManager::getSingleton().logMessage("[DotSceneLoader] The TiXmlDocument reported an error");
-			delete XMLDoc;
 			return;
 		}
 	}
@@ -40,14 +39,12 @@ void DotSceneLoader::parseDotScene(const String &SceneName, const String &groupN
 	{
 		//We'll just log, and continue on gracefully
 		LogManager::getSingleton().logMessage("[DotSceneLoader] Error creating TiXmlDocument");
-		delete XMLDoc;
 		return;
 	}
 	// Validate the File
 	XMLRoot = XMLDoc->RootElement();
 	if (String(XMLRoot->Value()) != "scene") {
 		LogManager::getSingleton().logMessage("[DotSceneLoader] Error: Invalid .scene File. Missing ");
-		delete XMLDoc;
 		return;
 	}
 	// figure out where to attach any nodes we create
@@ -56,8 +53,6 @@ void DotSceneLoader::parseDotScene(const String &SceneName, const String &groupN
 		mAttachNode = mSceneMgr->getRootSceneNode();
 	// Process the scene
 	processScene(XMLRoot);
-	// Close the XML File
-	delete XMLDoc;
 }
 void DotSceneLoader::processScene(TiXmlElement *XMLRoot)
 {

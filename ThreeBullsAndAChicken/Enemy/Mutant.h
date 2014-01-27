@@ -2,24 +2,23 @@
 #include "stdafx.h"
 #include "MutantState.h"
 #include "MutantModelHandler.h"
-#include <map>
-class Mutant
+class Mutant  : public boost::noncopyable
 {
 public:
-	Mutant(const NormalPosition pos);
+	Mutant(const PolarCoordinates pos, Ogre::SceneNode* playerNode);
 	~Mutant();
 	void update();
 	void setState(MUTANT_STATES);
-	NormalPosition getNormalPos() ;
+	const MutantModelHandler& getModelHandler() const;
 	MutantModelHandler& getModelHandler();
 	string getMaterialName()const;
-	MutantState* getCurrentState()
+	const MutantState* getCurrentState()
 	{
-		return m_states[m_currentState];
+		return m_currentState.get();
 	}
 private:
 	MutantModelHandler m_modelHolder;
-	std::map<MUTANT_STATES, MutantState*> m_states;
-	MUTANT_STATES m_currentState;
+	unique_ptr<MutantState> m_currentState;
+	Ogre::SceneNode* m_playerNode;
 };
 

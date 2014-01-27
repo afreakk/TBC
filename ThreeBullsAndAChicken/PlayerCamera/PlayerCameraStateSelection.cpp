@@ -2,7 +2,7 @@
 #include "PlayerCameraStateSelection.h"
 #include "../Enemy/EnemyHandler.h"
 
-PlayerCameraStateSelection::PlayerCameraStateSelection()
+PlayerCameraStateSelection::PlayerCameraStateSelection() : m_mutants(EnemyHandler::getSingleton().getMutantHandlers()), m_camera(OgreCore::getSingleton().getCamera())
 {
 }
 
@@ -13,21 +13,12 @@ PlayerCameraStateSelection::~PlayerCameraStateSelection()
 
 void PlayerCameraStateSelection::update()
 {
-	auto mutants = EnemyHandler::getSingleton().getMutants();
-	for (auto& mutant : mutants)
+	for (const auto& mutant : m_mutants)
 	{
-		if (mutant.getModelHandler().isSelected())
+		if (mutant->getMutant().getModelHandler().isSelected())
 		{
-			m_camera->lookAt(mutant.getModelHandler().getNode()->getPosition());
+			m_camera->lookAt(mutant->getMutant().getModelHandler().getNode()->getPosition());
 		}
 	}
-
-}
-void PlayerCameraStateSelection::init(SceneNode* playerNode)
-{
-	m_camera = OgreCore::getSingletonPtr()->getCamera();
-}
-void PlayerCameraStateSelection::exit()
-{
 
 }

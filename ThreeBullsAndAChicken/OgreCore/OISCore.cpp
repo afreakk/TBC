@@ -22,7 +22,8 @@ OISCore::~OISCore()
 {
 	if (m_keyboard)
 		m_ois->destroyInputObject(m_keyboard);
-	m_ois->destroyInputSystem(m_ois);
+	if (m_ois)
+		m_ois->destroyInputSystem(m_ois);
 }
 
 const OIS::Keyboard* OISCore::getKeyboard()

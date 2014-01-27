@@ -7,7 +7,5 @@ public:
 	MutantDeadState();
 	~MutantDeadState();
 	void update(MutantModelHandler*)override;
-	void init(MutantModelHandler*)override;
-	void exit()override;
 };
 
