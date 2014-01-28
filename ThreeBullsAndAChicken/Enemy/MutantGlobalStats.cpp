@@ -12,7 +12,7 @@ MutantGlobalStats::~MutantGlobalStats()
 	cout << "mutant GlobalSTATS destrucotr" << endl;
 }
 
-Ogre::Real MutantGlobalStats::getWalkSpeed() const
+const Ogre::Real& MutantGlobalStats::getWalkSpeed() const
 {
 	return m_walkSpeed;
 }

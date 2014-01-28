@@ -5,7 +5,7 @@ class MutantGlobalStats : public Ogre::Singleton<MutantGlobalStats>
 public:
 	MutantGlobalStats();
 	~MutantGlobalStats();
-	Ogre::Real getWalkSpeed() const;
+	const Ogre::Real& getWalkSpeed() const;
 	void setWalkSpeed(Real newWalkSpeed);
 private:
 	Ogre::Real m_walkSpeed;

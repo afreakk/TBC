@@ -18,22 +18,22 @@ void PlayerCamera::update()
 	m_currentState->update();
 }
 
-void PlayerCamera::notify(PLAYER_STATES newState)
+void PlayerCamera::notify(BEHAVOUR_STATE newState)
 {
 	setNewState(newState);
 }
-void PlayerCamera::setNewState(PLAYER_STATES newState)
+void PlayerCamera::setNewState(BEHAVOUR_STATE newState)
 {
 	m_currentState.reset();
 	switch (newState)
 	{
-	case PLAYER_STATES::PlayerNormalState:
+	case BEHAVOUR_STATE::NORMAL:
 		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal( m_player->getNode()) };
 		break;
-	case PLAYER_STATES::PlayerSelectionState:
+	case BEHAVOUR_STATE::SELECTION:
 		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateSelection() };
 		break;
-	case PLAYER_STATES::PlayerLERPState:
+	case BEHAVOUR_STATE::LERP:
 		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateLERP(m_player->getNode()) };
 		break;
 	default:

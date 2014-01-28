@@ -1,19 +1,18 @@
 #pragma once
 #include "stdafx.h"
-#include "PlayerState.h"
-class PlayerLERPState:public PlayerState
+#include "../UniversalBehaviourState/BehaviourState.h"
+class PlayerLERPState:public BehaviourState
 {
 public:
 	PlayerLERPState(SceneNode* target);
 	~PlayerLERPState();
-	void update(PlayerModelHandler& ) override;
+	void update(UniversalModelHandler& ) override;
 	bool nextTarget() const;
 private:
 	LERP_STATE m_lerpState;
 	SceneNode*const m_target;
 	bool m_goNextTarget;
 
-	bool attackEnemy(PlayerModelHandler& modelHandler);
-
+	bool attackEnemy(UniversalModelHandler& modelHandler);
 };
 

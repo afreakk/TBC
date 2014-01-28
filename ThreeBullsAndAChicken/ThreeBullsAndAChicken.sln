@@ -53,6 +53,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EnemyHandler", "EnemyHandle
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xxTemp", "xxTemp\xxTemp.vcxproj", "{0BF78B28-814B-4323-85D6-47F40CB72327}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UniversalBehaviourState", "UniversalBehaviourState\UniversalBehaviourState.vcxproj", "{20379BF4-D515-4D32-A3A3-53C3620051A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayerHandler", "PlayerHandler\PlayerHandler.vcxproj", "{63AE2264-336B-48E6-9185-C6766F7186B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -127,6 +131,14 @@ Global
 		{0BF78B28-814B-4323-85D6-47F40CB72327}.Debug|Win32.Build.0 = Debug|Win32
 		{0BF78B28-814B-4323-85D6-47F40CB72327}.Release|Win32.ActiveCfg = Release|Win32
 		{0BF78B28-814B-4323-85D6-47F40CB72327}.Release|Win32.Build.0 = Release|Win32
+		{20379BF4-D515-4D32-A3A3-53C3620051A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{20379BF4-D515-4D32-A3A3-53C3620051A3}.Debug|Win32.Build.0 = Debug|Win32
+		{20379BF4-D515-4D32-A3A3-53C3620051A3}.Release|Win32.ActiveCfg = Release|Win32
+		{20379BF4-D515-4D32-A3A3-53C3620051A3}.Release|Win32.Build.0 = Release|Win32
+		{63AE2264-336B-48E6-9185-C6766F7186B7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{63AE2264-336B-48E6-9185-C6766F7186B7}.Debug|Win32.Build.0 = Debug|Win32
+		{63AE2264-336B-48E6-9185-C6766F7186B7}.Release|Win32.ActiveCfg = Release|Win32
+		{63AE2264-336B-48E6-9185-C6766F7186B7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,8 +147,5 @@ Global
 		{A6118EBE-561E-43A3-8B7E-3B09B56917A8} = {8911112E-8C06-42D9-B28A-E62F858BB74A}
 		{8F8D2C6E-A39D-45B7-987D-A752A21BF9E3} = {8911112E-8C06-42D9-B28A-E62F858BB74A}
 		{4A8DB18A-9BF5-4916-AD8B-A82601543192} = {8911112E-8C06-42D9-B28A-E62F858BB74A}
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

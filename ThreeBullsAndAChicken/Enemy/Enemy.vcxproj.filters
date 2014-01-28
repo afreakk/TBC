@@ -27,9 +27,6 @@
     <ClInclude Include="MutantModelHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MutantState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MutantNormalState.h">
       <Filter>Header Files</Filter>
     </ClInclude>

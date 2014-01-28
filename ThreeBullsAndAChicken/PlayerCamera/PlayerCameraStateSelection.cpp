@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "PlayerCameraStateSelection.h"
 #include "../Enemy/EnemyHandler.h"
-
-PlayerCameraStateSelection::PlayerCameraStateSelection() : m_mutants(EnemyHandler::getSingleton().getMutantHandlers()), m_camera(OgreCore::getSingleton().getCamera())
+#include "../Enemy/MutantModelHandler.h"
+PlayerCameraStateSelection::PlayerCameraStateSelection() : m_mutants(EnemyHandler::getSingleton().getMutants()), m_camera(OgreCore::getSingleton().getCamera())
 {
 }
 
@@ -15,9 +15,10 @@ void PlayerCameraStateSelection::update()
 {
 	for (const auto& mutant : m_mutants)
 	{
-		if (mutant->getMutant().getModelHandler().isSelected())
+		MutantModelHandler& mutantModelHandler = static_cast<MutantModelHandler&>(mutant->getModelHandler());
+		if (mutantModelHandler.isSelected())
 		{
-			m_camera->lookAt(mutant->getMutant().getModelHandler().getNode()->getPosition());
+			m_camera->lookAt(mutant->getModelHandler().getNode()->getPosition());
 		}
 	}
 

@@ -2,17 +2,17 @@
 #include "stdafx.h"
 #include "../Camera/CameraBase.h"
 #include "../Player/Player.h"
-#include "../Player/PlayerStateSubscriber.h"
+#include "../UniversalBehaviourState/BehaviourStateSubscriber.h"
 #include "PlayerCameraState.h"
-class PlayerCamera:public PlayerStateSubscriber
+class PlayerCamera:public BehaviourStateSubscriber
 {
 public:
 	PlayerCamera(Player* player);
 	~PlayerCamera();
 	void update();
-	void notify(PLAYER_STATES) override;
+	void notify(BEHAVOUR_STATE) override;
 private:
-	void setNewState(PLAYER_STATES);
+	void setNewState(BEHAVOUR_STATE);
 
 	Player* m_player;
 	unique_ptr<PlayerCameraState> m_currentState;

@@ -1,0 +1,7 @@
+#pragma once
+enum class MUTANT_HANDLER_STATE
+{
+	NORMAL,
+	LERP,
+	UNDEFINED
+};

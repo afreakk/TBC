@@ -2,15 +2,14 @@
 #include "PlayerSelectionState.h"
 #include "../Enemy/EnemyHandler.h"
 #include "../OgreCore/OISCore.h"
-#include "PlayerStats.h"
 #include "../Enemy/MutantGlobalStats.h"
 PlayerSelectionState::PlayerSelectionState() 
-: PlayerState(PLAYER_STATES::PlayerSelectionState)
+: BehaviourState(BEHAVOUR_STATE::SELECTION)
 {
 }
 PlayerSelectionState::~PlayerSelectionState()
 {
 }
-void PlayerSelectionState::update(PlayerModelHandler& playerModel)
+void PlayerSelectionState::update(UniversalModelHandler& playerModel)
 {
 }

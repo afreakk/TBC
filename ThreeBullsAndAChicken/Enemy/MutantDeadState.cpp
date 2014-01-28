@@ -2,7 +2,7 @@
 #include "MutantDeadState.h"
 #include "../GameLevels/MainUpdate.h"
 
-MutantDeadState::MutantDeadState() :MutantState(MUTANT_STATES::STATE_DEAD)
+MutantDeadState::MutantDeadState() :BehaviourState(BEHAVOUR_STATE::DEAD)
 {
 }
 
@@ -11,9 +11,9 @@ MutantDeadState::~MutantDeadState()
 {
 }
 
-void MutantDeadState::update(MutantModelHandler* mutantModel)
+void MutantDeadState::update(UniversalModelHandler& mutantModel)
 {
 	cout << "dead" << endl;
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
-	mutantModel->fallAndDie(dt);
+	mutantModel.fallAndDie(dt);
 }

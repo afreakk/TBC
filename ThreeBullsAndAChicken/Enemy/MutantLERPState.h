@@ -1,12 +1,12 @@
 #pragma once
 #include "stdafx.h"
-#include "MutantState.h"
-class MutantLERPState : public MutantState
+#include "../UniversalBehaviourState/BehaviourState.h"
+class MutantLERPState : public BehaviourState
 {
 public:
 	MutantLERPState(Ogre::SceneNode* playerNode);
 	~MutantLERPState();
-	void update(MutantModelHandler*) override;
+	void update(UniversalModelHandler&) override;
 private:
 	LERP_STATE m_lerpState;
 	Ogre::SceneNode* const m_playerNode;

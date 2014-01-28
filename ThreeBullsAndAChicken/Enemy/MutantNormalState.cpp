@@ -3,7 +3,7 @@
 #include "../GameLevels/MainUpdate.h"
 #include "MutantGlobalStats.h"
 
-MutantNormalState::MutantNormalState() : MutantState(MUTANT_STATES::STATE_NORMAL)
+MutantNormalState::MutantNormalState() : BehaviourState(BEHAVOUR_STATE::NORMAL)
 {
 }
 
@@ -11,9 +11,9 @@ MutantNormalState::MutantNormalState() : MutantState(MUTANT_STATES::STATE_NORMAL
 MutantNormalState::~MutantNormalState()
 {
 }
-void MutantNormalState::update(MutantModelHandler* enemyModel)
+void MutantNormalState::update(UniversalModelHandler& enemyModel)
 {
 	auto walkSpeed = MutantGlobalStats::getSingletonPtr()->getWalkSpeed();
-	enemyModel->normalWalk(walkSpeed*MainUpdate::getSingletonPtr()->getDeltaTime(),NormalDirection::Left);
-	UnitCircleMovement::normalSetDirection(enemyModel->getNode(), enemyModel->getNormalPos(),NormalDirection::Left);
+	enemyModel.normalWalk(walkSpeed*MainUpdate::getSingletonPtr()->getDeltaTime(),NormalDirection::Left);
+	UnitCircleMovement::normalSetDirection(enemyModel.getNode(), enemyModel.getNormalPos(),NormalDirection::Left);
 }

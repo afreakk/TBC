@@ -24,12 +24,21 @@
     <ClInclude Include="MutantHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MutantHandlerEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerStateNormal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MutantHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateNormal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

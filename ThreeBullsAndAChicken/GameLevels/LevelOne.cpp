@@ -2,14 +2,16 @@
 #include "LevelOne.h"
 #include "../OgreCore/OgreCore.h"
 
-LevelOne::LevelOne() : ILevel(LevelID::LEVEL_ONE), m_playerCamera(&m_player), m_playerStats(new PlayerStats())
+LevelOne::LevelOne() 
+: ILevel(LevelID::LEVEL_ONE)
+, m_playerStats(new PlayerGlobalStats())
+, m_playerCamera(&m_player)
+, m_gameRules(&m_player)
 {
 
-	//temporary for reference of space
 	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
 	m_dotSceneLoader.parseDotScene("Cityblock.scene", "CityDir", sMgr);
 
-	m_gameRules.init(&m_enemyHandler, &m_player);
 	std::vector<PolarCoordinates> mutantStartingPositions;
 	int enemyCount = 8;
 	for (int i = 0; i < enemyCount; i++)
@@ -20,7 +22,8 @@ LevelOne::LevelOne() : ILevel(LevelID::LEVEL_ONE), m_playerCamera(&m_player), m_
 		mutantStartingPositions[i].d = 5.5;
 	}
 	m_enemyHandler.init(&m_player, mutantStartingPositions);
-	PlayerStats::getSingletonPtr()->registerEnergySubscriber(&m_playerGUI, "PlayerGUI");
+
+	PlayerGlobalStats::getSingletonPtr()->registerEnergySubscriber(&m_playerGUI, "PlayerGUI");
 	m_player.addSubsriber(&m_playerCamera, "playerCamera");
 }
 
@@ -28,7 +31,7 @@ LevelOne::LevelOne() : ILevel(LevelID::LEVEL_ONE), m_playerCamera(&m_player), m_
 LevelOne::~LevelOne()
 {
 	m_player.removeSubscriber("playerCamera");
-	PlayerStats::getSingletonPtr()->removeEnergySubscriber("PlayerGUI");
+	PlayerGlobalStats::getSingletonPtr()->removeEnergySubscriber("PlayerGUI");
 }
 
 bool LevelOne::update()

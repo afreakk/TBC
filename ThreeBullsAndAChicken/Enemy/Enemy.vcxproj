@@ -83,7 +83,6 @@
     <ClInclude Include="MutantLERPState.h" />
     <ClInclude Include="MutantModelHandler.h" />
     <ClInclude Include="MutantRecipe.h" />
-    <ClInclude Include="MutantState.h" />
     <ClInclude Include="MutantNormalState.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

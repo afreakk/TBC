@@ -5,10 +5,10 @@
 #include "../Other/LightHandler.h"
 #include "../PlayerCamera/PlayerCamera.h"
 #include "../Enemy/EnemyHandler.h"
-#include "../UniversalGameObjects/GameRules.h"
+#include "../PlayerHandler/PlayerHandler.h"
 #include "../Player/PlayerGUI.h"
 #include "../Other/DotSceneLoader.h"
-#include "../Player/PlayerStats.h"
+#include "../Player/PlayerGlobalStats.h"
 class LevelOne : public ILevel
 {
 public:
@@ -16,13 +16,14 @@ public:
 	~LevelOne();
 	bool update() override;
 private:
+	shared_ptr<PlayerGlobalStats> m_playerStats;
 	Player m_player;
+	PlayerCamera m_playerCamera;
+	PlayerHandler m_gameRules;
+
 	EnemyHandler m_enemyHandler;
 	LightHandler m_lightHandler;
-	PlayerCamera m_playerCamera;
-	GameRules m_gameRules;
 	PlayerGUI m_playerGUI;
-	shared_ptr<PlayerStats> m_playerStats;
 	DotSceneLoader m_dotSceneLoader;
 
 

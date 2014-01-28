@@ -1,12 +1,12 @@
 #pragma once
 #include "stdafx.h"
-#include "MutantState.h"
-class MutantNormalState:public MutantState
+#include "../UniversalBehaviourState/BehaviourState.h"
+class MutantNormalState:public BehaviourState
 {
 public:
 	MutantNormalState();
 	~MutantNormalState();
-	void update(MutantModelHandler* )override;
+	void update(UniversalModelHandler& )override;
 private:
 };
 

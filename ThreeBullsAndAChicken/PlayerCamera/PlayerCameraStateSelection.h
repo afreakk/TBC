@@ -8,7 +8,7 @@ public:
 	~PlayerCameraStateSelection();
 	void update() override ;
 private:
-	const std::vector<unique_ptr<MutantHandler> >& m_mutants; 
+	const std::vector<unique_ptr<Mutant> >& m_mutants; 
 	Ogre::Camera* m_camera;
 };
 

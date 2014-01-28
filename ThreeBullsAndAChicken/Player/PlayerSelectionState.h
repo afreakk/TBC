@@ -1,15 +1,15 @@
 #pragma once
 #include "stdafx.h"
-#include "PlayerState.h"
 #include "PlayerModelHandler.h"
 #include "../Enemy/Mutant.h"
+#include "../UniversalBehaviourState/BehaviourState.h"
 
-class PlayerSelectionState:public PlayerState
+class PlayerSelectionState:public BehaviourState
 {
 public:
 	PlayerSelectionState();
 	~PlayerSelectionState();
-	void update(PlayerModelHandler& playerModel) override;
+	void update(UniversalModelHandler& playerModel) override;
 private:
 };
 

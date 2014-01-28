@@ -81,13 +81,9 @@
     <ClInclude Include="PlayerGUI.h" />
     <ClInclude Include="PlayerLERPState.h" />
     <ClInclude Include="PlayerModelHandler.h" />
-    <ClInclude Include="PlayerNormalState.h" />
-    <ClInclude Include="PlayerNormalTranslator.h" />
     <ClInclude Include="PlayerRecipe.h" />
     <ClInclude Include="PlayerSelectionState.h" />
-    <ClInclude Include="PlayerState.h" />
-    <ClInclude Include="PlayerStateSubscriber.h" />
-    <ClInclude Include="PlayerStats.h" />
+    <ClInclude Include="PlayerGlobalStats.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -97,9 +93,7 @@
     <ClCompile Include="PlayerModelHandler.cpp" />
     <ClCompile Include="PlayerRecipe.cpp" />
     <ClCompile Include="PlayerSelectionState.cpp" />
-    <ClCompile Include="PlayerNormalState.cpp" />
-    <ClCompile Include="PlayerNormalTranslator.cpp" />
-    <ClCompile Include="PlayerStats.cpp" />
+    <ClCompile Include="PlayerGlobalStats.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

@@ -1,22 +1,16 @@
 #pragma once
 #include "stdafx.h"
 #include "../Enemy/Mutant.h"
-class MutantHandler : public boost::noncopyable
+#include "../UniversalGameObjects/StateHandler.h"
+class MutantHandler : public StateHandler <MUTANT_HANDLER_STATE>
 {
 public:
-	MutantHandler( PolarCoordinates pos, SceneNode* playerNode );
+	MutantHandler( Mutant* mutant);
 	~MutantHandler();
-	void update();
-	const Mutant& getMutant() const
-	{
-		return m_mutant;
-	}
-	Mutant& getMutant() 
-	{
-		return m_mutant;
-	}
+protected:
+	void switchState(MUTANT_HANDLER_STATE newState) override;
 private:
-	Mutant m_mutant;
+	Mutant* m_mutant;
 };
 
 
