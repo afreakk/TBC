@@ -1,11 +1,11 @@
 #pragma once
 #include "stdafx.h"
 #include "../BehaviourState/BehaviourState.h"
-class MutantDeadState : public BehaviourState
+class BehaviourStateDead : public BehaviourState
 {
 public:
-	MutantDeadState();
-	~MutantDeadState();
+	BehaviourStateDead();
+	~BehaviourStateDead();
 	void update(UniversalModelHandler&)override;
 };
 

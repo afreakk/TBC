@@ -38,6 +38,7 @@ int main()
 		LevelManager levelMgr(new LevelOne());
 		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(&levelMgr));
 		Ogre::Root::getSingletonPtr()->startRendering();
+		cout << "rendering stopped ." << endl;
 	}
 	catch (Ogre::Exception &e)
 	{

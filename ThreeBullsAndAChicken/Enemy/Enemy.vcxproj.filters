@@ -18,9 +18,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MutantModelHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -30,15 +27,12 @@
     <ClInclude Include="MutantRecipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MutantDeadState.h">
+    <ClInclude Include="EnemySpawner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MutantModelHandler.cpp">
@@ -50,7 +44,7 @@
     <ClCompile Include="MutantRecipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MutantDeadState.cpp">
+    <ClCompile Include="EnemySpawner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

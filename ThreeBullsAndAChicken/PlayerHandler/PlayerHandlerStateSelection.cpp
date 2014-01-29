@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "PlayerHandlerStateSelection.h"
 #include "../Enemy/MutantGlobalStats.h"
-#include "../Enemy/EnemyHandler.h"
 #include "../Enemy/MutantModelHandler.h"
+#include "../Containers/MutantContainer.h"
 PlayerHandlerStateSelection::PlayerHandlerStateSelection(Player* player) 
 :HandlerState(PLAYER_HANDLER_STATE::SELECTION)
 , m_player(player)
@@ -50,5 +50,5 @@ void PlayerHandlerStateSelection::goLerp()
 void PlayerHandlerStateSelection::pushBackSelected()
 {
 	m_attackList.push_back(m_selectionHandler.getSelected());
-	static_cast<MutantModelHandler&>(EnemyHandler::getSingleton().getMutants()[m_attackList[m_attackList.size() - 1]]->getModelHandler()).markAs(m_attackList.size());
+	static_cast<MutantModelHandler&>(MutantContainer::getSingleton().getMutants()[m_attackList[m_attackList.size() - 1]]->getModelHandler()).markAs(m_attackList.size());
 }

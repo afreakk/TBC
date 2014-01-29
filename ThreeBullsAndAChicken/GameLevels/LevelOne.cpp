@@ -5,15 +5,19 @@
 LevelOne::LevelOne() 
 : ILevel(LevelID::LEVEL_ONE)
 , m_playerStats(new PlayerGlobalStats())
-, m_playerCamera(&m_player)
-, m_gameRules(&m_player)
+, m_mutantGlobalStats(new MutantGlobalStats())
+, m_playerContainer(new PlayerContainer())
+, m_mutantContainer(new MutantContainer())
+, m_enemySpawner(m_mutantContainer.get(),m_playerContainer->getPlayer())
+, m_playerCamera(m_playerContainer->getPlayer())
 {
-
 	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
 	m_dotSceneLoader.parseDotScene("Cityblock.scene", "CityDir", sMgr);
 
-	std::vector<PolarCoordinates> mutantStartingPositions;
+	///
+
 	int enemyCount = 8;
+	std::vector<PolarCoordinates> mutantStartingPositions;
 	for (int i = 0; i < enemyCount; i++)
 	{
 		mutantStartingPositions.push_back(PolarCoordinates());
@@ -21,24 +25,26 @@ LevelOne::LevelOne()
 		mutantStartingPositions[i].h = 0.2;
 		mutantStartingPositions[i].d = 5.5;
 	}
-	m_enemyHandler.init(&m_player, mutantStartingPositions);
+	m_enemySpawner.injectStartingPositions(mutantStartingPositions);
+
+	///
 
 	PlayerGlobalStats::getSingletonPtr()->registerEnergySubscriber(&m_playerGUI, "PlayerGUI");
-	m_player.addSubsriber(&m_playerCamera, "playerCamera");
+	m_playerContainer->getPlayer()->addSubsriber(&m_playerCamera, "playerCamera");
 }
 
 
 LevelOne::~LevelOne()
 {
-	m_player.removeSubscriber("playerCamera");
+	m_playerContainer->getPlayer()->removeSubscriber("playerCamera");
 	PlayerGlobalStats::getSingletonPtr()->removeEnergySubscriber("PlayerGUI");
 }
 
 bool LevelOne::update()
 {
-	m_player.update();
-	m_enemyHandler.update();
+	m_playerContainer->update();
+	m_mutantContainer->update();
+	m_enemySpawner.update();
 	m_playerCamera.update();
-	m_gameRules.update();
 	return false;
 }

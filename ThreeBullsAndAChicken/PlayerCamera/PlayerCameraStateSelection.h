@@ -1,6 +1,6 @@
 #pragma once
 #include "PlayerCameraState.h"
-#include "../Enemy/EnemyHandler.h"
+#include "../BehaviourObject/Mutant.h"
 class PlayerCameraStateSelection:public PlayerCameraState
 {
 public:

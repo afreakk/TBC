@@ -1,8 +1,10 @@
 #pragma once
+#include "stdafx.h"
 #include "../UniversalGameObjects/HandlerState.h"
 #include "../BehaviourObject/Mutant.h"
 #include "PlayerHandlerStateSelectionHandler.h"
 #include "../Player/PlayerSelectionState.h"
+#include "../Player/Player.h"
 class PlayerHandlerStateSelection : public HandlerState <PLAYER_HANDLER_STATE>
 {
 public:

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "PlayerSelectionState.h"
-#include "../Enemy/EnemyHandler.h"
 #include "../OgreCore/OISCore.h"
 #include "../Enemy/MutantGlobalStats.h"
 PlayerSelectionState::PlayerSelectionState() 

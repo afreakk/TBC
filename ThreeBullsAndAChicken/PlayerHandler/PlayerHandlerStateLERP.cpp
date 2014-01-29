@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayerHandlerStateLERP.h"
-#include "../Enemy/EnemyHandler.h"
+#include "../Containers/MutantContainer.h"
 PlayerHandlerStateLERP::PlayerHandlerStateLERP(std::vector<unsigned> mutantList, Player* player) 
 : HandlerState(PLAYER_HANDLER_STATE::LERP)
 , m_mutantList(mutantList)
@@ -23,7 +23,7 @@ void PlayerHandlerStateLERP::attackNextTarget()
 {
 	if (m_mutantIndex < m_mutantList.size())
 	{
-		SceneNode*const node = EnemyHandler::getSingleton().getMutants()[m_mutantList[m_mutantIndex]]->getModelHandler().getNode();
+		SceneNode*const node = MutantContainer::getSingleton().getMutants()[m_mutantList[m_mutantIndex]]->getModelHandler().getNode();
 		m_currentLerpState.reset();
 		m_currentLerpState = unique_ptr<BehaviourStateLERP>{ new BehaviourStateLERP(node) };
 		m_player->setState(m_currentLerpState.get());

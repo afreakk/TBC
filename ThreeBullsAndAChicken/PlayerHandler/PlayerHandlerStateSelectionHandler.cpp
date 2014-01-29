@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "PlayerHandlerStateSelectionHandler.h"
-#include "../Enemy/EnemyHandler.h"
 #include "../Enemy/MutantModelHandler.h"
+#include "../Containers/MutantContainer.h"
 PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler()
-: m_mutants(EnemyHandler::getSingleton().getMutants() )
+: m_mutants(MutantContainer::getSingleton().getMutants() )
 , m_selectedIndex(0)
 , m_lastSelectedIndex(m_selectedIndex)
 {

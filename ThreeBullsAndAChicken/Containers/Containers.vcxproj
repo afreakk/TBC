@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2B383A19-02A1-41FA-83C6-1A82412D56FC}</ProjectGuid>
+    <ProjectGuid>{2711F0A9-7898-4807-93B3-F99954F8A677}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>BehaviourState</RootNamespace>
+    <RootNamespace>Containers</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -47,9 +47,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;..\PCH\;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
-      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -75,21 +73,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BehaviourState.h" />
-    <ClInclude Include="BehaviourStateDead.h" />
-    <ClInclude Include="BehaviourStateLERP.h" />
-    <ClInclude Include="BehaviourStateNormal.h" />
-    <ClInclude Include="BehaviourStateNormalTranslator.h" />
-    <ClInclude Include="BehaviourStateSubscriber.h" />
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MutantContainer.h" />
+    <ClInclude Include="PlayerContainer.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BehaviourStateDead.cpp" />
-    <ClCompile Include="BehaviourStateLERP.cpp" />
-    <ClCompile Include="BehaviourStateNormal.cpp" />
-    <ClCompile Include="BehaviourStateNormalTranslator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

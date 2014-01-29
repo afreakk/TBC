@@ -76,16 +76,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="EnemyHandler.h" />
-    <ClInclude Include="MutantDeadState.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="MutantGlobalStats.h" />
     <ClInclude Include="MutantModelHandler.h" />
     <ClInclude Include="MutantRecipe.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EnemyHandler.cpp" />
-    <ClCompile Include="MutantDeadState.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="MutantGlobalStats.cpp" />
     <ClCompile Include="MutantModelHandler.cpp" />
     <ClCompile Include="MutantRecipe.cpp" />

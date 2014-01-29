@@ -104,6 +104,9 @@
     <ProjectReference Include="..\Camera\Camera.vcxproj">
       <Project>{ef4cbdeb-d838-4cf2-8178-0104ed8782c3}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Containers\Containers.vcxproj">
+      <Project>{2711f0a9-7898-4807-93b3-f99954f8a677}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\EnemyHandler\EnemyHandler.vcxproj">
       <Project>{a2ce6f4b-bebb-45f6-801b-5b4c3dec174b}</Project>
     </ProjectReference>
