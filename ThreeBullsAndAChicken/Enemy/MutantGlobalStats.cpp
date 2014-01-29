@@ -2,7 +2,9 @@
 #include "MutantGlobalStats.h"
 
 template<> MutantGlobalStats* Ogre::Singleton<MutantGlobalStats>::msSingleton = 0;
-MutantGlobalStats::MutantGlobalStats() :m_walkSpeed(0.1)
+MutantGlobalStats::MutantGlobalStats() 
+: m_walkSpeed(0.1)
+, m_attackDistance(0.5)
 {
 }
 
@@ -15,6 +17,10 @@ MutantGlobalStats::~MutantGlobalStats()
 const Ogre::Real& MutantGlobalStats::getWalkSpeed() const
 {
 	return m_walkSpeed;
+}
+const Ogre::Real& MutantGlobalStats::getAttackDistance() const
+{
+	return m_attackDistance;
 }
 void MutantGlobalStats::setWalkSpeed(Real newWalkSpeed)
 {

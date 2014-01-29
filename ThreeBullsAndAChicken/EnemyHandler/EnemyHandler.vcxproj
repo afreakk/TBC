@@ -80,11 +80,13 @@
   <ItemGroup>
     <ClInclude Include="MutantHandler.h" />
     <ClInclude Include="MutantHandlerEnums.h" />
+    <ClInclude Include="MutantHandlerStateLERP.h" />
     <ClInclude Include="MutantHandlerStateNormal.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MutantHandler.cpp" />
+    <ClCompile Include="MutantHandlerStateLERP.cpp" />
     <ClCompile Include="MutantHandlerStateNormal.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

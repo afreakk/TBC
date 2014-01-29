@@ -34,7 +34,7 @@ void EnemyHandler::instantiateNewEnemies()
 		if (isWithinRange(m_player->getNormalPosition().r, (*posIter).r, m_spawnDistance))
 		{
 			m_mutants.push_back( unique_ptr<Mutant>(new  Mutant(*posIter)  ) );
-			m_mutantHandlers.push_back( unique_ptr<MutantHandler>(  new MutantHandler( m_mutants[m_mutants.size()-1].get()) ) );
+			m_mutantHandlers.push_back( unique_ptr<MutantHandler>(  new MutantHandler(m_mutants.back().get(),m_player) ) );
 			cout << "spawning new enemy" << endl;
 			m_mutantStartingPositions.erase(posIter);
 			return;

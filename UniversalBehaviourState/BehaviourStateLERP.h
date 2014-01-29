@@ -1,11 +1,11 @@
 #pragma once
 #include "stdafx.h"
 #include "../UniversalBehaviourState/BehaviourState.h"
-class PlayerLERPState:public BehaviourState
+class BehaviourStateLERP:public BehaviourState
 {
 public:
-	PlayerLERPState(SceneNode* target);
-	~PlayerLERPState();
+	BehaviourStateLERP(SceneNode* target);
+	~BehaviourStateLERP();
 	void update(UniversalModelHandler& ) override;
 	bool nextTarget() const;
 private:

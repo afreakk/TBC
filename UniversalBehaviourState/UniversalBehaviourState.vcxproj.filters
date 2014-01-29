@@ -15,25 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHandler.h">
+    <ClInclude Include="BehaviourState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHandlerStateLERP.h">
+    <ClInclude Include="BehaviourStateSubscriber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHandlerStateNormal.h">
+    <ClInclude Include="BehaviourObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHandlerStateSelection.h">
+    <ClInclude Include="BehaviourStateNormal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHandlerStateSelectionHandler.h">
+    <ClInclude Include="BehaviourStateNormalTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHandlerEnums.h">
+    <ClInclude Include="BehaviourStateLERP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,19 +44,16 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerHandler.cpp">
+    <ClCompile Include="BehaviourObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerHandlerStateNormal.cpp">
+    <ClCompile Include="BehaviourStateNormal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerHandlerStateSelection.cpp">
+    <ClCompile Include="BehaviourStateNormalTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateLERP.cpp">
+    <ClCompile Include="BehaviourStateLERP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

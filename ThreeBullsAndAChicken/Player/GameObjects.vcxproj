@@ -79,7 +79,6 @@
     <ClInclude Include="EnergySubscriber.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerGUI.h" />
-    <ClInclude Include="PlayerLERPState.h" />
     <ClInclude Include="PlayerModelHandler.h" />
     <ClInclude Include="PlayerRecipe.h" />
     <ClInclude Include="PlayerSelectionState.h" />
@@ -89,7 +88,6 @@
   <ItemGroup>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerGUI.cpp" />
-    <ClCompile Include="PlayerLERPState.cpp" />
     <ClCompile Include="PlayerModelHandler.cpp" />
     <ClCompile Include="PlayerRecipe.cpp" />
     <ClCompile Include="PlayerSelectionState.cpp" />

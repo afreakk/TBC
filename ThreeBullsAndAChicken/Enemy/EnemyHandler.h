@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "Mutant.h"
+#include "../BehaviourObject/Mutant.h"
 #include "../Player/Player.h"
 #include "../EnemyHandler/MutantHandler.h"
 #include "MutantGlobalStats.h"

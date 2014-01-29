@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "../UniversalBehaviourState/BehaviourObject.h"
+#include "../BehaviourObject/BehaviourObject.h"
 class Player : public BehaviourObject
 {
 public:

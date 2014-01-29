@@ -1,8 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "PlayerModelHandler.h"
-#include "../Enemy/Mutant.h"
-#include "../UniversalBehaviourState/BehaviourState.h"
+#include "../BehaviourObject/Mutant.h"
+#include "../BehaviourState/BehaviourState.h"
 
 class PlayerSelectionState:public BehaviourState
 {

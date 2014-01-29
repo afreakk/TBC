@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "PlayerLERPState.h"
+#include "BehaviourStateLERP.h"
 
 #include "../GameLevels/MainUpdate.h"
-PlayerLERPState::PlayerLERPState(SceneNode* target) :BehaviourState(BEHAVOUR_STATE::LERP)
+BehaviourStateLERP::BehaviourStateLERP(SceneNode* target) :BehaviourState(BEHAVOUR_STATE::LERP)
 , m_lerpState(LERP_STATE::LERP_WALK)
 , m_target(target)
 , m_goNextTarget(false)
@@ -10,21 +10,21 @@ PlayerLERPState::PlayerLERPState(SceneNode* target) :BehaviourState(BEHAVOUR_STA
 }
 
 
-PlayerLERPState::~PlayerLERPState()
+BehaviourStateLERP::~BehaviourStateLERP()
 {
 }
 
-bool PlayerLERPState::nextTarget() const
+bool BehaviourStateLERP::nextTarget() const
 {
 	return m_goNextTarget;
 }
-void PlayerLERPState::update(UniversalModelHandler& modelHandler)
+void BehaviourStateLERP::update(UniversalModelHandler& modelHandler)
 {
 	if (attackEnemy(modelHandler))
 		m_goNextTarget = true;
 
 }
-bool PlayerLERPState::attackEnemy(UniversalModelHandler& modelHandler)
+bool BehaviourStateLERP::attackEnemy(UniversalModelHandler& modelHandler)
 {
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
 	const Ogre::Vector3& tPos = m_target->getPosition();

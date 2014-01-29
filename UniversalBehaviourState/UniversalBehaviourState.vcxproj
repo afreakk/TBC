@@ -11,10 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C864C636-82C7-40E7-8B27-D44A44BA4CB3}</ProjectGuid>
+    <ProjectGuid>{20379BF4-D515-4D32-A3A3-53C3620051A3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Enemy</RootNamespace>
-    <ProjectName>Enemy</ProjectName>
+    <RootNamespace>UniversalBehaviourState</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -49,7 +48,6 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
-      <AdditionalOptions>/Zm144 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -66,7 +64,6 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
-      <AdditionalOptions>/Zm144 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -76,19 +73,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="EnemyHandler.h" />
-    <ClInclude Include="MutantDeadState.h" />
-    <ClInclude Include="MutantGlobalStats.h" />
-    <ClInclude Include="MutantModelHandler.h" />
-    <ClInclude Include="MutantRecipe.h" />
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BehaviourObject.h" />
+    <ClInclude Include="BehaviourState.h" />
+    <ClInclude Include="BehaviourStateLERP.h" />
+    <ClInclude Include="BehaviourStateNormal.h" />
+    <ClInclude Include="BehaviourStateNormalTranslator.h" />
+    <ClInclude Include="BehaviourStateSubscriber.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EnemyHandler.cpp" />
-    <ClCompile Include="MutantDeadState.cpp" />
-    <ClCompile Include="MutantGlobalStats.cpp" />
-    <ClCompile Include="MutantModelHandler.cpp" />
-    <ClCompile Include="MutantRecipe.cpp" />
+    <ClCompile Include="BehaviourObject.cpp" />
+    <ClCompile Include="BehaviourStateLERP.cpp" />
+    <ClCompile Include="BehaviourStateNormal.cpp" />
+    <ClCompile Include="BehaviourStateNormalTranslator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

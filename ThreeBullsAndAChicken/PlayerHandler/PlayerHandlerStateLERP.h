@@ -1,7 +1,7 @@
 #pragma once
 #include "../UniversalGameObjects/HandlerState.h"
-#include "../Enemy/Mutant.h"
-#include "../Player/PlayerLERPState.h"
+#include "../BehaviourObject/Mutant.h"
+#include "../BehaviourState/BehaviourStateLERP.h"
 #include "../Player/Player.h"
 class PlayerHandlerStateLERP : public HandlerState <PLAYER_HANDLER_STATE>
 {
@@ -15,7 +15,7 @@ private:
 	std::vector<unsigned> m_mutantList;
 	Player* m_player;
 	unsigned m_mutantIndex;
-	unique_ptr<PlayerLERPState> m_currentLerpState;
+	unique_ptr<BehaviourStateLERP> m_currentLerpState;
 
 	void goNormal();
 	void attackNextTarget();

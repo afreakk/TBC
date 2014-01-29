@@ -25,7 +25,7 @@ void PlayerHandlerStateLERP::attackNextTarget()
 	{
 		SceneNode*const node = EnemyHandler::getSingleton().getMutants()[m_mutantList[m_mutantIndex]]->getModelHandler().getNode();
 		m_currentLerpState.reset();
-		m_currentLerpState = unique_ptr<PlayerLERPState>{ new PlayerLERPState(node) };
+		m_currentLerpState = unique_ptr<BehaviourStateLERP>{ new BehaviourStateLERP(node) };
 		m_player->setState(m_currentLerpState.get());
 		m_mutantIndex++;
 	}

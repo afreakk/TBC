@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "MutantHandler.h"
 #include "MutantHandlerStateNormal.h"
+#include "MutantHandlerStateLERP.h"
 
-MutantHandler::MutantHandler(Mutant* mutant) 
-: m_mutant(mutant)
-, StateHandler(new MutantHandlerStateNormal(mutant))
+MutantHandler::MutantHandler(Mutant* mutant, Player* player) 
+: StateHandler(new MutantHandlerStateNormal(mutant, player->getNode()))
+, m_mutant(mutant)
+, m_player(player)
 {
-
 }
-
 
 MutantHandler::~MutantHandler()
 {
@@ -16,11 +16,14 @@ MutantHandler::~MutantHandler()
 
 void MutantHandler::switchState(MUTANT_HANDLER_STATE newState)
 {
+	m_currentState.reset();
 	switch (newState)
 	{
 	case MUTANT_HANDLER_STATE::NORMAL:
-		m_currentState.reset();
-		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>( new MutantHandlerStateNormal(m_mutant) ) ;
+		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>( new MutantHandlerStateNormal(m_mutant, m_player->getNode()) ) ;
+		break;
+	case MUTANT_HANDLER_STATE::LERP:
+		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>(new MutantHandlerStateLERP(m_mutant, m_player->getNode()));
 		break;
 	default:
 		assert(0);

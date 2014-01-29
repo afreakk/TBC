@@ -1,5 +1,5 @@
 #pragma once
-#include "../UniversalBehaviourState/BehaviourState.h"
+#include "../BehaviourState/BehaviourState.h"
 class BehaviourStateSubscriber
 {
 public:

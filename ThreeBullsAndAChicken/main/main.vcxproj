@@ -95,6 +95,12 @@
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BehaviourObject\BehaviourObject.vcxproj">
+      <Project>{0b0b4690-e015-4c4c-b298-2c56edfc2951}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\BehaviourState\BehaviourState.vcxproj">
+      <Project>{2b383a19-02a1-41fa-83c6-1a82412d56fc}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Camera\Camera.vcxproj">
       <Project>{ef4cbdeb-d838-4cf2-8178-0104ed8782c3}</Project>
     </ProjectReference>
@@ -130,9 +136,6 @@
     </ProjectReference>
     <ProjectReference Include="..\Shaders\Shaders.vcxproj">
       <Project>{8ee48852-f39a-49b0-9148-e2be82aed06e}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\UniversalBehaviourState\UniversalBehaviourState.vcxproj">
-      <Project>{20379bf4-d515-4d32-a3a3-53c3620051a3}</Project>
     </ProjectReference>
     <ProjectReference Include="..\UniversalGameObjects\UniversalGameObjects.vcxproj">
       <Project>{ec74a605-f8cb-48dc-8b0c-cad1378521cd}</Project>

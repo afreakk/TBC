@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Mutant.h"
-#include "MutantModelHandler.h"
+#include "../Enemy/MutantModelHandler.h"
 
 Mutant::Mutant(const PolarCoordinates pos) 
 : BehaviourObject(new MutantModelHandler(pos))

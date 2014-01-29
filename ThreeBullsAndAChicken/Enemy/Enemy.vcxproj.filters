@@ -21,22 +21,13 @@
     <ClInclude Include="EnemyHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Mutant.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MutantModelHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantNormalState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MutantGlobalStats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MutantRecipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantLERPState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MutantDeadState.h">
@@ -50,22 +41,13 @@
     <ClCompile Include="EnemyHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mutant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MutantModelHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MutantNormalState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MutantGlobalStats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MutantRecipe.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MutantLERPState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MutantDeadState.cpp">

@@ -1,7 +1,7 @@
 #pragma once
 #include "../UniversalGameObjects/HandlerState.h"
 #include "../Player/Player.h"
-#include "../UniversalBehaviourState/BehaviourStateNormal.h"
+#include "../BehaviourState/BehaviourStateNormal.h"
 class PlayerHandlerStateNormal : public HandlerState <PLAYER_HANDLER_STATE>
 {
 public:
