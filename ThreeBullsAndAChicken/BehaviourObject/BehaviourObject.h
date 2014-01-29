@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
-#include "BehaviourState.h"
-#include "BehaviourStateSubscriber.h"
+#include "../BehaviourState/BehaviourState.h"
+#include "../BehaviourState/BehaviourStateSubscriber.h"
 class BehaviourObject
 {
 public:

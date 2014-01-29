@@ -15,19 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BehaviourState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BehaviourStateSubscriber.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BehaviourObject.h">
+    <ClInclude Include="BehaviourStateLERP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BehaviourStateNormal.h">
@@ -36,15 +27,15 @@
     <ClInclude Include="BehaviourStateNormalTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BehaviourStateLERP.h">
+    <ClInclude Include="BehaviourStateSubscriber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BehaviourObject.cpp">
+    <ClCompile Include="BehaviourStateLERP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BehaviourStateNormal.cpp">
@@ -53,7 +44,7 @@
     <ClCompile Include="BehaviourStateNormalTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BehaviourStateLERP.cpp">
+    <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

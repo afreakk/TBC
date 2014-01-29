@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "BehaviourStateNormalTranslator.h"
-#include "../UniversalBehaviourState/BehaviourState.h"
+#include "../BehaviourState/BehaviourState.h"
 class BehaviourStateNormal:public BehaviourState
 {
 public:
