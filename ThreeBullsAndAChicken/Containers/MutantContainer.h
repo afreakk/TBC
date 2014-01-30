@@ -1,6 +1,7 @@
 #pragma once
 #include "../BehaviourObject/Mutant.h"
 #include "../BehaviourObjectHandler/MutantHandler.h"
+#include "../Other/simpleUtils.h"
 class MutantContainer : public Singleton<MutantContainer>
 {
 public:
@@ -19,6 +20,11 @@ public:
 		(*handler)->switchState(MUTANT_HANDLER_STATE::DEAD);
 		m_deadHandlers.emplace_back(std::move(*handler));
 		m_deadMutants.emplace_back(std::move(*mutant));
+	}
+	void removeKilledMutants()
+	{
+		vectorRemoveNulls<unique_ptr<Mutant> > (&m_mutants);
+		vectorRemoveNulls<unique_ptr<MutantHandler>  >(&m_handlers);
 	}
 	void addMutant(MutantHandler* mutantHandler, Mutant* mutant)
 	{

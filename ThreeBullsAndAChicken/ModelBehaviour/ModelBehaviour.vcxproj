@@ -65,6 +65,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE\Overlay;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0;C:\Users\afreakk\Desktop\particleuniverse-master\sdk\include\ParticleUniverse</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm191 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

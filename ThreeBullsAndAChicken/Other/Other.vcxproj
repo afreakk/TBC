@@ -77,6 +77,7 @@
   <ItemGroup>
     <ClInclude Include="DotSceneLoader.h" />
     <ClInclude Include="MovableText.h" />
+    <ClInclude Include="simpleUtils.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tinyxml.h" />
     <ClInclude Include="UnitCircleMovement.h" />

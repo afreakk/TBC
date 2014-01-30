@@ -14,6 +14,7 @@ PlayerHandlerStateLERP::PlayerHandlerStateLERP(std::vector<unsigned> mutantList,
 
 PlayerHandlerStateLERP::~PlayerHandlerStateLERP()
 {
+	MutantContainer::getSingleton().removeKilledMutants();
 }
 
 void PlayerHandlerStateLERP::goNormal()
