@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClInclude Include="MutantHandler.h" />
     <ClInclude Include="MutantHandlerEnums.h" />
+    <ClInclude Include="MutantHandlerStateDead.h" />
     <ClInclude Include="MutantHandlerStateLERP.h" />
     <ClInclude Include="MutantHandlerStateNormal.h" />
     <ClInclude Include="PlayerHandler.h" />
@@ -91,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MutantHandler.cpp" />
+    <ClCompile Include="MutantHandlerStateDead.cpp" />
     <ClCompile Include="MutantHandlerStateLERP.cpp" />
     <ClCompile Include="MutantHandlerStateNormal.cpp" />
     <ClCompile Include="PlayerHandler.cpp" />

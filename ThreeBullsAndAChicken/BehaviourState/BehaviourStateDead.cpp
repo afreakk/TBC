@@ -13,7 +13,6 @@ BehaviourStateDead::~BehaviourStateDead()
 
 void BehaviourStateDead::update(ModelHandler& mutantModel)
 {
-	cout << "dead" << endl;
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
 	mutantModel.fallAndDie(dt);
 }

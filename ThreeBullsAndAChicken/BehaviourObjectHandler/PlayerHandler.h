@@ -10,7 +10,6 @@ public:
 	~PlayerHandler();
 	bool keyPressed(const OIS::KeyEvent&) override;
 	bool keyReleased(const OIS::KeyEvent&) override;
-protected:
 	void switchState(PLAYER_HANDLER_STATE newState) override;
 private:
 	Player* m_player;

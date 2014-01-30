@@ -4,7 +4,7 @@
 PlayerCameraStateNormal::PlayerCameraStateNormal(SceneNode* playerNode) 
 : m_playerNode(playerNode)
 , m_camera(OgreCore::getSingleton().getCamera())
-, m_distance(1.35)
+, m_distance(1.30)
 {
 }
 

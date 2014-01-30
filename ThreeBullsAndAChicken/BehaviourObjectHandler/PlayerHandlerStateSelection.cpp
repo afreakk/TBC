@@ -16,6 +16,8 @@ PlayerHandlerStateSelection::PlayerHandlerStateSelection(Player* player)
 
 PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 {
+	for (auto idx:m_attackList)
+		static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[idx]->getModelHandler()).unMarkNumber();
 	MutantGlobalStats::getSingleton().scaleSpeed(20.0);
 }
 

@@ -12,9 +12,9 @@ public:
 	void keyPressed(const OIS::KeyEvent&) override;
 	void keyReleased(const OIS::KeyEvent&) override;
 private:
-	std::vector<unsigned> m_mutantList;
+	std::vector<unsigned> m_attackList;
 	Player* m_player;
-	unsigned m_mutantIndex;
+	unsigned m_listIndex;
 	unique_ptr<BehaviourStateLERP> m_currentLerpState;
 
 	void goNormal();

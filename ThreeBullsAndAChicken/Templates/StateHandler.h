@@ -14,9 +14,9 @@ public:
 		if (m_currentState->getState() != m_currentState->getOriginalState())
 			switchState(m_currentState->getState());
 	}
+	virtual void switchState(T newState)=0;
 protected:
 	unique_ptr<HandlerState<T>> m_currentState;
-	virtual void switchState(T newState)=0;
 };
 
 

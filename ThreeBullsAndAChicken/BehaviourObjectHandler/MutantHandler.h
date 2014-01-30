@@ -8,7 +8,6 @@ class MutantHandler : public StateHandler <MUTANT_HANDLER_STATE>, boost::noncopy
 public:
 	MutantHandler( Mutant* mutant, Player* player);
 	~MutantHandler();
-protected:
 	void switchState(MUTANT_HANDLER_STATE newState) override;
 private:
 	Mutant* m_mutant;
