@@ -6,5 +6,6 @@ class Mutant : public BehaviourObject
 public:
 	Mutant(const PolarCoordinates pos);
 	~Mutant();
+
 };
 

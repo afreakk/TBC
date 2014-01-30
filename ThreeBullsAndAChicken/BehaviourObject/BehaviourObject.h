@@ -1,23 +1,22 @@
 #pragma once
 #include "stdafx.h"
 #include "../BehaviourState/BehaviourState.h"
-#include "../BehaviourState/BehaviourStateSubscriber.h"
-class BehaviourObject
+#include "../Templates/Messager.h"
+class BehaviourObject : public Messager<BEHAVOUR_STATE>
 {
 public:
 	BehaviourObject(UniversalModelHandler* modelHandler);
 	~BehaviourObject();
 	void setState(BehaviourState* newState);
+	const BEHAVOUR_STATE& message() override
+	{
+		return  m_currentState->getState();
+	}
 	void update();
 protected:
 	unique_ptr<UniversalModelHandler> m_model;
 	BehaviourState* m_currentState;
-	std::map <string, BehaviourStateSubscriber*> m_stateSubsribers;
 public:
-	//subscriberStuff
-	void notifySubscribers();
-	void addSubsriber(BehaviourStateSubscriber*, string);
-	void removeSubscriber(string);
 	//gets
 	SceneNode* getNode() const ;
 	PolarCoordinates getNormalPosition() ;

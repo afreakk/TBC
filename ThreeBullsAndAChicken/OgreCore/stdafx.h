@@ -14,6 +14,7 @@
 #include <memory>
 #include "boost/noncopyable.hpp"
 using namespace std;
+using namespace Ogre;
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 

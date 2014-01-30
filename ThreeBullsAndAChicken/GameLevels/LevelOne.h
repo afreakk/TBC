@@ -1,15 +1,15 @@
 #pragma once
 #include "stdafx.h"
 #include "../Levels/ILevel.h"
-#include "../Player/Player.h"
-#include "../Other/LightHandler.h"
+#include "../BehaviourObject/Player.h"
+#include "../Environment/LvlOneEnvironment.h"
 #include "../PlayerCamera/PlayerCamera.h"
-#include "../Enemy/EnemySpawner.h"
-#include "../PlayerHandler/PlayerHandler.h"
-#include "../Player/PlayerGUI.h"
+#include "../UniversalGameObjects/EnemySpawner.h"
+#include "../BehaviourObjectHandler/PlayerHandler.h"
+#include "../PlayerGUI/PlayerGUI.h"
 #include "../Other/DotSceneLoader.h"
-#include "../Player/PlayerGlobalStats.h"
-#include "../Enemy/MutantGlobalStats.h"
+#include "../Stats/PlayerGlobalStats.h"
+#include "../Stats/MutantGlobalStats.h"
 #include "../Containers/PlayerContainer.h"
 class LevelOne : public ILevel
 {
@@ -25,7 +25,7 @@ private:
 	EnemySpawner m_enemySpawner;
 	PlayerCamera m_playerCamera;
 
-	LightHandler m_lightHandler;
+	LvlOneEnvironment m_lightHandler;
 	PlayerGUI m_playerGUI;
 	DotSceneLoader m_dotSceneLoader;
 

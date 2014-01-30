@@ -1,6 +1,6 @@
 #pragma once
-#include "../Player/Player.h"
-#include "../PlayerHandler/PlayerHandler.h"
+#include "../BehaviourObject/Player.h"
+#include "../BehaviourObjectHandler/PlayerHandler.h"
 class PlayerContainer : public Singleton<PlayerContainer>
 {
 public:

@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "../Other/UnitCircleMovement.h"
-#include "../UniversalGameObjects/UniversalModelHandler.h"
+#include "../ModelBehaviour/UniversalModelHandler.h"
 class BehaviourStateNormalTranslator
 {
 public:

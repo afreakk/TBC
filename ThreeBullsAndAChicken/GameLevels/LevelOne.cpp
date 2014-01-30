@@ -29,15 +29,15 @@ LevelOne::LevelOne()
 
 	///
 
-	PlayerGlobalStats::getSingletonPtr()->registerEnergySubscriber(&m_playerGUI, "PlayerGUI");
-	m_playerContainer->getPlayer()->addSubsriber(&m_playerCamera, "playerCamera");
+	PlayerGlobalStats::getSingletonPtr()->registerSubscriber(&m_playerGUI, "PlayerGUI");
+	m_playerContainer->getPlayer()->registerSubscriber(&m_playerCamera, "playerCamera");
 }
 
 
 LevelOne::~LevelOne()
 {
 	m_playerContainer->getPlayer()->removeSubscriber("playerCamera");
-	PlayerGlobalStats::getSingletonPtr()->removeEnergySubscriber("PlayerGUI");
+	PlayerGlobalStats::getSingletonPtr()->removeSubscriber("PlayerGUI");
 }
 
 bool LevelOne::update()

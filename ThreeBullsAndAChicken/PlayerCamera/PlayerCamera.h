@@ -1,10 +1,10 @@
 #pragma once
 #include "stdafx.h"
 #include "../Camera/CameraBase.h"
-#include "../Player/Player.h"
-#include "../BehaviourState/BehaviourStateSubscriber.h"
+#include "../BehaviourObject/Player.h"
 #include "PlayerCameraState.h"
-class PlayerCamera:public BehaviourStateSubscriber
+#include "../Templates/MessageSubscriber.h"
+class PlayerCamera:public MessageSubscriber<BEHAVOUR_STATE>
 {
 public:
 	PlayerCamera(Player* player);

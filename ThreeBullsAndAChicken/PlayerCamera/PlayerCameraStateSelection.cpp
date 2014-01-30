@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayerCameraStateSelection.h"
-#include "../Enemy/MutantModelHandler.h"
+#include "../ModelBehaviour/MutantModelHandler.h"
 #include "../Containers/MutantContainer.h"
 PlayerCameraStateSelection::PlayerCameraStateSelection() : m_mutants(MutantContainer::getSingleton().getMutants()), m_camera(OgreCore::getSingleton().getCamera())
 {

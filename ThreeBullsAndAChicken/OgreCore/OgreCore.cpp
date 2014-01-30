@@ -17,10 +17,12 @@ bool OgreCore::initRoot()
 	m_root->loadPlugin("RenderSystem_GL_d");
 	m_root->loadPlugin("Plugin_CgProgramManager_d");
 	m_root->loadPlugin("Plugin_OctreeSceneManager_d");
+	m_root->loadPlugin("ParticleUniverse_d");
 #else
 	m_root->loadPlugin("RenderSystem_GL");
 	m_root->loadPlugin("Plugin_CgProgramManager");
 	m_root->loadPlugin("Plugin_OctreeSceneManager");
+	m_root->loadPlugin("ParticleUniverse");
 #endif // !_DEBUG
 	Ogre::RenderSystemList::const_iterator r_it;
 

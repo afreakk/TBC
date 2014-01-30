@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "PlayerCameraStateNormal.h"
 #include "../OgreCore/OgreCore.h"
-PlayerCameraStateNormal::PlayerCameraStateNormal(SceneNode* playerNode) :m_playerNode(playerNode),m_camera(OgreCore::getSingleton().getCamera()), m_distance(1.4)
+PlayerCameraStateNormal::PlayerCameraStateNormal(SceneNode* playerNode) 
+: m_playerNode(playerNode)
+, m_camera(OgreCore::getSingleton().getCamera())
+, m_distance(1.35)
 {
 }
 

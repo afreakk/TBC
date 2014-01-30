@@ -1,6 +1,6 @@
 #pragma once
 #include "../BehaviourObject/Mutant.h"
-#include "../EnemyHandler/MutantHandler.h"
+#include "../BehaviourObjectHandler/MutantHandler.h"
 class MutantContainer : public Singleton<MutantContainer>
 {
 public:

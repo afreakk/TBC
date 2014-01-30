@@ -24,21 +24,6 @@ void BehaviourObject::setState(BehaviourState* newState)
 	notifySubscribers();
 }
 
-//subscriberStuff
-void BehaviourObject::addSubsriber(BehaviourStateSubscriber* subscriber, string id)
-{
-	m_stateSubsribers[id] = subscriber;
-	m_stateSubsribers[id]->notify(getState());
-}
-void BehaviourObject::removeSubscriber(string id)
-{
-	m_stateSubsribers.erase(id);
-}
-void BehaviourObject::notifySubscribers()
-{
-	for (auto & subsriber : m_stateSubsribers)
-		subsriber.second->notify(getState());
-}
 
 //gets
 BEHAVOUR_STATE BehaviourObject::getState() const

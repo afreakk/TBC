@@ -47,7 +47,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;..\PCH\;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE\Overlay;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0;C:\Users\afreakk\Desktop\particleuniverse-master\sdk\include\ParticleUniverse</AdditionalIncludeDirectories>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -65,7 +65,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE\Overlay;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0;C:\Users\afreakk\Desktop\particleuniverse-master\sdk\include\ParticleUniverse</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -80,7 +80,7 @@
     <ClInclude Include="BehaviourStateLERP.h" />
     <ClInclude Include="BehaviourStateNormal.h" />
     <ClInclude Include="BehaviourStateNormalTranslator.h" />
-    <ClInclude Include="BehaviourStateSubscriber.h" />
+    <ClInclude Include="PlayerSelectionState.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +88,7 @@
     <ClCompile Include="BehaviourStateLERP.cpp" />
     <ClCompile Include="BehaviourStateNormal.cpp" />
     <ClCompile Include="BehaviourStateNormalTranslator.cpp" />
+    <ClCompile Include="PlayerSelectionState.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>

@@ -97,9 +97,6 @@
     <ProjectReference Include="..\Camera\Camera.vcxproj">
       <Project>{ef4cbdeb-d838-4cf2-8178-0104ed8782c3}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Enemy\Enemy.vcxproj">
-      <Project>{c864c636-82c7-40e7-8b27-d44a44ba4cb3}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\GameLevels\GameLevels.vcxproj">
       <Project>{88fcf4b9-7968-4532-8228-393610f5938a}</Project>
     </ProjectReference>
@@ -120,12 +117,6 @@
     </ProjectReference>
     <ProjectReference Include="..\PlayerGUI\PlayerGUI.vcxproj">
       <Project>{c8d6c0c3-6def-45db-b4b6-68d486c2fac5}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Player\GameObjects.vcxproj">
-      <Project>{f720f1ba-79d9-44d1-ada0-7bab3ca26a12}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Shaders\Shaders.vcxproj">
-      <Project>{8ee48852-f39a-49b0-9148-e2be82aed06e}</Project>
     </ProjectReference>
     <ProjectReference Include="..\UniversalGameObjects\UniversalGameObjects.vcxproj">
       <Project>{ec74a605-f8cb-48dc-8b0c-cad1378521cd}</Project>
