@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "../Other/UnitCircleMovement.h"
 #include "../OgreCore/OgreCore.h"
-#include "../ModelBehaviour/CreationRecipes.h"
+#include "../ModelBehaviour/ModelRecipe.h"
 enum class LERP_STATE
 {
 	LERP_WALK,
@@ -15,11 +15,11 @@ enum class ANIMATIONS
 	DIE,
 	BLOCK
 };
-class UniversalModelHandler : boost::noncopyable
+class ModelHandler : boost::noncopyable
 {
 public:
-	UniversalModelHandler(CreationRecipes* recipe, PolarCoordinates normalPos);
-	virtual ~UniversalModelHandler();
+	ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos);
+	virtual ~ModelHandler();
 	void normalWalk(const Real& rInc, const NormalDirection& activeDirection);
 	LERP_STATE lerpAttack(const Ogre::Vector3&, const Ogre::Real&);
 	LERP_STATE lerpWalk(const Ogre::Vector3&, const Ogre::Real&);
@@ -30,7 +30,7 @@ protected:
 	virtual void init();
 	void enableAnimation(ANIMATIONS);
 
-	unique_ptr<CreationRecipes> m_crRecipe;
+	unique_ptr<ModelRecipe> m_crRecipe;
 	Entity*const m_entity;
 	SceneNode*const m_node;
 	PolarCoordinates m_normalPosition;

@@ -14,7 +14,7 @@ BehaviourStateNormalTranslator::~BehaviourStateNormalTranslator()
 {
 }
 
-void BehaviourStateNormalTranslator::update(UniversalModelHandler& playerModel, NormalDirection activeDirection)
+void BehaviourStateNormalTranslator::update(ModelHandler& playerModel, NormalDirection activeDirection)
 {
 	handleVelocity(activeDirection);
 	playerModel.normalWalk(m_velocity, activeDirection);

@@ -1,9 +1,9 @@
 #pragma once
 #include "stdafx.h"
-class CreationRecipes
+class ModelRecipe
 {
 public:
-	virtual ~CreationRecipes()
+	virtual ~ModelRecipe()
 	{
 	}
 	virtual Ogre::Entity* initMesh(Ogre::SceneManager* )=0;

@@ -6,7 +6,7 @@ class BehaviourStateNormal:public BehaviourState
 {
 public:
 	BehaviourStateNormal(const NormalDirection* walkingDirection, const Real* speed);
-	void update(UniversalModelHandler& playerModel) override;
+	void update(ModelHandler& playerModel) override;
 	~BehaviourStateNormal();
 private:
 	void handleDirection();

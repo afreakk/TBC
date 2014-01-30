@@ -21,22 +21,22 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CreationRecipes.h">
+    <ClInclude Include="ModelRecipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MutantModelHandler.h">
+    <ClInclude Include="ModelHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MutantRecipe.h">
+    <ClInclude Include="ModelRecipeMutant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerModelHandler.h">
+    <ClInclude Include="ModelHandlerMutant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerRecipe.h">
+    <ClInclude Include="ModelHandlerPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UniversalModelHandler.h">
+    <ClInclude Include="ModelRecipePlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,19 +44,19 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MutantModelHandler.cpp">
+    <ClCompile Include="ModelHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MutantRecipe.cpp">
+    <ClCompile Include="ModelRecipeMutant.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerModelHandler.cpp">
+    <ClCompile Include="ModelHandlerMutant.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerRecipe.cpp">
+    <ClCompile Include="ModelHandlerPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UniversalModelHandler.cpp">
+    <ClCompile Include="ModelRecipePlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

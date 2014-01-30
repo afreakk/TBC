@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayerHandlerStateSelectionHandler.h"
-#include "../ModelBehaviour/MutantModelHandler.h"
+#include "../ModelBehaviour/ModelHandlerMutant.h"
 #include "../Containers/MutantContainer.h"
 PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler()
 : m_mutants(MutantContainer::getSingleton().getMutants() )
@@ -16,10 +16,10 @@ PlayerHandlerStateSelectionHandler::~PlayerHandlerStateSelectionHandler()
 
 void PlayerHandlerStateSelectionHandler::updateSelected()
 {
-	MutantModelHandler& lastSelectedModelHandler = static_cast<MutantModelHandler&>(m_mutants[m_lastSelectedIndex]->getModelHandler());
+	ModelHandlerMutant& lastSelectedModelHandler = static_cast<ModelHandlerMutant&>(m_mutants[m_lastSelectedIndex]->getModelHandler());
 	if (m_lastSelectedIndex != m_selectedIndex)
-		static_cast<MutantModelHandler&>(m_mutants[m_lastSelectedIndex]->getModelHandler()).markSelected(false);
-	static_cast<MutantModelHandler&>(m_mutants[m_selectedIndex]->getModelHandler()).markSelected(true);
+		static_cast<ModelHandlerMutant&>(m_mutants[m_lastSelectedIndex]->getModelHandler()).markSelected(false);
+	static_cast<ModelHandlerMutant&>(m_mutants[m_selectedIndex]->getModelHandler()).markSelected(true);
 	m_lastSelectedIndex = m_selectedIndex;
 }
 void PlayerHandlerStateSelectionHandler::handleIndex(const OIS::KeyEvent& e)

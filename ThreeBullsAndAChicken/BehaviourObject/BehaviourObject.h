@@ -5,7 +5,7 @@
 class BehaviourObject : public Messager<BEHAVOUR_STATE>
 {
 public:
-	BehaviourObject(UniversalModelHandler* modelHandler);
+	BehaviourObject(ModelHandler* modelHandler);
 	~BehaviourObject();
 	void setState(BehaviourState* newState);
 	const BEHAVOUR_STATE& message() override
@@ -14,13 +14,13 @@ public:
 	}
 	void update();
 protected:
-	unique_ptr<UniversalModelHandler> m_model;
+	unique_ptr<ModelHandler> m_model;
 	BehaviourState* m_currentState;
 public:
 	//gets
 	SceneNode* getNode() const ;
 	PolarCoordinates getNormalPosition() ;
-	UniversalModelHandler& getModelHandler();
+	ModelHandler& getModelHandler();
 	BEHAVOUR_STATE getState() const;
 };
 

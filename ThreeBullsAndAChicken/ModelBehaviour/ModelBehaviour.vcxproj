@@ -77,24 +77,24 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CreationRecipes.h" />
-    <ClInclude Include="MutantModelHandler.h" />
-    <ClInclude Include="MutantRecipe.h" />
-    <ClInclude Include="PlayerModelHandler.h" />
-    <ClInclude Include="PlayerRecipe.h" />
+    <ClInclude Include="ModelRecipe.h" />
+    <ClInclude Include="ModelHandlerMutant.h" />
+    <ClInclude Include="ModelRecipeMutant.h" />
+    <ClInclude Include="ModelHandlerPlayer.h" />
+    <ClInclude Include="ModelRecipePlayer.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="UniversalModelHandler.h" />
+    <ClInclude Include="ModelHandler.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MutantModelHandler.cpp" />
-    <ClCompile Include="MutantRecipe.cpp" />
-    <ClCompile Include="PlayerModelHandler.cpp" />
-    <ClCompile Include="PlayerRecipe.cpp" />
+    <ClCompile Include="ModelHandlerMutant.cpp" />
+    <ClCompile Include="ModelRecipeMutant.cpp" />
+    <ClCompile Include="ModelHandlerPlayer.cpp" />
+    <ClCompile Include="ModelRecipePlayer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="UniversalModelHandler.cpp" />
+    <ClCompile Include="ModelHandler.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

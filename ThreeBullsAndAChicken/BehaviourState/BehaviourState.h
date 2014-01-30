@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "../ModelBehaviour/UniversalModelHandler.h"
+#include "../ModelBehaviour/ModelHandler.h"
 
 enum class BEHAVOUR_STATE
 {
@@ -18,7 +18,7 @@ public:
 	virtual ~BehaviourState()
 	{
 	}
-	virtual void update(UniversalModelHandler& )=0;
+	virtual void update(ModelHandler& )=0;
 	const BEHAVOUR_STATE& getState() const 
 	{
 		return m_state;

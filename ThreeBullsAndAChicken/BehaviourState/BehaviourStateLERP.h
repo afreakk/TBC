@@ -6,7 +6,7 @@ class BehaviourStateLERP:public BehaviourState
 public:
 	BehaviourStateLERP(SceneNode* target,const Real* speed);
 	~BehaviourStateLERP();
-	void update(UniversalModelHandler& ) override;
+	void update(ModelHandler& ) override;
 	bool nextTarget() const;
 private:
 	LERP_STATE m_lerpState;
@@ -14,6 +14,6 @@ private:
 	bool m_goNextTarget;
 	const Real& m_speed;
 
-	bool attackEnemy(UniversalModelHandler& modelHandler);
+	bool attackEnemy(ModelHandler& modelHandler);
 };
 

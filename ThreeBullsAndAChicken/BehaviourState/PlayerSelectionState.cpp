@@ -9,6 +9,6 @@ PlayerSelectionState::PlayerSelectionState()
 PlayerSelectionState::~PlayerSelectionState()
 {
 }
-void PlayerSelectionState::update(UniversalModelHandler& playerModel)
+void PlayerSelectionState::update(ModelHandler& playerModel)
 {
 }

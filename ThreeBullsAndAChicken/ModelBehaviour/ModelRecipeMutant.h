@@ -1,17 +1,20 @@
 #pragma once
 #include "stdafx.h"
-#include "../ModelBehaviour/CreationRecipes.h"
-class PlayerRecipe : public CreationRecipes
+#include "ModelRecipe.h"
+class ModelRecipeMutant:public ModelRecipe, boost::noncopyable
 {
 public:
-	PlayerRecipe();
-	~PlayerRecipe();
+	ModelRecipeMutant();
+	~ModelRecipeMutant();
 	Ogre::Entity* initMesh(Ogre::SceneManager* sMgr) override;
 	Ogre::SceneNode* initNode(Ogre::SceneManager* sMgr) override;
 	Ogre::AnimationState* getWalk(Ogre::Entity*) override;
 	Ogre::AnimationState* getAttack(Ogre::Entity*) override;
 	Ogre::AnimationState* getDie(Ogre::Entity*) override;
-	Ogre::AnimationState* getBlock(Ogre::Entity*);
 private:
+	const int m_id;
+	static int s_count;
+	string m_entityName;
+	string m_nodeName;
 };
 

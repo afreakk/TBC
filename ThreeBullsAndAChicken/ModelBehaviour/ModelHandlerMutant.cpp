@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "MutantModelHandler.h"
+#include "ModelHandlerMutant.h"
 
 #include "../OgreCore/OgreCore.h"
-#include "MutantRecipe.h"
+#include "ModelRecipeMutant.h"
 using namespace Ogre;
-MutantModelHandler::MutantModelHandler(PolarCoordinates normalPos) 
-: UniversalModelHandler(new MutantRecipe(), normalPos)
+ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos) 
+: ModelHandler(new ModelRecipeMutant(), normalPos)
 , m_selectedTag(m_node)
 , m_marked(false)
 , m_selected(false)
@@ -13,12 +13,12 @@ MutantModelHandler::MutantModelHandler(PolarCoordinates normalPos)
 {
 	markSelected(false);
 }
-MutantModelHandler::~MutantModelHandler()
+ModelHandlerMutant::~ModelHandlerMutant()
 {
-	cout << "MutantModelHandler destrucotr" << endl;
+	cout << "ModelHandlerMutant destrucotr" << endl;
 }
 
-void MutantModelHandler::markAs(int number)
+void ModelHandlerMutant::markAs(int number)
 {
 	m_numberText.reset();
 	m_numberText = unique_ptr<MovableText> (  new MovableText("lol", boost::lexical_cast<string>(number),"StarWars",100.0f) ) ;
@@ -30,7 +30,7 @@ void MutantModelHandler::markAs(int number)
 	m_marked = true;
 }
 
-void MutantModelHandler::unMarkNumber()
+void ModelHandlerMutant::unMarkNumber()
 {
 	if (m_numberText)
 	{
@@ -38,7 +38,7 @@ void MutantModelHandler::unMarkNumber()
 		m_numberText = nullptr;
 	}
 }
-void MutantModelHandler::markSelected(bool selected)
+void ModelHandlerMutant::markSelected(bool selected)
 {
 	m_selected = selected;
 	if (m_entity)

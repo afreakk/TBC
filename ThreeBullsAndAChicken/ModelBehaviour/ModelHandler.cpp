@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "UniversalModelHandler.h"
+#include "ModelHandler.h"
 
 using namespace Ogre;
 
 
-UniversalModelHandler::UniversalModelHandler(CreationRecipes* recipe, PolarCoordinates normalPos)
+ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos)
 : m_crRecipe(recipe)
 , m_entity(m_crRecipe->initMesh(OgreCore::getSingletonPtr()->getSceneMgr()))
 , m_node(m_crRecipe->initNode(OgreCore::getSingletonPtr()->getSceneMgr()))
@@ -12,12 +12,12 @@ UniversalModelHandler::UniversalModelHandler(CreationRecipes* recipe, PolarCoord
 {
 	init();
 }
-UniversalModelHandler::~UniversalModelHandler()
+ModelHandler::~ModelHandler()
 {
-	cout << "UniversalModelHandler destrucotr " << endl;
+	cout << "ModelHandler destrucotr " << endl;
 }
 
-void UniversalModelHandler::init() 
+void ModelHandler::init() 
 {
 	m_node->attachObject(m_entity);
 	m_animations[ANIMATIONS::ATTACK]= m_crRecipe->getAttack(m_entity);
@@ -26,7 +26,7 @@ void UniversalModelHandler::init()
 	UnitCircleMovement::normalSetPosition(m_node, m_normalPosition);
 }
 
-void UniversalModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
+void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
 	enableAnimation(ANIMATIONS::WALK);
 	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*30.0);
@@ -35,19 +35,19 @@ void UniversalModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirec
 	UnitCircleMovement::normalSetPosition(m_node, m_normalPosition);
 }
 //private
-void UniversalModelHandler::enableAnimation(ANIMATIONS animation)
+void ModelHandler::enableAnimation(ANIMATIONS animation)
 {
 	for (auto& animation : m_animations)
 		animation.second->setEnabled(false);
 	m_animations[animation]->setEnabled(true);
 }
-void UniversalModelHandler::fallAndDie(Real dt)
+void ModelHandler::fallAndDie(Real dt)
 {
 	enableAnimation(ANIMATIONS::DIE);
 	m_animations[ANIMATIONS::DIE]->setLoop(false);
 	m_animations[ANIMATIONS::DIE]->addTime(dt);
 }
-LERP_STATE UniversalModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+LERP_STATE ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
 	lerp(nextPosition, dt);
 	enableAnimation(ANIMATIONS::ATTACK);
@@ -58,7 +58,7 @@ LERP_STATE UniversalModelHandler::lerpAttack( const Ogre::Vector3& nextPosition,
 	return LERP_STATE::LERP_WALK;
 
 }
-LERP_STATE UniversalModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+LERP_STATE ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
 	lerp(nextPosition, dt);
 	enableAnimation(ANIMATIONS::WALK);
@@ -68,36 +68,36 @@ LERP_STATE UniversalModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, co
 		return LERP_STATE::LERP_WALK;
 	return LERP_STATE::LERP_ATTACK;
 }
-void UniversalModelHandler::lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+void ModelHandler::lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
 	m_node->lookAt(nextPosition,Ogre::Node::TransformSpace::TS_WORLD);
 	m_node->translate(Vector3(0.0, 0.0, -dt), Ogre::Node::TS_LOCAL);
 	updateNormalPos();
 }
 
-Ogre::SceneNode* UniversalModelHandler::getNode() const 
+Ogre::SceneNode* ModelHandler::getNode() const 
 {
 	return m_node;
 }
-const PolarCoordinates& UniversalModelHandler::getNormalPos() 
+const PolarCoordinates& ModelHandler::getNormalPos() 
 {
 	return m_normalPosition;
 }
 
-const Vector3 UniversalModelHandler::getNormalVecPos() const
+const Vector3 ModelHandler::getNormalVecPos() const
 {
 	return UnitCircleMovement::posFromR(m_normalPosition);
 }
 
-Entity* UniversalModelHandler::getEntity() const
+Entity* ModelHandler::getEntity() const
 {
 	return m_entity;
 }
-void UniversalModelHandler::setNormalPos(PolarCoordinates newPos)
+void ModelHandler::setNormalPos(PolarCoordinates newPos)
 {
 	m_normalPosition = newPos;
 }
-void UniversalModelHandler::updateNormalPos()
+void ModelHandler::updateNormalPos()
 {
 	vectorToNormal(m_node->getPosition(), m_normalPosition);
 }

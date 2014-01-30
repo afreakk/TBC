@@ -15,7 +15,7 @@ BehaviourStateNormal::~BehaviourStateNormal()
 {
 	cout << "normalState destrucotr" << endl;
 }
-void BehaviourStateNormal::update(UniversalModelHandler& playerModel)
+void BehaviourStateNormal::update(ModelHandler& playerModel)
 {
 	handleDirection();
 	m_translator.update(playerModel, m_walkingDirection);

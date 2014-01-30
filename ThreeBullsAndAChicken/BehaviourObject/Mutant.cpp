@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Mutant.h"
-#include "../ModelBehaviour/MutantModelHandler.h"
+#include "../ModelBehaviour/ModelHandlerMutant.h"
 
 Mutant::Mutant(const PolarCoordinates pos) 
-: BehaviourObject(new MutantModelHandler(pos))
+: BehaviourObject(new ModelHandlerMutant(pos))
 {
 }
 

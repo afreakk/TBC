@@ -8,14 +8,6 @@
 #include "../OgreCore/OgreCore.h"
 #include "../OgreCore/OISCore.h"
 
-void PrintFullPath(char * partialPath)
-{
-	char full[_MAX_PATH];
-	if (_fullpath(full, partialPath, _MAX_PATH) != NULL)
-		printf("Full path is: %s\n", full);
-	else
-		printf("Invalid path\n");
-}
 int main()
 {
 	try
@@ -46,7 +38,6 @@ int main()
 	{
 		std::cout << "!!!!std::exception!!!!\n" << e.what() << std::endl;;
 	}
-	PrintFullPath(".\\");
 	std::cout << std::endl << "Exiting main." << std::endl;
 	char p;
 	std::cin >> p;

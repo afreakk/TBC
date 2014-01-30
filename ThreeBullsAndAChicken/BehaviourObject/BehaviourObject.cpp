@@ -2,7 +2,7 @@
 #include "BehaviourObject.h"
 
 
-BehaviourObject::BehaviourObject(UniversalModelHandler* modelHandler)
+BehaviourObject::BehaviourObject(ModelHandler* modelHandler)
 : m_model(modelHandler)
 , m_currentState(nullptr)
 {
@@ -38,7 +38,7 @@ SceneNode* BehaviourObject::getNode() const
 {
 	return m_model->getNode();
 }
-UniversalModelHandler& BehaviourObject::getModelHandler()
+ModelHandler& BehaviourObject::getModelHandler()
 {
 	return *m_model.get();
 }

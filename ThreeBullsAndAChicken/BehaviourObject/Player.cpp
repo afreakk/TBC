@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "../ModelBehaviour/PlayerModelHandler.h"
+#include "../ModelBehaviour/ModelHandlerPlayer.h"
 
 Player::Player() 
-: BehaviourObject(new PlayerModelHandler( PolarCoordinates( 0.0, 5.5, 0.2 )  ) )
+: BehaviourObject(new ModelHandlerPlayer( PolarCoordinates( 0.0, 5.5, 0.2 )  ) )
 {
 }
 

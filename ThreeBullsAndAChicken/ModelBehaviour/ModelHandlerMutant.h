@@ -1,15 +1,15 @@
 #pragma once
 #include "stdafx.h"
 #include "../Other/UnitCircleMovement.h"
-#include "../ModelBehaviour/UniversalModelHandler.h"
+#include "../ModelBehaviour/ModelHandler.h"
 #include "../Other/MovableText.h"
 #include "../UniversalGameObjects/SelectedTag.h"
 
-class MutantModelHandler : public UniversalModelHandler
+class ModelHandlerMutant : public ModelHandler
 {
 public:
-	MutantModelHandler(PolarCoordinates normalPos);
-	~MutantModelHandler();
+	ModelHandlerMutant(PolarCoordinates normalPos);
+	~ModelHandlerMutant();
 	void markAs(int number);
 	void unMarkNumber();
 	void markSelected(bool);

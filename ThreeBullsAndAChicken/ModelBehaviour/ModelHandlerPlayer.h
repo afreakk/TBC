@@ -1,12 +1,12 @@
 #pragma once
 #include "stdafx.h"
 #include "../Other/UnitCircleMovement.h"
-#include "../ModelBehaviour/UniversalModelHandler.h"
-class PlayerModelHandler:public UniversalModelHandler
+#include "../ModelBehaviour/ModelHandler.h"
+class ModelHandlerPlayer:public ModelHandler
 {
 public:
-	PlayerModelHandler(PolarCoordinates nwPos);
-	~PlayerModelHandler();
+	ModelHandlerPlayer(PolarCoordinates nwPos);
+	~ModelHandlerPlayer();
 	void block(Real dt);
 	void unBlock();
 	bool isBlocking()

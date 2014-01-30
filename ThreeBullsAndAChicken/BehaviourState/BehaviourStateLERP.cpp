@@ -20,12 +20,12 @@ bool BehaviourStateLERP::nextTarget() const
 {
 	return m_goNextTarget;
 }
-void BehaviourStateLERP::update(UniversalModelHandler& modelHandler)
+void BehaviourStateLERP::update(ModelHandler& modelHandler)
 {
 	if (attackEnemy(modelHandler))
 		m_goNextTarget = true;
 }
-bool BehaviourStateLERP::attackEnemy(UniversalModelHandler& modelHandler)
+bool BehaviourStateLERP::attackEnemy(ModelHandler& modelHandler)
 {
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
 	auto speed = dt*m_speed;
