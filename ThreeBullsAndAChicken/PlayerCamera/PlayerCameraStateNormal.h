@@ -11,5 +11,6 @@ private:
 	Ogre::Camera* m_camera;
 	Ogre::SceneNode* m_playerNode;
 	Ogre::Real m_distance;
+	Real m_lerp;
 };
 

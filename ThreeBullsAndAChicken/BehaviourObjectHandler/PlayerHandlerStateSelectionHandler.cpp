@@ -2,8 +2,8 @@
 #include "PlayerHandlerStateSelectionHandler.h"
 #include "../ModelBehaviour/ModelHandlerMutant.h"
 #include "../Containers/MutantContainer.h"
-PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler()
-: m_mutants(MutantContainer::getSingleton().getMutants() )
+PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler(Vector3 playerPos)
+: m_mutants(MutantContainer::getSingleton().getAndSortMutants(playerPos) )
 , m_selectedIndex(0)
 , m_lastSelectedIndex(m_selectedIndex)
 {
@@ -26,9 +26,9 @@ void PlayerHandlerStateSelectionHandler::handleIndex(const OIS::KeyEvent& e)
 {
 	int idxVelocity = 0;
 	if (e.key == OIS::KC_A)
-		idxVelocity++;
-	if (e.key == OIS::KC_D)
 		idxVelocity--;
+	if (e.key == OIS::KC_D)
+		idxVelocity++;
 	if (idxVelocity != 0)
 		changeIndex(idxVelocity);
 

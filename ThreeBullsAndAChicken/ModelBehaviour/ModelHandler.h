@@ -8,13 +8,6 @@ enum class LERP_STATE
 	LERP_WALK,
 	LERP_ATTACK
 };
-enum class ANIMATIONS
-{
-	WALK,
-	ATTACK,
-	DIE,
-	BLOCK
-};
 class ModelHandler : boost::noncopyable
 {
 public:
@@ -28,14 +21,13 @@ protected:
 	void updateNormalPos();
 	void lerp(const Ogre::Vector3&, const Ogre::Real&);
 	virtual void init();
-	void enableAnimation(ANIMATIONS);
 
 	unique_ptr<ModelRecipe> m_crRecipe;
 	Entity*const m_entity;
 	SceneNode*const m_node;
 	PolarCoordinates m_normalPosition;
 
-	std::map<ANIMATIONS, AnimationState*> m_animations;
+	std::map<ANIMATIONS, unique_ptr<BaseAnimation> > m_animations;
 	//getsnsets
 public:
 	virtual Entity*					getEntity() const;

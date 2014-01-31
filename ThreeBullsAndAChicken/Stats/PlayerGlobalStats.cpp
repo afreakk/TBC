@@ -6,7 +6,7 @@ template<> PlayerGlobalStats* Ogre::Singleton<PlayerGlobalStats>::msSingleton = 
 PlayerGlobalStats::PlayerGlobalStats() 
 : m_energy(100)
 , m_walkingSpeed(0.08)
-, m_LERPSpeed(0.5)
+, m_LERPSpeed(5.5)
 {
 }
 

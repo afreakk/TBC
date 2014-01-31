@@ -3,7 +3,8 @@
 #include "../BehaviourObject/Mutant.h"
 #include "../Templates/StateHandler.h"
 #include "../BehaviourObject/Player.h"
-class MutantHandler : public StateHandler <MUTANT_HANDLER_STATE>, boost::noncopyable
+#include "../Templates/Distancer.h"
+class MutantHandler : public StateHandler <MUTANT_HANDLER_STATE>, boost::noncopyable, public Distancer
 {
 public:
 	MutantHandler( Mutant* mutant, Player* player);

@@ -4,6 +4,7 @@
 
 LevelOne::LevelOne() 
 : ILevel(LevelID::LEVEL_ONE)
+, m_globalVars(new GlobalVariables())
 , m_playerStats(new PlayerGlobalStats())
 , m_mutantGlobalStats(new MutantGlobalStats())
 , m_playerContainer(new PlayerContainer())
@@ -30,7 +31,7 @@ LevelOne::LevelOne()
 	///
 
 	PlayerGlobalStats::getSingletonPtr()->registerSubscriber(&m_playerGUI, "PlayerGUI");
-	m_playerContainer->getPlayer()->registerSubscriber(&m_playerCamera, "playerCamera");
+	m_playerContainer->getHandler()->registerSubscriber(&m_playerCamera, "playerCamera");
 }
 
 

@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "ModelRecipePlayer.h"
+#include "../ModelAnimations/AnimationAttack.h"
+#include "../ModelAnimations/AnimationWalk.h"
+#include "../ModelAnimations/AnimationDie.h"
 
 ModelRecipePlayer::ModelRecipePlayer()
 {
@@ -13,18 +16,26 @@ Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
 	return sMgr->createEntity("PlayerEntity", "ninja.mesh");
 }
 
-Ogre::AnimationState* ModelRecipePlayer::getDie(Ogre::Entity* entity)
+BaseAnimation* ModelRecipePlayer::getDie(Ogre::Entity* entity)
 {
-	return entity->getAnimationState("Death1");
+	std::vector<AnimationState*> anims;
+	anims.push_back(entity->getAnimationState("Death1"));
+	anims.push_back(entity->getAnimationState("Death2"));
+	return new AnimationDie(anims);
 }
-Ogre::AnimationState* ModelRecipePlayer::getWalk(Ogre::Entity* entity)
+BaseAnimation* ModelRecipePlayer::getWalk(Ogre::Entity* entity)
 {
-	return entity->getAnimationState("Walk");
+	std::vector<AnimationState*> anims;
+	anims.push_back(entity->getAnimationState("Walk"));
+	return new AnimationWalk(anims);
 }
-Ogre::AnimationState* ModelRecipePlayer::getAttack(Ogre::Entity* entity)
+BaseAnimation* ModelRecipePlayer::getAttack(Ogre::Entity* entity)
 {
-	auto attack =  entity->getAnimationState("Attack1");
-	return attack;
+	std::vector<AnimationState*> anims;
+	anims.push_back(entity->getAnimationState("Attack1"));
+	anims.push_back(entity->getAnimationState("Attack2"));
+	anims.push_back(entity->getAnimationState("Attack3"));
+	return new AnimationAttack(anims);
 }
 Ogre::SceneNode* ModelRecipePlayer::initNode(Ogre::SceneManager* sMgr)
 {

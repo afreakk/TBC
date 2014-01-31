@@ -23,6 +23,10 @@ public:
 	{
 		return m_player.get();
 	}
+	PlayerHandler* getHandler()
+	{
+		return m_handler.get();
+	}
 private:
 	unique_ptr<Player> m_player;
 	unique_ptr<PlayerHandler> m_handler;

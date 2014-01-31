@@ -119,6 +119,9 @@
     <ProjectReference Include="..\Levels\Levels.vcxproj">
       <Project>{b688e051-97e1-4c1f-a283-a21a6c218b4f}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\ModelAnimations\ModelAnimations.vcxproj">
+      <Project>{8b0bcb53-5d31-48cb-b850-6c401de3f930}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\ModelBehaviour\ModelBehaviour.vcxproj">
       <Project>{5093c8d2-2200-49ac-affc-8db3185b20e9}</Project>
     </ProjectReference>

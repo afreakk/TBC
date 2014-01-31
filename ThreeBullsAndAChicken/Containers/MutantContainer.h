@@ -5,6 +5,18 @@
 class MutantContainer : public Singleton<MutantContainer>
 {
 public:
+	struct {
+		bool operator()(const unique_ptr<MutantHandler>& a, const unique_ptr<MutantHandler>& b)
+		{
+			return a->distance < b->distance;
+		}
+	} handlerSort;
+	struct {
+		bool operator()(const unique_ptr<Mutant>& a, const unique_ptr<Mutant>& b)
+		{
+			return a->distance < b->distance;
+		}
+	} mutantSort;
 	MutantContainer()
 	{
 
@@ -31,12 +43,29 @@ public:
 		m_handlers.push_back(unique_ptr<MutantHandler>(mutantHandler));
 		m_mutants.push_back(unique_ptr<Mutant>(mutant));
 	}
+	void sortByDistance(Vector3 playerPos)
+	{
+		std::vector<unsigned> indexes;
+		for (int i = 0; i < m_mutants.size(); i++)
+		{
+			auto distance = m_mutants[i]->getNode()->getPosition().distance(playerPos);
+			m_mutants[i]->distance = distance;
+			m_handlers[i]->distance = distance;
+		}
+		std::sort(m_handlers.begin(), m_handlers.end(), handlerSort);
+		std::sort(m_mutants.begin(), m_mutants.end(), mutantSort);
+	}
 	const std::vector<unique_ptr<Mutant>>& getMutants() const
 	{
 		return m_mutants;
 	}
 	std::vector<unique_ptr<Mutant>>& getMutants()
 	{
+		return m_mutants;
+	}
+	std::vector<unique_ptr<Mutant>>& getAndSortMutants(Vector3 pos)
+	{
+		sortByDistance(pos);
 		return m_mutants;
 	}
 	void update()

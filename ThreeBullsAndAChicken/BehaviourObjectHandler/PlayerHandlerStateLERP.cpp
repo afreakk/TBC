@@ -2,6 +2,7 @@
 #include "PlayerHandlerStateLERP.h"
 #include "../Containers/MutantContainer.h"
 #include "../Stats/PlayerGlobalStats.h"
+#include "../Stats/GlobalVariables.h"
 PlayerHandlerStateLERP::PlayerHandlerStateLERP(std::vector<unsigned> mutantList, Player* player) 
 : HandlerState(PLAYER_HANDLER_STATE::LERP)
 , m_attackList(mutantList)
@@ -10,10 +11,12 @@ PlayerHandlerStateLERP::PlayerHandlerStateLERP(std::vector<unsigned> mutantList,
 , m_currentLerpState(nullptr)
 {
 	attackNextTarget();
+	GlobalVariables::getSingleton().setSpeed(1.0 / 20.0);
 }
 
 PlayerHandlerStateLERP::~PlayerHandlerStateLERP()
 {
+	GlobalVariables::getSingleton().setSpeed(1.0);
 	MutantContainer::getSingleton().removeKilledMutants();
 }
 

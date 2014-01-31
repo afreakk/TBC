@@ -1,24 +1,24 @@
 #include "stdafx.h"
 #include "PlayerHandlerStateSelection.h"
-#include "../Stats/MutantGlobalStats.h"
 #include "../ModelBehaviour/ModelHandlerMutant.h"
 #include "../Containers/MutantContainer.h"
+#include "../Stats/GlobalVariables.h"
 PlayerHandlerStateSelection::PlayerHandlerStateSelection(Player* player) 
-:HandlerState(PLAYER_HANDLER_STATE::SELECTION)
+: m_selectionHandler(player->getNode()->getPosition())
+, HandlerState(PLAYER_HANDLER_STATE::SELECTION)
 , m_player(player)
 , m_selectionState{ new PlayerSelectionState() }
-
 {
 	m_player->setState(m_selectionState.get());
-	MutantGlobalStats::getSingleton().scaleSpeed(1.0/20.0);
+	GlobalVariables::getSingleton().setSpeed(1.0 / 20.0);
 }
 
 
 PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 {
+	GlobalVariables::getSingleton().setSpeed(1.0);
 	for (auto idx:m_attackList)
 		static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[idx]->getModelHandler()).unMarkNumber();
-	MutantGlobalStats::getSingleton().scaleSpeed(20.0);
 }
 
 void PlayerHandlerStateSelection::update()
@@ -51,6 +51,11 @@ void PlayerHandlerStateSelection::goLerp()
 }
 void PlayerHandlerStateSelection::pushBackSelected()
 {
+	for (const auto& atk : m_attackList)
+	{
+		if (m_selectionHandler.getSelected() == atk)
+			return;
+	}
 	m_attackList.push_back(m_selectionHandler.getSelected());
 	static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[m_attackList[m_attackList.size() - 1]]->getModelHandler()).markAs(m_attackList.size());
 }

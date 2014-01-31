@@ -41,6 +41,7 @@ void PlayerHandler::switchState(PLAYER_HANDLER_STATE newState)
 		assert(0);
 		break;
 	}
+	notifySubscribers();
 
 }
 bool PlayerHandler::keyPressed(const OIS::KeyEvent& e)

@@ -10,5 +10,7 @@ public:
 private:
 	Ogre::Camera* m_camera;
 	Ogre::SceneNode* m_playerNode;
+	Real m_lerp;
+	Real m_r;
 };
 

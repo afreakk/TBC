@@ -2,7 +2,11 @@
 #include "PlayerCameraStateSelection.h"
 #include "../ModelBehaviour/ModelHandlerMutant.h"
 #include "../Containers/MutantContainer.h"
-PlayerCameraStateSelection::PlayerCameraStateSelection() : m_mutants(MutantContainer::getSingleton().getMutants()), m_camera(OgreCore::getSingleton().getCamera())
+#include "../GameLevels/MainUpdate.h"
+PlayerCameraStateSelection::PlayerCameraStateSelection() 
+: m_mutants(MutantContainer::getSingleton().getMutants())
+, m_camera(OgreCore::getSingleton().getCamera())
+, m_lookAt(Vector3::ZERO)
 {
 }
 
@@ -13,13 +17,15 @@ PlayerCameraStateSelection::~PlayerCameraStateSelection()
 
 void PlayerCameraStateSelection::update()
 {
+	auto dt = MainUpdate::getSingleton().getDeltaTime();
 	for (const auto& mutant : m_mutants)
 	{
 		ModelHandlerMutant& mutantModelHandler = static_cast<ModelHandlerMutant&>(mutant->getModelHandler());
 		if (mutantModelHandler.isSelected())
 		{
-			m_camera->lookAt(mutant->getModelHandler().getNode()->getPosition());
+			m_lookAt = Math::lerp(m_lookAt, mutant->getModelHandler().getNode()->getPosition(), dt);
 		}
 	}
-
+	if (!m_lookAt.isZeroLength())
+		m_camera->lookAt(m_lookAt);
 }

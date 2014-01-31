@@ -11,6 +11,7 @@
 #include "../Stats/PlayerGlobalStats.h"
 #include "../Stats/MutantGlobalStats.h"
 #include "../Containers/PlayerContainer.h"
+#include "../Stats/GlobalVariables.h"
 class LevelOne : public ILevel
 {
 public:
@@ -18,6 +19,7 @@ public:
 	~LevelOne();
 	bool update() override;
 private:
+	unique_ptr<GlobalVariables> m_globalVars;
 	unique_ptr<PlayerGlobalStats> m_playerStats;
 	unique_ptr<MutantGlobalStats> m_mutantGlobalStats;
 	unique_ptr<PlayerContainer> m_playerContainer;

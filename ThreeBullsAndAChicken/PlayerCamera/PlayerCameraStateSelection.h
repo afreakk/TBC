@@ -10,5 +10,6 @@ public:
 private:
 	const std::vector<unique_ptr<Mutant> >& m_mutants; 
 	Ogre::Camera* m_camera;
+	Vector3 m_lookAt;
 };
 

@@ -3,7 +3,7 @@
 class PlayerHandlerStateSelectionHandler
 {
 public:
-	PlayerHandlerStateSelectionHandler();
+	PlayerHandlerStateSelectionHandler(Vector3 playerPos);
 	~PlayerHandlerStateSelectionHandler();
 	void handleIndex(const OIS::KeyEvent&);
 	void changeIndex(int iVel);

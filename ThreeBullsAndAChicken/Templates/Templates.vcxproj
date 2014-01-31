@@ -76,6 +76,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Distancer.h" />
     <ClInclude Include="HandlerState.h" />
     <ClInclude Include="Messager.h" />
     <ClInclude Include="MessageSubscriber.h" />

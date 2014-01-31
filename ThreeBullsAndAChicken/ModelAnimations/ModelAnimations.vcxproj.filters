@@ -21,19 +21,16 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Messager.h">
+    <ClInclude Include="BaseAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MessageSubscriber.h">
+    <ClInclude Include="AnimationAttack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HandlerState.h">
+    <ClInclude Include="AnimationDie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Distancer.h">
+    <ClInclude Include="AnimationWalk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

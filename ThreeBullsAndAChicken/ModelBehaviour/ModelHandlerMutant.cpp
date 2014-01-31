@@ -33,24 +33,11 @@ void ModelHandlerMutant::markAs(int number)
 void ModelHandlerMutant::unMarkNumber()
 {
 	if (m_numberText)
-	{
 		m_numberText->detachFromParent();
-		m_numberText = nullptr;
-	}
 }
 void ModelHandlerMutant::markSelected(bool selected)
 {
 	m_selected = selected;
-	if (m_entity)
-	{
-		if (selected)
-		{
-			m_entity->setMaterialName("PlainTexture");
-			m_selectedTag.select();
-		}
-		else
-		{
-			m_entity->setMaterialName("red");
-		}
-	}
+	if (m_selected)
+		m_selectedTag.select();
 }

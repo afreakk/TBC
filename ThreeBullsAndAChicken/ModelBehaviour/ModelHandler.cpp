@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ModelHandler.h"
+#include "../Stats/GlobalVariables.h"
 
 using namespace Ogre;
 
@@ -20,51 +21,43 @@ ModelHandler::~ModelHandler()
 void ModelHandler::init() 
 {
 	m_node->attachObject(m_entity);
-	m_animations[ANIMATIONS::ATTACK]= m_crRecipe->getAttack(m_entity);
-	m_animations[ANIMATIONS::WALK]	= m_crRecipe->getWalk(m_entity);
-	m_animations[ANIMATIONS::DIE]	= m_crRecipe->getDie(m_entity);
+	m_animations[ANIMATIONS::ATTACK]= unique_ptr<BaseAnimation>(m_crRecipe->getAttack(m_entity) );
+	m_animations[ANIMATIONS::WALK]	= unique_ptr<BaseAnimation>(m_crRecipe->getWalk(m_entity) );
+	m_animations[ANIMATIONS::DIE]	= unique_ptr<BaseAnimation>(m_crRecipe->getDie(m_entity) );
 	UnitCircleMovement::normalSetPosition(m_node, m_normalPosition);
 }
 
 void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
-	enableAnimation(ANIMATIONS::WALK);
-	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*30.0);
-	m_normalPosition.r += rInc;
+	Real rVel = rInc*GlobalVariables::getSingleton().getSpeed();
+	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rVel)*30.0, m_animations);
+	m_normalPosition.r += rVel;
 	UnitCircleMovement::normalSetDirection(m_node, m_normalPosition, activeDirection);
 	UnitCircleMovement::normalSetPosition(m_node, m_normalPosition);
 }
 //private
-void ModelHandler::enableAnimation(ANIMATIONS animation)
-{
-	for (auto& animation : m_animations)
-		animation.second->setEnabled(false);
-	m_animations[animation]->setEnabled(true);
-}
 void ModelHandler::fallAndDie(Real dt)
 {
-	enableAnimation(ANIMATIONS::DIE);
-	m_animations[ANIMATIONS::DIE]->setLoop(false);
-	m_animations[ANIMATIONS::DIE]->addTime(dt);
+	m_animations[ANIMATIONS::DIE]->addTime(dt, m_animations);
 }
 LERP_STATE ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
-	lerp(nextPosition, dt);
-	enableAnimation(ANIMATIONS::ATTACK);
-	m_animations[ANIMATIONS::ATTACK]->addTime(dt*10.0);
+	Real dtVel = dt*GlobalVariables::getSingleton().getSpeed();
+	lerp(nextPosition, dtVel);
+	m_animations[ANIMATIONS::ATTACK]->addTime(dtVel*2.0, m_animations);
 	auto ADistance = m_node->getPosition().distance(nextPosition);
-	if (ADistance > 0.05)
+	if (ADistance > 0.01)
 		return LERP_STATE::LERP_ATTACK;
 	return LERP_STATE::LERP_WALK;
 
 }
 LERP_STATE ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
-	lerp(nextPosition, dt);
-	enableAnimation(ANIMATIONS::WALK);
-	m_animations[ANIMATIONS::WALK]->addTime(dt*10.0);
+	Real dtVel = dt*GlobalVariables::getSingleton().getSpeed();
+	lerp(nextPosition, dtVel);
+	m_animations[ANIMATIONS::WALK]->addTime(dtVel*10.0, m_animations);
 	auto ADistance = m_node->getPosition().distance(nextPosition);
-	if (ADistance > 0.125)
+	if (ADistance > 0.225)
 		return LERP_STATE::LERP_WALK;
 	return LERP_STATE::LERP_ATTACK;
 }

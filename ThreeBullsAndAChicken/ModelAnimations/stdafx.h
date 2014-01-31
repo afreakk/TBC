@@ -4,11 +4,11 @@
 //
 
 #pragma once
-#include <string>
-#include "OISKeyboard.h"
-#include "OgrePrerequisites.h"
+#include "OgreAnimationState.h"
+#include <vector>
+#include <memory>
 using namespace std;
-
+using namespace Ogre;
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 
 
