@@ -1,5 +1,6 @@
 #pragma once
 #include "../BehaviourObject/Mutant.h"
+#include "PlayerHandlerStateSelectionLine.h"
 class PlayerHandlerStateSelectionHandler
 {
 public:
@@ -10,9 +11,11 @@ public:
 	void extremeChangeIndex(int iVel);
 	void updateSelected();
 	unsigned getSelected()const ;
+	void addLine();
 private:
 	std::vector<unique_ptr<Mutant>>&  m_mutants;
 	unsigned m_selectedIndex;
 	unsigned m_lastSelectedIndex;
+	PlayerHandlerStateSelectionLine m_selectionLine;
 };
 

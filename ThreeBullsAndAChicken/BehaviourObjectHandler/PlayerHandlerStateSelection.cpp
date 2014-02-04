@@ -58,4 +58,5 @@ void PlayerHandlerStateSelection::pushBackSelected()
 	}
 	m_attackList.push_back(m_selectionHandler.getSelected());
 	static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[m_attackList[m_attackList.size() - 1]]->getModelHandler()).markAs(m_attackList.size());
+	m_selectionHandler.addLine();
 }

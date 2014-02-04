@@ -16,6 +16,8 @@ PlayerHandlerStateSelectionHandler::~PlayerHandlerStateSelectionHandler()
 
 void PlayerHandlerStateSelectionHandler::updateSelected()
 {
+	m_selectionLine.update();
+	m_selectionLine.setNewTarget(m_selectedIndex);
 	ModelHandlerMutant& lastSelectedModelHandler = static_cast<ModelHandlerMutant&>(m_mutants[m_lastSelectedIndex]->getModelHandler());
 	if (m_lastSelectedIndex != m_selectedIndex)
 		static_cast<ModelHandlerMutant&>(m_mutants[m_lastSelectedIndex]->getModelHandler()).markSelected(false);
@@ -58,4 +60,8 @@ void PlayerHandlerStateSelectionHandler::extremeChangeIndex(int iVel)
 unsigned PlayerHandlerStateSelectionHandler::getSelected() const
 {
 	return m_selectedIndex;
+}
+void PlayerHandlerStateSelectionHandler::addLine()
+{
+	m_selectionLine.addEnemy();
 }

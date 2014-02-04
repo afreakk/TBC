@@ -38,7 +38,7 @@ void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& act
 //private
 void ModelHandler::fallAndDie(Real dt)
 {
-	m_animations[ANIMATIONS::DIE]->addTime(dt, m_animations);
+	m_animations[ANIMATIONS::DIE]->addTime(dt*GlobalVariables::getSingleton().getSpeed(), m_animations);
 }
 LERP_STATE ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {

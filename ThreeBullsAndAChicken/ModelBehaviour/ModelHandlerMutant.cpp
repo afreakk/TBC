@@ -3,10 +3,13 @@
 
 #include "../OgreCore/OgreCore.h"
 #include "ModelRecipeMutant.h"
+#include "../Stats/GlobalVariables.h"
+#include "../Stats/MutantGlobalStats.h"
 using namespace Ogre;
-ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos) 
+ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos)
 : ModelHandler(new ModelRecipeMutant(), normalPos)
 , m_selectedTag(m_node)
+, m_bloodSplat(m_node)
 , m_marked(false)
 , m_selected(false)
 , m_numberText(nullptr)
@@ -40,4 +43,8 @@ void ModelHandlerMutant::markSelected(bool selected)
 	m_selected = selected;
 	if (m_selected)
 		m_selectedTag.select();
+}
+void ModelHandlerMutant::damage()
+{
+	m_bloodSplat.activate(MutantGlobalStats::getSingleton().getScale()*GlobalVariables::getSingleton().getSpeed());
 }

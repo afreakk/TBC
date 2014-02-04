@@ -6,6 +6,7 @@ MutantGlobalStats::MutantGlobalStats()
 : m_walkSpeed(0.04)
 , m_attackDistance(0.5)
 , m_LERPSpeed(0.5)
+, m_scale(1.0)
 {
 }
 
@@ -31,4 +32,10 @@ void MutantGlobalStats::scaleSpeed(Real newScale)
 {
 	m_LERPSpeed *= newScale;
 	m_walkSpeed *= newScale;
+	m_scale = newScale;
+}
+
+const Ogre::Real& MutantGlobalStats::getScale() const
+{
+	return m_scale;
 }

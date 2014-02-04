@@ -75,12 +75,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BloodSplat.h" />
     <ClInclude Include="EnemySpawner.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="SelectedTag.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BloodSplat.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="SelectedTag.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

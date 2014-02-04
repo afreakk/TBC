@@ -4,6 +4,7 @@
 #include "../ModelBehaviour/ModelHandler.h"
 #include "../Other/MovableText.h"
 #include "../UniversalGameObjects/SelectedTag.h"
+#include "../UniversalGameObjects/BloodSplat.h"
 
 class ModelHandlerMutant : public ModelHandler
 {
@@ -17,9 +18,11 @@ public:
 	{
 		return m_selected;
 	}
+	void damage();
 private:
 	unique_ptr<MovableText> m_numberText;
 	SelectedTag m_selectedTag;
+	BloodSplat m_bloodSplat;
 	bool m_selected;
 	bool m_marked;
 };

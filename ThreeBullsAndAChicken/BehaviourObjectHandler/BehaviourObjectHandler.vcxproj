@@ -89,6 +89,7 @@
     <ClInclude Include="PlayerHandlerStateNormal.h" />
     <ClInclude Include="PlayerHandlerStateSelection.h" />
     <ClInclude Include="PlayerHandlerStateSelectionHandler.h" />
+    <ClInclude Include="PlayerHandlerStateSelectionLine.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,7 @@
     <ClCompile Include="PlayerHandlerStateNormal.cpp" />
     <ClCompile Include="PlayerHandlerStateSelection.cpp" />
     <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp" />
+    <ClCompile Include="PlayerHandlerStateSelectionLine.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

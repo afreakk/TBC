@@ -36,7 +36,7 @@ bool OgreCore::initRoot()
 bool OgreCore::initResources()
 {
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/hmat", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/general", "FileSystem", "General");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/azz", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/city", "FileSystem", "CityDir");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/fonts", "FileSystem", "Fonts");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/cubemapsJS.zip", "Zip", "skybox");
