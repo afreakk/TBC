@@ -36,6 +36,12 @@ void PlayerCamera::setNewState(PLAYER_HANDLER_STATE newState)
 	case PLAYER_HANDLER_STATE::LERP:
 		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateLERP(m_player->getNode()) };
 		break;
+	case PLAYER_HANDLER_STATE::DEAD:
+		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateLERP(m_player->getNode()) };
+		break;
+	case PLAYER_HANDLER_STATE::TUMBLE:
+		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal( m_player->getNode()) };
+		break;
 	default:
 		assert(0);
 		break;

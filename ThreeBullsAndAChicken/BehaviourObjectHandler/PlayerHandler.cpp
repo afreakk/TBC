@@ -3,6 +3,8 @@
 #include "PlayerHandlerStateNormal.h"
 #include "PlayerHandlerStateSelection.h"
 #include "PlayerHandlerStateLERP.h"
+#include "PlayerHandlerStateDead.h"
+#include "PlayerHandlerStateTumble.h"
 #include "../OgreCore/OISCore.h"
 
 
@@ -22,6 +24,7 @@ PlayerHandler::~PlayerHandler()
 void PlayerHandler::switchState(PLAYER_HANDLER_STATE newState)
 {
 	std::vector<unsigned> mutantList;
+	TUMBLE_DIRECTION tumbleValue = TUMBLE_DIRECTION::DIRECTION_NONE;
 	switch (newState)
 	{
 	case PLAYER_HANDLER_STATE::NORMAL:
@@ -36,6 +39,15 @@ void PlayerHandler::switchState(PLAYER_HANDLER_STATE newState)
 		mutantList = static_cast<PlayerHandlerStateSelection*>(m_currentState.get())->getAttackList();
 		m_currentState.reset();
 		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>( new PlayerHandlerStateLERP(mutantList, m_player));
+		break;
+	case PLAYER_HANDLER_STATE::DEAD:
+		m_currentState.reset();
+		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateDead(m_player));
+		break;
+	case PLAYER_HANDLER_STATE::TUMBLE:
+		tumbleValue = static_cast<PlayerHandlerStateNormal*>(m_currentState.get())->getTumbleValue();
+		m_currentState.reset();
+		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateTumble(tumbleValue, m_player));
 		break;
 	default:
 		assert(0);

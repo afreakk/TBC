@@ -5,7 +5,8 @@ enum class ANIMATIONS
 	WALK,
 	ATTACK,
 	DIE,
-	BLOCK
+	BLOCK,
+	TUMBLE
 };
 class BaseAnimation
 {

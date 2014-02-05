@@ -9,6 +9,7 @@ PlayerHandlerStateNormal::PlayerHandlerStateNormal(Player* player)
 , m_spaceDown(false)
 , m_walkingDirection{ NormalDirection::None }
 , m_normalState{ new BehaviourStateNormal{ &m_walkingDirection , &PlayerGlobalStats::getSingleton().getWalkingSpeed()}}
+, m_tumble(TUMBLE_DIRECTION::DIRECTION_NONE)
 {
 	m_player->setState(m_normalState.get());
 }
@@ -22,12 +23,20 @@ void PlayerHandlerStateNormal::update()
 	m_walkingDirection = getWalkingDirection();
 	if (m_spaceDown)
 		m_state = PLAYER_HANDLER_STATE::SELECTION;
+	else if (m_tumble != TUMBLE_DIRECTION::DIRECTION_NONE)
+		m_state = PLAYER_HANDLER_STATE::TUMBLE;
 }
 
 void PlayerHandlerStateNormal::keyPressed(const OIS::KeyEvent& e)
 {
 	if (e.key == OIS::KeyCode::KC_SPACE)
 		m_spaceDown = true;
+
+	//tumbling direction or at all
+	if (e.key == OIS::KeyCode::KC_W)
+		m_tumble = TUMBLE_DIRECTION::DIRECTION_IN;
+	else if (e.key == OIS::KeyCode::KC_S)
+		m_tumble = TUMBLE_DIRECTION::DIRECTION_OUT;
 }
 void PlayerHandlerStateNormal::keyReleased(const OIS::KeyEvent& e)
 {

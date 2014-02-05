@@ -3,6 +3,7 @@
 #include "../ModelAnimations/AnimationAttack.h"
 #include "../ModelAnimations/AnimationWalk.h"
 #include "../ModelAnimations/AnimationDie.h"
+#include "../ModelAnimations/AnimationTumble.h"
 
 ModelRecipePlayer::ModelRecipePlayer()
 {
@@ -43,7 +44,9 @@ Ogre::SceneNode* ModelRecipePlayer::initNode(Ogre::SceneManager* sMgr)
 	node->setScale(Ogre::Vector3(0.001, 0.001, 0.001));
 	return node;
 }
-Ogre::AnimationState* ModelRecipePlayer::getBlock(Ogre::Entity* entity)
+BaseAnimation* ModelRecipePlayer::getTumble(Ogre::Entity* entity)
 {
-	return entity->getAnimationState("Block");
+	std::vector<AnimationState*> anims;
+	anims.push_back( entity->getAnimationState("Backflip") ) ;
+	return new AnimationTumble(anims);
 }

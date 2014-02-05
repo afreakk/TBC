@@ -11,7 +11,6 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos)
 , m_node(m_crRecipe->initNode(OgreCore::getSingletonPtr()->getSceneMgr()))
 , m_normalPosition(normalPos)
 {
-	init();
 }
 ModelHandler::~ModelHandler()
 {
@@ -24,7 +23,7 @@ void ModelHandler::init()
 	m_animations[ANIMATIONS::ATTACK]= unique_ptr<BaseAnimation>(m_crRecipe->getAttack(m_entity) );
 	m_animations[ANIMATIONS::WALK]	= unique_ptr<BaseAnimation>(m_crRecipe->getWalk(m_entity) );
 	m_animations[ANIMATIONS::DIE]	= unique_ptr<BaseAnimation>(m_crRecipe->getDie(m_entity) );
-	UnitCircleMovement::normalSetPosition(m_node, m_normalPosition);
+	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 }
 
 void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
@@ -32,8 +31,8 @@ void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& act
 	Real rVel = rInc*GlobalVariables::getSingleton().getSpeed();
 	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rVel)*30.0, m_animations);
 	m_normalPosition.r += rVel;
-	UnitCircleMovement::normalSetDirection(m_node, m_normalPosition, activeDirection);
-	UnitCircleMovement::normalSetPosition(m_node, m_normalPosition);
+	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
+	UnitCircleMovement::polarSetDirection(m_node, m_normalPosition, activeDirection);
 }
 //private
 void ModelHandler::fallAndDie(Real dt)
@@ -46,7 +45,7 @@ LERP_STATE ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Og
 	lerp(nextPosition, dtVel);
 	m_animations[ANIMATIONS::ATTACK]->addTime(dtVel*2.0, m_animations);
 	auto ADistance = m_node->getPosition().distance(nextPosition);
-	if (ADistance > 0.01)
+	if (ADistance > 0.1)
 		return LERP_STATE::LERP_ATTACK;
 	return LERP_STATE::LERP_WALK;
 
@@ -79,7 +78,7 @@ const PolarCoordinates& ModelHandler::getNormalPos()
 
 const Vector3 ModelHandler::getNormalVecPos() const
 {
-	return UnitCircleMovement::posFromR(m_normalPosition);
+	return UnitCircleMovement::VectorFromPolar(m_normalPosition);
 }
 
 Entity* ModelHandler::getEntity() const
@@ -92,5 +91,5 @@ void ModelHandler::setNormalPos(PolarCoordinates newPos)
 }
 void ModelHandler::updateNormalPos()
 {
-	vectorToNormal(m_node->getPosition(), m_normalPosition);
+	vectorToPolar(m_node->getPosition(), m_normalPosition);
 }

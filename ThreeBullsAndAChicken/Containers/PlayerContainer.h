@@ -27,6 +27,10 @@ public:
 	{
 		return m_handler.get();
 	}
+	void killPlayer()
+	{
+		m_handler->switchState(PLAYER_HANDLER_STATE::DEAD);
+	}
 private:
 	unique_ptr<Player> m_player;
 	unique_ptr<PlayerHandler> m_handler;

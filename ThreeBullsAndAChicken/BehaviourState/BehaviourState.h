@@ -7,6 +7,8 @@ enum class BEHAVOUR_STATE
 	NORMAL,
 	SELECTION,
 	LERP,
+	RANGED_ATTACK,
+	TUMBLE,
 	DEAD
 };
 class BehaviourState : public boost::noncopyable

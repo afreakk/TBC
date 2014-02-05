@@ -6,6 +6,6 @@ class BehaviourStateDead : public BehaviourState
 public:
 	BehaviourStateDead();
 	~BehaviourStateDead();
-	void update(ModelHandler&)override;
+	virtual void update(ModelHandler&)override;
 };
 

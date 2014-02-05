@@ -36,6 +36,18 @@
     <ClInclude Include="PlayerSelectionState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BehaviourStateAttackRanged.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantDeadState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateTumble.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BehaviourStateLERP.cpp">
@@ -56,5 +68,19 @@
     <ClCompile Include="PlayerSelectionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BehaviourStateAttackRanged.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantDeadState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourStateTumble.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BehaviourState.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

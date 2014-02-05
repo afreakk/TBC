@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MutantHandlerStateNormal.h"
 #include "../Stats/MutantGlobalStats.h"
-
+#include "../ModelBehaviour/ModelHandlerMutant.h"
 MutantHandlerStateNormal::MutantHandlerStateNormal(Mutant* mutant, SceneNode* playerNode)
 : HandlerState(MUTANT_HANDLER_STATE::NORMAL)
 , m_mutant(mutant)
@@ -20,5 +20,5 @@ MutantHandlerStateNormal::~MutantHandlerStateNormal()
 void MutantHandlerStateNormal::update()
 {
 	if (m_mutant->getModelHandler().getNode()->getPosition().distance(m_playerNode->getPosition()) < MutantGlobalStats::getSingleton().getAttackDistance())
-		m_state = MUTANT_HANDLER_STATE::LERP;
+		m_state = MUTANT_HANDLER_STATE::RANGED_ATTACK;
 }

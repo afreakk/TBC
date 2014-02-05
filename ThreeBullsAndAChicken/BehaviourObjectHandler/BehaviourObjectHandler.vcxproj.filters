@@ -27,9 +27,6 @@
     <ClInclude Include="MutantHandlerEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MutantHandlerStateLERP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MutantHandlerStateNormal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -57,15 +54,21 @@
     <ClInclude Include="PlayerHandlerStateSelectionLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MutantHandlerStateAttackRanged.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateDead.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateTumble.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MutantHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MutantHandlerStateLERP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MutantHandlerStateNormal.cpp">
@@ -90,6 +93,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerHandlerStateSelectionLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateAttackRanged.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateDead.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateTumble.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

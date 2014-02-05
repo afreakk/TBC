@@ -17,10 +17,10 @@ public:
 	LERP_STATE lerpAttack(const Ogre::Vector3&, const Ogre::Real&);
 	LERP_STATE lerpWalk(const Ogre::Vector3&, const Ogre::Real&);
 	void fallAndDie(Real dt);
+	virtual void init();
 protected:
 	void updateNormalPos();
 	void lerp(const Ogre::Vector3&, const Ogre::Real&);
-	virtual void init();
 
 	unique_ptr<ModelRecipe> m_crRecipe;
 	Entity*const m_entity;

@@ -81,28 +81,32 @@
     <ClInclude Include="MutantHandler.h" />
     <ClInclude Include="MutantHandlerEnums.h" />
     <ClInclude Include="MutantHandlerStateDead.h" />
-    <ClInclude Include="MutantHandlerStateLERP.h" />
+    <ClInclude Include="MutantHandlerStateAttackRanged.h" />
     <ClInclude Include="MutantHandlerStateNormal.h" />
     <ClInclude Include="PlayerHandler.h" />
     <ClInclude Include="PlayerHandlerEnums.h" />
+    <ClInclude Include="PlayerHandlerStateDead.h" />
     <ClInclude Include="PlayerHandlerStateLERP.h" />
     <ClInclude Include="PlayerHandlerStateNormal.h" />
     <ClInclude Include="PlayerHandlerStateSelection.h" />
     <ClInclude Include="PlayerHandlerStateSelectionHandler.h" />
     <ClInclude Include="PlayerHandlerStateSelectionLine.h" />
+    <ClInclude Include="PlayerHandlerStateTumble.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MutantHandler.cpp" />
     <ClCompile Include="MutantHandlerStateDead.cpp" />
-    <ClCompile Include="MutantHandlerStateLERP.cpp" />
+    <ClCompile Include="MutantHandlerStateAttackRanged.cpp" />
     <ClCompile Include="MutantHandlerStateNormal.cpp" />
     <ClCompile Include="PlayerHandler.cpp" />
+    <ClCompile Include="PlayerHandlerStateDead.cpp" />
     <ClCompile Include="PlayerHandlerStateLERP.cpp" />
     <ClCompile Include="PlayerHandlerStateNormal.cpp" />
     <ClCompile Include="PlayerHandlerStateSelection.cpp" />
     <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp" />
     <ClCompile Include="PlayerHandlerStateSelectionLine.cpp" />
+    <ClCompile Include="PlayerHandlerStateTumble.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

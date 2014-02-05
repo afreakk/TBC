@@ -10,6 +10,7 @@ ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos)
 : ModelHandler(new ModelRecipeMutant(), normalPos)
 , m_selectedTag(m_node)
 , m_bloodSplat(m_node)
+, m_flameThrower(m_node)
 , m_marked(false)
 , m_selected(false)
 , m_numberText(nullptr)
@@ -44,7 +45,11 @@ void ModelHandlerMutant::markSelected(bool selected)
 	if (m_selected)
 		m_selectedTag.select();
 }
-void ModelHandlerMutant::damage()
+void ModelHandlerMutant::damage(Vector3 direction)
 {
-	m_bloodSplat.activate(MutantGlobalStats::getSingleton().getScale()*GlobalVariables::getSingleton().getSpeed());
+	m_bloodSplat.activate(MutantGlobalStats::getSingleton().getScale()*GlobalVariables::getSingleton().getSpeed(),direction);
+}
+void ModelHandlerMutant::fire()
+{
+	m_flameThrower.activate(MutantGlobalStats::getSingleton().getScale()*GlobalVariables::getSingleton().getSpeed());
 }

@@ -11,7 +11,7 @@ public:
 	BaseAnimation* getWalk(Ogre::Entity*) override;
 	BaseAnimation* getAttack(Ogre::Entity*) override;
 	BaseAnimation* getDie(Ogre::Entity*) override;
-	Ogre::AnimationState* getBlock(Ogre::Entity*);
+	BaseAnimation* getTumble(Ogre::Entity*);
 private:
 };
 

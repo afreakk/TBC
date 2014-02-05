@@ -1,15 +1,15 @@
 #include "stdafx.h"
 #include "UnitCircleMovement.h"
 using namespace Ogre;
-Ogre::Vector3 UnitCircleMovement::posFromR(PolarCoordinates p)
+Ogre::Vector3 UnitCircleMovement::VectorFromPolar(PolarCoordinates p)
 {
 	return Ogre::Vector3(Ogre::Math::Sin(p.r)*p.d,p.h,Ogre::Math::Cos(p.r)*p.d);
 }
-void UnitCircleMovement::normalSetPosition(Ogre::SceneNode* node, PolarCoordinates p)
+void UnitCircleMovement::polarSetPosition(Ogre::SceneNode* node, PolarCoordinates p)
 {
-	node->setPosition(posFromR(p));
+	node->setPosition(VectorFromPolar(p));
 }
-void UnitCircleMovement::normalSetDirection(Ogre::SceneNode* node, PolarCoordinates p, NormalDirection direction)
+void UnitCircleMovement::polarSetDirection(Ogre::SceneNode* node, PolarCoordinates p, NormalDirection direction)
 {
 	switch (direction)
 	{
@@ -23,7 +23,7 @@ void UnitCircleMovement::normalSetDirection(Ogre::SceneNode* node, PolarCoordina
 		return;
 		break;
 	}
-	node->lookAt(posFromR(p),Ogre::Node::TransformSpace::TS_WORLD);
+	node->lookAt(VectorFromPolar(p),Ogre::Node::TransformSpace::TS_WORLD);
 }
 
 void keepWithinMax(Real* d)
@@ -48,8 +48,44 @@ bool isWithinRange(Real r1, Real r2, Real distance)
 		return true;
 	return false;
 }
-void vectorToNormal(const Vector3 vec, PolarCoordinates& norm)
+void vectorToPolar(const Vector3 vec, PolarCoordinates& norm)
 {
+	norm.h = vec.y;
 	norm.r = atan2(vec.x , vec.z);
 	norm.d = sqrt(vec.z*vec.z + vec.x*vec.x);
+}
+Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction)
+{
+	PolarCoordinates polar;
+	vectorToPolar(playerPos, polar);
+	switch (direction)
+	{
+	case TUMBLE_DIRECTION::DIRECTION_IN:
+		polar.d -= NORMAL_INCREMENT;
+		break;
+	case TUMBLE_DIRECTION::DIRECTION_OUT:
+		polar.d += NORMAL_INCREMENT;
+		break;
+	default:
+		assert(0);
+		break;
+	}
+	Real shortestDistance = 100.0;
+	int laneIndex = -1;
+	unsigned i = 0; 
+	for (const auto lane : NORMAL_LANES)
+	{
+		auto distance = abs(polar.d - lane);
+		cout << distance << endl;
+		if (distance < shortestDistance)
+		{
+			shortestDistance = distance;
+			laneIndex = i;
+		}
+		i++;
+	}
+	assert(laneIndex > -1);
+	polar.d = NORMAL_LANES[laneIndex];
+	cout << laneIndex << "distance: " << polar.d << endl;
+	return UnitCircleMovement::VectorFromPolar(polar);
 }

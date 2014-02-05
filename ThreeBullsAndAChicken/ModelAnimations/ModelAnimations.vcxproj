@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="AnimationAttack.h" />
     <ClInclude Include="AnimationDie.h" />
+    <ClInclude Include="AnimationTumble.h" />
     <ClInclude Include="AnimationWalk.h" />
     <ClInclude Include="BaseAnimation.h" />
     <ClInclude Include="stdafx.h" />

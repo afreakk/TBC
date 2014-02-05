@@ -5,6 +5,7 @@
 Mutant::Mutant(const PolarCoordinates pos) 
 : BehaviourObject(new ModelHandlerMutant(pos))
 {
+	m_model->init();
 }
 
 

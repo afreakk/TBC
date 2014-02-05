@@ -5,6 +5,7 @@
 #include "../Other/MovableText.h"
 #include "../UniversalGameObjects/SelectedTag.h"
 #include "../UniversalGameObjects/BloodSplat.h"
+#include "../UniversalGameObjects/MutantFlameThrower.h"
 
 class ModelHandlerMutant : public ModelHandler
 {
@@ -18,11 +19,13 @@ public:
 	{
 		return m_selected;
 	}
-	void damage();
+	void fire();
+	void damage(Vector3 direction);
 private:
-	unique_ptr<MovableText> m_numberText;
 	SelectedTag m_selectedTag;
 	BloodSplat m_bloodSplat;
+	MutantFlameThrower m_flameThrower;
 	bool m_selected;
 	bool m_marked;
+	unique_ptr<MovableText> m_numberText;
 };

@@ -76,23 +76,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BehaviourState.h" />
+    <ClInclude Include="BehaviourStateAttackRanged.h" />
     <ClInclude Include="BehaviourStateDead.h" />
     <ClInclude Include="BehaviourStateLERP.h" />
     <ClInclude Include="BehaviourStateNormal.h" />
     <ClInclude Include="BehaviourStateNormalTranslator.h" />
+    <ClInclude Include="BehaviourStateTumble.h" />
+    <ClInclude Include="MutantDeadState.h" />
     <ClInclude Include="PlayerSelectionState.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BehaviourStateAttackRanged.cpp" />
     <ClCompile Include="BehaviourStateDead.cpp" />
     <ClCompile Include="BehaviourStateLERP.cpp" />
     <ClCompile Include="BehaviourStateNormal.cpp" />
     <ClCompile Include="BehaviourStateNormalTranslator.cpp" />
+    <ClCompile Include="BehaviourStateTumble.cpp" />
+    <ClCompile Include="MutantDeadState.cpp" />
     <ClCompile Include="PlayerSelectionState.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BehaviourState.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
