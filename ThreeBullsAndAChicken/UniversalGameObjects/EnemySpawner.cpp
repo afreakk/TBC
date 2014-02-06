@@ -8,10 +8,12 @@ EnemySpawner::EnemySpawner(MutantContainer* mutantContainer, Player* player)
 , m_player(player)
 {
 }
-void EnemySpawner::injectStartingPositions(const std::vector<PolarCoordinates> mutantStartingPositions)
+void EnemySpawner::injectStartingPositions()
 {
-	for (const auto& startingPosition : mutantStartingPositions)
-		m_mutantStartingPositions.push_back(startingPosition);
+
+	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "Enemies");
+	for (unsigned i = 0; i < rootNode->findChild("r")->getValues().size(); i++)
+		m_mutantStartingPositions.push_back(polarFromStarting(rootNode->findChild("r")->getValueR(i), rootNode->findChild("lane")->getValueU()));
 }
 EnemySpawner::~EnemySpawner()
 {

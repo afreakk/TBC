@@ -20,11 +20,5 @@ void ModelHandlerPlayer::init()
 }
 bool ModelHandlerPlayer::tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
-	Real dtVel = dt*GlobalVariables::getSingleton().getSpeed();
-	lerp(nextPosition, dtVel);
-	m_animations[ANIMATIONS::TUMBLE]->addTime(dtVel, m_animations);
-	auto ADistance = m_node->getPosition().distance(nextPosition);
-	if (ADistance < 0.1)
-		return true;
-	return false;
+	return !lerp(nextPosition, dt, ANIMATIONS::TUMBLE, 1.0);
 }

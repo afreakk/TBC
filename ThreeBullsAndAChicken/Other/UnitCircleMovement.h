@@ -1,10 +1,50 @@
 #pragma once
 #include "stdafx.h"
-const unsigned NORMAL_LANES_COUNT = 3;
-const Real NORMAL_INCREMENT = 1.0;
-const Real NORMAL_FIRST_LANE = 5.0;
-const Real NORMAL_LANES[NORMAL_LANES_COUNT] = {NORMAL_FIRST_LANE, NORMAL_FIRST_LANE+(NORMAL_INCREMENT*1), NORMAL_FIRST_LANE+(NORMAL_INCREMENT*2) };
-const Real NORMAL_LANE_HEIGHT = 0.0;
+#include "ConfigScriptLoader.h"
+//todo this should be in UniversalGameObjects
+class Global
+{
+public:
+	Global()
+	{
+
+	}
+	void initLanes()
+	{
+		ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "globalLanes");
+		m_laneCount = rootNode->findChild("laneCount")->getValueU(0);
+		m_increment = rootNode->findChild("laneIncrement")->getValueR(0);
+		m_firstLane = rootNode->findChild("firstLane")->getValueR(0);
+		m_height = rootNode->findChild("laneHeight")->getValueR(0);
+		m_laneArray = new Real[m_laneCount];
+		for (unsigned i = 0; i < m_laneCount; i++)
+			m_laneArray[i] = m_firstLane + m_increment*i;
+	}
+	Real getLane(unsigned index)
+	{
+		return m_laneArray[index];
+	}
+	Real getIncrement()
+	{
+		return m_increment;
+	}
+	Real getHeight()
+	{
+		return m_height;
+	}
+	unsigned getLaneCount()
+	{
+		return m_laneCount;
+	}
+private:
+	unsigned m_laneCount;
+	Real m_increment;
+	Real m_firstLane;
+	Real* m_laneArray;
+	Real m_height;
+
+};
+extern Global g;
 
 enum class NormalDirection
 {
@@ -45,3 +85,7 @@ bool isWithinRange(Real, Real, Real);
 unsigned energyCostOf(PolarCoordinates, PolarCoordinates);
 void vectorToPolar(const Vector3 vec, PolarCoordinates&);
 Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction);
+inline PolarCoordinates polarFromStarting(Real r, unsigned laneIdx)
+{
+	return PolarCoordinates(r, g.getLane(laneIdx), g.getHeight());
+}

@@ -33,6 +33,9 @@
     <ClInclude Include="MutantFlameThrower.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MutantNumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MutantFlameThrower.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantNumber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

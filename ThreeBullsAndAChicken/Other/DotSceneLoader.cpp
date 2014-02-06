@@ -662,7 +662,7 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 	{
 		MeshPtr pMesh= MeshManager::getSingleton().load(meshFile, m_sGroupName);
 		pEntity = mSceneMgr->createEntity(name, meshFile);
-		pEntity->setCastShadows(true);
+		pEntity->setCastShadows(castShadows);
 		pParent->attachObject(pEntity);
 		if (!materialFile.empty())
 			pEntity->setMaterialName(materialFile);

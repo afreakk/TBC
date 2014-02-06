@@ -4,7 +4,7 @@
 class Player : public BehaviourObject
 {
 public:
-	Player();
+	Player(PolarCoordinates coordinate);
 	~Player();
 };
 

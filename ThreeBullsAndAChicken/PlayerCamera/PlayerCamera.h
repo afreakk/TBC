@@ -5,6 +5,7 @@
 #include "PlayerCameraState.h"
 #include "../Templates/MessageSubscriber.h"
 #include "../BehaviourObjectHandler/PlayerHandlerEnums.h"
+#include "../Camera/PlayerCameraVars.h"
 class PlayerCamera:public MessageSubscriber<PLAYER_HANDLER_STATE>
 {
 public:
@@ -17,6 +18,7 @@ private:
 
 	Player* m_player;
 	unique_ptr<PlayerCameraState> m_currentState;
+	unique_ptr<PlayerCameraVars> m_playerCameraVars;
 	
 
 };

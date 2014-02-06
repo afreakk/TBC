@@ -41,7 +41,6 @@ BaseAnimation* ModelRecipePlayer::getAttack(Ogre::Entity* entity)
 Ogre::SceneNode* ModelRecipePlayer::initNode(Ogre::SceneManager* sMgr)
 {
 	auto node = sMgr->getRootSceneNode()->createChildSceneNode("PlayerNode");
-	node->setScale(Ogre::Vector3(0.001, 0.001, 0.001));
 	return node;
 }
 BaseAnimation* ModelRecipePlayer::getTumble(Ogre::Entity* entity)

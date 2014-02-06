@@ -32,7 +32,6 @@ void PlayerHandlerStateNormal::keyPressed(const OIS::KeyEvent& e)
 	if (e.key == OIS::KeyCode::KC_SPACE)
 		m_spaceDown = true;
 
-	//tumbling direction or at all
 	if (e.key == OIS::KeyCode::KC_W)
 		m_tumble = TUMBLE_DIRECTION::DIRECTION_IN;
 	else if (e.key == OIS::KeyCode::KC_S)

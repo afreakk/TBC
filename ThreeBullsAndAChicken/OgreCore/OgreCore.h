@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "../Other/ConfigScriptLoader.h"
 class OgreCore : public Ogre::Singleton<OgreCore>
 {
 public:
@@ -11,6 +12,7 @@ public:
 	bool initSceneManager(); //fourth
 	bool initCamera(const Ogre::String cameraName); //fifth
 	bool initViewport();
+	bool initScript();
 	bool initResources();   //second
 	bool initOverlaySystem();
 	//gets
@@ -29,5 +31,6 @@ private:
 	Ogre::Viewport*     m_viewport;
 	Ogre::Vector2       m_resolution;
 	unique_ptr<Ogre::OverlaySystem>m_overlaySystem;
+	unique_ptr<ConfigScriptLoader>m_scriptLoader;
 
 };

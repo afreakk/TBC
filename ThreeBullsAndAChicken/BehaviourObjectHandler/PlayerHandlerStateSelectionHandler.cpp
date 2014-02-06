@@ -20,8 +20,8 @@ void PlayerHandlerStateSelectionHandler::updateSelected()
 	m_selectionLine.setNewTarget(m_selectedIndex);
 	ModelHandlerMutant& lastSelectedModelHandler = static_cast<ModelHandlerMutant&>(m_mutants[m_lastSelectedIndex]->getModelHandler());
 	if (m_lastSelectedIndex != m_selectedIndex)
-		static_cast<ModelHandlerMutant&>(m_mutants[m_lastSelectedIndex]->getModelHandler()).markSelected(false);
-	static_cast<ModelHandlerMutant&>(m_mutants[m_selectedIndex]->getModelHandler()).markSelected(true);
+		static_cast<ModelHandlerMutant&>(m_mutants[m_lastSelectedIndex]->getModelHandler()).setHovered(false);
+	static_cast<ModelHandlerMutant&>(m_mutants[m_selectedIndex]->getModelHandler()).setHovered(true);
 	m_lastSelectedIndex = m_selectedIndex;
 }
 void PlayerHandlerStateSelectionHandler::handleIndex(const OIS::KeyEvent& e)

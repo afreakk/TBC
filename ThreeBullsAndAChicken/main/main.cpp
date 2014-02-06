@@ -19,12 +19,13 @@ int main()
 		OgreCore::getSingletonPtr()->initCamera("MainCamera");
 		OgreCore::getSingletonPtr()->initViewport();
 		OgreCore::getSingletonPtr()->initOverlaySystem();
+		OgreCore::getSingletonPtr()->initScript();
 		OgreCore::getSingletonPtr()->initResources();
 
 		unique_ptr<OISCore> oisCore(new OISCore());
 		oisCore->init();
 
-
+		g.initLanes();
 		LevelManager levelMgr(new LevelOne());
 		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(&levelMgr));
 		Ogre::Root::getSingletonPtr()->startRendering();

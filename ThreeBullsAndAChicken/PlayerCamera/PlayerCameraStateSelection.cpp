@@ -21,7 +21,7 @@ void PlayerCameraStateSelection::update()
 	for (const auto& mutant : m_mutants)
 	{
 		ModelHandlerMutant& mutantModelHandler = static_cast<ModelHandlerMutant&>(mutant->getModelHandler());
-		if (mutantModelHandler.isSelected())
+		if (mutantModelHandler.isHovered())
 		{
 			m_lookAt = Math::lerp(m_lookAt, mutant->getModelHandler().getNode()->getPosition(), dt);
 		}

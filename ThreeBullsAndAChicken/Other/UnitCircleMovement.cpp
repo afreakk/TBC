@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UnitCircleMovement.h"
+Global g;
 using namespace Ogre;
 Ogre::Vector3 UnitCircleMovement::VectorFromPolar(PolarCoordinates p)
 {
@@ -61,31 +62,27 @@ Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction)
 	switch (direction)
 	{
 	case TUMBLE_DIRECTION::DIRECTION_IN:
-		polar.d -= NORMAL_INCREMENT;
+		polar.d -= g.getIncrement();
 		break;
 	case TUMBLE_DIRECTION::DIRECTION_OUT:
-		polar.d += NORMAL_INCREMENT;
+		polar.d += g.getIncrement();
 		break;
 	default:
 		assert(0);
 		break;
 	}
-	Real shortestDistance = 100.0;
+	Real shortestDistance = 100000.0;
 	int laneIndex = -1;
-	unsigned i = 0; 
-	for (const auto lane : NORMAL_LANES)
+	for (int i = 0; i < g.getLaneCount(); i++)
 	{
-		auto distance = abs(polar.d - lane);
-		cout << distance << endl;
+		auto distance = abs(polar.d - g.getLane(i));
 		if (distance < shortestDistance)
 		{
 			shortestDistance = distance;
 			laneIndex = i;
 		}
-		i++;
 	}
 	assert(laneIndex > -1);
-	polar.d = NORMAL_LANES[laneIndex];
-	cout << laneIndex << "distance: " << polar.d << endl;
+	polar.d = g.getLane(laneIndex);
 	return UnitCircleMovement::VectorFromPolar(polar);
 }

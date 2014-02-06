@@ -11,7 +11,7 @@ BloodSplat::BloodSplat(SceneNode* parentNode)
 , m_ran(false)
 {
 	m_node->attachObject(m_particleSystem);
-	m_node->setPosition(0, 75, 0);
+	m_node->setPosition(0.0, 100.0, 0.0);
 }
 
 
@@ -22,7 +22,7 @@ BloodSplat::~BloodSplat()
 void BloodSplat::activate(Real timeScale, Vector3 direction)
 {
 	auto collider = m_particleSystem->getTechnique(0)->getAffector("planecollider");
-	collider->position = Vector3(0, -75, 0);
+	collider->position = Vector3(0.0, -100.0, 0.0);
 	auto emitter = m_particleSystem->getTechnique(0)->getEmitter("bloodemitter");
 	emitter->direction = direction;
 	m_particleSystem->setScaleTime(timeScale);

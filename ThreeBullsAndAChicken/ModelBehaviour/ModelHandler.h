@@ -20,7 +20,7 @@ public:
 	virtual void init();
 protected:
 	void updateNormalPos();
-	void lerp(const Ogre::Vector3&, const Ogre::Real&);
+	bool lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt, ANIMATIONS animation, Real distance);
 
 	unique_ptr<ModelRecipe> m_crRecipe;
 	Entity*const m_entity;

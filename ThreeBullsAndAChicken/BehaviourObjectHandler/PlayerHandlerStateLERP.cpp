@@ -11,7 +11,7 @@ PlayerHandlerStateLERP::PlayerHandlerStateLERP(std::vector<unsigned> mutantList,
 , m_currentLerpState(nullptr)
 {
 	attackNextTarget();
-	GlobalVariables::getSingleton().setSpeed(1.0 / 20.0);
+	GlobalVariables::getSingleton().setSpeed(PlayerGlobalStats::getSingleton().getSlowMotionPower());
 }
 
 PlayerHandlerStateLERP::~PlayerHandlerStateLERP()

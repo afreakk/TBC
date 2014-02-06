@@ -11,45 +11,27 @@ ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos)
 , m_selectedTag(m_node)
 , m_bloodSplat(m_node)
 , m_flameThrower(m_node)
-, m_marked(false)
-, m_selected(false)
-, m_numberText(nullptr)
+, m_number(m_node)
+, m_hovered(false)
 {
-	markSelected(false);
+	setHovered(false);
 }
 ModelHandlerMutant::~ModelHandlerMutant()
 {
 	cout << "ModelHandlerMutant destrucotr" << endl;
 }
 
-void ModelHandlerMutant::markAs(int number)
-{
-	m_numberText.reset();
-	m_numberText = unique_ptr<MovableText> (  new MovableText("lol", boost::lexical_cast<string>(number),"StarWars",100.0f) ) ;
-	auto fontNode = m_node->createChildSceneNode();
-	fontNode->setPosition(m_node->getPosition() + Vector3(0, 275, 0));
-	fontNode->attachObject(m_numberText.get());
-	cout << fontNode->getPosition() << endl;
-	cout << m_node->getPosition() << endl;
-	m_marked = true;
-}
-
-void ModelHandlerMutant::unMarkNumber()
-{
-	if (m_numberText)
-		m_numberText->detachFromParent();
-}
-void ModelHandlerMutant::markSelected(bool selected)
-{
-	m_selected = selected;
-	if (m_selected)
-		m_selectedTag.select();
-}
 void ModelHandlerMutant::damage(Vector3 direction)
 {
-	m_bloodSplat.activate(MutantGlobalStats::getSingleton().getScale()*GlobalVariables::getSingleton().getSpeed(),direction);
+	m_bloodSplat.activate(GlobalVariables::getSingleton().getSpeed(),direction);
 }
 void ModelHandlerMutant::fire()
 {
-	m_flameThrower.activate(MutantGlobalStats::getSingleton().getScale()*GlobalVariables::getSingleton().getSpeed());
+	m_flameThrower.activate(GlobalVariables::getSingleton().getSpeed());
+}
+void ModelHandlerMutant::setHovered(bool selected)
+{
+	m_hovered = selected;
+	if (m_hovered)
+		m_selectedTag.select();
 }

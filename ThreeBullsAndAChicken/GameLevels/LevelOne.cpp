@@ -17,19 +17,7 @@ LevelOne::LevelOne()
 
 	///
 
-	int enemyCount = 8;
-	std::vector<PolarCoordinates> mutantStartingPositions;
-	for (int i = 0; i < enemyCount; i++)
-	{
-		mutantStartingPositions.push_back(PolarCoordinates());
-		mutantStartingPositions[i].r = floor(static_cast<float>(i)) * ((Math::PI/2.0) / floor(static_cast<float>(enemyCount)))+Math::PI/8.0;
-		mutantStartingPositions[i].h = 0.2;
-		if (i%2==0)
-			mutantStartingPositions[i].d = NORMAL_LANES[0];
-		else
-			mutantStartingPositions[i].d = NORMAL_LANES[2];
-	}
-	m_enemySpawner.injectStartingPositions(mutantStartingPositions);
+	m_enemySpawner.injectStartingPositions();
 
 	///
 

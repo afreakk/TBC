@@ -1,14 +1,19 @@
 #pragma once
 #include "../BehaviourObject/Player.h"
 #include "../BehaviourObjectHandler/PlayerHandler.h"
+#include "../Other/ConfigScriptLoader.h"
 class PlayerContainer : public Singleton<PlayerContainer>
 {
 public:
 	PlayerContainer()
-	: m_player(new Player())
-	, m_handler(new PlayerHandler(m_player.get()))
+	: m_player(nullptr)
+	, m_handler(nullptr)
 	{
-
+		ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "Player");
+		unsigned lane = rootNode->findChild("lane")->getValueU(0);
+		Real r = rootNode->findChild("r")->getValueR(0);
+		m_player = unique_ptr<Player>( new Player( polarFromStarting(r,lane) ) );
+		m_handler = unique_ptr<PlayerHandler>(new PlayerHandler(m_player.get()));
 	}
 	~PlayerContainer()
 	{

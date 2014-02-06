@@ -2,7 +2,14 @@
 #include "OgreCore.h"
 template<> OgreCore* Ogre::Singleton<OgreCore>::msSingleton = 0;
 
-OgreCore::OgreCore() :m_root(nullptr), m_window(nullptr), m_sceneMgr(nullptr), m_camera(nullptr), m_viewport(nullptr)
+OgreCore::OgreCore() 
+: m_root(nullptr)
+, m_window(nullptr)
+, m_sceneMgr(nullptr)
+, m_camera(nullptr)
+, m_viewport(nullptr)
+, m_overlaySystem(nullptr)
+, m_scriptLoader(nullptr)
 {
 }
 OgreCore::~OgreCore()
@@ -33,16 +40,19 @@ bool OgreCore::initRoot()
 	return true;
 }
 
+bool OgreCore::initScript()
+{
+	m_scriptLoader = unique_ptr<ConfigScriptLoader> ( new ConfigScriptLoader() ) ;
+	return true;
+}
 bool OgreCore::initResources()
 {
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/hmat", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/azz", "FileSystem", "General");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/city", "FileSystem", "CityDir");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/fonts", "FileSystem", "Fonts");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/cubemapsJS.zip", "Zip", "skybox");
 
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
-
 	return true;
 }
 

@@ -9,7 +9,7 @@ class EnemySpawner
 {
 public:
 	EnemySpawner(MutantContainer* mutantContainer, Player* player);
-	void injectStartingPositions( const std::vector<PolarCoordinates> mutantStartingPositions);
+	void injectStartingPositions();
 	~EnemySpawner();
 	void update();
 private:

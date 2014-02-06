@@ -2,8 +2,8 @@
 #include "Player.h"
 #include "../ModelBehaviour/ModelHandlerPlayer.h"
 
-Player::Player() 
-: BehaviourObject(new ModelHandlerPlayer( PolarCoordinates( 0.0, NORMAL_LANES[1], 0.2 )  ) )
+Player::Player(PolarCoordinates coordinate) 
+: BehaviourObject(new ModelHandlerPlayer( coordinate ) ) 
 {
 	m_model->init();
 }

@@ -4,7 +4,7 @@
 class BehaviourStateTumble: public BehaviourState
 {
 public:
-	BehaviourStateTumble(Vector3 tumbleToPos);
+	BehaviourStateTumble(Vector3 tumbleToPos, Real speed);
 	~BehaviourStateTumble();
 	virtual void update(ModelHandler&)override;
 	bool hasReachedEnd() const
@@ -13,6 +13,7 @@ public:
 	}
 private:
 	Vector3 m_tumbleToPos;
+	Real m_speed;
 	bool m_reachedEnd;
 };
 

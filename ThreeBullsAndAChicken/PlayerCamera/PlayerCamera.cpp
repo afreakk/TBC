@@ -4,7 +4,10 @@
 #include "PlayerCameraStateNormal.h"
 #include "PlayerCameraStateSelection.h"
 #include "PlayerCameraStateLERP.h"
-PlayerCamera::PlayerCamera(Player* player) :m_player(player), m_currentState{nullptr} 
+PlayerCamera::PlayerCamera(Player* player) 
+: m_player(player)
+, m_currentState{nullptr} 
+, m_playerCameraVars(new PlayerCameraVars())
 {
 }
 

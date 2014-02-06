@@ -3,13 +3,20 @@
 
 template<> MutantGlobalStats* Ogre::Singleton<MutantGlobalStats>::msSingleton = 0;
 MutantGlobalStats::MutantGlobalStats() 
-: m_walkSpeed(0.04)
-, m_attackDistance(0.5)
-, m_LERPSpeed(0.5)
-, m_scale(1.0)
+: m_walkSpeed(Real(0))
+, m_attackDistance(Real(0))
+, m_LERPSpeed(Real(0))
 {
+	parseScript();
 }
 
+void MutantGlobalStats::parseScript()
+{
+	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "EnemyStats");
+	m_walkSpeed = rootNode->findChild("walkSpeed")->getValueR(0);
+	m_attackDistance = rootNode->findChild("attackDistance")->getValueR(0);
+	m_LERPSpeed = rootNode->findChild("LERPSpeed")->getValueR(0);
+}
 
 MutantGlobalStats::~MutantGlobalStats()
 {
@@ -28,14 +35,4 @@ const Ogre::Real& MutantGlobalStats::getAttackDistance() const
 {
 	return m_attackDistance;
 }
-void MutantGlobalStats::scaleSpeed(Real newScale)
-{
-	m_LERPSpeed *= newScale;
-	m_walkSpeed *= newScale;
-	m_scale = newScale;
-}
 
-const Ogre::Real& MutantGlobalStats::getScale() const
-{
-	return m_scale;
-}

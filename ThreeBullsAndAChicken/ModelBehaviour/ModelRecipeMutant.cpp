@@ -50,6 +50,5 @@ BaseAnimation* ModelRecipeMutant::getAttack(Ogre::Entity* entity)
 Ogre::SceneNode* ModelRecipeMutant::initNode(Ogre::SceneManager* sMgr)
 {
 	auto node = sMgr->getRootSceneNode()->createChildSceneNode(m_nodeName);
-	node->setScale(Ogre::Vector3(0.001, 0.001, 0.001));
 	return node;
 }

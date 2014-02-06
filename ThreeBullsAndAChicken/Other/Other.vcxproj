@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ConfigScriptLoader.h" />
     <ClInclude Include="DotSceneLoader.h" />
     <ClInclude Include="MovableText.h" />
     <ClInclude Include="simpleUtils.h" />
@@ -83,6 +84,7 @@
     <ClInclude Include="UnitCircleMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConfigScriptLoader.cpp" />
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="MovableText.cpp" />
     <ClCompile Include="stdafx.cpp">

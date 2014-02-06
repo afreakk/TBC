@@ -18,7 +18,7 @@ PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 {
 	GlobalVariables::getSingleton().setSpeed(1.0);
 	for (auto idx:m_attackList)
-		static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[idx]->getModelHandler()).unMarkNumber();
+		static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[idx]->getModelHandler()).getNumer().unMarkNumber();
 }
 
 void PlayerHandlerStateSelection::update()
@@ -57,6 +57,6 @@ void PlayerHandlerStateSelection::pushBackSelected()
 			return;
 	}
 	m_attackList.push_back(m_selectionHandler.getSelected());
-	static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[m_attackList[m_attackList.size() - 1]]->getModelHandler()).markAs(m_attackList.size());
+	static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[m_attackList[m_attackList.size() - 1]]->getModelHandler()).getNumer().markAs(m_attackList.size());
 	m_selectionHandler.addLine();
 }

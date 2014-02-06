@@ -12,10 +12,15 @@ public:
 	const unsigned& message() override;
 	const Real& getLERPSpeed() const;
 	const Real& getWalkingSpeed() const;
+	const Real& getSlowMotionPower() const;
+	const Real& getTumbleSpeed() const;
 private:
+	void parseScript();
 	unsigned m_energy;
 	Real m_walkingSpeed;
 	Real m_LERPSpeed;
+	Real m_tumbleSpeed;
+	Real m_slowMotionPower;
 
 };
 

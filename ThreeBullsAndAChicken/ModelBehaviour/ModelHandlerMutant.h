@@ -2,30 +2,31 @@
 #include "stdafx.h"
 #include "../Other/UnitCircleMovement.h"
 #include "../ModelBehaviour/ModelHandler.h"
-#include "../Other/MovableText.h"
 #include "../UniversalGameObjects/SelectedTag.h"
 #include "../UniversalGameObjects/BloodSplat.h"
 #include "../UniversalGameObjects/MutantFlameThrower.h"
+#include "../UniversalGameObjects/MutantNumber.h"
 
 class ModelHandlerMutant : public ModelHandler
 {
 public:
 	ModelHandlerMutant(PolarCoordinates normalPos);
 	~ModelHandlerMutant();
-	void markAs(int number);
-	void unMarkNumber();
-	void markSelected(bool);
-	bool isSelected() const
+	void setHovered(bool);
+	bool isHovered() const
 	{
-		return m_selected;
+		return m_hovered;
 	}
 	void fire();
 	void damage(Vector3 direction);
+	MutantNumber& getNumer()
+	{
+		return m_number;
+	}
 private:
 	SelectedTag m_selectedTag;
 	BloodSplat m_bloodSplat;
 	MutantFlameThrower m_flameThrower;
-	bool m_selected;
-	bool m_marked;
-	unique_ptr<MovableText> m_numberText;
+	MutantNumber m_number;
+	bool m_hovered;
 };

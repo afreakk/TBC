@@ -46,7 +46,7 @@ public:
 	void sortByDistance(Vector3 playerPos)
 	{
 		std::vector<unsigned> indexes;
-		for (int i = 0; i < m_mutants.size(); i++)
+		for (unsigned i = 0; i < m_mutants.size(); i++)
 		{
 			auto distance = m_mutants[i]->getNode()->getPosition().distance(playerPos);
 			m_mutants[i]->distance = distance;

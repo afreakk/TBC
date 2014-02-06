@@ -41,30 +41,28 @@ void ModelHandler::fallAndDie(Real dt)
 }
 LERP_STATE ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
-	Real dtVel = dt*GlobalVariables::getSingleton().getSpeed();
-	lerp(nextPosition, dtVel);
-	m_animations[ANIMATIONS::ATTACK]->addTime(dtVel*2.0, m_animations);
-	auto ADistance = m_node->getPosition().distance(nextPosition);
-	if (ADistance > 0.1)
+	if(lerp(nextPosition, dt, ANIMATIONS::ATTACK,10.0))
 		return LERP_STATE::LERP_ATTACK;
 	return LERP_STATE::LERP_WALK;
 
 }
 LERP_STATE ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
-	Real dtVel = dt*GlobalVariables::getSingleton().getSpeed();
-	lerp(nextPosition, dtVel);
-	m_animations[ANIMATIONS::WALK]->addTime(dtVel*10.0, m_animations);
-	auto ADistance = m_node->getPosition().distance(nextPosition);
-	if (ADistance > 0.225)
+	if (lerp(nextPosition, dt, ANIMATIONS::WALK,30.0))
 		return LERP_STATE::LERP_WALK;
 	return LERP_STATE::LERP_ATTACK;
 }
-void ModelHandler::lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt, ANIMATIONS animation, Real minDistance)
 {
+	Real dtVel = dt*GlobalVariables::getSingleton().getSpeed();
+	m_animations[animation]->addTime(dtVel, m_animations);
 	m_node->lookAt(nextPosition,Ogre::Node::TransformSpace::TS_WORLD);
 	m_node->translate(Vector3(0.0, 0.0, -dt), Ogre::Node::TS_LOCAL);
 	updateNormalPos();
+	auto ADistance = m_node->getPosition().distance(nextPosition);
+	if (ADistance > minDistance)
+		return true;
+	return false;
 }
 
 Ogre::SceneNode* ModelHandler::getNode() const 
