@@ -8,7 +8,7 @@ public:
 	BehaviourObject(ModelHandler* modelHandler);
 	~BehaviourObject();
 	void setState(BehaviourState* newState);
-	const BEHAVOUR_STATE& message() override
+	const BEHAVOUR_STATE message() override
 	{
 		return  m_currentState->getState();
 	}

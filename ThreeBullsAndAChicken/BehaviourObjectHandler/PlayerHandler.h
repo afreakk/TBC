@@ -11,7 +11,7 @@ public:
 	bool keyPressed(const OIS::KeyEvent&) override;
 	bool keyReleased(const OIS::KeyEvent&) override;
 	void switchState(PLAYER_HANDLER_STATE newState) override;
-	const PLAYER_HANDLER_STATE& message() override
+	const PLAYER_HANDLER_STATE message() override
 	{
 		return  m_currentState->getState();
 	}

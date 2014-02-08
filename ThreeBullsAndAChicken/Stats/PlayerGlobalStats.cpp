@@ -47,7 +47,7 @@ void PlayerGlobalStats::modifyEnergy(const int modifier)
 	notifySubscribers();
 }
 
-const unsigned& PlayerGlobalStats::message() 
+const unsigned PlayerGlobalStats::message() 
 {
 	return m_energy;
 }

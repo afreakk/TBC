@@ -8,8 +8,8 @@
 class EnemySpawner 
 {
 public:
-	EnemySpawner(MutantContainer* mutantContainer, Player* player);
-	void injectStartingPositions();
+	EnemySpawner();
+	void init(MutantContainer* mutantContainer, Player* player);
 	~EnemySpawner();
 	void update();
 private:

@@ -1,15 +1,17 @@
 #include "stdafx.h"
 #include "EnemySpawner.h"
 
-EnemySpawner::EnemySpawner(MutantContainer* mutantContainer, Player* player) 
+EnemySpawner::EnemySpawner() 
 : m_spawnDistance(Ogre::Math::PI / 8.0)
 , m_attackDistance(0.5)
-, m_mutantContainer(mutantContainer)
-, m_player(player)
+, m_mutantContainer(nullptr)
+, m_player(nullptr)
 {
 }
-void EnemySpawner::injectStartingPositions()
+void EnemySpawner::init(MutantContainer* mutantContainer, Player* player)
 {
+	m_mutantContainer = mutantContainer;
+	m_player = player;
 
 	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "Enemies");
 	for (unsigned i = 0; i < rootNode->findChild("r")->getValues().size(); i++)

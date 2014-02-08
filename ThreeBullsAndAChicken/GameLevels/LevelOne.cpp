@@ -10,9 +10,10 @@ LevelOne::LevelOne()
 , m_particleRefContainer(new ParticleReferenceContainer())
 , m_playerContainer(new PlayerContainer())
 , m_mutantContainer(new MutantContainer())
-, m_enemySpawner(m_mutantContainer.get(),m_playerContainer->getPlayer())
-, m_playerCamera(m_playerContainer->getPlayer())
 {
+	m_enemySpawner.init(m_mutantContainer.get(), m_playerContainer->getPlayer());
+	m_playerCamera.init(m_playerContainer->getPlayer());
+
 	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
 	m_dotSceneLoader.parseDotScene("cityblock.scene", "SceneOne", sMgr);
 //	auto ent = sMgr->createEntity("cityblockBox009.mesh");
@@ -20,7 +21,6 @@ LevelOne::LevelOne()
 
 	///
 
-	m_enemySpawner.injectStartingPositions();
 
 	///
 

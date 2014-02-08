@@ -9,7 +9,7 @@ public:
 	unsigned getEnergy() const;
 	void setEnergy(const unsigned);
 	void modifyEnergy(const int);
-	const unsigned& message() override;
+	const unsigned message() override;
 	const Real& getLERPSpeed() const;
 	const Real& getWalkingSpeed() const;
 	const Real& getSlowMotionPower() const;

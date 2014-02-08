@@ -19,7 +19,7 @@ public:
 		for (auto& subscriber : m_subscribers)
 			subscriber.second->notify(message());
 	}
-	virtual const T& message() = 0;
+	virtual const T message() = 0;
 protected:
 	std::map< string, MessageSubscriber<T>* > m_subscribers;
 };

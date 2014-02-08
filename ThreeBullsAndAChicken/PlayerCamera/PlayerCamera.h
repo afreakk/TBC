@@ -9,7 +9,8 @@
 class PlayerCamera:public MessageSubscriber<PLAYER_HANDLER_STATE>
 {
 public:
-	PlayerCamera(Player* player);
+	PlayerCamera();
+	void init(Player* player);
 	~PlayerCamera();
 	void update();
 	void notify(PLAYER_HANDLER_STATE) override;
