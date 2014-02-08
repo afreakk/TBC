@@ -1,21 +1,14 @@
 #include "stdafx.h"
 #include "MutantDeadState.h"
 #include "../GameLevels/MainUpdate.h"
-#include "../ModelBehaviour/ModelHandlerMutant.h"
 
-MutantDeadState::MutantDeadState(Vector3 killedDirection)
+MutantDeadState::MutantDeadState(Vector3 killedDirection, ModelHandlerMutant& mutantModelHandler)
 : BehaviourStateDead()
-, m_killerDirection(killedDirection)
-{
-}
-
-
-void MutantDeadState::update(ModelHandler& modelHandler)
 {
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
-	static_cast<ModelHandlerMutant&>(modelHandler).damage(m_killerDirection.normalisedCopy());
-	BehaviourStateDead::update(modelHandler);
+	mutantModelHandler.damage(killedDirection.normalisedCopy());
 }
+
 MutantDeadState::~MutantDeadState()
 {
 }

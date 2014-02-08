@@ -361,7 +361,7 @@ void DotSceneLoader::processLight(TiXmlElement *XMLNode, SceneNode *pParent)
 	else if (sValue == "radPoint")
 		pLight->setType(Light::LT_POINT);
 	pLight->setVisible(getAttribBool(XMLNode, "visible", true));
-	pLight->setCastShadows(getAttribBool(XMLNode, "castShadows", true));
+	pLight->setCastShadows(getAttribBool(XMLNode, "castShadows"));
 	TiXmlElement *pElement;
 	// Process position (?)
 	pElement = XMLNode->FirstChildElement("position");
@@ -641,7 +641,7 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 	String meshFile = getAttrib(XMLNode, "meshFile");
 	String materialFile = getAttrib(XMLNode, "materialFile");
 	bool isStatic = getAttribBool(XMLNode, "static", false);;
-	bool castShadows = getAttribBool(XMLNode, "castShadows", true);
+	bool castShadows = getAttribBool(XMLNode, "castShadows");
 	// TEMP: Maintain a list of static and dynamic objects
 	if (isStatic)
 		staticObjects.push_back(name);

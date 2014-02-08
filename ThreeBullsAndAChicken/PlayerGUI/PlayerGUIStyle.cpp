@@ -36,7 +36,7 @@ void PlayerGUIStyle::setupEnergyGUI()
 	m_energyBar->setMetricsMode(Ogre::GMM_PIXELS);
 	m_energyBar->setPosition(xPos,yPos );
 	m_energyBar->setDimensions(m_energyMaxWidth, m_energyHeight);
-	m_energyBar->setMaterialName("def");
+//	m_energyBar->setMaterialName("def");
 
 
 	m_energyText = static_cast<TextAreaOverlayElement*>(overlayManager.createOverlayElement("TextArea", "TextAreaName"));

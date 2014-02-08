@@ -47,10 +47,25 @@ bool OgreCore::initScript()
 }
 bool OgreCore::initResources()
 {
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/azz", "FileSystem", "General");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/city", "FileSystem", "CityDir");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gameScripts", "FileSystem", "GameScripts");
+
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/particleEffects/particleScripts", "FileSystem", "ParticleEffects");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/particleEffects/textures", "FileSystem", "ParticleEffects");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/particleEffects/materialScripts", "FileSystem", "ParticleEffects");
+
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/models/meshes", "FileSystem", "Models");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/models/skeletons", "FileSystem", "Models");
+
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/soloMaterials/materialScripts", "FileSystem", "SoloMaterials");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/soloMaterials/textures", "FileSystem", "SoloMaterials");
+
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/mesh", "FileSystem", "SceneOne");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/material", "FileSystem", "SceneOne");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/bitmap", "FileSystem", "SceneOne");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/program", "FileSystem", "SceneOne");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery", "FileSystem", "SceneOne");
+
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/fonts", "FileSystem", "Fonts");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/cubemapsJS.zip", "Zip", "skybox");
 
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 	return true;
@@ -70,7 +85,7 @@ bool OgreCore::initWindow(const int xResolution, const int yResolution, const Og
 
 bool OgreCore::initSceneManager()
 {
-	m_sceneMgr = m_root->createSceneManager(Ogre::ST_EXTERIOR_FAR);
+	m_sceneMgr = m_root->createSceneManager(Ogre::ST_GENERIC);
 	return true;
 }
 

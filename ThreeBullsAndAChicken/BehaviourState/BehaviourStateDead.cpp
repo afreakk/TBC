@@ -14,5 +14,5 @@ BehaviourStateDead::~BehaviourStateDead()
 
 void BehaviourStateDead::update(ModelHandler& modelHandler)
 {
-	modelHandler.fallAndDie(MainUpdate::getSingleton().getDeltaTime());
+	modelHandler.fallAndDie();
 }

@@ -27,14 +27,12 @@ void BehaviourStateLERP::update(ModelHandler& modelHandler)
 }
 bool BehaviourStateLERP::attackEnemy(ModelHandler& modelHandler)
 {
-	auto dt = MainUpdate::getSingleton().getDeltaTime();
-	auto speed = dt*m_speed;
 	const Ogre::Vector3& tPos = m_target->getPosition();
 	if (m_lerpState == LERP_STATE::LERP_WALK)
-		m_lerpState = modelHandler.lerpWalk(tPos, speed);
+		m_lerpState = modelHandler.lerpWalk(tPos, m_speed);
 	else if (m_lerpState == LERP_STATE::LERP_ATTACK)
 	{
-		m_lerpState = modelHandler.lerpAttack(tPos, speed);
+		m_lerpState = modelHandler.lerpAttack(tPos, m_speed);
 		if (m_lerpState == LERP_STATE::LERP_WALK)
 			return true;
 	}

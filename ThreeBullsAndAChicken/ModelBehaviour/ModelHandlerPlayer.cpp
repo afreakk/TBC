@@ -20,5 +20,5 @@ void ModelHandlerPlayer::init()
 }
 bool ModelHandlerPlayer::tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
-	return !lerp(nextPosition, dt, ANIMATIONS::TUMBLE, 1.0);
+	return !lerp(nextPosition, dt, ANIMATIONS::TUMBLE, m_LERPPrecision, GlobalVariables::getSingleton().getLERPAnimTumblekRatio());
 }

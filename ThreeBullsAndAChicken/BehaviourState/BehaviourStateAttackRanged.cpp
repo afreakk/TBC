@@ -20,14 +20,15 @@ BehaviourStateAttackRanged::~BehaviourStateAttackRanged()
 
 void BehaviourStateAttackRanged::update(ModelHandler& modelHandler)
 {
+	Real shootDelay = m_shootDelay*(1.0/GlobalVariables::getSingleton().getSpeed());
 	m_localTime += MainUpdate::getSingleton().getDeltaTime();
-	if (m_localTime > m_shootDelay)
+	if (m_localTime > shootDelay)
 	{
 		m_localTime = 0.0;
 		m_hasAimed = false;
 		static_cast<ModelHandlerMutant&>(modelHandler).fire();
 	}
-	else if (m_localTime > m_shootDelay / 2.0&& !m_hasAimed)
+	else if (m_localTime > shootDelay / 2.0&& !m_hasAimed)
 	{
 		if (hasHit())
 			PlayerContainer::getSingleton().killPlayer();

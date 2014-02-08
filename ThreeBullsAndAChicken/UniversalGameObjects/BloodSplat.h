@@ -1,17 +1,17 @@
 #pragma once
 #include "stdafx.h"
-#include "ParticleUniverseSystemManager.h"
-class BloodSplat
+#include "ParticleEffect.h"
+#include "../ModelBehaviour/ModelHandler.h"
+class BloodSplat : public ParticleEffect
 {
 public:
-	BloodSplat(SceneNode* parentNode);
+	BloodSplat(SceneNode* parentNode, ModelHandler* model);
 	~BloodSplat();
-	void activate(Real timeScale, Vector3 direction);
+	void setDirection(Vector3 direction);
+	void update() override;
 private:
 	static int m_bloodSplatCount;
-	const int m_id;
-	ParticleUniverse::ParticleSystem* m_particleSystem;
-	SceneNode* m_node;
-	bool m_ran;
+	ModelHandler* m_model;
+	ParticleUniverse::ParticleEmitter* m_emitter;
 };
 

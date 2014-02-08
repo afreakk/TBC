@@ -1,5 +1,7 @@
 #pragma once
 #include "stdafx.h"
+#include "../Containers/ParticleReferenceContainer.h"
+#include "../Containers/PlayerContainer.h"
 #include "../Levels/ILevel.h"
 #include "../BehaviourObject/Player.h"
 #include "../Environment/LvlOneEnvironment.h"
@@ -10,7 +12,6 @@
 #include "../Other/DotSceneLoader.h"
 #include "../Stats/PlayerGlobalStats.h"
 #include "../Stats/MutantGlobalStats.h"
-#include "../Containers/PlayerContainer.h"
 #include "../Stats/GlobalVariables.h"
 class LevelOne : public ILevel
 {
@@ -22,6 +23,7 @@ private:
 	unique_ptr<GlobalVariables> m_globalVars;
 	unique_ptr<PlayerGlobalStats> m_playerStats;
 	unique_ptr<MutantGlobalStats> m_mutantGlobalStats;
+	unique_ptr<ParticleReferenceContainer> m_particleRefContainer;
 	unique_ptr<PlayerContainer> m_playerContainer;
 	unique_ptr<MutantContainer> m_mutantContainer;
 	EnemySpawner m_enemySpawner;

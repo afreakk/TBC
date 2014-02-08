@@ -9,7 +9,7 @@ using namespace Ogre;
 ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos)
 : ModelHandler(new ModelRecipeMutant(), normalPos)
 , m_selectedTag(m_node)
-, m_bloodSplat(m_node)
+, m_bloodSplat(m_node, this)
 , m_flameThrower(m_node)
 , m_number(m_node)
 , m_hovered(false)
@@ -23,11 +23,12 @@ ModelHandlerMutant::~ModelHandlerMutant()
 
 void ModelHandlerMutant::damage(Vector3 direction)
 {
-	m_bloodSplat.activate(GlobalVariables::getSingleton().getSpeed(),direction);
+	m_bloodSplat.setDirection(direction);
+	m_bloodSplat.activate();
 }
 void ModelHandlerMutant::fire()
 {
-	m_flameThrower.activate(GlobalVariables::getSingleton().getSpeed());
+	m_flameThrower.activate();
 }
 void ModelHandlerMutant::setHovered(bool selected)
 {
