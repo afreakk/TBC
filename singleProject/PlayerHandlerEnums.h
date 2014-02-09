@@ -1,0 +1,11 @@
+#pragma once
+enum class PLAYER_HANDLER_STATE
+{
+	NORMAL,
+	SELECTION,
+	LERP,
+	DEAD,
+	TUMBLE,
+	UNDEFINED
+};
+

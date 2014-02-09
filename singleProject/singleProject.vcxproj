@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseAnimation.cpp" />
+    <ClCompile Include="BehaviourObject.cpp" />
+    <ClCompile Include="BehaviourStateAttackRanged.cpp" />
+    <ClCompile Include="BehaviourStateDead.cpp" />
+    <ClCompile Include="BehaviourStateLERP.cpp" />
+    <ClCompile Include="BehaviourStateNormal.cpp" />
+    <ClCompile Include="BehaviourStateNormalTranslator.cpp" />
+    <ClCompile Include="BehaviourStateTumble.cpp" />
+    <ClCompile Include="BloodSplat.cpp" />
+    <ClCompile Include="ConfigScriptLoader.cpp" />
+    <ClCompile Include="DotSceneLoader.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
+    <ClCompile Include="LaneSettings.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="LevelMenu.cpp" />
+    <ClCompile Include="LevelOne.cpp" />
+    <ClCompile Include="LightHandler.cpp" />
+    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="LvlOneEnvironment.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainUpdate.cpp" />
+    <ClCompile Include="ModelHandler.cpp" />
+    <ClCompile Include="ModelHandlerMutant.cpp" />
+    <ClCompile Include="ModelHandlerPlayer.cpp" />
+    <ClCompile Include="ModelRecipeMutant.cpp" />
+    <ClCompile Include="ModelRecipePlayer.cpp" />
+    <ClCompile Include="MovableText.cpp" />
+    <ClCompile Include="Mutant.cpp" />
+    <ClCompile Include="MutantDeadState.cpp" />
+    <ClCompile Include="MutantFlameThrower.cpp" />
+    <ClCompile Include="MutantGlobalStats.cpp" />
+    <ClCompile Include="MutantHandler.cpp" />
+    <ClCompile Include="MutantHandlerStateAttackRanged.cpp" />
+    <ClCompile Include="MutantHandlerStateDead.cpp" />
+    <ClCompile Include="MutantHandlerStateNormal.cpp" />
+    <ClCompile Include="MutantNumber.cpp" />
+    <ClCompile Include="OgreCore.cpp" />
+    <ClCompile Include="OISCore.cpp" />
+    <ClCompile Include="ParticleReferenceContainer.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerCamera.cpp" />
+    <ClCompile Include="PlayerCameraStateLERP.cpp" />
+    <ClCompile Include="PlayerCameraStateNormal.cpp" />
+    <ClCompile Include="PlayerCameraStateSelection.cpp" />
+    <ClCompile Include="PlayerCameraVars.cpp" />
+    <ClCompile Include="PlayerContainer.cpp" />
+    <ClCompile Include="PlayerGlobalStats.cpp" />
+    <ClCompile Include="PlayerGUI.cpp" />
+    <ClCompile Include="PlayerGUIStyle.cpp" />
+    <ClCompile Include="PlayerHandler.cpp" />
+    <ClCompile Include="PlayerHandlerStateDead.cpp" />
+    <ClCompile Include="PlayerHandlerStateLERP.cpp" />
+    <ClCompile Include="PlayerHandlerStateNormal.cpp" />
+    <ClCompile Include="PlayerHandlerStateSelection.cpp" />
+    <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp" />
+    <ClCompile Include="PlayerHandlerStateSelectionLine.cpp" />
+    <ClCompile Include="PlayerHandlerStateTumble.cpp" />
+    <ClCompile Include="PlayerSelectionState.cpp" />
+    <ClCompile Include="PolarCoordinates.cpp" />
+    <ClCompile Include="SelectedTag.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="tinyxml.cpp" />
+    <ClCompile Include="tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxmlparser.cpp" />
+    <ClCompile Include="UnitCircleMovement.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AnimationAttack.h" />
+    <ClInclude Include="AnimationDie.h" />
+    <ClInclude Include="AnimationTumble.h" />
+    <ClInclude Include="AnimationWalk.h" />
+    <ClInclude Include="BaseAnimation.h" />
+    <ClInclude Include="BehaviourObject.h" />
+    <ClInclude Include="BehaviourState.h" />
+    <ClInclude Include="BehaviourStateAttackRanged.h" />
+    <ClInclude Include="BehaviourStateDead.h" />
+    <ClInclude Include="BehaviourStateLERP.h" />
+    <ClInclude Include="BehaviourStateNormal.h" />
+    <ClInclude Include="BehaviourStateNormalTranslator.h" />
+    <ClInclude Include="BehaviourStateTumble.h" />
+    <ClInclude Include="BloodSplat.h" />
+    <ClInclude Include="CameraBase.h" />
+    <ClInclude Include="ConfigScriptLoader.h" />
+    <ClInclude Include="Distancer.h" />
+    <ClInclude Include="DotSceneLoader.h" />
+    <ClInclude Include="EnemySpawner.h" />
+    <ClInclude Include="ENUMLERPState.h" />
+    <ClInclude Include="ENUMNormalDirection.h" />
+    <ClInclude Include="ENUMTumbleDirection.h" />
+    <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="HandlerState.h" />
+    <ClInclude Include="ILevel.h" />
+    <ClInclude Include="LaneSettings.h" />
+    <ClInclude Include="LevelListing.h" />
+    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="LevelMenu.h" />
+    <ClInclude Include="LevelOne.h" />
+    <ClInclude Include="LightHandler.h" />
+    <ClInclude Include="Line.h" />
+    <ClInclude Include="LvlOneEnvironment.h" />
+    <ClInclude Include="MainUpdate.h" />
+    <ClInclude Include="Messager.h" />
+    <ClInclude Include="MessageSubscriber.h" />
+    <ClInclude Include="ModelHandler.h" />
+    <ClInclude Include="ModelHandlerMutant.h" />
+    <ClInclude Include="ModelHandlerPlayer.h" />
+    <ClInclude Include="ModelRecipe.h" />
+    <ClInclude Include="ModelRecipeMutant.h" />
+    <ClInclude Include="ModelRecipePlayer.h" />
+    <ClInclude Include="MovableText.h" />
+    <ClInclude Include="Mutant.h" />
+    <ClInclude Include="MutantContainer.h" />
+    <ClInclude Include="MutantDeadState.h" />
+    <ClInclude Include="MutantFlameThrower.h" />
+    <ClInclude Include="MutantGlobalStats.h" />
+    <ClInclude Include="MutantHandler.h" />
+    <ClInclude Include="MutantHandlerEnums.h" />
+    <ClInclude Include="MutantHandlerStateAttackRanged.h" />
+    <ClInclude Include="MutantHandlerStateDead.h" />
+    <ClInclude Include="MutantHandlerStateNormal.h" />
+    <ClInclude Include="MutantNumber.h" />
+    <ClInclude Include="OgreCore.h" />
+    <ClInclude Include="OISCore.h" />
+    <ClInclude Include="ParticleEffect.h" />
+    <ClInclude Include="ParticleReferenceContainer.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerCamera.h" />
+    <ClInclude Include="PlayerCameraState.h" />
+    <ClInclude Include="PlayerCameraStateLERP.h" />
+    <ClInclude Include="PlayerCameraStateNormal.h" />
+    <ClInclude Include="PlayerCameraStateSelection.h" />
+    <ClInclude Include="PlayerCameraVars.h" />
+    <ClInclude Include="PlayerContainer.h" />
+    <ClInclude Include="PlayerGlobalStats.h" />
+    <ClInclude Include="PlayerGUI.h" />
+    <ClInclude Include="PlayerGUIStyle.h" />
+    <ClInclude Include="PlayerHandler.h" />
+    <ClInclude Include="PlayerHandlerEnums.h" />
+    <ClInclude Include="PlayerHandlerStateDead.h" />
+    <ClInclude Include="PlayerHandlerStateLERP.h" />
+    <ClInclude Include="PlayerHandlerStateNormal.h" />
+    <ClInclude Include="PlayerHandlerStateSelection.h" />
+    <ClInclude Include="PlayerHandlerStateSelectionHandler.h" />
+    <ClInclude Include="PlayerHandlerStateSelectionLine.h" />
+    <ClInclude Include="PlayerHandlerStateTumble.h" />
+    <ClInclude Include="PlayerSelectionState.h" />
+    <ClInclude Include="PolarCoordinates.h" />
+    <ClInclude Include="SelectedTag.h" />
+    <ClInclude Include="simpleUtils.h" />
+    <ClInclude Include="StateHandler.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="tinyxml.h" />
+    <ClInclude Include="UnitCircleMovement.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2248A4F3-A880-41EA-9E97-E72F6B905311}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>singleProject</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\GAME\Bin\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\GAME\Bin\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE\Overlay;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0;C:\Users\afreakk\Desktop\particleuniverse-master\sdk\include\ParticleUniverse</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm209 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>C:\source_ogre_actual\install\lib\debug\OgreMain_d.lib;C:\Libs\boostOgreLib\debug\libboost_thread-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_date_time-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_system-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_chrono-vc120-mt-gd-1_55.lib;C:\source_ogre_actual\install\lib\debug\OgreRTShaderSystem_d.lib;C:\source_ogre_actual\install\lib\debug\OgreTerrain_d.lib;C:\source_ogre_actual\install\lib\debug\OgrePaging_d.lib;C:\source_ogre_actual\install\lib\debug\OgreVolume_d.lib;C:\source_ogre_actual\install\lib\debug\OgreOverlay_d.lib;C:\source_ogre_actual\install\lib\debug\OIS_d.lib;C:\Users\afreakk\Desktop\particleuniverse-master\lib\Debug\ParticleUniverse_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/Zm209 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE\Overlay;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0;C:\Users\afreakk\Desktop\particleuniverse-master\sdk\include\ParticleUniverse</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>C:\Libs\boostOgreLib\release\libboost_thread-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\release\libboost_date_time-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\release\libboost_system-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\release\libboost_chrono-vc120-mt-1_55.lib;C:\source_ogre_actual\install\lib\release\OgreMain.lib;C:\source_ogre_actual\install\lib\release\OgreRTShaderSystem.lib;C:\source_ogre_actual\install\lib\release\OgreTerrain.lib;C:\source_ogre_actual\install\lib\release\OgrePaging.lib;C:\source_ogre_actual\install\lib\release\OgreVolume.lib;C:\source_ogre_actual\install\lib\release\OgreOverlay.lib;C:\source_ogre_actual\install\lib\release\OIS.lib;C:\Program Files (x86)\Particle Universe\Particle Universe Plugin\VCBuild\lib\Release\ParticleUniverse.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

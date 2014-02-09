@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{7a01c769-5997-491b-802f-761e4b7b4843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourState">
+      <UniqueIdentifier>{60c0d744-fbf3-4140-b91f-83f50afdd52d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{837aa147-7a7c-483b-9809-780bffb86e22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourStateHandler">
+      <UniqueIdentifier>{68c605fe-7cc8-4a6f-988b-61eb4a089b82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{f341b8ba-2fa7-44a7-93ab-f7a4d5d4a8fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Container">
+      <UniqueIdentifier>{ee085196-ea59-4e79-8cd8-83d886a99778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{a5c28d8e-f318-42a1-8c9c-87af8b2e257a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rules">
+      <UniqueIdentifier>{5f7029ee-237c-4b89-96ad-c1b8a4381f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourObject">
+      <UniqueIdentifier>{7b10ab55-f4af-4a8f-ba1c-82e7f7e513d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{ede93cd9-53ec-4b96-941a-2d5d0d8003dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment">
+      <UniqueIdentifier>{c1250337-e10d-47f5-8aef-d5a94ca24860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stats">
+      <UniqueIdentifier>{e898abc3-f608-44ab-b507-01bee0ec2159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{8503d40a-1f47-4f80-9f80-f3c563202748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TBCSpecific">
+      <UniqueIdentifier>{dd2c8537-2ecf-4da4-8c4d-2414d2159951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Props">
+      <UniqueIdentifier>{6834396a-7aa4-4053-ae5a-717cc3bf3dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Template">
+      <UniqueIdentifier>{d01bd3a7-574f-4a81-8671-edba551e8b2f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OgreCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="OISCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourStateTumble.cpp">
+      <Filter>BehaviourState</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourStateAttackRanged.cpp">
+      <Filter>BehaviourState</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourStateDead.cpp">
+      <Filter>BehaviourState</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourStateLERP.cpp">
+      <Filter>BehaviourState</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourStateNormal.cpp">
+      <Filter>BehaviourState</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourStateNormalTranslator.cpp">
+      <Filter>BehaviourState</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelHandler.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelHandlerMutant.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelHandlerPlayer.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelRecipeMutant.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelRecipePlayer.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateTumble.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandler.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateDead.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateLERP.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateNormal.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSelection.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSelectionLine.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandler.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateAttackRanged.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateDead.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateNormal.cpp">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCameraVars.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCamera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCameraStateLERP.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCameraStateNormal.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCameraStateSelection.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseAnimation.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerContainer.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleReferenceContainer.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="BloodSplat.cpp">
+      <Filter>Props</Filter>
+    </ClCompile>
+    <ClCompile Include="MovableText.cpp">
+      <Filter>Props</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantFlameThrower.cpp">
+      <Filter>Props</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantDeadState.cpp">
+      <Filter>BehaviourState</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigScriptLoader.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="DotSceneLoader.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="LaneSettings.cpp">
+      <Filter>Rules</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourObject.cpp">
+      <Filter>BehaviourObject</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelOne.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelMenu.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="LvlOneEnvironment.cpp">
+      <Filter>Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="LightHandler.cpp">
+      <Filter>Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Mutant.cpp">
+      <Filter>BehaviourObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantGlobalStats.cpp">
+      <Filter>Stats</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGlobalStats.cpp">
+      <Filter>Stats</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitCircleMovement.cpp">
+      <Filter>Rules</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxmlparser.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxmlerror.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectedTag.cpp">
+      <Filter>Props</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSelectionState.cpp">
+      <Filter>BehaviourState</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantNumber.cpp">
+      <Filter>Props</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGUIStyle.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGUI.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="PolarCoordinates.cpp">
+      <Filter>TBCSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>Props</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>BehaviourObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
+      <Filter>Rules</Filter>
+    </ClCompile>
+    <ClCompile Include="MainUpdate.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OgreCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="OISCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourState.h">
+      <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateAttackRanged.h">
+      <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateDead.h">
+      <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateLERP.h">
+      <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateNormal.h">
+      <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateNormalTranslator.h">
+      <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateTumble.h">
+      <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRecipePlayer.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelHandler.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelHandlerMutant.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelHandlerPlayer.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRecipe.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRecipeMutant.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandler.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerEnums.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateDead.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateLERP.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateNormal.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSelection.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSelectionHandler.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSelectionLine.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateTumble.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="StateHandler.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandler.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerEnums.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerStateAttackRanged.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerStateDead.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerStateNormal.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="HandlerState.h">
+      <Filter>BehaviourStateHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCameraVars.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCamera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCameraState.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCameraStateLERP.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCameraStateNormal.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCameraStateSelection.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraBase.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseAnimation.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationWalk.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationTumble.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationDie.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationAttack.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantContainer.h">
+      <Filter>Container</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleReferenceContainer.h">
+      <Filter>Container</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerContainer.h">
+      <Filter>Container</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantDeadState.h">
+      <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodSplat.h">
+      <Filter>Props</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelOne.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelMenu.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelListing.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ILevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantGlobalStats.h">
+      <Filter>Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGlobalStats.h">
+      <Filter>Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitCircleMovement.h">
+      <Filter>Rules</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="simpleUtils.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectedTag.h">
+      <Filter>Props</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSelectionState.h">
+      <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGUIStyle.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PolarCoordinates.h">
+      <Filter>TBCSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffect.h">
+      <Filter>Props</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>Props</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantNumber.h">
+      <Filter>Props</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantFlameThrower.h">
+      <Filter>Props</Filter>
+    </ClInclude>
+    <ClInclude Include="MovableText.h">
+      <Filter>Props</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageSubscriber.h">
+      <Filter>Template</Filter>
+    </ClInclude>
+    <ClInclude Include="Messager.h">
+      <Filter>Template</Filter>
+    </ClInclude>
+    <ClInclude Include="LvlOneEnvironment.h">
+      <Filter>Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="LightHandler.h">
+      <Filter>Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="LaneSettings.h">
+      <Filter>Rules</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalVariables.h">
+      <Filter>Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="ENUMLERPState.h">
+      <Filter>TBCSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="ENUMNormalDirection.h">
+      <Filter>TBCSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="ENUMTumbleDirection.h">
+      <Filter>TBCSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigScriptLoader.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Distancer.h">
+      <Filter>Template</Filter>
+    </ClInclude>
+    <ClInclude Include="DotSceneLoader.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourObject.h">
+      <Filter>BehaviourObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Mutant.h">
+      <Filter>BehaviourObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>BehaviourObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>Rules</Filter>
+    </ClInclude>
+    <ClInclude Include="MainUpdate.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
