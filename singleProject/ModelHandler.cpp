@@ -112,9 +112,9 @@ void ModelHandler::updateNormalPos()
 }
 const Vector3 ModelHandler::getBonePos() const
 {
-	return (*(m_entity->getSkeleton()->getBoneIterator().begin() + 10))->_getDerivedPosition();
+	return (*(m_entity->getSkeleton()->getBoneIterator().begin() + 5))->_getDerivedPosition();
 }
 const Vector3 ModelHandler::getBoneOrientation() const
 {
-	return (*(m_entity->getSkeleton()->getBoneIterator().begin() + 10))->_getDerivedOrientation().yAxis();
+	return (*(m_entity->getSkeleton()->getBoneIterator().begin() + 5))->_getDerivedOrientation().yAxis();
 }

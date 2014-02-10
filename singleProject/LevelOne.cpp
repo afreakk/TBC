@@ -15,7 +15,7 @@ LevelOne::LevelOne()
 	m_playerCamera.init(m_playerContainer->getPlayer());
 
 	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
-	m_dotSceneLoader.parseDotScene("cityblock.scene", "SceneOne", sMgr);
+	m_dotSceneLoader.parseDotScene("citycylinder.scene", "SceneOne", sMgr);
 //	auto ent = sMgr->createEntity("cityblockBox009.mesh");
 //	sMgr->getRootSceneNode()->createChildSceneNode()->attachObject(ent);
 
@@ -38,11 +38,11 @@ LevelOne::~LevelOne()
 Real avgFps = 0.0;
 bool LevelOne::update()
 {
-	if (avgFps != OgreCore::getSingleton().getWindow()->getAverageFPS())
+	/*if (avgFps != OgreCore::getSingleton().getWindow()->getAverageFPS())
 	{
 		avgFps = OgreCore::getSingleton().getWindow()->getAverageFPS();
 		cout << OgreCore::getSingleton().getWindow()->getAverageFPS() << endl;
-	}
+	}*/
 	m_particleRefContainer->update();
 	m_playerContainer->update();
 	m_mutantContainer->update();

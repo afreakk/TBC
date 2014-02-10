@@ -14,7 +14,10 @@ ModelRecipePlayer::~ModelRecipePlayer()
 }
 Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
 {
-	return sMgr->createEntity("PlayerEntity", "ninja.mesh");
+    Ogre::Entity* ent = sMgr->createEntity("PlayerEntity", "ninja.mesh");
+	ent->setQueryFlags(QueryMasks::PlayerMask);
+	ent->setUpdateBoundingBoxFromSkeleton(true);
+	return ent;
 }
 
 BaseAnimation* ModelRecipePlayer::getDie(Ogre::Entity* entity)

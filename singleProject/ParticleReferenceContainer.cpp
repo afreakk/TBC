@@ -19,15 +19,19 @@ void ParticleReferenceContainer::addParticle(ParticleEffect * prtEffect)
 }
 void ParticleReferenceContainer::removeParticle(ParticleEffect* prtEffect)
 {
+	std::vector<ParticleEffect*>::iterator deleteIterator = m_prtEffects.end();
     for (auto p = m_prtEffects.begin(); p != m_prtEffects.end(); ++p)
     {
         if (*p == prtEffect)
         {
-            m_prtEffects.erase(p);
-            return;
+			deleteIterator = p;
+			break;
         }
     }
-    assert(0);
+	if (deleteIterator != m_prtEffects.end())
+		m_prtEffects.erase(deleteIterator);
+	else
+        assert(0);
 }
 void ParticleReferenceContainer::update()
 {

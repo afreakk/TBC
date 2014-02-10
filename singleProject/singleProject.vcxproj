@@ -32,6 +32,7 @@
     <ClCompile Include="LvlOneEnvironment.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainUpdate.cpp" />
+    <ClCompile Include="ManualLine.cpp" />
     <ClCompile Include="ModelHandler.cpp" />
     <ClCompile Include="ModelHandlerMutant.cpp" />
     <ClCompile Include="ModelHandlerPlayer.cpp" />
@@ -40,7 +41,6 @@
     <ClCompile Include="MovableText.cpp" />
     <ClCompile Include="Mutant.cpp" />
     <ClCompile Include="MutantDeadState.cpp" />
-    <ClCompile Include="MutantFlameThrower.cpp" />
     <ClCompile Include="MutantGlobalStats.cpp" />
     <ClCompile Include="MutantHandler.cpp" />
     <ClCompile Include="MutantHandlerStateAttackRanged.cpp" />
@@ -48,7 +48,9 @@
     <ClCompile Include="MutantHandlerStateNormal.cpp" />
     <ClCompile Include="MutantNumber.cpp" />
     <ClCompile Include="OgreCore.cpp" />
+    <ClCompile Include="TBCRay.cpp" />
     <ClCompile Include="OISCore.cpp" />
+    <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="ParticleReferenceContainer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
@@ -79,6 +81,8 @@
     <ClCompile Include="tinyxmlerror.cpp" />
     <ClCompile Include="tinyxmlparser.cpp" />
     <ClCompile Include="UnitCircleMovement.cpp" />
+    <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponTypes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationAttack.h" />
@@ -115,6 +119,7 @@
     <ClInclude Include="Line.h" />
     <ClInclude Include="LvlOneEnvironment.h" />
     <ClInclude Include="MainUpdate.h" />
+    <ClInclude Include="ManualLine.h" />
     <ClInclude Include="Messager.h" />
     <ClInclude Include="MessageSubscriber.h" />
     <ClInclude Include="ModelHandler.h" />
@@ -127,13 +132,14 @@
     <ClInclude Include="Mutant.h" />
     <ClInclude Include="MutantContainer.h" />
     <ClInclude Include="MutantDeadState.h" />
-    <ClInclude Include="MutantFlameThrower.h" />
     <ClInclude Include="MutantGlobalStats.h" />
     <ClInclude Include="MutantHandler.h" />
     <ClInclude Include="MutantHandlerEnums.h" />
     <ClInclude Include="MutantHandlerStateAttackRanged.h" />
     <ClInclude Include="MutantHandlerStateDead.h" />
     <ClInclude Include="MutantHandlerStateNormal.h" />
+    <ClInclude Include="TBCRay.h" />
+    <ClInclude Include="WeaponTypes.h" />
     <ClInclude Include="MutantNumber.h" />
     <ClInclude Include="OgreCore.h" />
     <ClInclude Include="OISCore.h" />
@@ -167,6 +173,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tinyxml.h" />
     <ClInclude Include="UnitCircleMovement.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2248A4F3-A880-41EA-9E97-E72F6B905311}</ProjectGuid>

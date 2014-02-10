@@ -1,16 +1,15 @@
 #pragma once
-#include "boost/noncopyable.hpp"
+#include "ManualLine.h"
 class Line 
 {
 public:
-	Line(Node* start, Node* end);
+	Line(Node* start, Node* end, string materialName);
 	void newNode(Node* end);
 	void update();
 	~Line();
 private:
-	Ogre::ManualObject* myManualObject;
-	Ogre::MaterialPtr myManualObjectMaterial;
 	Node* m_start;
 	Node* m_end;
+	ManualLine m_line;
 };
 

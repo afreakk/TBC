@@ -1,5 +1,11 @@
 #pragma once
 #include "BaseAnimation.h"
+enum QueryMasks
+{
+    PlayerMask = 1<<0,
+    World = 2<<0,
+    None = 3<<0
+};
 class ModelRecipe
 {
 public:

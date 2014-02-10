@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "MutantGlobalStats.h"
 #include "ConfigScriptLoader.h"
+#include "OgreCore.h"
 
 template<> MutantGlobalStats* Ogre::Singleton<MutantGlobalStats>::msSingleton = 0;
 MutantGlobalStats::MutantGlobalStats() 
 : m_walkSpeed(Real(0))
 , m_attackDistance(Real(0))
 , m_LERPSpeed(Real(0))
+, m_rangedCooldown(Real(0))
 {
 	parseScript();
 }
@@ -17,6 +19,7 @@ void MutantGlobalStats::parseScript()
 	m_walkSpeed = rootNode->findChild("walkSpeed")->getValueR(0);
 	m_attackDistance = rootNode->findChild("attackDistance")->getValueR(0);
 	m_LERPSpeed = rootNode->findChild("LERPSpeed")->getValueR(0);
+	m_rangedCooldown = rootNode->findChild("rangedCooldown")->getValueR(0);
 }
 
 MutantGlobalStats::~MutantGlobalStats()
@@ -36,4 +39,7 @@ const Ogre::Real& MutantGlobalStats::getAttackDistance() const
 {
 	return m_attackDistance;
 }
-
+const Ogre::Real& MutantGlobalStats::getRangedCooldown() const
+{
+	return m_rangedCooldown;
+}

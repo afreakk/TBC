@@ -2,7 +2,6 @@
 #include "BehaviourState.h"
 #include "OgreVector3.h"
 #include "OgreQuaternion.h"
-using namespace Ogre;
 class BehaviourStateAttackRanged : public BehaviourState
 {
 public:
@@ -14,11 +13,10 @@ private:
 	Quaternion m_delayedDirectionToPlayer;
 	Quaternion m_originalDirection;
 	Real m_lerp;
-	const Real m_shootDelay;
+	const Real& m_shootDelay;
 	Real m_localTime;
 	bool m_hasAimed;
 
-	bool hasHit();
 	void aim(ModelHandler& modelHandler);
 
 };

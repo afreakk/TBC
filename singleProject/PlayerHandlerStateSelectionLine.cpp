@@ -9,7 +9,7 @@ PlayerHandlerStateSelectionLine::PlayerHandlerStateSelectionLine()
 : m_index(0)
 , m_currentNode(PlayerContainer::getSingleton().getPlayer()->getNode())
 {
-	m_lines.emplace_back(new Line(m_currentNode, m_currentNode));
+	m_lines.emplace_back(new Line(m_currentNode, m_currentNode, "Green"));
 }
 
 void PlayerHandlerStateSelectionLine::setNewTarget(unsigned index)
@@ -20,7 +20,7 @@ void PlayerHandlerStateSelectionLine::setNewTarget(unsigned index)
 
 void PlayerHandlerStateSelectionLine::addEnemy()
 {
-	m_lines.emplace_back(new Line(m_currentNode, m_currentNode));
+	m_lines.emplace_back(new Line(m_currentNode, m_currentNode, "Green"));
 	m_index++;
 }
 void PlayerHandlerStateSelectionLine::update()

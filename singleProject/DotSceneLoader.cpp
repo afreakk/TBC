@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "DotSceneLoader.h"
 #include "tinyxml.h"
+#include "ModelRecipe.h"
 using namespace std;
 using namespace Ogre;
 void DotSceneLoader::parseDotScene(const String &SceneName, const String &groupName, SceneManager *yourSceneMgr, SceneNode *pAttachNode, const String &sPrependNode)
@@ -638,6 +639,7 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 	// Process attributes
 	String name = getAttrib(XMLNode, "name");
 	String id = getAttrib(XMLNode, "id");
+
 	String meshFile = getAttrib(XMLNode, "meshFile");
 	String materialFile = getAttrib(XMLNode, "materialFile");
 	bool isStatic = getAttribBool(XMLNode, "static", false);;
@@ -663,6 +665,10 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 		MeshPtr pMesh= MeshManager::getSingleton().load(meshFile, m_sGroupName);
 		pEntity = mSceneMgr->createEntity(name, meshFile);
 		pEntity->setCastShadows(castShadows);
+		if (id == "1")
+			pEntity->setQueryFlags(QueryMasks::None);
+		else
+			pEntity->setQueryFlags(QueryMasks::World);
 		pParent->attachObject(pEntity);
 		if (!materialFile.empty())
 			pEntity->setMaterialName(materialFile);

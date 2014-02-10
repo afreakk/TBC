@@ -1,6 +1,10 @@
 #pragma once
 #include "ParticleEffect.h"
-#include "ModelHandler.h"
+namespace ParticleUniverse
+{
+	class ParticleEmitter;
+}
+class ModelHandler;
 class BloodSplat : public ParticleEffect
 {
 public:

@@ -2,8 +2,8 @@
 #include "Mutant.h"
 #include "ModelHandlerMutant.h"
 
-Mutant::Mutant(const PolarCoordinates pos) 
-: BehaviourObject(new ModelHandlerMutant(pos))
+Mutant::Mutant(const PolarCoordinates pos, WeaponType weaponType) 
+: BehaviourObject(new ModelHandlerMutant(pos, weaponType))
 {
 	m_model->init();
 }

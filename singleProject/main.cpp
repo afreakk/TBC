@@ -8,6 +8,7 @@
 #include "OgreCore.h"
 #include "OISCore.h"
 #include "LaneSettings.h"
+#include "TBCRay.h"
 
 int main()
 {
@@ -22,12 +23,14 @@ int main()
 		OgreCore::getSingletonPtr()->initOverlaySystem();
 		OgreCore::getSingletonPtr()->initScript();
 		OgreCore::getSingletonPtr()->initResources();
+		OgreCore::getSingletonPtr()->getSceneMgr()->showBoundingBoxes(true);
 
 		unique_ptr<OISCore> oisCore(new OISCore());
 		oisCore->init();
 
 		unique_ptr<LaneSettings> laneSettings = unique_ptr<LaneSettings>(new LaneSettings() );
 		laneSettings->initLanes();
+		unique_ptr<TBCRay> raycasting = unique_ptr<TBCRay>(new TBCRay(OgreCore::getSingletonPtr()->getSceneMgr()));
 
 		LevelManager levelMgr(new LevelOne());
 		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(&levelMgr));

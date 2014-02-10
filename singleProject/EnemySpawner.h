@@ -3,7 +3,11 @@
 #include "Player.h"
 #include "MutantHandler.h"
 #include "MutantContainer.h"
-
+struct MutantStartingInfo
+{
+	PolarCoordinates polar;
+	WeaponType weaponType;
+};
 class EnemySpawner 
 {
 public:
@@ -17,7 +21,7 @@ private:
 	MutantContainer* m_mutantContainer;
 	Player* m_player;
 	
-	std::vector<PolarCoordinates> m_mutantStartingPositions;
+	std::vector<MutantStartingInfo> m_mutantStartingPositions;
 
 	void instantiateNewEnemies();
 

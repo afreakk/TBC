@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{7a01c769-5997-491b-802f-761e4b7b4843}</UniqueIdentifier>
     </Filter>
@@ -61,6 +57,24 @@
     <Filter Include="Template">
       <UniqueIdentifier>{d01bd3a7-574f-4a81-8671-edba551e8b2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Props\Virtuals">
+      <UniqueIdentifier>{d19e6839-5796-476c-9e4b-4f0a19286a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Props\concrete">
+      <UniqueIdentifier>{2d900581-2619-4cd3-9588-3c7869e584c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Animations">
+      <UniqueIdentifier>{97c7617d-87c3-41ce-832f-077755f67fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Behaviour">
+      <UniqueIdentifier>{bdd94c90-ffa9-4391-b099-6f29f4f66014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\modelRecipe">
+      <UniqueIdentifier>{75a78e88-c7be-4b1e-a77c-ba2ccfba6e96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Props\Weapon">
+      <UniqueIdentifier>{570e45fa-87d0-4ab0-bebf-29dce0c47894}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,21 +106,6 @@
     </ClCompile>
     <ClCompile Include="BehaviourStateNormalTranslator.cpp">
       <Filter>BehaviourState</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelHandler.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelHandlerMutant.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelHandlerPlayer.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelRecipeMutant.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelRecipePlayer.cpp">
-      <Filter>Model</Filter>
     </ClCompile>
     <ClCompile Include="PlayerHandlerStateTumble.cpp">
       <Filter>BehaviourStateHandler</Filter>
@@ -159,22 +158,13 @@
     <ClCompile Include="PlayerCameraStateSelection.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="BaseAnimation.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerContainer.cpp">
       <Filter>Container</Filter>
     </ClCompile>
     <ClCompile Include="ParticleReferenceContainer.cpp">
       <Filter>Container</Filter>
     </ClCompile>
-    <ClCompile Include="BloodSplat.cpp">
-      <Filter>Props</Filter>
-    </ClCompile>
     <ClCompile Include="MovableText.cpp">
-      <Filter>Props</Filter>
-    </ClCompile>
-    <ClCompile Include="MutantFlameThrower.cpp">
       <Filter>Props</Filter>
     </ClCompile>
     <ClCompile Include="MutantDeadState.cpp">
@@ -228,14 +218,8 @@
     <ClCompile Include="tinyxml.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
-    <ClCompile Include="SelectedTag.cpp">
-      <Filter>Props</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerSelectionState.cpp">
       <Filter>BehaviourState</Filter>
-    </ClCompile>
-    <ClCompile Include="MutantNumber.cpp">
-      <Filter>Props</Filter>
     </ClCompile>
     <ClCompile Include="PlayerGUIStyle.cpp">
       <Filter>GUI</Filter>
@@ -246,9 +230,6 @@
     <ClCompile Include="PolarCoordinates.cpp">
       <Filter>TBCSpecific</Filter>
     </ClCompile>
-    <ClCompile Include="Line.cpp">
-      <Filter>Props</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>BehaviourObject</Filter>
     </ClCompile>
@@ -257,6 +238,51 @@
     </ClCompile>
     <ClCompile Include="MainUpdate.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEffect.cpp">
+      <Filter>Props\Virtuals</Filter>
+    </ClCompile>
+    <ClCompile Include="BloodSplat.cpp">
+      <Filter>Props\concrete</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>Props\concrete</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantNumber.cpp">
+      <Filter>Props\concrete</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectedTag.cpp">
+      <Filter>Props\concrete</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseAnimation.cpp">
+      <Filter>Model\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelHandler.cpp">
+      <Filter>Model\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelHandlerMutant.cpp">
+      <Filter>Model\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelHandlerPlayer.cpp">
+      <Filter>Model\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelRecipeMutant.cpp">
+      <Filter>Model\modelRecipe</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelRecipePlayer.cpp">
+      <Filter>Model\modelRecipe</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Props\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponTypes.cpp">
+      <Filter>Props\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="TBCRay.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ManualLine.cpp">
+      <Filter>Props\Virtuals</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,24 +315,6 @@
     </ClInclude>
     <ClInclude Include="BehaviourStateTumble.h">
       <Filter>BehaviourState</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelRecipePlayer.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelHandler.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelHandlerMutant.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelHandlerPlayer.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelRecipe.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelRecipeMutant.h">
-      <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="PlayerHandler.h">
       <Filter>BehaviourStateHandler</Filter>
@@ -377,21 +385,6 @@
     <ClInclude Include="CameraBase.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="BaseAnimation.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationWalk.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationTumble.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationDie.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationAttack.h">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="MutantContainer.h">
       <Filter>Container</Filter>
     </ClInclude>
@@ -403,9 +396,6 @@
     </ClInclude>
     <ClInclude Include="MutantDeadState.h">
       <Filter>BehaviourState</Filter>
-    </ClInclude>
-    <ClInclude Include="BloodSplat.h">
-      <Filter>Props</Filter>
     </ClInclude>
     <ClInclude Include="LevelOne.h">
       <Filter>Level</Filter>
@@ -437,9 +427,6 @@
     <ClInclude Include="simpleUtils.h">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="SelectedTag.h">
-      <Filter>Props</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerSelectionState.h">
       <Filter>BehaviourState</Filter>
     </ClInclude>
@@ -451,18 +438,6 @@
     </ClInclude>
     <ClInclude Include="PolarCoordinates.h">
       <Filter>TBCSpecific</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleEffect.h">
-      <Filter>Props</Filter>
-    </ClInclude>
-    <ClInclude Include="Line.h">
-      <Filter>Props</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantNumber.h">
-      <Filter>Props</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantFlameThrower.h">
-      <Filter>Props</Filter>
     </ClInclude>
     <ClInclude Include="MovableText.h">
       <Filter>Props</Filter>
@@ -517,6 +492,66 @@
     </ClInclude>
     <ClInclude Include="MainUpdate.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffect.h">
+      <Filter>Props\Virtuals</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodSplat.h">
+      <Filter>Props\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>Props\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantNumber.h">
+      <Filter>Props\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectedTag.h">
+      <Filter>Props\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseAnimation.h">
+      <Filter>Model\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationAttack.h">
+      <Filter>Model\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationDie.h">
+      <Filter>Model\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationTumble.h">
+      <Filter>Model\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationWalk.h">
+      <Filter>Model\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelHandler.h">
+      <Filter>Model\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelHandlerMutant.h">
+      <Filter>Model\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelHandlerPlayer.h">
+      <Filter>Model\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRecipePlayer.h">
+      <Filter>Model\modelRecipe</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRecipe.h">
+      <Filter>Model\modelRecipe</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRecipeMutant.h">
+      <Filter>Model\modelRecipe</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Props\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponTypes.h">
+      <Filter>Props\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="TBCRay.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="ManualLine.h">
+      <Filter>Props\Virtuals</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

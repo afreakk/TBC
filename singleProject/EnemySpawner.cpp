@@ -16,7 +16,11 @@ void EnemySpawner::init(MutantContainer* mutantContainer, Player* player)
 
 	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "Enemies");
 	for (unsigned i = 0; i < rootNode->findChild("r")->getValues().size(); i++)
-		m_mutantStartingPositions.push_back(polarFromStarting(rootNode->findChild("r")->getValueR(i), rootNode->findChild("lane")->getValueU(i) ));
+	{
+		m_mutantStartingPositions.push_back(MutantStartingInfo());
+		m_mutantStartingPositions[i].polar = polarFromStarting(rootNode->findChild("r")->getValueR(i), rootNode->findChild("lane")->getValueU(i) );
+		m_mutantStartingPositions[i].weaponType = WeaponBase::weaponTypeFromString(rootNode->findChild("weaponType")->getValue(i));
+	}
 }
 EnemySpawner::~EnemySpawner()
 {
@@ -30,11 +34,11 @@ void EnemySpawner::update()
 }
 void EnemySpawner::instantiateNewEnemies()
 {
-	for (std::vector<PolarCoordinates>::iterator posIter = begin(m_mutantStartingPositions); posIter != end(m_mutantStartingPositions); ++posIter)
+	for (std::vector<MutantStartingInfo>::iterator posIter = begin(m_mutantStartingPositions); posIter != end(m_mutantStartingPositions); ++posIter)
 	{
-		if (isWithinRange(m_player->getNormalPosition().r, (*posIter).r, m_spawnDistance))
+		if (isWithinRange(m_player->getNormalPosition().r, (*posIter).polar.r, m_spawnDistance))
 		{
-			Mutant* mutant = new Mutant(*posIter);
+			Mutant* mutant = new Mutant((*posIter).polar,(*posIter).weaponType );
 			MutantHandler* mutantHandler = new MutantHandler(mutant, m_player);
 			m_mutantContainer->addMutant(mutantHandler, mutant);
 			cout << "spawning new enemy" << endl;

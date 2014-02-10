@@ -2,26 +2,12 @@
 #include "Line.h"
 
 #include "OgreCore.h"
-const Vector3 LINEHEIGHT = Vector3(0.f,0.01f,0.f);
-Line::Line(Node* start, Node* end)
+const Vector3 LINEHEIGHT = Vector3(0.f,10.1f,0.f);
+Line::Line(Node* start, Node* end, string materialName)
 : m_start(start)
 , m_end(end)
+, m_line(m_start->getPosition()+LINEHEIGHT, m_end->getPosition()+LINEHEIGHT, materialName)
 {
-	auto mSceneMgr = OgreCore::getSingleton().getSceneMgr();
-	myManualObject = mSceneMgr->createManualObject();
-
-	myManualObjectMaterial = Ogre::MaterialManager::getSingleton().create("manual1Material", "General");
-	myManualObjectMaterial->setReceiveShadows(true);
-	myManualObjectMaterial->getTechnique(0)->setLightingEnabled(true);
-	myManualObjectMaterial->getTechnique(0)->getPass(0)->setDiffuse(1, 0, 0, 0.1);
-
-
-	myManualObject->begin("manual1Material", Ogre::RenderOperation::OT_LINE_LIST);
-	myManualObject->position(m_start->getPosition()+LINEHEIGHT);
-	myManualObject->position(m_end->getPosition()+LINEHEIGHT);
-	myManualObject->end();
-
-	OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->attachObject(myManualObject);
 }
 
 void Line::newNode(Node* end)
@@ -31,12 +17,8 @@ void Line::newNode(Node* end)
 
 void Line::update()
 {
-	myManualObject->beginUpdate(0);
-	myManualObject->position(m_start->getPosition() + LINEHEIGHT);
-	myManualObject->position(m_end->getPosition() + LINEHEIGHT);
-	myManualObject->end();
+	m_line.update(m_start->getPosition()+LINEHEIGHT, m_end->getPosition()+LINEHEIGHT);
 }
 Line::~Line()
 {
-	myManualObject->detachFromParent();
 }

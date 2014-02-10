@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "BloodSplat.h"
 #include "OgreCore.h"
-#include "ParticleEmitters/ParticleUniverseLineEmitter.h"
+#include "ModelHandler.h"
+#include "ParticleUniverseSystem.h"
 int BloodSplat::m_bloodSplatCount = 0;
 BloodSplat::BloodSplat(SceneNode* parentNode, ModelHandler* model)
 : ParticleEffect(parentNode, ++m_bloodSplatCount, "bloodSpray", "hhStrike", OgreCore::getSingleton().getSceneMgr())

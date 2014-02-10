@@ -21,6 +21,7 @@ ModelRecipeMutant::~ModelRecipeMutant()
 Ogre::Entity* ModelRecipeMutant::initMesh(Ogre::SceneManager* sMgr)
 {
 	auto ent = sMgr->createEntity(m_entityName, "ninja.mesh");
+	ent->setUpdateBoundingBoxFromSkeleton(true);
 	return ent;
 }
 

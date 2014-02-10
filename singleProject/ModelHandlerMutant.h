@@ -1,15 +1,13 @@
 #pragma once
-#include "UnitCircleMovement.h"
 #include "ModelHandler.h"
 #include "SelectedTag.h"
 #include "BloodSplat.h"
-#include "MutantFlameThrower.h"
 #include "MutantNumber.h"
-
+#include "Weapon.h"
 class ModelHandlerMutant : public ModelHandler
 {
 public:
-	ModelHandlerMutant(PolarCoordinates normalPos);
+	ModelHandlerMutant(PolarCoordinates normalPos,  WeaponType weaponType);
 	~ModelHandlerMutant();
 	void setHovered(bool);
 	bool isHovered() const
@@ -23,9 +21,11 @@ public:
 		return m_number;
 	}
 private:
+	void setWeapon(WeaponType weaponType);
+
 	SelectedTag m_selectedTag;
 	BloodSplat m_bloodSplat;
-	MutantFlameThrower m_flameThrower;
+	unique_ptr<WeaponBase> m_weapon;
 	MutantNumber m_number;
 	bool m_hovered;
 };
