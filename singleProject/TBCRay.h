@@ -21,5 +21,6 @@ private:
 
 	ManualLine m_hitLine;
 	ManualLine m_line;
+	Ogre::Ray ray;
 };
 

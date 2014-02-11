@@ -25,23 +25,16 @@ BehaviourStateAttackRanged::~BehaviourStateAttackRanged()
 
 void BehaviourStateAttackRanged::update(ModelHandler& modelHandler)
 {
+	auto dt = MainUpdate::getSingleton().getDeltaTime()*GlobalVariables::getSingleton().getSpeed();
+	aim(modelHandler);
+    Quaternion interpolatedLookAt = Math::lerp<Quaternion,Real>(m_originalDirection, m_delayedDirectionToPlayer, Real(dt*1.0));
+	modelHandler.getNode()->setOrientation(m_delayedDirectionToPlayer);
 	if (m_localTime >= m_shootDelay)
 	{
-		aim(modelHandler);
-		m_localTime = 0.0;
-		m_lerp = 0.0;
         static_cast<ModelHandlerMutant&>(modelHandler).fire();
+		m_localTime = 0.0;
 	}
-
-	auto dt = MainUpdate::getSingleton().getDeltaTime()*GlobalVariables::getSingleton().getSpeed();
 	m_localTime += dt;
-	Quaternion interpolatedLookAt = m_delayedDirectionToPlayer;
-	if (m_lerp < 1.0)
-	{
-	    m_lerp += dt;
-        Quaternion interpolatedLookAt = Math::lerp(m_originalDirection, m_delayedDirectionToPlayer, m_lerp);
-	}
-	modelHandler.getNode()->setOrientation(interpolatedLookAt);
 }
 
 void BehaviourStateAttackRanged::aim(ModelHandler& modelHandler)

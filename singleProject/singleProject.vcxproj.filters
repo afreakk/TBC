@@ -284,6 +284,9 @@
     <ClCompile Include="ManualLine.cpp">
       <Filter>Props\Virtuals</Filter>
     </ClCompile>
+    <ClCompile Include="OgreFix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -552,6 +555,9 @@
     </ClInclude>
     <ClInclude Include="ManualLine.h">
       <Filter>Props\Virtuals</Filter>
+    </ClInclude>
+    <ClInclude Include="OgreFix.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

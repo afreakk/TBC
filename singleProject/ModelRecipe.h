@@ -2,9 +2,9 @@
 #include "BaseAnimation.h"
 enum QueryMasks
 {
-    PlayerMask = 1<<0,
-    World = 2<<0,
-    None = 3<<0
+    PlayerMask = 1<<1,
+    World = 1<<2,
+    None = 1<<3
 };
 class ModelRecipe
 {

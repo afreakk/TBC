@@ -7,7 +7,9 @@ namespace Ogre
 }
 namespace ParticleUniverse
 {
-	class PlaneCollider;
+	class SphereCollider;
+	class OnCollisionObserver;
+	class ParticleAffector;
 }
 //Lazer
 class MutantLazer : public WeaponBeam
@@ -31,6 +33,7 @@ public:
 	MutantFireBall(Ogre::SceneNode* parentNode, ModelHandler* model);
 	void update() override;
 private:
-	ParticleUniverse::PlaneCollider* m_planeCollider;
+	ParticleUniverse::SphereCollider* m_planeCollider;
+	ParticleUniverse::ParticleAffector* m_collisionObserver;
 
 };

@@ -85,7 +85,7 @@ bool OgreCore::initWindow(const int xResolution, const int yResolution, const Og
 
 bool OgreCore::initSceneManager()
 {
-	m_sceneMgr = m_root->createSceneManager(Ogre::ST_GENERIC);
+	m_sceneMgr = m_root->createSceneManager("OctreeSceneManager");
 	return true;
 }
 

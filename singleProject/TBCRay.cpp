@@ -6,12 +6,13 @@
 template<> TBCRay* Ogre::Singleton<TBCRay>::msSingleton = 0;
 TBCRay::TBCRay(Ogre::SceneManager* sceneMgr)
 {
-	MovableObject::setDefaultQueryFlags(QueryMasks::None);
-	m_raySceneQuery = sceneMgr->createRayQuery(Ogre::Ray(), QueryMasks::PlayerMask | QueryMasks::World);
+	/*MovableObject::setDefaultQueryFlags(QueryMasks::None);
+	m_raySceneQuery = sceneMgr->createRayQuery(Ogre::Ray(), QueryMasks::PlayerMask);
 	if (!m_raySceneQuery)
 		printf("["__FILE__"::%u] Failed to create Ogre::RaySceneQuery instance\n", __LINE__);
 	m_raySceneQuery->setSortByDistance(true);
 
+	m_raySceneQuery->setRay(ray);*/
 	m_line.init(Vector3::ZERO, Vector3::ZERO, "Green");
 	m_hitLine.init(Vector3::ZERO, Vector3::ZERO, "Red");
 }
@@ -33,58 +34,46 @@ void TBCRay::debugHit(const Ogre::Vector3& point, const Ogre::Vector3& endPoint)
 	m_hitLine.update(point, endPoint);
 }
 
+#include "UnitCircleMovement.h"
+#include "PlayerContainer.h"
+#include "Player.h"
+#include "ModelHandler.h"
+#include "MainUpdate.h"
+#include "OgreFix.h"
+	Real xtime = 0;
 bool TBCRay::RaycastPlayer(const Ogre::Vector3& point, const Ogre::Vector3& normal)
 {
-	debugRay(point, normal);
-	Ogre::Ray ray(point, normal.normalisedCopy());
-	// create a query object
-	m_raySceneQuery->setRay(ray);
 
-	// execute the query, returns a vector of hits
-//	m_raySceneQuery->setQueryMask(QueryMasks::PlayerMask);
-	if (m_raySceneQuery->execute().size() <= 0)
-		// raycast did not hit an objects bounding box
-		return false;
-	Ogre::RaySceneQueryResult& hitObjects = m_raySceneQuery->getLastResults();
-	if (hitObjects.size()<1)
-		return false;
+	//Vector3 normalised = normal.normalisedCopy();
+	Vector3 normalised = normal.normalisedCopy();
+	debugRay(point, normalised*80000.0);
+	ray.setOrigin(point);
+	ray.setDirection(normalised);
 
-	Ogre::RaySceneQueryResultEntry& firstHitObject = hitObjects[0];
+	Ogre::AxisAlignedBox boundingBox = PlayerContainer::getSingleton().getPlayer()->getModelHandler().getEntity()->getBoundingBox();
+	Matrix4 mat;
+	SceneNode* playerNode = PlayerContainer::getSingleton().getPlayer()->getNode();
+	mat.makeTransform(playerNode->getPosition(), playerNode->getScale(), playerNode->getOrientation());
+	boundingBox.transform(mat);
 
-	if (!firstHitObject.movable && firstHitObject.movable->getMovableType() != "Entity")
-		return false;
-    Ogre::Entity *pentity = static_cast<Ogre::Entity*>(firstHitObject.movable);
-	String entityName= pentity->getName();
-	if (entityName != "PlayerEntity")
-		return false;
+	std::pair<bool, Real> result = OgreFix::intersects(ray,boundingBox);
+	if (result.first)
+	{
+		debugHit(point, point+normalised*80000.0);
+		return true;
+	}
 	else
 	{
-        // mesh data to retrieve
-        size_t vertex_count;
-        size_t index_count;
-        Ogre::Vector3* vertices;
-        unsigned long* indices;
-
-        GetMeshInformation(pentity, vertex_count, vertices, index_count, indices, pentity->getParentNode()->_getDerivedPosition()
-            , pentity->getParentNode()->_getDerivedOrientation(), pentity->getParentNode()->_getDerivedScale());
-        // test for hitting individual triangles on the mesh
-        for (int i = 0; i<static_cast<int>(index_count); i += 3)
-        {
-            // check for a hit against this triangle
-            std::pair<bool, Ogre::Real> hit = Ogre::Math::intersects(ray, vertices[indices[i]], vertices[indices[i + 1]], vertices[indices[i + 2]], true, false);
-            if (hit.second)
-                return true;
-        }
-        delete[] vertices;
-        delete[] indices;
+		debugHit(point, point);
+		return false;
 	}
-	return false;
+
 }
 bool TBCRay::RaycastFromPoint(const Ogre::Vector3& point, const Ogre::Vector3& normal, Ogre::Vector3& result)
 {
 	debugRay(point, normal);
 	// create the ray to test
-	Ogre::Ray ray(point, normal);
+	Ogre::Ray ray(point, normal.normalisedCopy());
 
 	if (!m_raySceneQuery)
 		return false;

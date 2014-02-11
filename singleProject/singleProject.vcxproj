@@ -48,6 +48,7 @@
     <ClCompile Include="MutantHandlerStateNormal.cpp" />
     <ClCompile Include="MutantNumber.cpp" />
     <ClCompile Include="OgreCore.cpp" />
+    <ClCompile Include="OgreFix.cpp" />
     <ClCompile Include="TBCRay.cpp" />
     <ClCompile Include="OISCore.cpp" />
     <ClCompile Include="ParticleEffect.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="MutantHandlerStateAttackRanged.h" />
     <ClInclude Include="MutantHandlerStateDead.h" />
     <ClInclude Include="MutantHandlerStateNormal.h" />
+    <ClInclude Include="OgreFix.h" />
     <ClInclude Include="TBCRay.h" />
     <ClInclude Include="WeaponTypes.h" />
     <ClInclude Include="MutantNumber.h" />
