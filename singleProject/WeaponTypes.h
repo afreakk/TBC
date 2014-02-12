@@ -35,5 +35,6 @@ public:
 private:
 	ParticleUniverse::SphereCollider* m_planeCollider;
 	ParticleUniverse::ParticleAffector* m_collisionObserver;
+	unsigned m_weaponDamage;
 
 };

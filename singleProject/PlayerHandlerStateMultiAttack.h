@@ -4,11 +4,11 @@
 class BehaviourStateLERP;
 class Player;
 
-class PlayerHandlerStateLERP : public HandlerState <PLAYER_HANDLER_STATE>
+class PlayerHandlerStateMultiAttack : public HandlerState <PLAYER_HANDLER_STATE>
 {
 public:
-	PlayerHandlerStateLERP(std::vector<unsigned> mutantList, Player* player);
-	~PlayerHandlerStateLERP();
+	PlayerHandlerStateMultiAttack(std::vector<unsigned> mutantList, Player* player);
+	~PlayerHandlerStateMultiAttack();
 	void update() override;
 	void keyPressed(const OIS::KeyEvent&) override;
 	void keyReleased(const OIS::KeyEvent&) override;

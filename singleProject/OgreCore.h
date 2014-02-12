@@ -21,13 +21,13 @@ public:
 	bool initResources();   //second
 	bool initOverlaySystem();
 	//gets
-	Ogre::Vector2		getResolution();
-	Ogre::Root*         getRoot();
-	Ogre::RenderWindow* getWindow();
-	Ogre::SceneManager* getSceneMgr();
-	Ogre::Camera*       getCamera();
-	Ogre::Viewport*     getViewport();
-	Ogre::OverlaySystem*getOverlaySystem();
+	const Ogre::Vector2&getResolution() const;
+	Ogre::Root*         getRoot() const;
+	Ogre::RenderWindow* getWindow() const;
+	Ogre::SceneManager* getSceneMgr() const;
+	Ogre::Camera*       getCamera() const;
+	Ogre::Viewport*     getViewport() const;
+	Ogre::OverlaySystem*getOverlaySystem() const;
 private:
 	std::unique_ptr<Ogre::Root>m_root;
 	Ogre::RenderWindow* m_window;

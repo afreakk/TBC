@@ -75,6 +75,18 @@
     <Filter Include="Props\Weapon">
       <UniqueIdentifier>{570e45fa-87d0-4ab0-bebf-29dce0c47894}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\virtuals">
+      <UniqueIdentifier>{dd0c2160-75b8-4bd3-bb38-e6f7509e623f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourStateHandler\Player">
+      <UniqueIdentifier>{34c124db-5e88-424b-9571-5110596a5702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourStateHandler\Mutant">
+      <UniqueIdentifier>{8da10da5-2433-45eb-b883-3d3e137ce754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourStateHandler\TopLayer">
+      <UniqueIdentifier>{33ce6766-adcc-4d57-9765-9f0bcafcc2ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -106,42 +118,6 @@
     </ClCompile>
     <ClCompile Include="BehaviourStateNormalTranslator.cpp">
       <Filter>BehaviourState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateTumble.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandler.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateDead.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateLERP.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateNormal.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateSelection.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateSelectionLine.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="MutantHandler.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="MutantHandlerStateAttackRanged.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="MutantHandlerStateDead.cpp">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="MutantHandlerStateNormal.cpp">
-      <Filter>BehaviourStateHandler</Filter>
     </ClCompile>
     <ClCompile Include="PlayerCameraVars.cpp">
       <Filter>Camera</Filter>
@@ -221,9 +197,6 @@
     <ClCompile Include="PlayerSelectionState.cpp">
       <Filter>BehaviourState</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerGUIStyle.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerGUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
@@ -287,6 +260,54 @@
     <ClCompile Include="OgreFix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MeshEmitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIResources.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIBar.cpp">
+      <Filter>GUI\virtuals</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateAttackRanged.cpp">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateDead.cpp">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateNormal.cpp">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateDead.cpp">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateNormal.cpp">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSelection.cpp">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSelectionLine.cpp">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateTumble.cpp">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandler.cpp">
+      <Filter>BehaviourStateHandler\TopLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandler.cpp">
+      <Filter>BehaviourStateHandler\TopLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateMultiAttack.cpp">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSingleAttack.cpp">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -318,54 +339,6 @@
     </ClInclude>
     <ClInclude Include="BehaviourStateTumble.h">
       <Filter>BehaviourState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandler.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerEnums.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateDead.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateLERP.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateNormal.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateSelection.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateSelectionHandler.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateSelectionLine.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateTumble.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="StateHandler.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantHandler.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantHandlerEnums.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantHandlerStateAttackRanged.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantHandlerStateDead.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantHandlerStateNormal.h">
-      <Filter>BehaviourStateHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="HandlerState.h">
-      <Filter>BehaviourStateHandler</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCameraVars.h">
       <Filter>Camera</Filter>
@@ -432,9 +405,6 @@
     </ClInclude>
     <ClInclude Include="PlayerSelectionState.h">
       <Filter>BehaviourState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerGUIStyle.h">
-      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="PlayerGUI.h">
       <Filter>GUI</Filter>
@@ -558,6 +528,72 @@
     </ClInclude>
     <ClInclude Include="OgreFix.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshEmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStatus.h">
+      <Filter>Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIResources.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BarTypes.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIBar.h">
+      <Filter>GUI\virtuals</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerStateAttackRanged.h">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerStateDead.h">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerStateNormal.h">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateDead.h">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateNormal.h">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSelection.h">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSelectionHandler.h">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSelectionLine.h">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateTumble.h">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandler.h">
+      <Filter>BehaviourStateHandler\TopLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandler.h">
+      <Filter>BehaviourStateHandler\TopLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerEnums.h">
+      <Filter>BehaviourStateHandler\TopLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerEnums.h">
+      <Filter>BehaviourStateHandler\TopLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="HandlerState.h">
+      <Filter>BehaviourStateHandler\TopLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="StateHandler.h">
+      <Filter>BehaviourStateHandler\TopLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateMultiAttack.h">
+      <Filter>BehaviourStateHandler\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSingleAttack.h">
+      <Filter>BehaviourStateHandler\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -40,3 +40,8 @@ void PlayerContainer::killPlayer()
 {
     m_handler->switchState(PLAYER_HANDLER_STATE::DEAD);
 }
+void PlayerContainer::notify(PlayerStatus p)
+{
+	if (p.health == 0)
+		killPlayer();
+}

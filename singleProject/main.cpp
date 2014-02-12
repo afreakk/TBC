@@ -9,6 +9,7 @@
 #include "OISCore.h"
 #include "LaneSettings.h"
 #include "TBCRay.h"
+#include "GUIResources.h"
 
 int main()
 {
@@ -24,6 +25,9 @@ int main()
 		OgreCore::getSingletonPtr()->initScript();
 		OgreCore::getSingletonPtr()->initResources();
 		OgreCore::getSingletonPtr()->getSceneMgr()->showBoundingBoxes(true);
+
+		unique_ptr<GUIResources> guiResources = unique_ptr<GUIResources>(new GUIResources("GameOverlay"));
+		guiResources->show(true);
 
 		unique_ptr<OISCore> oisCore(new OISCore());
 		oisCore->init();

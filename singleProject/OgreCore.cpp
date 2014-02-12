@@ -96,15 +96,6 @@ bool OgreCore::initOverlaySystem()
 	return true;
 }
 
-Ogre::Vector2 OgreCore::getResolution()
-{
-	return m_resolution;
-}
-
-Ogre::OverlaySystem* OgreCore::getOverlaySystem()
-{
-	return m_overlaySystem.get();
-}
 bool OgreCore::initCamera(const Ogre::String cameraName)
 {
 	m_camera = m_sceneMgr->createCamera(cameraName);
@@ -119,18 +110,25 @@ bool OgreCore::initViewport()
 	return true;
 }
 //gets
-Ogre::RenderWindow* OgreCore::getWindow(){
+const Ogre::Vector2& OgreCore::getResolution() const{
+	return m_resolution;
+}
+
+Ogre::OverlaySystem* OgreCore::getOverlaySystem() const{
+	return m_overlaySystem.get();
+}
+Ogre::RenderWindow* OgreCore::getWindow() const{
 	return m_window;
 }
-Ogre::Root* OgreCore::getRoot(){
+Ogre::Root* OgreCore::getRoot() const{
 	return m_root.get();
 }
-Ogre::SceneManager* OgreCore::getSceneMgr(){
+Ogre::SceneManager* OgreCore::getSceneMgr() const{
 	return m_sceneMgr;
 }
-Ogre::Camera*       OgreCore::getCamera(){
+Ogre::Camera*       OgreCore::getCamera() const{
 	return m_camera;
 }
-Ogre::Viewport*     OgreCore::getViewport(){
+Ogre::Viewport*     OgreCore::getViewport() const{
 	return m_viewport;
 }

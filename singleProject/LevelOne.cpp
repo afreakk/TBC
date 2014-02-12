@@ -16,15 +16,9 @@ LevelOne::LevelOne()
 
 	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
 	m_dotSceneLoader.parseDotScene("citycylinder.scene", "SceneOne", sMgr);
-//	auto ent = sMgr->createEntity("cityblockBox009.mesh");
-//	sMgr->getRootSceneNode()->createChildSceneNode()->attachObject(ent);
-
-	///
-
-
-	///
 
 	PlayerGlobalStats::getSingletonPtr()->registerSubscriber(&m_playerGUI, "PlayerGUI");
+	PlayerGlobalStats::getSingletonPtr()->registerSubscriber(m_playerContainer.get(), "PlayerContainer");
 	m_playerContainer->getHandler()->registerSubscriber(&m_playerCamera, "playerCamera");
 }
 
@@ -33,6 +27,7 @@ LevelOne::~LevelOne()
 {
 	m_playerContainer->getPlayer()->removeSubscriber("playerCamera");
 	PlayerGlobalStats::getSingletonPtr()->removeSubscriber("PlayerGUI");
+	PlayerGlobalStats::getSingletonPtr()->removeSubscriber("PlayerContainer");
 }
 
 Real avgFps = 0.0;

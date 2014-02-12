@@ -3,7 +3,8 @@
 #include "OgreCore.h"
 #include "ParticleUniverseSystem.h"
 #include "MainUpdate.h"
-#include "TBCRay.h"
+
+#include "PlayerGlobalStats.h"
 #include "PlayerContainer.h"
 #include "Player.h"
 
@@ -21,18 +22,9 @@ WeaponBase::~WeaponBase()
 {
 
 }
-bool WeaponBase::shootPlayer()
+void WeaponBase::shootPlayer(const int damage)
 {
-	bool hitPlayer = TBCRay::getSingleton().RaycastPlayer(m_node->_getDerivedPosition()+Vector3(0.0,50.0, 0.0)
-		, PlayerContainer::getSingleton().getPlayer()->getNode()->getPosition() - m_node->_getDerivedPosition());
-//	cout << "casted ray did " << hitPlayer << " hit" << endl;
-    if (hitPlayer)
-    {
-        cout << "hit " << endl;
-        PlayerContainer::getSingleton().killPlayer();
-		return true;
-    }
-	return false;
+	PlayerGlobalStats::getSingleton().modifyHealth(-damage);
 }
 WeaponType WeaponBase::weaponTypeFromString(String weaponString)
 {
@@ -81,7 +73,7 @@ void WeaponBall::update()
 	m_node->translate(Vector3(0.0, 0.0, -MainUpdate::getSingleton().getDeltaTime()*200.0));
 	if (hitTest())
 	{
-		PlayerContainer::getSingleton().killPlayer();
+//		PlayerContainer::getSingleton().killPlayer();
         m_endSpell = true;
 	}
 	else if (m_node->getPosition().z < -400.0)

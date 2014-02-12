@@ -19,7 +19,6 @@ public:
 	}
 private:
 	Player* m_player;
-	bool m_spaceDown;
 	TUMBLE_DIRECTION m_tumble;
 	NormalDirection m_walkingDirection;
 	unique_ptr<BehaviourStateNormal> m_normalState;

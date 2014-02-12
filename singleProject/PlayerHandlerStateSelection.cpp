@@ -50,7 +50,7 @@ std::vector<unsigned> PlayerHandlerStateSelection::getAttackList() const
 }
 void PlayerHandlerStateSelection::goLerp()
 {
-	m_state = PLAYER_HANDLER_STATE::LERP;
+	m_state = PLAYER_HANDLER_STATE::MULTI_ATTACK;
 }
 void PlayerHandlerStateSelection::pushBackSelected()
 {

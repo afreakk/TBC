@@ -7,6 +7,7 @@
 #include "PlayerContainer.h"
 #include "Player.h"
 #include "TBCRay.h"
+static const Vector3 RayHeight(0.0, 100.0, 0.0);
 //MutantLazer
 MutantLazer::MutantLazer(SceneNode* parentNode, ModelHandler* model)
 : WeaponBeam(parentNode, model, "MutantLazer", "lazer", "lazerEmitter")
@@ -30,6 +31,7 @@ void MutantFlameThrower::update()
 //MutantFireBall
 MutantFireBall::MutantFireBall(SceneNode* parentNode, ModelHandler* model)
 : WeaponBeam(parentNode, model, "MutantFireBall", "FireBall", "FireEmitter" )
+, m_weaponDamage(40)
 {
 	m_collisionObserver = static_cast<ParticleUniverse::ParticleAffector*>(m_particleSystem->getTechnique(0)->getAffector("boolman"));
 	m_planeCollider = static_cast<ParticleUniverse::SphereCollider*>(m_particleSystem->getTechnique(0)->getAffector("planecollider"));
@@ -38,12 +40,15 @@ void MutantFireBall::update()
 {
 	m_planeCollider->position.y = m_emitter->position.y;
 	m_planeCollider->position.x = m_emitter->position.x;
-	if (TBCRay::getSingleton().RaycastPlayer(m_node->getParent()->getPosition()
+	if (TBCRay::getSingleton().RaycastPlayer(m_node->getParent()->getPosition()+ RayHeight
 		,  m_node->getParent()->getOrientation() *Vector3(0.0, 0.0, -1.0) ))
 	{
-		if (m_collisionObserver->isEnabled())
-			PlayerContainer::getSingleton().killPlayer();
         m_planeCollider->position.z = m_node->convertWorldToLocalPosition( PlayerContainer::getSingleton().getPlayer()->getNode()->getPosition() ).z ;
+		if (m_collisionObserver->isEnabled())
+		{
+			shootPlayer(m_weaponDamage);
+			m_collisionObserver->setEnabled(false);
+		}
 	}
 	else
 	{

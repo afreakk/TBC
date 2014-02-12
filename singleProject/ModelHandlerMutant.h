@@ -15,6 +15,7 @@ public:
 		return m_hovered;
 	}
 	void fire();
+	void init() override;
 	void damage(Vector3 direction);
 	MutantNumber& getNumer()
 	{

@@ -1,14 +1,16 @@
 #pragma once
 #include "MessageSubscriber.h"
 #include "MovableText.h"
-#include "PlayerGUIStyle.h"
-class PlayerGUI : public Ogre::Singleton<PlayerGUI>, public MessageSubscriber<unsigned>
+#include "BarTypes.h"
+#include "PlayerStatus.h"
+class PlayerGUI : public Ogre::Singleton<PlayerGUI>, public MessageSubscriber<PlayerStatus>
 {
 public:
 	PlayerGUI();
 	~PlayerGUI();
-	void notify(unsigned) override;
+	void notify(PlayerStatus) override;
 private:
-	PlayerGUIStyle m_guiStyle;
+	EnergyBar m_energyBar;
+	HealthBar m_healthBar;
 };
 

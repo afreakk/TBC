@@ -23,6 +23,7 @@
     <ClCompile Include="ConfigScriptLoader.cpp" />
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
+    <ClCompile Include="GUIResources.cpp" />
     <ClCompile Include="LaneSettings.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMenu.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainUpdate.cpp" />
     <ClCompile Include="ManualLine.cpp" />
+    <ClCompile Include="MeshEmitter.cpp" />
     <ClCompile Include="ModelHandler.cpp" />
     <ClCompile Include="ModelHandlerMutant.cpp" />
     <ClCompile Include="ModelHandlerPlayer.cpp" />
@@ -49,6 +51,7 @@
     <ClCompile Include="MutantNumber.cpp" />
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
+    <ClCompile Include="PlayerHandlerStateSingleAttack.cpp" />
     <ClCompile Include="TBCRay.cpp" />
     <ClCompile Include="OISCore.cpp" />
     <ClCompile Include="ParticleEffect.cpp" />
@@ -62,10 +65,10 @@
     <ClCompile Include="PlayerContainer.cpp" />
     <ClCompile Include="PlayerGlobalStats.cpp" />
     <ClCompile Include="PlayerGUI.cpp" />
-    <ClCompile Include="PlayerGUIStyle.cpp" />
+    <ClCompile Include="GUIBar.cpp" />
     <ClCompile Include="PlayerHandler.cpp" />
     <ClCompile Include="PlayerHandlerStateDead.cpp" />
-    <ClCompile Include="PlayerHandlerStateLERP.cpp" />
+    <ClCompile Include="PlayerHandlerStateMultiAttack.cpp" />
     <ClCompile Include="PlayerHandlerStateNormal.cpp" />
     <ClCompile Include="PlayerHandlerStateSelection.cpp" />
     <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp" />
@@ -90,6 +93,7 @@
     <ClInclude Include="AnimationDie.h" />
     <ClInclude Include="AnimationTumble.h" />
     <ClInclude Include="AnimationWalk.h" />
+    <ClInclude Include="BarTypes.h" />
     <ClInclude Include="BaseAnimation.h" />
     <ClInclude Include="BehaviourObject.h" />
     <ClInclude Include="BehaviourState.h" />
@@ -109,6 +113,7 @@
     <ClInclude Include="ENUMNormalDirection.h" />
     <ClInclude Include="ENUMTumbleDirection.h" />
     <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="GUIResources.h" />
     <ClInclude Include="HandlerState.h" />
     <ClInclude Include="ILevel.h" />
     <ClInclude Include="LaneSettings.h" />
@@ -121,6 +126,7 @@
     <ClInclude Include="LvlOneEnvironment.h" />
     <ClInclude Include="MainUpdate.h" />
     <ClInclude Include="ManualLine.h" />
+    <ClInclude Include="MeshEmitter.h" />
     <ClInclude Include="Messager.h" />
     <ClInclude Include="MessageSubscriber.h" />
     <ClInclude Include="ModelHandler.h" />
@@ -140,6 +146,8 @@
     <ClInclude Include="MutantHandlerStateDead.h" />
     <ClInclude Include="MutantHandlerStateNormal.h" />
     <ClInclude Include="OgreFix.h" />
+    <ClInclude Include="PlayerHandlerStateSingleAttack.h" />
+    <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="TBCRay.h" />
     <ClInclude Include="WeaponTypes.h" />
     <ClInclude Include="MutantNumber.h" />
@@ -157,11 +165,11 @@
     <ClInclude Include="PlayerContainer.h" />
     <ClInclude Include="PlayerGlobalStats.h" />
     <ClInclude Include="PlayerGUI.h" />
-    <ClInclude Include="PlayerGUIStyle.h" />
+    <ClInclude Include="GUIBar.h" />
     <ClInclude Include="PlayerHandler.h" />
     <ClInclude Include="PlayerHandlerEnums.h" />
     <ClInclude Include="PlayerHandlerStateDead.h" />
-    <ClInclude Include="PlayerHandlerStateLERP.h" />
+    <ClInclude Include="PlayerHandlerStateMultiAttack.h" />
     <ClInclude Include="PlayerHandlerStateNormal.h" />
     <ClInclude Include="PlayerHandlerStateSelection.h" />
     <ClInclude Include="PlayerHandlerStateSelectionHandler.h" />
@@ -221,13 +229,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE\Overlay;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0;C:\Users\afreakk\Desktop\particleuniverse-master\sdk\include\ParticleUniverse</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TBCDEP)\include\OIS;$(TBCDEP)\include\OGRE\Overlay;$(TBCDEP)\include\OGRE;$(TBCDEP)\include\boost;$(TBCDEP)\include\particleu</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zm209 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\source_ogre_actual\install\lib\debug\OgreMain_d.lib;C:\Libs\boostOgreLib\debug\libboost_thread-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_date_time-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_system-vc120-mt-gd-1_55.lib;C:\Libs\boostOgreLib\debug\libboost_chrono-vc120-mt-gd-1_55.lib;C:\source_ogre_actual\install\lib\debug\OgreRTShaderSystem_d.lib;C:\source_ogre_actual\install\lib\debug\OgreTerrain_d.lib;C:\source_ogre_actual\install\lib\debug\OgrePaging_d.lib;C:\source_ogre_actual\install\lib\debug\OgreVolume_d.lib;C:\source_ogre_actual\install\lib\debug\OgreOverlay_d.lib;C:\source_ogre_actual\install\lib\debug\OIS_d.lib;C:\Users\afreakk\Desktop\particleuniverse-master\lib\Debug\ParticleUniverse_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreMain_d.lib;OgreRTShaderSystem_d.lib;OgreTerrain_d.lib;OgrePaging_d.lib;OgreVolume_d.lib;OgreOverlay_d.lib;OIS_d.lib;libboost_thread-vc120-mt-gd-1_55.lib;libboost_date_time-vc120-mt-gd-1_55.lib;libboost_system-vc120-mt-gd-1_55.lib;libboost_chrono-vc120-mt-gd-1_55.lib;ParticleUniverse_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(TBCDEP)\lib\boost\$(Configuration);$(TBCDEP)\lib\ogre\$(Configuration);$(TBCDEP)\lib\particleu\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -240,14 +249,15 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/Zm209 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>c:\source_ogre_actual\install\include\OIS;C:\source_ogre_actual\install\include\OGRE\Overlay;C:\source_ogre_actual\install\include\OGRE;C:\Libs\boost_1_55_0;C:\Users\afreakk\Desktop\particleuniverse-master\sdk\include\ParticleUniverse</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TBCDEP)\include\OIS;$(TBCDEP)\include\OGRE\Overlay;$(TBCDEP)\include\OGRE;$(TBCDEP)\include\boost;$(TBCDEP)\include\particleu</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>C:\Libs\boostOgreLib\release\libboost_thread-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\release\libboost_date_time-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\release\libboost_system-vc120-mt-1_55.lib;C:\Libs\boostOgreLib\release\libboost_chrono-vc120-mt-1_55.lib;C:\source_ogre_actual\install\lib\release\OgreMain.lib;C:\source_ogre_actual\install\lib\release\OgreRTShaderSystem.lib;C:\source_ogre_actual\install\lib\release\OgreTerrain.lib;C:\source_ogre_actual\install\lib\release\OgrePaging.lib;C:\source_ogre_actual\install\lib\release\OgreVolume.lib;C:\source_ogre_actual\install\lib\release\OgreOverlay.lib;C:\source_ogre_actual\install\lib\release\OIS.lib;C:\Program Files (x86)\Particle Universe\Particle Universe Plugin\VCBuild\lib\Release\ParticleUniverse.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libboost_thread-vc120-mt-1_55.lib;libboost_date_time-vc120-mt-1_55.lib;libboost_system-vc120-mt-1_55.lib;libboost_chrono-vc120-mt-1_55.lib;OgreMain.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgrePaging.lib;OgreVolume.lib;OgreOverlay.lib;OIS.lib;ParticleUniverse.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(TBCDEP)\lib\boost\$(Configuration);$(TBCDEP)\lib\ogre\$(Configuration);$(TBCDEP)\lib\particleu\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

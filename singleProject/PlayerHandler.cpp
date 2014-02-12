@@ -2,7 +2,8 @@
 #include "PlayerHandler.h"
 #include "PlayerHandlerStateNormal.h"
 #include "PlayerHandlerStateSelection.h"
-#include "PlayerHandlerStateLERP.h"
+#include "PlayerHandlerStateMultiAttack.h"
+#include "PlayerHandlerStateSingleAttack.h"
 #include "PlayerHandlerStateDead.h"
 #include "PlayerHandlerStateTumble.h"
 #include "OISCore.h"
@@ -36,10 +37,14 @@ void PlayerHandler::switchState(PLAYER_HANDLER_STATE newState)
 		m_currentState.reset();
 		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>( new PlayerHandlerStateSelection(m_player));
 		break;
-	case PLAYER_HANDLER_STATE::LERP:
+	case PLAYER_HANDLER_STATE::MULTI_ATTACK:
 		mutantList = static_cast<PlayerHandlerStateSelection*>(m_currentState.get())->getAttackList();
 		m_currentState.reset();
-		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>( new PlayerHandlerStateLERP(mutantList, m_player));
+		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>( new PlayerHandlerStateMultiAttack(mutantList, m_player));
+		break;
+	case PLAYER_HANDLER_STATE::SINGLE_ATTACK:
+		m_currentState.reset();
+		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>( new PlayerHandlerStateSingleAttack(m_player));
 		break;
 	case PLAYER_HANDLER_STATE::DEAD:
 		m_currentState.reset();

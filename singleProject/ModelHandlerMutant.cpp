@@ -22,6 +22,10 @@ ModelHandlerMutant::~ModelHandlerMutant()
 {
 	cout << "ModelHandlerMutant destrucotr" << endl;
 }
+void ModelHandlerMutant::init()
+{
+	ModelHandler::init();
+}
 
 void ModelHandlerMutant::damage(Vector3 direction)
 {

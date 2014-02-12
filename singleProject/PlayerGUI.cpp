@@ -11,7 +11,8 @@ PlayerGUI::~PlayerGUI()
 }
 
 
-void PlayerGUI::notify(unsigned newEnergy)
+void PlayerGUI::notify(PlayerStatus playerStatus)
 {
-	m_guiStyle.setEnergy(newEnergy);
+	m_energyBar.setValue(playerStatus.energy);
+	m_healthBar.setValue(playerStatus.health);
 }
