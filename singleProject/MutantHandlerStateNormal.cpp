@@ -7,7 +7,7 @@ MutantHandlerStateNormal::MutantHandlerStateNormal(Mutant* mutant, SceneNode* pl
 : HandlerState(MUTANT_HANDLER_STATE::NORMAL)
 , m_mutant(mutant)
 , m_playerNode(playerNode)
-, m_walkingDirection{ NormalDirection::Left }
+, m_walkingDirection{ NormalDirection::dirLeft }
 , m_normalState{ new BehaviourStateNormal{ &m_walkingDirection , &MutantGlobalStats::getSingleton().getWalkSpeed()}}
 {
 	m_mutant->setState(m_normalState.get());

@@ -28,10 +28,10 @@ void BehaviourStateNormalTranslator::handleVelocity(NormalDirection activeDirect
 {
 	switch (activeDirection)
 	{
-	case NormalDirection::Left:
+	case NormalDirection::dirRight:
 		increaseVelocity(m_speed);
 		break;
-	case NormalDirection::Right:
+	case NormalDirection::dirLeft:
 		increaseVelocity(-m_speed);
 		break;
 	case NormalDirection::None:

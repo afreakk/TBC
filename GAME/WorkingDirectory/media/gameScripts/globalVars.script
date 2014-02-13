@@ -1,0 +1,78 @@
+//Global
+
+entity ModelHandler
+{
+	startAttackDistance 250.0
+	LERPPrecision 50.0
+}
+entity globalLanes
+{
+	laneCount 3
+	laneIncrement 500
+	firstLane 10700
+	laneHeight 0
+}
+
+entity GlobalStats
+{
+	LERPAnimWalkRatio 0.00875
+	LERPAnimAttackRatio 0.00175
+	LERPAnimTumbleRatio 0.00175
+	normalAnimWalkSpeed 60.0
+	animDieSpeed 0.6
+}
+
+// Camera
+
+entity PlayerCameraNormal
+{
+	distance 1.2
+	height 400.0
+}
+entity PlayerCameraLERP
+{
+	distance 1500.0
+	height 750.0
+	spinSpeed 0.5
+}
+
+// ENEMIES
+
+entity Enemies
+{
+	r 			0.1 0.2 0.3 0.4
+	lane 		0 	2 	0 	2
+	weaponType	fireball fireball fireball fireball
+}
+entity EnemyStats
+{
+	walkSpeed 0.016
+	LERPSpeed 100.0
+	attackDistance 1000.5
+	rangedCooldown 2.0
+}
+
+//Player
+
+entity Player
+{
+	lane 1
+	r 0
+}
+
+player ModelInfo
+{
+	mesh ninja.mesh
+	
+}
+
+entity PlayerStats
+{
+	healthPoints 100
+	energy 100
+	walkSpeed 0.036
+	energy_LERP 8000.0
+	normal_LERP 800.0
+	slowMotionPower 0.05
+	tumbleSpeed 2000.0
+}

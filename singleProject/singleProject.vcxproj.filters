@@ -308,6 +308,9 @@
     <ClCompile Include="PlayerHandlerStateSingleAttack.cpp">
       <Filter>BehaviourStateHandler\Player</Filter>
     </ClCompile>
+    <ClCompile Include="MutantContainer.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -594,6 +597,9 @@
     </ClInclude>
     <ClInclude Include="PlayerHandlerStateSingleAttack.h">
       <Filter>BehaviourStateHandler\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateLimbo.h">
+      <Filter>BehaviourState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

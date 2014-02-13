@@ -1,6 +1,7 @@
 #pragma once
 #include "OgreSingleton.h"
 #include "ManualLine.h"
+class BehaviourObject;
 class TBCRay : public Ogre::Singleton<TBCRay>
 {
 private:
@@ -8,7 +9,7 @@ private:
 
 public:
 	TBCRay(Ogre::SceneManager* sceneMgr);
-	bool RaycastPlayer(const Ogre::Vector3& point, const Ogre::Vector3& normal);
+	bool raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, BehaviourObject* gameObjectt);
 	bool RaycastFromPoint(const Ogre::Vector3& point, const Ogre::Vector3& normal, Ogre::Vector3& result);
 
 private:

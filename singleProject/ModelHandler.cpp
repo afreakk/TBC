@@ -11,6 +11,7 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos)
 , m_entity(m_crRecipe->initMesh(OgreCore::getSingletonPtr()->getSceneMgr()))
 , m_node(m_crRecipe->initNode(OgreCore::getSingletonPtr()->getSceneMgr()))
 , m_normalPosition(normalPos)
+, m_normalDirection(NormalDirection::None)
 {
 	parseScript();
 }
@@ -42,6 +43,7 @@ void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& act
 	m_normalPosition.r += rVel;
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 	UnitCircleMovement::polarSetDirection(m_node, m_normalPosition, activeDirection);
+	m_normalDirection = rVel > 0 ? NormalDirection::dirRight : NormalDirection::dirLeft;
 }
 
 void ModelHandler::fallAndDie()
@@ -84,6 +86,10 @@ bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt,
 	return false;
 }
 
+const NormalDirection ModelHandler::getNormalDirection() const
+{
+	return m_normalDirection;
+}
 Ogre::SceneNode* ModelHandler::getNode() const 
 {
 	return m_node;

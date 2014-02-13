@@ -6,15 +6,20 @@ public:
 	virtual ~GUIBar();
 	void setValue(unsigned);
 protected:
+	void updateBar(unsigned);
 	void setupBar();
-	const Ogre::Vector2& m_resolution;
-	std::string m_materialName;
 	Ogre::Real m_barMaxWidth;
 	Ogre::Real m_barHeight;
 	Ogre::Real m_xPos;
 	Ogre::Real m_yPos;
-	Ogre::OverlayContainer* m_bar;
+	std::string m_barMaterial;
+	std::string m_rammeMaterial;
+	std::string m_glassMaterial;
+	Ogre::OverlayContainer* m_ramme;
+	Ogre::OverlayElement* m_bar;
+	Ogre::OverlayElement* m_glass;
 	Ogre::TextAreaOverlayElement* m_text;
+	void initText(Ogre::OverlayContainer* parent);
 	static unsigned m_count;
 	std::string m_id;
 };

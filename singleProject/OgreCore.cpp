@@ -65,6 +65,8 @@ bool OgreCore::initResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/program", "FileSystem", "SceneOne");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery", "FileSystem", "SceneOne");
 
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui", "FileSystem", "GUI");
+
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/fonts", "FileSystem", "Fonts");
 
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();

@@ -16,6 +16,7 @@ public:
 	virtual void init();
 	const Vector3 getBonePos() const ;
 	const Vector3 getBoneOrientation() const;
+	const NormalDirection getNormalDirection() const;
 protected:
 	void updateNormalPos();
 	bool lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt, ANIMATIONS animation, Real distance, Real animLerpRatio, bool isRecursive=false);
@@ -27,6 +28,7 @@ protected:
 	PolarCoordinates m_normalPosition;
 	Real m_LERPPrecision;
 	Real m_startAttackDistance;
+	NormalDirection m_normalDirection;
 
 
 	std::map<ANIMATIONS, unique_ptr<BaseAnimation> > m_animations;

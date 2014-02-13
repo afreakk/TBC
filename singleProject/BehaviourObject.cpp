@@ -16,7 +16,7 @@ BehaviourObject::~BehaviourObject()
 
 void BehaviourObject::update()
 {
-	m_currentState->update(*m_model.get());
+    m_currentState->update(*m_model.get());
 }
 
 void BehaviourObject::setState(BehaviourState* newState)

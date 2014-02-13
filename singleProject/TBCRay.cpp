@@ -3,6 +3,10 @@
 #include "OgreRay.h"
 #include "ManualLine.h"
 #include "ModelRecipe.h"
+#include "UnitCircleMovement.h"
+#include "BehaviourObject.h"
+#include "ModelHandler.h"
+#include "OgreFix.h"
 template<> TBCRay* Ogre::Singleton<TBCRay>::msSingleton = 0;
 TBCRay::TBCRay(Ogre::SceneManager* sceneMgr)
 {
@@ -34,25 +38,16 @@ void TBCRay::debugHit(const Ogre::Vector3& point, const Ogre::Vector3& endPoint)
 	m_hitLine.update(point, endPoint);
 }
 
-#include "UnitCircleMovement.h"
-#include "PlayerContainer.h"
-#include "Player.h"
-#include "ModelHandler.h"
-#include "MainUpdate.h"
-#include "OgreFix.h"
-	Real xtime = 0;
-bool TBCRay::RaycastPlayer(const Ogre::Vector3& point, const Ogre::Vector3& normal)
+bool TBCRay::raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, BehaviourObject* gameObject)
 {
-
-	//Vector3 normalised = normal.normalisedCopy();
 	Vector3 normalised = normal.normalisedCopy();
 	debugRay(point, normalised*80000.0);
 	ray.setOrigin(point);
 	ray.setDirection(normalised);
 
-	Ogre::AxisAlignedBox boundingBox = PlayerContainer::getSingleton().getPlayer()->getModelHandler().getEntity()->getBoundingBox();
+	Ogre::AxisAlignedBox boundingBox = gameObject->getModelHandler().getEntity()->getBoundingBox();
 	Matrix4 mat;
-	SceneNode* playerNode = PlayerContainer::getSingleton().getPlayer()->getNode();
+	SceneNode* playerNode = gameObject->getNode();
 	mat.makeTransform(playerNode->getPosition(), playerNode->getScale(), playerNode->getOrientation());
 	boundingBox.transform(mat);
 

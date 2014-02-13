@@ -6,6 +6,7 @@
 
 #include "PlayerGlobalStats.h"
 #include "PlayerContainer.h"
+#include "MutantContainer.h"
 #include "Player.h"
 
 //WeaponBase
@@ -25,6 +26,10 @@ WeaponBase::~WeaponBase()
 void WeaponBase::shootPlayer(const int damage)
 {
 	PlayerGlobalStats::getSingleton().modifyHealth(-damage);
+}
+void WeaponBase::shootMutant(const unsigned idx)
+{
+	MutantContainer::getSingleton().killMutant(idx);
 }
 WeaponType WeaponBase::weaponTypeFromString(String weaponString)
 {

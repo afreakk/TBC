@@ -14,10 +14,10 @@ void UnitCircleMovement::polarSetDirection(Ogre::SceneNode* node, PolarCoordinat
 {
 	switch (direction)
 	{
-	case NormalDirection::Left:
+	case NormalDirection::dirRight:
 		p.r += Ogre::Math::PI/12.0;
 		break;
-	case NormalDirection::Right:
+	case NormalDirection::dirLeft:
 		p.r -= Ogre::Math::PI/12.0;
 		break;
 	default:

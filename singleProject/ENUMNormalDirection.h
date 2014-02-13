@@ -2,7 +2,7 @@
 #pragma once
 enum class NormalDirection
 {
-	Left,
-	Right,
+	dirRight,
+	dirLeft,
 	None
 };

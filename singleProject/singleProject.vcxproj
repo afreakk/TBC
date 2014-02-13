@@ -42,6 +42,7 @@
     <ClCompile Include="ModelRecipePlayer.cpp" />
     <ClCompile Include="MovableText.cpp" />
     <ClCompile Include="Mutant.cpp" />
+    <ClCompile Include="MutantContainer.cpp" />
     <ClCompile Include="MutantDeadState.cpp" />
     <ClCompile Include="MutantGlobalStats.cpp" />
     <ClCompile Include="MutantHandler.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="BehaviourStateAttackRanged.h" />
     <ClInclude Include="BehaviourStateDead.h" />
     <ClInclude Include="BehaviourStateLERP.h" />
+    <ClInclude Include="BehaviourStateLimbo.h" />
     <ClInclude Include="BehaviourStateNormal.h" />
     <ClInclude Include="BehaviourStateNormalTranslator.h" />
     <ClInclude Include="BehaviourStateTumble.h" />

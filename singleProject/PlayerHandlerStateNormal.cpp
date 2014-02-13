@@ -30,7 +30,7 @@ void PlayerHandlerStateNormal::keyPressed(const OIS::KeyEvent& e)
 {
 	if (OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift) && e.key == OIS::KeyCode::KC_SPACE)
 		m_state = PLAYER_HANDLER_STATE::SELECTION;
-	else if (e.key == OIS::KeyCode::KC_SPACE)
+	else if (e.key == OIS::KeyCode::KC_SPACE||e.key == OIS::KeyCode::KC_C)
 		m_state = PLAYER_HANDLER_STATE::SINGLE_ATTACK;
 	if (e.key == OIS::KeyCode::KC_W)
 		m_tumble = TUMBLE_DIRECTION::DIRECTION_IN;
@@ -50,8 +50,8 @@ NormalDirection PlayerHandlerStateNormal::getWalkingDirection()
 	if (keyboard->isKeyDown(OIS::KeyCode::KC_D))
 		direction++;
 	if (direction > 0)
-		return NormalDirection::Left;
+		return NormalDirection::dirRight;
 	if (direction < 0)
-		return NormalDirection::Right;
+		return NormalDirection::dirLeft;
 	return NormalDirection::None;
 }
