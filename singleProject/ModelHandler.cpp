@@ -43,7 +43,7 @@ void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& act
 	m_normalPosition.r += rVel;
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 	UnitCircleMovement::polarSetDirection(m_node, m_normalPosition, activeDirection);
-	m_normalDirection = rVel > 0 ? NormalDirection::dirRight : NormalDirection::dirLeft;
+	m_normalDirection = rVel > 0 ? NormalDirection::dirRight : ( rVel < 0 ?NormalDirection::dirLeft : m_normalDirection );
 }
 
 void ModelHandler::fallAndDie()
@@ -94,7 +94,7 @@ Ogre::SceneNode* ModelHandler::getNode() const
 {
 	return m_node;
 }
-const PolarCoordinates& ModelHandler::getNormalPos() 
+const PolarCoordinates& ModelHandler::getPolarCoordinates() 
 {
 	return m_normalPosition;
 }

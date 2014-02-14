@@ -20,5 +20,6 @@ private:
 
 	void goNormal();
 	void attackNextTarget();
+	void compensateAttackList(unsigned killedIndex);
 };
 

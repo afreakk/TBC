@@ -1,18 +1,21 @@
 #include "stdafx.h"
 #include "MutantContainer.h"
-
+#include "PlayerGlobalStats.h"
+static const unsigned energyPerMutant = 10;
 MutantContainer::MutantContainer()
 {}
 MutantContainer::~MutantContainer()
 {}
 void MutantContainer::killMutant(unsigned id)
 {
+	PlayerGlobalStats::getSingleton().modifyEnergy(energyPerMutant);
     auto handler = m_handlers.begin() + id;
     auto mutant = m_mutants.begin() + id;
-//    (*handler)->switchState(MUTANT_HANDLER_STATE::DEAD);
 	m_handlers[id]->switchState(MUTANT_HANDLER_STATE::DEAD);
-    //m_deadHandlers.push_back(std::move(*handler));
-    //m_deadMutants.push_back(std::move(*mutant));
+    m_deadHandlers.push_back(std::move(*handler));
+    m_deadMutants.push_back(std::move(*mutant));
+	m_handlers.erase(handler);
+	m_mutants.erase(mutant);
 }
 void MutantContainer::removeKilledMutants()
 {
@@ -72,18 +75,21 @@ int MutantContainer::getClosestMutant(PolarCoordinates pos, NormalDirection dire
 	int idx = -1;
 	unsigned i = 0;
 	keepWithinMax(&pos.r);
+	Real rr = 999999999;
     switch (direction)
     {
 		case NormalDirection::dirRight:
             for (const auto& mutant : m_mutants)
             {
-                PolarCoordinates mutantPos = mutant->getNormalPosition();
+                PolarCoordinates mutantPos = mutant->getPolarCoordinates();
 				keepWithinMax(&mutantPos.r);
                 Real distance = mutantPos.r - pos.r;
                 if (mutantPos.r> pos.r && distance < closesDistance)
                 {
                     idx = i;
                     closesDistance = distance;
+					rr = mutantPos.r;
+
                 }
 				i++;
             }
@@ -91,13 +97,14 @@ int MutantContainer::getClosestMutant(PolarCoordinates pos, NormalDirection dire
 		case NormalDirection::dirLeft:
             for (const auto& mutant : m_mutants)
             {
-                PolarCoordinates mutantPos = mutant->getNormalPosition();
+                PolarCoordinates mutantPos = mutant->getPolarCoordinates();
 				keepWithinMax(&mutantPos.r);
                 Real distance = pos.r-mutantPos.r;
                 if (mutantPos.r < pos.r && distance < closesDistance)
                 {
                     idx = i;
                     closesDistance = distance;
+					rr = mutantPos.r;
                 }
 				i++;
             }
@@ -108,5 +115,7 @@ int MutantContainer::getClosestMutant(PolarCoordinates pos, NormalDirection dire
 			assert(0);
 			break;
     }
+	std::cout << pos.r << endl;
+	std::cout << rr << endl;
 	return idx;
 }

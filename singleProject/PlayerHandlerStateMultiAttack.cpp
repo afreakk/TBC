@@ -20,7 +20,6 @@ PlayerHandlerStateMultiAttack::PlayerHandlerStateMultiAttack(std::vector<unsigne
 PlayerHandlerStateMultiAttack::~PlayerHandlerStateMultiAttack()
 {
 	GlobalVariables::getSingleton().setSpeed(1.0);
-	MutantContainer::getSingleton().removeKilledMutants();
 }
 
 void PlayerHandlerStateMultiAttack::goNormal()
@@ -31,7 +30,7 @@ void PlayerHandlerStateMultiAttack::attackNextTarget()
 {
 	if (m_listIndex < m_attackList.size())
 	{
-		SceneNode*const node = MutantContainer::getSingleton().getMutants()[m_attackList[m_listIndex]]->getModelHandler().getNode();
+		SceneNode*const node = MutantContainer::getSingleton().getMutants()[ m_attackList[m_listIndex] ]->getModelHandler().getNode();
 		m_currentLerpState.reset();
 		m_currentLerpState = unique_ptr<BehaviourStateLERP>{ new BehaviourStateLERP(node, &PlayerGlobalStats::getSingleton().getLERPSpeed_Energy() ) };
 		m_player->setState(m_currentLerpState.get());
@@ -45,7 +44,9 @@ void PlayerHandlerStateMultiAttack::update()
 {
 	if (m_currentLerpState->nextTarget())
 	{
-		MutantContainer::getSingleton().killMutant(m_attackList[m_listIndex - 1]);
+		unsigned killedIndex = m_attackList[m_listIndex - 1];
+		MutantContainer::getSingleton().killMutant(killedIndex);
+		compensateAttackList(killedIndex);
 		attackNextTarget();
 	}
 }
@@ -56,4 +57,12 @@ void PlayerHandlerStateMultiAttack::keyPressed(const OIS::KeyEvent&)
 void PlayerHandlerStateMultiAttack::keyReleased(const OIS::KeyEvent&)
 {
 
+}
+void PlayerHandlerStateMultiAttack::compensateAttackList(unsigned killedIndex)
+{
+	for (auto& itt : m_attackList)
+	{
+		if (killedIndex < itt)
+			itt--;
+	}
 }

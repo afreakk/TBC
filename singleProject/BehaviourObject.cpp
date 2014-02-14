@@ -31,9 +31,9 @@ BEHAVOUR_STATE BehaviourObject::getState() const
 {
 	return m_currentState->getState();
 }
-PolarCoordinates BehaviourObject::getNormalPosition() 
+PolarCoordinates BehaviourObject::getPolarCoordinates() 
 {
-	return m_model->getNormalPos();
+	return m_model->getPolarCoordinates();
 }
 SceneNode* BehaviourObject::getNode() const 
 {

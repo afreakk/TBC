@@ -1,6 +1,5 @@
 #pragma once
 #include "MessageSubscriber.h"
-#include "MovableText.h"
 #include "BarTypes.h"
 #include "PlayerStatus.h"
 class PlayerGUI : public Ogre::Singleton<PlayerGUI>, public MessageSubscriber<PlayerStatus>

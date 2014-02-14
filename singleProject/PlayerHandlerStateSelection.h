@@ -4,6 +4,7 @@
 #include "PlayerHandlerEnums.h"
 class Player;
 class PlayerSelectionState;
+class BehaviourState;
 class PlayerHandlerStateSelection : public HandlerState <PLAYER_HANDLER_STATE>
 {
 public:
@@ -12,16 +13,19 @@ public:
 	void update() override;
 	void keyPressed(const OIS::KeyEvent&) override;
 	void keyReleased(const OIS::KeyEvent&) override;
+
 	std::vector<unsigned> getAttackList() const;
 private:
 	PlayerHandlerStateSelectionHandler m_selectionHandler;
 	Player* m_player;
-	unique_ptr<PlayerSelectionState> m_selectionState;
+	unique_ptr<BehaviourState> m_selectionState;
 	std::vector<unsigned> m_attackList;
 
 	void handleSelection(const OIS::KeyEvent&);
 	void pushBackSelected();
-	void goLerp();
+	bool currentMarkedIsInList();
+	void updateMarked();
+	void markEnergy();
 
 };
 

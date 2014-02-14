@@ -36,7 +36,7 @@ protected:
 public:
 	virtual Entity*					getEntity() const;
 	virtual SceneNode*				getNode() const ;
-	virtual const PolarCoordinates&	getNormalPos() ;
+	virtual const PolarCoordinates&	getPolarCoordinates() ;
 	virtual void					setNormalPos(PolarCoordinates newPos);
 	virtual const Vector3			getNormalVecPos() const;
 

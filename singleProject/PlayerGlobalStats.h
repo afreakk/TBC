@@ -10,9 +10,11 @@ public:
 
 	void setEnergy(const unsigned);
 	void modifyEnergy(const int);
+	void markEnergy(const unsigned);
 
 	void setHealth(const unsigned);
 	void modifyHealth(const int);
+	void markHealth(const unsigned);
 
 	const Real& getLERPSpeed_Energy() const;
 	const Real& getLERPSpeed_NoEnergy() const;
@@ -23,8 +25,7 @@ public:
 	const PlayerStatus message() override;
 private:
 	void parseScript();
-	unsigned m_energy;
-	unsigned m_healthPoints;
+	PlayerStatus m_status;
 	Real m_walkingSpeed;
 	Real m_LERPSpeed_Energy;
 	Real m_LERPSpeed_NoEnergy;

@@ -51,9 +51,9 @@ void MutantFireBall::update()
 			m_collisionObserver->setEnabled(false);
 		}
 	}
-	else
+	else //not hit player
 	{
-		bool hitSomething = false;
+		bool hitMutant = false;
         for (unsigned i = 0; i < MutantContainer::getSingleton().getMutants().size(); i++)
         {
 			Node* iMutantNode = MutantContainer::getSingleton().getMutants()[i]->getNode();
@@ -62,7 +62,7 @@ void MutantFireBall::update()
             if (TBCRay::getSingleton().raycast(m_node->getParent()->getPosition()+ RayHeight,  m_node->getParent()->getOrientation() *Vector3(0.0, 0.0, -1.0)
                 , MutantContainer::getSingleton().getMutants()[i].get()))
             {
-                hitSomething = true;
+                hitMutant = true;
                 m_planeCollider->position.z = m_node->convertWorldToLocalPosition( MutantContainer::getSingleton().getMutants()[i]->getNode()->getPosition() ).z ;
                 if (m_collisionObserver->isEnabled())
                 {
@@ -73,7 +73,7 @@ void MutantFireBall::update()
             }
 
         }
-		if (!hitSomething)
+		if (!hitMutant)
             m_planeCollider->position.z = -40000.0;
 	}
 	WeaponBeam::update();

@@ -10,7 +10,7 @@
 
 PlayerHandlerStateSingleAttack::PlayerHandlerStateSingleAttack( Player* player )
 : HandlerState(PLAYER_HANDLER_STATE::SINGLE_ATTACK)
-, m_mutantIdx(MutantContainer::getSingleton().getClosestMutant(player->getNormalPosition(), player->getModelHandler().getNormalDirection()))
+, m_mutantIdx(MutantContainer::getSingleton().getClosestMutant(player->getPolarCoordinates(), player->getModelHandler().getNormalDirection()))
 , m_player(player)
 , m_lerpState(m_mutantIdx>= 0 ? new BehaviourStateLERP(MutantContainer::getSingleton().getMutants()[m_mutantIdx]->getNode(), &PlayerGlobalStats::getSingleton().getLERPSpeed_NoEnergy() ) : nullptr )
 {
@@ -27,7 +27,6 @@ PlayerHandlerStateSingleAttack::PlayerHandlerStateSingleAttack( Player* player )
 
 PlayerHandlerStateSingleAttack::~PlayerHandlerStateSingleAttack()
 {
-	MutantContainer::getSingleton().removeKilledMutants();
 }
 
 void PlayerHandlerStateSingleAttack::update()

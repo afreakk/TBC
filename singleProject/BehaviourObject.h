@@ -22,7 +22,7 @@ protected:
 public:
 	//gets
 	Ogre::SceneNode* getNode() const ;
-	PolarCoordinates getNormalPosition() ;
+	PolarCoordinates getPolarCoordinates() ;
 	ModelHandler& getModelHandler();
 	BEHAVOUR_STATE getState() const;
 };
