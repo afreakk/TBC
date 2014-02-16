@@ -6,6 +6,7 @@ public:
 	GUIResources(std::string overlayName);
 	~GUIResources();
 	void addOverlayContainer(Ogre::OverlayContainer* container);
+	void removeOverlayContainer(Ogre::OverlayContainer* container);
 	void show(bool v);
 private:
 	void loadFont();

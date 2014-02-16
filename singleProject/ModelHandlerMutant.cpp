@@ -6,14 +6,14 @@
 #include "MutantGlobalStats.h"
 #include "WeaponTypes.h"
 
-using namespace Ogre;
-ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos, WeaponType weaponType)
-: ModelHandler(new ModelRecipeMutant(), normalPos)
+ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos, WeaponType weaponType, ModelRecipe* modlRecipe)
+: ModelHandler(modlRecipe, normalPos)
 , m_selectedTag(m_node)
 , m_bloodSplat(m_node, this)
 , m_weapon( nullptr)
 , m_number(m_node)
 , m_hovered(false)
+, m_type(WeaponType::NOTHING)
 {
 	setWeapon(weaponType);
 	setHovered(false);
@@ -26,6 +26,7 @@ void ModelHandlerMutant::init()
 {
 	ModelHandler::init();
 }
+
 
 void ModelHandlerMutant::damage(Vector3 direction)
 {
@@ -44,7 +45,8 @@ void ModelHandlerMutant::setHovered(bool selected)
 }
 void ModelHandlerMutant::setWeapon(WeaponType weaponType)
 {
-	switch (weaponType)
+	m_type = weaponType;
+	switch (m_type)
 	{
 	case WeaponType::LAZER:
 		m_weapon = unique_ptr<WeaponBase>(new MutantLazer(m_node, this));
@@ -55,8 +57,15 @@ void ModelHandlerMutant::setWeapon(WeaponType weaponType)
 	case WeaponType::FIREBALL:
 		m_weapon = unique_ptr<WeaponBase>(new MutantFireBall(m_node, this));
 		break;
+	case WeaponType::SUICIDE_BOMB:
+		m_weapon = unique_ptr<WeaponBase>(new MutantSuicide(m_node, this));
+		break;
 	default:
 		assert(0);
 		break;
 	}
+}
+WeaponType ModelHandlerMutant::getWeaponType()
+{
+	return m_type;
 }

@@ -2,8 +2,10 @@
 #include "EnemySpawner.h"
 #include "ConfigScriptLoader.h"
 #include "UnitCircleMovement.h"
+#include "ModelRecipeMutantSuicide.h"
+#include "ModelRecipeMutant.h"
 EnemySpawner::EnemySpawner() 
-: m_spawnDistance(Ogre::Math::PI / 8.0)
+: m_spawnDistance(Ogre::Math::PI / 64.0)
 , m_attackDistance(0.5)
 , m_mutantContainer(nullptr)
 , m_player(nullptr)
@@ -38,7 +40,17 @@ void EnemySpawner::instantiateNewEnemies()
 	{
 		if (isWithinRange(m_player->getPolarCoordinates().r, (*posIter).polar.r, m_spawnDistance))
 		{
-			Mutant* mutant = new Mutant((*posIter).polar,(*posIter).weaponType );
+			ModelRecipe* modelRecipe = nullptr;
+			switch ((*posIter).weaponType)
+			{
+			case WeaponType::SUICIDE_BOMB:
+                modelRecipe = new ModelRecipeMutantSuicide();
+				break;
+			default:
+				modelRecipe = new ModelRecipeMutant();
+				break;
+			}
+			Mutant* mutant = new Mutant((*posIter).polar,(*posIter).weaponType , modelRecipe );
 			MutantHandler* mutantHandler = new MutantHandler(mutant, m_player);
 			m_mutantContainer->addMutant(mutantHandler, mutant);
 			cout << "spawning new enemy" << endl;

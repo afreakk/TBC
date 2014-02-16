@@ -38,3 +38,8 @@ bool BehaviourStateLERP::attackEnemy(ModelHandler& modelHandler)
 	}
 	return false;
 }
+
+void BehaviourStateLERP::attack()
+{
+
+}

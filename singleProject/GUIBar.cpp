@@ -15,6 +15,11 @@ GUIBar::GUIBar( Ogre::Real xPos, Ogre::Real yPos, Ogre::Real barWidth, Ogre::Rea
 , m_dynamicBarMarkerMaterial(materialName + "Marker")
 , m_rammeMaterial("ramme")
 , m_glassMaterial("glass")
+, m_ramme(nullptr)
+, m_dynamicBar(nullptr)
+, m_barMarker(nullptr)
+, m_glass(nullptr)
+, m_text(nullptr)
 , m_barMaxWidth(barWidth)
 , m_barHeight(barHeight)
 , m_xPos(xPos)
@@ -27,7 +32,8 @@ GUIBar::GUIBar( Ogre::Real xPos, Ogre::Real yPos, Ogre::Real barWidth, Ogre::Rea
 }
 GUIBar::~GUIBar()
 {
-
+	if (m_ramme)
+		GUIResources::getSingleton().removeOverlayContainer(m_ramme);
 }
 void GUIBar::setValue(unsigned energy)
 {

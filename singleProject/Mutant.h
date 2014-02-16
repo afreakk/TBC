@@ -5,7 +5,7 @@
 class Mutant : public BehaviourObject, public Distancer
 {
 public:
-	Mutant(const PolarCoordinates pos, WeaponType weaponType);
+	Mutant(const PolarCoordinates pos, WeaponType weaponType, ModelRecipe* modelRecipe);
 	~Mutant();
 
 };

@@ -38,3 +38,13 @@ private:
 	unsigned m_weaponDamage;
 
 };
+//suicidebomb
+class MutantSuicide : public WeaponBomb
+{
+public:
+	MutantSuicide(Ogre::SceneNode* parentNode, ModelHandler* model);
+	void update() override;
+	void activate() override;
+private:
+	Ogre::Real m_weaponRadius;
+};

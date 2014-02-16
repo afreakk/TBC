@@ -30,6 +30,9 @@ PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 
 void PlayerHandlerStateSelection::update()
 {
+	auto siz = MutantContainer::getSingleton().getMutants().size();
+	if (! (siz>0))
+        m_state = PLAYER_HANDLER_STATE::NORMAL;
 	if (m_state != m_originalState)
 		return;
 	updateMarked();

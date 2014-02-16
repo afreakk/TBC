@@ -14,6 +14,7 @@ public:
 	void update(ModelHandler& ) override;
 	bool nextTarget() const;
 private:
+	void attack();
 	LERP_STATE m_lerpState;
 	Ogre::SceneNode*const m_target;
 	bool m_goNextTarget;

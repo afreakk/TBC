@@ -1,8 +1,12 @@
 #include "stdafx.h"
 #include "LevelMenu.h"
+#include "MainLevelSetter.h"
+#include "MainUpdate.h"
 
 
-LevelMenu::LevelMenu() : ILevel(LevelID::LEVEL_MENU)
+LevelMenu::LevelMenu() 
+: ILevel(LevelID::LEVEL_MENU)
+, m_time(Real(0.0))
 {
 	cout << "entering LevelMenu Constructor:" << endl;
 	cout << "exiting LevelMenu Construcotr:" << endl;
@@ -12,9 +16,10 @@ LevelMenu::LevelMenu() : ILevel(LevelID::LEVEL_MENU)
 LevelMenu::~LevelMenu()
 {
 }
-
 bool LevelMenu::update()
 {
-	cout << "updating LevelMenu" << endl;
+	m_time += MainUpdate::getSingleton().getDeltaTime();
+	/*if (m_time > 0.1)
+		MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);*/
 	return false;
 }

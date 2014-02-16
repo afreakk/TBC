@@ -39,7 +39,7 @@ unsigned energyCostOf(PolarCoordinates a, PolarCoordinates b)
 {
 	keepWithinMax(&a.r);
 	keepWithinMax(&b.r);
-	return static_cast<unsigned>(round( Ogre::Math::Abs(a.r - b.r)*100.0 ));
+	return static_cast<unsigned>(round( Ogre::Math::Abs(a.r - b.r)*200.0 ));
 }
 bool isWithinRange(Real r1, Real r2, Real distance)
 {
@@ -89,4 +89,18 @@ Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction)
 PolarCoordinates polarFromStarting(Real r, unsigned laneIdx)
 {
 	return PolarCoordinates(r, LaneSettings::getSingleton().getLane(laneIdx), LaneSettings::getSingleton().getHeight());
+}
+bool hitTestSide(PolarCoordinates left, PolarCoordinates right, Real* closestDistance, bool skipDistance)
+{
+    keepWithinMax(&right.r);
+    Real distance = right.r - left.r;
+    Real diff = right.r - left.r;
+    if (distance >= 0.0 && distance < Math::PI/168.0 && distance < *closestDistance && abs(right.d - left.d)<(skipDistance ? 600:100))
+    {
+        *closestDistance = distance;
+		return true;
+
+    }
+	return false;
+
 }

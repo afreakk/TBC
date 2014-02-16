@@ -2,26 +2,22 @@
 #include "Mutant.h"
 #include "MutantHandler.h"
 #include "simpleUtils.h"
+struct mutantCarcas
+{
+	unique_ptr<MutantHandler> handler;
+	unique_ptr<Mutant> mutant;
+	Real time;
+	mutantCarcas() : handler(nullptr), mutant(nullptr), time(0.0)
+	{}
+};
 class MutantContainer : public Singleton<MutantContainer>
 {
 public:
-    //sort by distance 
-	struct {
-		bool operator()(const unique_ptr<MutantHandler>& a, const unique_ptr<MutantHandler>& b)
-		{
-			return a->distance < b->distance;
-		}
-	} handlerSort;
-	struct {
-		bool operator()(const unique_ptr<Mutant>& a, const unique_ptr<Mutant>& b)
-		{
-			return a->distance < b->distance;
-		}
-	} mutantSort;
-    //end sortbydistance
 	MutantContainer();
     ~MutantContainer();
 	void killMutant(unsigned id);
+    // returns -1 if not found
+	int getIndexOf(Ogre::SceneNode* node);
     void removeKilledMutants();
     void addMutant(MutantHandler* mutantHandler, Mutant* mutant);
     void sortByDistance(Vector3 playerPos);
@@ -31,12 +27,11 @@ public:
 	int getClosestMutant(PolarCoordinates pos, NormalDirection direction);
     void update();
 private:
+	Ogre::Real m_despawnTime;
 	std::vector<unique_ptr<MutantHandler>> m_handlers;
 	std::vector<unique_ptr<Mutant>> m_mutants;
 
-	std::vector<unique_ptr<MutantHandler>> m_deadHandlers;
-	std::vector<unique_ptr<Mutant>> m_deadMutants;
+	std::vector<unique_ptr<mutantCarcas>> m_deadMutant;
+	void handleDeadMutants();
 
 };
-
-template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;

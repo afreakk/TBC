@@ -4,7 +4,7 @@
 
 MutantNumber::MutantNumber(SceneNode* node)
 : m_modelNode(node)
-, m_fontNode(m_modelNode->createChildSceneNode())
+, m_fontNode(m_modelNode->createChildSceneNode(Vector3(0.0,300.0,0.0)))
 , m_numberText(nullptr)
 , m_marked(false)
 {

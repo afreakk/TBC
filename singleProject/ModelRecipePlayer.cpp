@@ -17,6 +17,9 @@ Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
     Ogre::Entity* ent = sMgr->createEntity("PlayerEntity", "ninja.mesh");
 	ent->setQueryFlags(QueryMasks::PlayerMask);
 	ent->setUpdateBoundingBoxFromSkeleton(true);
+	unsigned short src, dest;
+	if (!ent->getMesh()->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
+		ent->getMesh()->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
 	return ent;
 }
 
@@ -41,10 +44,9 @@ BaseAnimation* ModelRecipePlayer::getAttack(Ogre::Entity* entity)
 	anims.push_back(entity->getAnimationState("Attack3"));
 	return new AnimationAttack(anims);
 }
-Ogre::SceneNode* ModelRecipePlayer::initNode(Ogre::SceneManager* sMgr)
+void ModelRecipePlayer::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 {
-	auto node = sMgr->getRootSceneNode()->createChildSceneNode("PlayerNode");
-	return node;
+	node->attachObject(ent);
 }
 BaseAnimation* ModelRecipePlayer::getTumble(Ogre::Entity* entity)
 {

@@ -6,7 +6,7 @@ SelectedTag::SelectedTag(SceneNode* parentNode)
 : m_id(++m_selectedTagCount)
 , m_node(parentNode->createChildSceneNode())
 , m_particleSystem( ParticleUniverse::ParticleSystemManager::getSingleton().createParticleSystem(
-"selectedTag"+boost::lexical_cast<string>(m_id), "woosh", OgreCore::getSingleton().getSceneMgr() ) )
+"selectedTag"+boost::lexical_cast<string>(m_id), "hwoosh", OgreCore::getSingleton().getSceneMgr() ) )
 {
 	m_node->attachObject(m_particleSystem);
 }

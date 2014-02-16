@@ -22,6 +22,9 @@ Ogre::Entity* ModelRecipeMutant::initMesh(Ogre::SceneManager* sMgr)
 {
 	auto ent = sMgr->createEntity(m_entityName, "ninja.mesh");
 	ent->setUpdateBoundingBoxFromSkeleton(true);
+	unsigned short src, dest;
+	if (!ent->getMesh()->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
+		ent->getMesh()->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
 	return ent;
 }
 
@@ -47,8 +50,7 @@ BaseAnimation* ModelRecipeMutant::getAttack(Ogre::Entity* entity)
 	anims.push_back(entity->getAnimationState("Attack3"));
 	return new AnimationAttack(anims);
 }
-Ogre::SceneNode* ModelRecipeMutant::initNode(Ogre::SceneManager* sMgr)
+void ModelRecipeMutant::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 {
-	auto node = sMgr->getRootSceneNode()->createChildSceneNode(m_nodeName);
-	return node;
+	node->attachObject(ent);
 }

@@ -32,6 +32,7 @@
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="LvlOneEnvironment.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainLevelSetter.cpp" />
     <ClCompile Include="MainUpdate.cpp" />
     <ClCompile Include="ManualLine.cpp" />
     <ClCompile Include="MeshEmitter.cpp" />
@@ -39,6 +40,7 @@
     <ClCompile Include="ModelHandlerMutant.cpp" />
     <ClCompile Include="ModelHandlerPlayer.cpp" />
     <ClCompile Include="ModelRecipeMutant.cpp" />
+    <ClCompile Include="ModelRecipeMutantSuicide.cpp" />
     <ClCompile Include="ModelRecipePlayer.cpp" />
     <ClCompile Include="MovableText.cpp" />
     <ClCompile Include="Mutant.cpp" />
@@ -49,6 +51,7 @@
     <ClCompile Include="MutantHandlerStateAttackRanged.cpp" />
     <ClCompile Include="MutantHandlerStateDead.cpp" />
     <ClCompile Include="MutantHandlerStateNormal.cpp" />
+    <ClCompile Include="MutantHandlerStateSuicideBomb.cpp" />
     <ClCompile Include="MutantNumber.cpp" />
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
@@ -115,6 +118,7 @@
     <ClInclude Include="ENUMNormalDirection.h" />
     <ClInclude Include="ENUMTumbleDirection.h" />
     <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="GlowMaterialListener.h" />
     <ClInclude Include="GUIResources.h" />
     <ClInclude Include="HandlerState.h" />
     <ClInclude Include="ILevel.h" />
@@ -126,6 +130,7 @@
     <ClInclude Include="LightHandler.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="LvlOneEnvironment.h" />
+    <ClInclude Include="MainLevelSetter.h" />
     <ClInclude Include="MainUpdate.h" />
     <ClInclude Include="ManualLine.h" />
     <ClInclude Include="MeshEmitter.h" />
@@ -136,6 +141,7 @@
     <ClInclude Include="ModelHandlerPlayer.h" />
     <ClInclude Include="ModelRecipe.h" />
     <ClInclude Include="ModelRecipeMutant.h" />
+    <ClInclude Include="ModelRecipeMutantSuicide.h" />
     <ClInclude Include="ModelRecipePlayer.h" />
     <ClInclude Include="MovableText.h" />
     <ClInclude Include="Mutant.h" />
@@ -147,6 +153,7 @@
     <ClInclude Include="MutantHandlerStateAttackRanged.h" />
     <ClInclude Include="MutantHandlerStateDead.h" />
     <ClInclude Include="MutantHandlerStateNormal.h" />
+    <ClInclude Include="MutantHandlerStateSuicideBomb.h" />
     <ClInclude Include="OgreFix.h" />
     <ClInclude Include="PlayerHandlerStateSingleAttack.h" />
     <ClInclude Include="PlayerStatus.h" />

@@ -11,3 +11,8 @@ LvlOneEnvironment::LvlOneEnvironment()
 LvlOneEnvironment::~LvlOneEnvironment()
 {
 }
+
+void LvlOneEnvironment::update()
+{
+	m_lightHandler.update();
+}

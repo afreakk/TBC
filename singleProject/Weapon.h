@@ -6,6 +6,7 @@ enum class WeaponType
     LAZER,
     FLAMETHROWER,
     FIREBALL,
+    SUICIDE_BOMB,
     NOTHING
 };
 namespace ParticleUniverse
@@ -16,7 +17,7 @@ namespace ParticleUniverse
 class WeaponBase : public ParticleEffect
 {
 public:
-	WeaponBase(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName);
+	WeaponBase(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName="");
 	virtual ~WeaponBase();
 	static WeaponType weaponTypeFromString(String weaponString);
 protected:
@@ -45,4 +46,11 @@ protected:
 	Ogre::Real m_ballDamageRadius;
 	bool m_endSpell;
 	bool hitTest();
+};
+class WeaponBomb : public WeaponBase
+{
+public:
+	WeaponBomb(SceneNode* parentNode, ModelHandler* model, String id, String templateName);
+	virtual ~WeaponBomb();
+	virtual void update() override;
 };

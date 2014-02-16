@@ -3,11 +3,12 @@
 #include "MutantHandlerStateNormal.h"
 #include "MutantHandlerStateAttackRanged.h"
 #include "MutantHandlerStateDead.h"
+#include "MutantHandlerStateSuicideBomb.h"
 #include "Player.h"
 #include "Mutant.h"
 
 MutantHandler::MutantHandler(Mutant* mutant, Player* player) 
-: StateHandler(new MutantHandlerStateNormal(mutant, player->getNode()))
+: StateHandler(new MutantHandlerStateNormal(mutant, player->getModelHandler().getPolarCoordinates()))
 , m_mutant(mutant)
 , m_player(player)
 {
@@ -23,13 +24,16 @@ void MutantHandler::switchState(MUTANT_HANDLER_STATE newState)
 	switch (newState)
 	{
 	case MUTANT_HANDLER_STATE::NORMAL:
-		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>( new MutantHandlerStateNormal(m_mutant, m_player->getNode()) ) ;
+		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>( new MutantHandlerStateNormal(m_mutant, m_player->getModelHandler().getPolarCoordinates()) ) ;
 		break;
 	case MUTANT_HANDLER_STATE::RANGED_ATTACK:
 		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>(new MutantHandlerStateAttackRanged(m_mutant, m_player->getNode()));
 		break;
 	case MUTANT_HANDLER_STATE::DEAD:
 		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>(new MutantHandlerStateDead(m_mutant));
+		break;
+	case MUTANT_HANDLER_STATE::SUICIDE_ATTACK:
+		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>(new MutantHandlerStateSuicideBomb(m_mutant, m_player->getNode()));
 		break;
 	default:
 		assert(0);

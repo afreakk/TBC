@@ -15,7 +15,7 @@ int WeaponBase::m_weaponCount = 0;
 WeaponBase::WeaponBase(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName)
 : ParticleEffect(parentNode, ++m_weaponCount, id, templateName, OgreCore::getSingleton().getSceneMgr())
 , m_model(model)
-, m_emitter(m_particleSystem->getTechnique(0)->getEmitter(emitterName))
+, m_emitter(emitterName!="" ? m_particleSystem->getTechnique(0)->getEmitter(emitterName) : nullptr)
 {
 
 }
@@ -39,6 +39,8 @@ WeaponType WeaponBase::weaponTypeFromString(String weaponString)
 		return WeaponType::FLAMETHROWER;
 	if (weaponString == "fireball")
 		return WeaponType::FIREBALL;
+	if (weaponString == "suicide")
+		return WeaponType::SUICIDE_BOMB;
 	assert(0);
 	return WeaponType::NOTHING;
 }
@@ -56,6 +58,20 @@ WeaponBeam::~WeaponBeam()
 void WeaponBeam::update()
 {
 	m_emitter->position = m_model->getBonePos();
+	WeaponBase::update();
+}
+
+
+WeaponBomb::WeaponBomb(SceneNode* parentNode, ModelHandler* model, String id, String templateName)
+: WeaponBase(parentNode, model, id, templateName)
+{
+}
+WeaponBomb::~WeaponBomb()
+{
+}
+
+void WeaponBomb::update()
+{
 	WeaponBase::update();
 }
 

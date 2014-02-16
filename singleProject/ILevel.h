@@ -5,8 +5,9 @@ class ILevel : public boost::noncopyable
 {
 public:
 	ILevel(LevelID levelID) :m_levelID(levelID)
-	{
-	}
+	{}
+	virtual ~ILevel()
+	{}
 	virtual bool update()=0;
 	const LevelID getID()
 	{

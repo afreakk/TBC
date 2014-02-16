@@ -7,10 +7,10 @@ public:
 	ModelRecipeMutant();
 	~ModelRecipeMutant();
 	Ogre::Entity* initMesh(Ogre::SceneManager* sMgr) override;
-	Ogre::SceneNode* initNode(Ogre::SceneManager* sMgr) override;
 	BaseAnimation* getWalk(Ogre::Entity*) override;
 	BaseAnimation* getAttack(Ogre::Entity*) override;
 	BaseAnimation* getDie(Ogre::Entity*) override;
+	virtual void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent);
 private:
 	const int m_id;
 	static int s_count;

@@ -27,6 +27,10 @@ void GUIResources::addOverlayContainer(Ogre::OverlayContainer* container)
 {
 	m_overlay->add2D(container);
 }
+void GUIResources::removeOverlayContainer(Ogre::OverlayContainer* container)
+{
+	m_overlay->remove2D(container);
+}
 void GUIResources::show(bool v)
 {
 	if (v)

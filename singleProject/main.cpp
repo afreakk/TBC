@@ -2,14 +2,16 @@
 //
 
 #include "stdafx.h"
-#include "LevelManager.h"
-#include "LevelOne.h"
+#include "MainLevelSetter.h"
 #include "MainUpdate.h"
 #include "OgreCore.h"
 #include "OISCore.h"
 #include "LaneSettings.h"
 #include "TBCRay.h"
 #include "GUIResources.h"
+#include "GlobalVariables.h"
+#include "MutantGlobalStats.h"
+#include "PlayerGlobalStats.h"
 
 int main()
 {
@@ -17,14 +19,14 @@ int main()
 	{
 		unique_ptr<OgreCore> ogreCore(new OgreCore());
 		OgreCore::getSingletonPtr()->initRoot();
-		OgreCore::getSingletonPtr()->initWindow(1024,576,"TBC");
+		OgreCore::getSingletonPtr()->initWindow(1280,720,"TBC");
 		OgreCore::getSingletonPtr()->initSceneManager();
 		OgreCore::getSingletonPtr()->initCamera("MainCamera");
 		OgreCore::getSingletonPtr()->initViewport();
 		OgreCore::getSingletonPtr()->initOverlaySystem();
 		OgreCore::getSingletonPtr()->initScript();
 		OgreCore::getSingletonPtr()->initResources();
-		OgreCore::getSingletonPtr()->getSceneMgr()->showBoundingBoxes(true);
+//		OgreCore::getSingletonPtr()->getSceneMgr()->showBoundingBoxes(true);
 
 		unique_ptr<GUIResources> guiResources = unique_ptr<GUIResources>(new GUIResources("GameOverlay"));
 		guiResources->show(true);
@@ -36,8 +38,13 @@ int main()
 		laneSettings->initLanes();
 		unique_ptr<TBCRay> raycasting = unique_ptr<TBCRay>(new TBCRay(OgreCore::getSingletonPtr()->getSceneMgr()));
 
-		LevelManager levelMgr(new LevelOne());
-		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(&levelMgr));
+		unique_ptr<GlobalVariables> m_globalVars = unique_ptr<GlobalVariables>(new GlobalVariables());
+		unique_ptr<PlayerGlobalStats> m_playerStats = unique_ptr<PlayerGlobalStats>(new PlayerGlobalStats());
+        unique_ptr<MutantGlobalStats> m_mutantGlobalStats = unique_ptr<MutantGlobalStats>(new MutantGlobalStats());
+
+
+		unique_ptr<MainLevelSetter> lvlSetter = unique_ptr<MainLevelSetter>(new MainLevelSetter(MainLevelEnums::LVL1));
+		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(lvlSetter->getLevelManager()));
 		Ogre::Root::getSingletonPtr()->startRendering();
 		cout << "rendering stopped ." << endl;
 	}

@@ -31,11 +31,11 @@ TBCRay::TBCRay(Ogre::SceneManager* sceneMgr)
 																			 */
 void TBCRay::debugRay(const Ogre::Vector3& point, const Ogre::Vector3& normal)
 {
-	m_line.update(point, point + normal);
+	//m_line.update(point, point + normal);
 }
 void TBCRay::debugHit(const Ogre::Vector3& point, const Ogre::Vector3& endPoint)
 {
-	m_hitLine.update(point, endPoint);
+	//m_hitLine.update(point, endPoint);
 }
 
 bool TBCRay::raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, BehaviourObject* gameObject)

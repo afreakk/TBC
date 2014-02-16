@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "LightHandler.h"
 #include "OgreCore.h"
+#include "MainUpdate.h"
 
 LightHandler::LightHandler()
+: time(0.0)
 {
 
 	auto sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
@@ -19,16 +21,24 @@ LightHandler::LightHandler()
 	sMgr->setShadowTextureSize(2048*2);*/
 	sMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-	Ogre::Light* directionalLight = sMgr->createLight("DirectionalLight");
+	directionalLight = sMgr->createLight("DirectionalLight");
 	directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
-	directionalLight->setDiffuseColour(Ogre::ColourValue(.5, .5, .5));
-	directionalLight->setSpecularColour(Ogre::ColourValue(.5, .5, .5));
-	directionalLight->setDirection(Ogre::Vector3(-1, -1, -1));
+	directionalLight->setDiffuseColour(Ogre::ColourValue(.95, .95, .95));
+	directionalLight->setSpecularColour(Ogre::ColourValue(.95, .95, .95));
+	directionalLight->setDirection(Ogre::Vector3(0.0, -1.0, -0.0));
+
 
 
 }
 
+void LightHandler::update()
+{
+	time += MainUpdate::getSingleton().getDeltaTime()/8.0;
+	directionalLight->setDirection(Ogre::Vector3(sin(time+3.14)*2.0, -1.0, cos(time+3.14)*2.0));
+}
 
 LightHandler::~LightHandler()
 {
+	auto sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
+	sMgr->destroyLight(directionalLight);
 }

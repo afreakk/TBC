@@ -311,6 +311,15 @@
     <ClCompile Include="MutantContainer.cpp">
       <Filter>Container</Filter>
     </ClCompile>
+    <ClCompile Include="MainLevelSetter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateSuicideBomb.cpp">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelRecipeMutantSuicide.cpp">
+      <Filter>Model\modelRecipe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -600,6 +609,18 @@
     </ClInclude>
     <ClInclude Include="BehaviourStateLimbo.h">
       <Filter>BehaviourState</Filter>
+    </ClInclude>
+    <ClInclude Include="GlowMaterialListener.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLevelSetter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerStateSuicideBomb.h">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRecipeMutantSuicide.h">
+      <Filter>Model\modelRecipe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

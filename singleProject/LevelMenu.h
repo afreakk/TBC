@@ -6,5 +6,7 @@ public:
 	LevelMenu();
 	~LevelMenu();
 	bool update() override;
+private:
+	Ogre::Real m_time;
 };
 

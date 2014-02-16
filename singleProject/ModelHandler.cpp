@@ -9,7 +9,7 @@ using namespace Ogre;
 ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos)
 : m_crRecipe(recipe)
 , m_entity(m_crRecipe->initMesh(OgreCore::getSingletonPtr()->getSceneMgr()))
-, m_node(m_crRecipe->initNode(OgreCore::getSingletonPtr()->getSceneMgr()))
+, m_node(OgreCore::getSingletonPtr()->getSceneMgr()->getRootSceneNode()->createChildSceneNode())
 , m_normalPosition(normalPos)
 , m_normalDirection(NormalDirection::None)
 {
@@ -17,6 +17,11 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos)
 }
 ModelHandler::~ModelHandler()
 {
+	SceneNode* parent = m_entity->getParentSceneNode();
+	parent->detachObject(m_entity);
+	OgreCore::getSingleton().getSceneMgr()->destroyEntity(m_entity->getName());
+	parent->removeAndDestroyAllChildren();
+	OgreCore::getSingleton().getSceneMgr()->destroySceneNode(parent->getName());
 	cout << "ModelHandler destrucotr " << endl;
 }
 
@@ -29,7 +34,7 @@ void ModelHandler::parseScript()
 }
 void ModelHandler::init() 
 {
-	m_node->attachObject(m_entity);
+	m_crRecipe->attachNode(m_node, m_entity);
 	m_animations[ANIMATIONS::ATTACK]= unique_ptr<BaseAnimation>(m_crRecipe->getAttack(m_entity) );
 	m_animations[ANIMATIONS::WALK]	= unique_ptr<BaseAnimation>(m_crRecipe->getWalk(m_entity) );
 	m_animations[ANIMATIONS::DIE]	= unique_ptr<BaseAnimation>(m_crRecipe->getDie(m_entity) );

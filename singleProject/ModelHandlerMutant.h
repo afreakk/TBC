@@ -7,7 +7,7 @@
 class ModelHandlerMutant : public ModelHandler
 {
 public:
-	ModelHandlerMutant(PolarCoordinates normalPos,  WeaponType weaponType);
+	ModelHandlerMutant(PolarCoordinates normalPos,  WeaponType weaponType, ModelRecipe* modlRecipe);
 	~ModelHandlerMutant();
 	void setHovered(bool);
 	bool isHovered() const
@@ -21,12 +21,15 @@ public:
 	{
 		return m_number;
 	}
+	WeaponType getWeaponType();
 private:
-	void setWeapon(WeaponType weaponType);
-
 	SelectedTag m_selectedTag;
 	BloodSplat m_bloodSplat;
 	unique_ptr<WeaponBase> m_weapon;
 	MutantNumber m_number;
 	bool m_hovered;
+	WeaponType m_type;
+
+	void setWeapon(WeaponType weaponType);
+
 };

@@ -17,3 +17,5 @@ unsigned energyCostOf(PolarCoordinates, PolarCoordinates);
 void vectorToPolar(const Ogre::Vector3 vec, PolarCoordinates&);
 Ogre::Vector3 vectorFromTumbleDirection(Ogre::Vector3 playerPos, TUMBLE_DIRECTION direction);
 PolarCoordinates polarFromStarting(Ogre::Real r, unsigned laneIdx);
+
+bool hitTestSide(PolarCoordinates left, PolarCoordinates right, Real* closestDistance, bool skipDistance=false);

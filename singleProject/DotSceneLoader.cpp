@@ -51,7 +51,9 @@ void DotSceneLoader::parseDotScene(const String &SceneName, const String &groupN
 	// figure out where to attach any nodes we create
 	mAttachNode = pAttachNode;
 	if (!mAttachNode)
-		mAttachNode = mSceneMgr->getRootSceneNode();
+		mAttachNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+    mAttachNode->scale(Vector3(75.0));
+
 	// Process the scene
 	processScene(XMLRoot);
 }
@@ -333,7 +335,7 @@ void DotSceneLoader::processTerrain(TiXmlElement *XMLNode)
 	memset(pMem, 0, terrainConfig.length() + 1);
 	memcpy(pMem, terrainConfig.c_str(), terrainConfig.length() + 1);
 	DataStreamPtr pStr(new Ogre::MemoryDataStream(pMem, terrainConfig.length() + 1, true));
-	this->mSceneMgr->setWorldGeometry(pStr);
+	//this->mSceneMgr->setWorldGeometry(pStr);
 }
 void DotSceneLoader::processUserDataReference(TiXmlElement *XMLNode, SceneNode *pParent)
 {
@@ -641,7 +643,15 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 	String id = getAttrib(XMLNode, "id");
 
 	String meshFile = getAttrib(XMLNode, "meshFile");
-	String materialFile = getAttrib(XMLNode, "materialFile");
+	std::vector<String> MaterialSyntax = { "materialFile", "materialName" };
+	String materialFile;
+	for (const auto & matSyn : MaterialSyntax)
+	{
+        materialFile = getAttrib(XMLNode, matSyn);
+		if (materialFile.size() > 0)
+			break;
+	}
+	materialFile = "blinn7";
 	bool isStatic = getAttribBool(XMLNode, "static", false);;
 	bool castShadows = getAttribBool(XMLNode, "castShadows");
 	// TEMP: Maintain a list of static and dynamic objects
