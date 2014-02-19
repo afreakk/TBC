@@ -15,10 +15,12 @@ public:
 		m_animStates[m_idx]->setLoop(false);
 		m_animStates[m_idx]->setEnabled(true);
 		m_animStates[m_idx]->addTime(time);
+		BaseAnimation::setStopped(false);
 	}
 	void endAnimation() override
 	{
 		m_animStates[m_idx]->setEnabled(false);
+		BaseAnimation::setStopped(true);
 	}
 	bool hasEnded() override
 	{

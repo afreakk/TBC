@@ -17,18 +17,17 @@ public:
 		m_animStates[m_idx]->setEnabled(true);
 		m_animStates[m_idx]->addTime(time);
 		m_animStates[m_idx]->setLoop(false);
+		BaseAnimation::setStopped(false);
 	}
 	void endAnimation() override
 	{
-		if (m_animStates[m_idx]->getEnabled())
-		{
-			m_animStates[m_idx]->setEnabled(false);
-			m_animStates[m_idx]->setTimePosition(0.0);
-			if (m_idx < m_animStates.size() - 1)
-				m_idx++;
-			else
-				m_idx = 0;
-		}
+        m_animStates[m_idx]->setEnabled(false);
+        m_animStates[m_idx]->setTimePosition(0.0);
+        if (m_idx < m_animStates.size() - 1)
+            m_idx++;
+        else
+            m_idx = 0;
+		BaseAnimation::setStopped(true);
 	}
 	bool hasEnded() override
 	{

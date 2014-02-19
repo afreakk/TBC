@@ -247,6 +247,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>OgreMain_d.lib;OgreRTShaderSystem_d.lib;OgreTerrain_d.lib;OgrePaging_d.lib;OgreVolume_d.lib;OgreOverlay_d.lib;OIS_d.lib;libboost_thread-vc120-mt-gd-1_55.lib;libboost_date_time-vc120-mt-gd-1_55.lib;libboost_system-vc120-mt-gd-1_55.lib;libboost_chrono-vc120-mt-gd-1_55.lib;ParticleUniverse_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TBCDEP)\lib\boost\$(Configuration);$(TBCDEP)\lib\ogre\$(Configuration);$(TBCDEP)\lib\particleu\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

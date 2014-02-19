@@ -13,10 +13,12 @@ public:
 		disableOtherAnims(otherAnims);
 		m_animStates[0]->setEnabled(true);
 		m_animStates[0]->addTime(time);
+		BaseAnimation::setStopped(false);
 	}
 	void endAnimation() override
 	{
 		m_animStates[0]->setEnabled(false);
+		BaseAnimation::setStopped(true);
 	}
 	bool hasEnded() override
 	{
