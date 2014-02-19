@@ -11,7 +11,8 @@ public:
 	void addTime(const Real& time, std::map<ANIMATIONS, unique_ptr<BaseAnimation> >& otherAnims) override
 	{
 		disableOtherAnims(otherAnims);
-		m_animStates[0]->setEnabled(true);
+		if (!m_animStates[0]->getEnabled())
+            m_animStates[0]->setEnabled(true);
 		m_animStates[0]->addTime(time);
 		BaseAnimation::setStopped(false);
 	}

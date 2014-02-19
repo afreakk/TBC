@@ -6,17 +6,18 @@ public:
 	AnimationAttack(std::vector<AnimationState*> animStates)
 		: BaseAnimation(animStates)
 		, m_idx(rand()%animStates.size())
+		, m_looping(false)
 	{
-
+		m_animStates[m_idx]->setLoop(m_looping);
 	}
 	~AnimationAttack()
 	{}
 	void addTime(const Real& time, std::map<ANIMATIONS, unique_ptr<BaseAnimation> >& otherAnims) override
 	{
 		disableOtherAnims(otherAnims);
-		m_animStates[m_idx]->setEnabled(true);
+		if (!m_animStates[m_idx]->getEnabled())
+		    m_animStates[m_idx]->setEnabled(true);
 		m_animStates[m_idx]->addTime(time);
-		m_animStates[m_idx]->setLoop(false);
 		BaseAnimation::setStopped(false);
 	}
 	void endAnimation() override
@@ -27,6 +28,7 @@ public:
             m_idx++;
         else
             m_idx = 0;
+		m_animStates[m_idx]->setLoop(m_looping);
 		BaseAnimation::setStopped(true);
 	}
 	bool hasEnded() override
@@ -35,5 +37,6 @@ public:
 	}
 private:
 	unsigned m_idx;
+	bool m_looping;
 };
 
