@@ -17,10 +17,12 @@ PlayerHandlerStateMultiAttack::PlayerHandlerStateMultiAttack(std::vector<unsigne
 {
 	setNextTarget();
 	GlobalVariables::getSingleton().setSpeed(PlayerGlobalStats::getSingleton().getSlowMotionPower());
+	MutantContainer::getSingleton().compensateThis(&m_attackList);
 }
 
 PlayerHandlerStateMultiAttack::~PlayerHandlerStateMultiAttack()
 {
+	MutantContainer::getSingleton().unCompensateThis(&m_attackList);
 	GlobalVariables::getSingleton().setSpeed(1.0);
 }
 
@@ -59,7 +61,6 @@ void PlayerHandlerStateMultiAttack::update()
 void PlayerHandlerStateMultiAttack::killTarget(unsigned idx)
 {
     MutantContainer::getSingleton().killMutantPlayer(idx);
-    MutantContainer::compensateAttackList(idx, &m_attackList);
 }
 void PlayerHandlerStateMultiAttack::keyPressed(const OIS::KeyEvent&)
 {

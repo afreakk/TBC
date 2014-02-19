@@ -6,7 +6,9 @@ template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
 static const unsigned energyPerMutant = 10;
 MutantContainer::MutantContainer()
 : m_despawnTime(2.0)
-{}
+{
+	m_listsToBeCompensated.push_back(&m_toBeKilled);
+}
 MutantContainer::~MutantContainer()
 {}
 void MutantContainer::killMutantPlayer(unsigned id)
@@ -28,7 +30,7 @@ void MutantContainer::moveMutant(unsigned id)
 	m_deadMutant.back()->mutant = std::move(*mutant);
 	m_handlers.erase(handler);
 	m_mutants.erase(mutant);
-	compensateAttackList(id, &m_toBeKilled);
+	compensateLists(id);
 }
 void MutantContainer::addMutant(MutantHandler* mutantHandler, Mutant* mutant)
 {
@@ -93,6 +95,22 @@ void MutantContainer::update()
 	if (m_deadMutant.size() > 0)
 		handleDeadMutants();
 }
+
+void MutantContainer::compensateThis(std::vector<unsigned>* attackList)
+{
+    m_listsToBeCompensated.push_back(attackList);
+}
+void MutantContainer::unCompensateThis(std::vector<unsigned>* attackList)
+{
+	auto m = std::find(m_listsToBeCompensated.begin(), m_listsToBeCompensated.end(), attackList);
+	if (m != m_listsToBeCompensated.end())
+		m_listsToBeCompensated.erase(m);
+}
+void MutantContainer::compensateLists(unsigned killedIndex)
+{
+	for (auto it : m_listsToBeCompensated)
+		compensateAttackList(killedIndex, it);
+}   
 void MutantContainer::handleDeadMutants()
 {
     int toDespawn = -1;

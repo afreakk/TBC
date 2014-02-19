@@ -25,7 +25,8 @@ public:
     std::vector<unique_ptr<Mutant>>& getAndSortMutants(Vector3 pos);
 	int getClosestMutant(PolarCoordinates pos, NormalDirection direction);
     void update();
-	static void compensateAttackList(unsigned killedIndex, std::vector<unsigned>* toBeKilledList );
+	void compensateThis(std::vector<unsigned>* attackList);
+	void unCompensateThis(std::vector<unsigned>* attackList);
 private:
 	Ogre::Real m_despawnTime;
 	std::vector<unique_ptr<MutantHandler>> m_handlers;
@@ -34,9 +35,13 @@ private:
 	std::vector<unique_ptr<mutantCarcas>> m_deadMutant;
 	std::vector<unsigned> m_toBeKilled;
 
+	std::vector< std::vector<unsigned>* > m_listsToBeCompensated;
+
 	void handleDeadMutants();
 	void checkDistance(const PolarCoordinates& pos, unsigned i, Ogre::Real* closestDistance , int* idx, bool left);
 	void moveMutant(unsigned id);
     void sortByDistance(Vector3 playerPos);
+	void compensateLists(unsigned killedIndex);
+	static void compensateAttackList(unsigned killedIndex, std::vector<unsigned>* toBeKilledList );
 
 };

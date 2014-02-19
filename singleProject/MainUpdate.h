@@ -10,8 +10,10 @@ public:
 	bool frameRenderingQueued(const Ogre::FrameEvent &evt) override;
 	bool frameStarted(const Ogre::FrameEvent &evt) override;
 	const Ogre::Real& getDeltaTime();
+	const Ogre::Real& getScaledDeltaTime();
 private:
 	LevelManager* m_levelManager;
 	Ogre::Real m_deltaTime;
+	Ogre::Real m_scaledDeltaTime;
 
 };

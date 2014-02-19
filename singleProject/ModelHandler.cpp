@@ -44,17 +44,16 @@ void ModelHandler::init()
 
 void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
-	Real rVel = rInc*GlobalVariables::getSingleton().getSpeed();
-	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rVel)*GlobalVariables::getSingleton().getNormalAnimWalkSpeed(), m_animations);
-	m_normalPosition.r += rVel;
+	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*GlobalVariables::getSingleton().getNormalAnimWalkSpeed(), m_animations);
+	m_normalPosition.r += rInc;
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 	UnitCircleMovement::polarSetDirection(m_node, m_normalPosition, activeDirection);
-	m_normalDirection = rVel > 0 ? NormalDirection::dirRight : ( rVel < 0 ?NormalDirection::dirLeft : m_normalDirection );
+	m_normalDirection = rInc > 0 ? NormalDirection::dirRight : ( rInc < 0 ?NormalDirection::dirLeft : m_normalDirection );
 }
 
 void ModelHandler::fallAndDie()
 {
-	Real animVel = (MainUpdate::getSingleton().getDeltaTime()*GlobalVariables::getSingleton().getSpeed()) * GlobalVariables::getSingleton().getAnimDieSpeed();
+	Real animVel = MainUpdate::getSingleton().getScaledDeltaTime() * GlobalVariables::getSingleton().getAnimDieSpeed();
 	m_animations[ANIMATIONS::DIE]->addTime(animVel , m_animations);
 }
 AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
@@ -74,9 +73,8 @@ AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const 
 		}
 		else
 		{
-			Real dtVel = dt;
-            scaleTime(&dtVel);
-			m_animations[ANIMATIONS::ATTACK]->addTime(dtVel*GlobalVariables::getSingleton().getLERPAnimAttackRatio(),m_animations);
+			Real dtScaled = scaleTime(dt);
+			m_animations[ANIMATIONS::ATTACK]->addTime(dtScaled*GlobalVariables::getSingleton().getLERPAnimAttackRatio(),m_animations);
 			return AttackReturn::KILLED;
 		}
 	}
@@ -88,23 +86,22 @@ bool ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real&
 		return true;
 	return false;
 }
-void ModelHandler::scaleTime(Ogre::Real* time)
+Ogre::Real ModelHandler::scaleTime(const Ogre::Real& time)
 {
-    *time = (*time)*GlobalVariables::getSingleton().getSpeed()*MainUpdate::getSingleton().getDeltaTime();
+	return time*MainUpdate::getSingleton().getScaledDeltaTime();
 }
-bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt, ANIMATIONS animation, Real minDistance, Real animLerpRatio, bool isRecursive)
+bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, ANIMATIONS animation, Real minDistance, Real animLerpRatio, bool isRecursive)
 {
-	Real dtVel = dt;
 	if (!isRecursive)
-		scaleTime(&dtVel);
-	if (dtVel > minDistance)
+		dt = scaleTime(dt);
+	if (dt > minDistance)
 	{
-		lerp(nextPosition, dtVel-minDistance, animation, minDistance, animLerpRatio, true);
-		dtVel = minDistance;
+		lerp(nextPosition, dt-minDistance, animation, minDistance, animLerpRatio, true);
+		dt = minDistance;
 	}
-	m_animations[animation]->addTime(dtVel*animLerpRatio, m_animations);
+	m_animations[animation]->addTime(dt*animLerpRatio, m_animations);
 	m_node->lookAt(nextPosition,Ogre::Node::TransformSpace::TS_WORLD);
-	m_node->translate(Vector3(0.0, 0.0, -dtVel), Ogre::Node::TS_LOCAL);
+	m_node->translate(Vector3(0.0, 0.0, -dt), Ogre::Node::TS_LOCAL);
 	if (!isRecursive)
 	{
 		updateNormalPos();

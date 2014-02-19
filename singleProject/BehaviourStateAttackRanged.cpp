@@ -26,7 +26,7 @@ BehaviourStateAttackRanged::~BehaviourStateAttackRanged()
 
 void BehaviourStateAttackRanged::update(ModelHandler& modelHandler)
 {
-	const auto& dt = MainUpdate::getSingleton().getDeltaTime()*GlobalVariables::getSingleton().getSpeed();
+	const auto& dt = MainUpdate::getSingleton().getScaledDeltaTime();
 	m_localTime += dt;
 	switch (m_phase)
 	{

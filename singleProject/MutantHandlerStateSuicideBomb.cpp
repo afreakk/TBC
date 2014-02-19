@@ -26,7 +26,7 @@ MutantHandlerStateSuicideBomb::~MutantHandlerStateSuicideBomb()
 
 void MutantHandlerStateSuicideBomb::update()
 {
-	m_detonationTimer -= MainUpdate::getSingleton().getDeltaTime();
+	m_detonationTimer -= MainUpdate::getSingleton().getScaledDeltaTime();
 	if (m_mutState->nextTarget())
 	{
 		static_cast<ModelHandlerMutant&>(m_mutant->getModelHandler()).fire();

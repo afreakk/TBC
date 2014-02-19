@@ -14,6 +14,7 @@ PlayerHandlerStateSelection::PlayerHandlerStateSelection(Player* player)
 , m_player(player)
 , m_selectionState(MutantContainer::getSingleton().getMutants().size() > 0 ? static_cast<BehaviourState*>(new PlayerSelectionState()) : static_cast<BehaviourState*>(new BehaviourStateLimbo()))
 {
+	MutantContainer::getSingleton().compensateThis(&m_attackList);
 	if (! (MutantContainer::getSingleton().getMutants().size()>0))
         m_state = PLAYER_HANDLER_STATE::NORMAL;
 	m_player->setState(m_selectionState.get());
@@ -23,6 +24,7 @@ PlayerHandlerStateSelection::PlayerHandlerStateSelection(Player* player)
 
 PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 {
+	MutantContainer::getSingleton().unCompensateThis(&m_attackList);
 	GlobalVariables::getSingleton().setSpeed(1.0);
 	for (auto idx:m_attackList)
 		static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[idx]->getModelHandler()).getNumer().unMarkNumber();

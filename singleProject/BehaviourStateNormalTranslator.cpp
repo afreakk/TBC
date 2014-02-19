@@ -22,7 +22,7 @@ void BehaviourStateNormalTranslator::update(ModelHandler& playerModel, NormalDir
 }
 void BehaviourStateNormalTranslator::increaseVelocity(const Real& ammount)
 {
-	m_velocity += ammount*MainUpdate::getSingletonPtr()->getDeltaTime();
+	m_velocity += ammount*MainUpdate::getSingletonPtr()->getScaledDeltaTime();
 }
 void BehaviourStateNormalTranslator::handleVelocity(NormalDirection activeDirection)
 {

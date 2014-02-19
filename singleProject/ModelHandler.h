@@ -23,10 +23,10 @@ public:
 	const Vector3 getBonePos() const ;
 	const Vector3 getBoneOrientation() const;
 	const NormalDirection getNormalDirection() const;
-	void scaleTime(Ogre::Real* time);
+	Ogre::Real scaleTime(const Ogre::Real& time);
 protected:
 	void updateNormalPos();
-	bool lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt, ANIMATIONS animation, Real distance, Real animLerpRatio, bool isRecursive=false);
+	bool lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, ANIMATIONS animation, Real distance, Real animLerpRatio, bool isRecursive=false);
 	void parseScript();
 
 	unique_ptr<ModelRecipe> m_crRecipe;
