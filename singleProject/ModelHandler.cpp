@@ -12,6 +12,7 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos)
 , m_node(OgreCore::getSingletonPtr()->getSceneMgr()->getRootSceneNode()->createChildSceneNode())
 , m_normalPosition(normalPos)
 , m_normalDirection(NormalDirection::None)
+, m_hasLerpAttacked(false)
 {
 	parseScript();
 }
@@ -56,24 +57,46 @@ void ModelHandler::fallAndDie()
 	Real animVel = (MainUpdate::getSingleton().getDeltaTime()*GlobalVariables::getSingleton().getSpeed()) * GlobalVariables::getSingleton().getAnimDieSpeed();
 	m_animations[ANIMATIONS::DIE]->addTime(animVel , m_animations);
 }
-LERP_STATE ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
-	if(lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
-		return LERP_STATE::LERP_ATTACK;
-	return LERP_STATE::LERP_WALK;
+	if (!m_hasLerpAttacked)
+	{
+		if (!lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
+			m_hasLerpAttacked = true;
+		return AttackReturn::NOT_KILLED;
+	}
+	else
+	{
+		if (m_animations[ANIMATIONS::ATTACK]->hasEnded())
+		{
+			m_hasLerpAttacked = false;
+            return AttackReturn::ANIM_ENDED;
+		}
+		else
+		{
+			Real dtVel = dt;
+            scaleTime(&dtVel);
+			m_animations[ANIMATIONS::ATTACK]->addTime(dtVel*GlobalVariables::getSingleton().getLERPAnimAttackRatio(),m_animations);
+			return AttackReturn::KILLED;
+		}
+	}
 
 }
-LERP_STATE ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+bool ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
 	if (lerp(nextPosition, dt, ANIMATIONS::WALK, m_LERPPrecision+m_startAttackDistance, GlobalVariables::getSingleton().getLERPAnimWalkRatio()))
-		return LERP_STATE::LERP_WALK;
-	return LERP_STATE::LERP_ATTACK;
+		return true;
+	return false;
+}
+void ModelHandler::scaleTime(Ogre::Real* time)
+{
+    *time = (*time)*GlobalVariables::getSingleton().getSpeed()*MainUpdate::getSingleton().getDeltaTime();
 }
 bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, const Ogre::Real& dt, ANIMATIONS animation, Real minDistance, Real animLerpRatio, bool isRecursive)
 {
 	Real dtVel = dt;
 	if (!isRecursive)
-		dtVel = dt*GlobalVariables::getSingleton().getSpeed()*MainUpdate::getSingleton().getDeltaTime();
+		scaleTime(&dtVel);
 	if (dtVel > minDistance)
 	{
 		lerp(nextPosition, dtVel-minDistance, animation, minDistance, animLerpRatio, true);

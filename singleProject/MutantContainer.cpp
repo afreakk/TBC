@@ -5,14 +5,21 @@
 template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
 static const unsigned energyPerMutant = 10;
 MutantContainer::MutantContainer()
-: m_despawnTime(1.0)
+: m_despawnTime(2.0)
 {}
 MutantContainer::~MutantContainer()
 {}
-void MutantContainer::killMutant(unsigned id)
+void MutantContainer::killMutantPlayer(unsigned id)
 {
 	PlayerGlobalStats::getSingleton().modifyEnergy(energyPerMutant);
-
+	killMutant(id);
+}
+void MutantContainer::killMutant(unsigned id)
+{
+	m_toBeKilled.push_back(id);
+}
+void MutantContainer::moveMutant(unsigned id)
+{
     auto handler = m_handlers.begin() + id;
     auto mutant = m_mutants.begin() + id;
 	(*handler)->switchState(MUTANT_HANDLER_STATE::DEAD);
@@ -21,11 +28,7 @@ void MutantContainer::killMutant(unsigned id)
 	m_deadMutant.back()->mutant = std::move(*mutant);
 	m_handlers.erase(handler);
 	m_mutants.erase(mutant);
-}
-void MutantContainer::removeKilledMutants()
-{
-    vectorRemoveNulls<unique_ptr<Mutant> > (&m_mutants);
-    vectorRemoveNulls<unique_ptr<MutantHandler>  >(&m_handlers);
+	compensateAttackList(id, &m_toBeKilled);
 }
 void MutantContainer::addMutant(MutantHandler* mutantHandler, Mutant* mutant)
 {
@@ -73,10 +76,20 @@ int MutantContainer::getIndexOf(Ogre::SceneNode* node)
 }
 void MutantContainer::update()
 {
-    for (auto& handler : m_handlers)
-        handler->update();
-    for (auto& mutant : m_mutants)
-		mutant->update();
+	for (unsigned i = 0; i < m_handlers.size(); i++)
+	{
+        m_handlers[i]->update();
+	}
+	for (unsigned i = 0; i< m_mutants.size(); i++)
+	{
+		m_mutants[i]->update();
+	}
+	if (m_toBeKilled.size()>0)
+	{
+        for (auto it : m_toBeKilled)
+            moveMutant(it);
+		m_toBeKilled.clear();
+	}
 	if (m_deadMutant.size() > 0)
 		handleDeadMutants();
 }
@@ -101,29 +114,16 @@ int MutantContainer::getClosestMutant(PolarCoordinates pos, NormalDirection dire
 {
 	Real closesDistance = 100000.0;
 	int idx = -1;
-	unsigned i = 0;
 	keepWithinMax(&pos.r);
     switch (direction)
     {
 		case NormalDirection::dirRight:
-            for (const auto& mutant : m_mutants)
-            {
-                PolarCoordinates mutantPos = mutant->getPolarCoordinates();
-				bool skipDistanceCheck = (static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getWeaponType() == WeaponType::SUICIDE_BOMB);
-				if (hitTestSide(pos,mutantPos,&closesDistance, skipDistanceCheck))
-                    idx = i;
-				i++;
-            }
+			for (unsigned i = 0; i < m_mutants.size(); i++)
+				checkDistance(pos, i, &closesDistance, &idx,false);
 			break;
 		case NormalDirection::dirLeft:
-            for (const auto& mutant : m_mutants)
-            {
-                PolarCoordinates mutantPos = mutant->getPolarCoordinates();
-				bool skipDistanceCheck = (static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getWeaponType() == WeaponType::SUICIDE_BOMB);
-				if (hitTestSide(mutantPos,pos,&closesDistance, skipDistanceCheck))
-                    idx = i;
-				i++;
-            }
+			for (unsigned i = 0; i < m_mutants.size(); i++)
+				checkDistance(pos, i, &closesDistance, &idx,true);
 			break;
 		case NormalDirection::None:
 			break;
@@ -132,4 +132,22 @@ int MutantContainer::getClosestMutant(PolarCoordinates pos, NormalDirection dire
 			break;
     }
 	return idx;
+}
+
+void MutantContainer::checkDistance(const PolarCoordinates& pos, unsigned i, Ogre::Real* closestDistance , int* idx, bool left)
+{
+	Mutant* mutant = m_mutants[i].get();
+    PolarCoordinates mutantPos = mutant->getPolarCoordinates();
+    bool skipDistanceCheck = (static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getWeaponType() == WeaponType::SUICIDE_BOMB);
+    if (hitTestSide(left?mutantPos:pos,left?pos:mutantPos,closestDistance, skipDistanceCheck))
+        *idx = i;
+}
+
+void MutantContainer::compensateAttackList(unsigned killedIndex, std::vector<unsigned>* toBeKilledList )
+{
+	for (auto& itt : *toBeKilledList)
+	{
+		if (killedIndex < itt)
+			itt--;
+	}
 }

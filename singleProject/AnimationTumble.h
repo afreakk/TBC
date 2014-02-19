@@ -21,6 +21,10 @@ public:
 		m_animStates[m_idx]->setEnabled(false);
 		m_animStates[m_idx]->setTimePosition(0.0);
 	}
+	bool hasEnded() override
+	{
+		return m_animStates[m_idx]->hasEnded();
+	}
 private:
 	unsigned m_idx;
 };

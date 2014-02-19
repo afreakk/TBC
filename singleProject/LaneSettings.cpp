@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "LaneSettings.h"
 #include "ConfigScriptLoader.h"
-
+#include "UnitCircleMovement.h"
 template<> LaneSettings* Ogre::Singleton<LaneSettings>::msSingleton = 0;
 LaneSettings::LaneSettings()
 {
@@ -12,6 +12,11 @@ LaneSettings::~LaneSettings()
 {
 }
 
+Ogre::Vector3 LaneSettings::getVectorOf(unsigned index, const Ogre::Real& r, const Ogre::Real& height)
+{
+	Real d = getLane(index);
+	return UnitCircleMovement::VectorFromPolar(PolarCoordinates(r, d, height));
+}
 void LaneSettings::initLanes()
 {
     ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "globalLanes");

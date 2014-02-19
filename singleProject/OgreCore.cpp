@@ -36,8 +36,9 @@ bool OgreCore::initRoot()
 
 
 	Ogre::RenderSystemList::const_iterator r_it;
+	const Ogre::RenderSystemList m = m_root->getAvailableRenderers();
 
-	r_it = m_root->getAvailableRenderers().begin();
+	r_it = m.begin();
 	m_root->setRenderSystem(*r_it);
 	m_root->initialise(false);
 
@@ -70,10 +71,22 @@ bool OgreCore::initResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery", "FileSystem", "SceneOne");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui", "FileSystem", "GUI");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/glsl", "FileSystem", "GLSL");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/fonts", "FileSystem", "Fonts");
 
+	/*Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/programs/Cg", "FileSystem", "exMat");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/programs/GLSL", "FileSystem", "exMat");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/programs/GLSL150", "FileSystem", "exMat");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/programs/GLSL400", "FileSystem", "exMat");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/programs/GLSLES", "FileSystem", "exMat");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/programs/HLSL", "FileSystem", "exMat");
+
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/scripts", "FileSystem", "exMat");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/scripts/SSAO", "FileSystem", "exMat");
+
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/textures", "FileSystem", "exMat");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/textures/SSAO", "FileSystem", "exMat");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/materials/textures/nvidia", "FileSystem", "exMat");*/
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 	return true;
 }
@@ -93,6 +106,19 @@ bool OgreCore::initWindow(const int xResolution, const int yResolution, const Og
 bool OgreCore::initSceneManager()
 {
 	m_sceneMgr = m_root->createSceneManager("OctreeSceneManager");
+	return true;
+}
+bool OgreCore::initShadowCasting()
+{
+	m_sceneMgr->setShadowTextureSelfShadow(true);
+	// Set the caster material which uses the shaders defined above
+	m_sceneMgr->setShadowTextureCasterMaterial("Ogre/DepthShadowmap/Caster/Float");
+	// Set the pixel format to floating point
+	m_sceneMgr->setShadowTexturePixelFormat(Ogre::PF_FLOAT32_R);
+	// You can switch this on or off, I suggest you try both and see which works best for you
+	m_sceneMgr->setShadowCasterRenderBackFaces(false);
+	// Finally enable the shadows using texture additive integrated
+	m_sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
 	return true;
 }
 
@@ -119,10 +145,10 @@ bool OgreCore::initViewport()
 }
 bool OgreCore::initCompositor()
 {
-	CompositorManager::getSingleton().addCompositor(m_camera->getViewport(), "Glow");
+/*	CompositorManager::getSingleton().addCompositor(m_camera->getViewport(), "Glow");
 	CompositorManager::getSingleton().setCompositorEnabled(m_camera->getViewport(), "Glow", true);
 	GlowMaterialListener *gml = new GlowMaterialListener();
-	Ogre::MaterialManager::getSingleton().addListener(gml);
+	Ogre::MaterialManager::getSingleton().addListener(gml);*/
 	return true;
 }
 //gets

@@ -13,13 +13,16 @@ public:
 	~BehaviourStateLERP();
 	void update(ModelHandler& ) override;
 	bool nextTarget() const;
+	bool enemyKilled() const;
 private:
-	void attack();
 	LERP_STATE m_lerpState;
 	Ogre::SceneNode*const m_target;
-	bool m_goNextTarget;
 	const Ogre::Real& m_speed;
+	bool m_goNextTarget;
+	bool m_running;
+	bool m_killed;
 
+	void attack();
 	bool attackEnemy(ModelHandler& modelHandler);
 };
 

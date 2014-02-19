@@ -1,5 +1,8 @@
 #pragma once
 #include "Weapon.h"
+/*
+Do not use activate() for killing of entities
+*/
 class ModelHandler;
 namespace Ogre
 {
@@ -44,7 +47,8 @@ class MutantSuicide : public WeaponBomb
 public:
 	MutantSuicide(Ogre::SceneNode* parentNode, ModelHandler* model);
 	void update() override;
-	void activate() override;
 private:
+	void detonate();
 	Ogre::Real m_weaponRadius;
+	bool m_detonated;
 };

@@ -26,6 +26,7 @@ int main()
 		OgreCore::getSingletonPtr()->initOverlaySystem();
 		OgreCore::getSingletonPtr()->initScript();
 		OgreCore::getSingletonPtr()->initResources();
+		OgreCore::getSingleton().initShadowCasting();
 //		OgreCore::getSingletonPtr()->getSceneMgr()->showBoundingBoxes(true);
 
 		unique_ptr<GUIResources> guiResources = unique_ptr<GUIResources>(new GUIResources("GameOverlay"));

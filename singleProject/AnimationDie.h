@@ -20,6 +20,10 @@ public:
 	{
 		m_animStates[m_idx]->setEnabled(false);
 	}
+	bool hasEnded() override
+	{
+		return m_animStates[m_idx]->hasEnded();
+	}
 private:
 	unsigned m_idx;
 };

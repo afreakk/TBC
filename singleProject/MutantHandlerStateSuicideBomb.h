@@ -11,5 +11,7 @@ public:
 	void update() override;
 private:
 	Mutant* m_mutant;
-	unique_ptr<BehaviourStateLERP> m_state;
+	unique_ptr<BehaviourStateLERP> m_mutState;
+	Ogre::Real m_detonationTimer;
+	bool m_activated;
 };

@@ -21,6 +21,7 @@ public:
 	bool initResources();   //second
 	bool initOverlaySystem();
 	bool initCompositor();
+	bool initShadowCasting();
 	//gets
 	const Ogre::Vector2&getResolution() const;
 	Ogre::Root*         getRoot() const;

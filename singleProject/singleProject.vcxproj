@@ -23,6 +23,7 @@
     <ClCompile Include="ConfigScriptLoader.cpp" />
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
+    <ClCompile Include="GlowMaterialListener.cpp" />
     <ClCompile Include="GUIResources.cpp" />
     <ClCompile Include="LaneSettings.cpp" />
     <ClCompile Include="LevelManager.cpp" />

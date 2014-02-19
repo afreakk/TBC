@@ -12,8 +12,10 @@ PlayerHandlerStateMultiAttack::PlayerHandlerStateMultiAttack(std::vector<unsigne
 , m_player(player)
 , m_listIndex(0)
 , m_currentLerpState(nullptr)
+, m_currentTargetIndex(0)
+, m_currentTargetKilled(false)
 {
-	attackNextTarget();
+	setNextTarget();
 	GlobalVariables::getSingleton().setSpeed(PlayerGlobalStats::getSingleton().getSlowMotionPower());
 }
 
@@ -22,33 +24,42 @@ PlayerHandlerStateMultiAttack::~PlayerHandlerStateMultiAttack()
 	GlobalVariables::getSingleton().setSpeed(1.0);
 }
 
-void PlayerHandlerStateMultiAttack::goNormal()
-{
-	m_state = PLAYER_HANDLER_STATE::NORMAL;
-}
-void PlayerHandlerStateMultiAttack::attackNextTarget()
+void PlayerHandlerStateMultiAttack::setNextTarget()
 {
 	if (m_listIndex < m_attackList.size())
 	{
-		SceneNode*const node = MutantContainer::getSingleton().getMutants()[ m_attackList[m_listIndex] ]->getModelHandler().getNode();
-		m_currentLerpState.reset();
-		m_currentLerpState = unique_ptr<BehaviourStateLERP>{ new BehaviourStateLERP(node, &PlayerGlobalStats::getSingleton().getLERPSpeed_Energy() ) };
-		m_player->setState(m_currentLerpState.get());
-		m_listIndex++;
+		m_currentTargetIndex = m_attackList[m_listIndex++];
+		SceneNode*const node = MutantContainer::getSingleton().getMutants()[ m_currentTargetIndex ]->getModelHandler().getNode();
+		setNewState(node);
 	}
 	else
-		goNormal();
+        m_state = PLAYER_HANDLER_STATE::NORMAL;
+}
+
+void PlayerHandlerStateMultiAttack::setNewState(Ogre::SceneNode* targetNode)
+{
+    m_currentLerpState.reset();
+    m_currentLerpState = unique_ptr<BehaviourStateLERP>{ new BehaviourStateLERP(targetNode, &PlayerGlobalStats::getSingleton().getLERPSpeed_Energy() ) };
+    m_player->setState(m_currentLerpState.get());
 }
 
 void PlayerHandlerStateMultiAttack::update()
 {
+	if (!m_currentTargetKilled && m_currentLerpState->enemyKilled())
+	{
+		killTarget(m_currentTargetIndex);
+		m_currentTargetKilled = true;
+	}
 	if (m_currentLerpState->nextTarget())
 	{
-		unsigned killedIndex = m_attackList[m_listIndex - 1];
-		MutantContainer::getSingleton().killMutant(killedIndex);
-		compensateAttackList(killedIndex);
-		attackNextTarget();
+		setNextTarget();
+		m_currentTargetKilled = false;
 	}
+}
+void PlayerHandlerStateMultiAttack::killTarget(unsigned idx)
+{
+    MutantContainer::getSingleton().killMutantPlayer(idx);
+    MutantContainer::compensateAttackList(idx, &m_attackList);
 }
 void PlayerHandlerStateMultiAttack::keyPressed(const OIS::KeyEvent&)
 {
@@ -57,12 +68,4 @@ void PlayerHandlerStateMultiAttack::keyPressed(const OIS::KeyEvent&)
 void PlayerHandlerStateMultiAttack::keyReleased(const OIS::KeyEvent&)
 {
 
-}
-void PlayerHandlerStateMultiAttack::compensateAttackList(unsigned killedIndex)
-{
-	for (auto& itt : m_attackList)
-	{
-		if (killedIndex < itt)
-			itt--;
-	}
 }

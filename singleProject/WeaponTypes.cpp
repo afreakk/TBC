@@ -81,20 +81,34 @@ void MutantFireBall::update()
 
 MutantSuicide::MutantSuicide(Ogre::SceneNode* parentNode, ModelHandler* model)
 : WeaponBomb(parentNode, model, "suicideExploisionnn", "suicideExplosion" )
-, m_weaponRadius(100.0)
+, m_weaponRadius(200.0)
+, m_detonated(false)
 {
 	m_node->setPosition(0.0, 150.0, 0.0);
 }
 void MutantSuicide::update()
 {
 	WeaponBomb::update();
-	int idx = MutantContainer::getSingleton().getIndexOf(m_node->getParentSceneNode());
-	if (idx >= 0)
-        shootMutant(idx);
+	if (!m_detonated)
+	{
+		detonate();
+		m_detonated = true;
+	}
 }
-void MutantSuicide::activate()
+void MutantSuicide::detonate()
 {
-	WeaponBomb::activate();
+    //player
 	if (PlayerContainer::getSingleton().getPlayer()->getNode()->getPosition().distance(m_node->getParent()->getPosition()) < m_weaponRadius)
 		shootPlayer(50);
+    //mutants
+    for (unsigned i = 0; i < MutantContainer::getSingleton().getMutants().size(); i++)
+	{
+        Node* iMutantNode = MutantContainer::getSingleton().getMutants()[i]->getNode();
+        if (iMutantNode == (m_node->getParent()))
+            continue;
+		if (iMutantNode->getPosition().distance(m_node->getParent()->getPosition())< m_weaponRadius)
+		{
+			shootMutant(i);
+		}
+    }
 }

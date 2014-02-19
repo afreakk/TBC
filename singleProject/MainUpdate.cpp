@@ -13,7 +13,7 @@ bool MainUpdate::frameEnded(const Ogre::FrameEvent &evt)
 }
 bool MainUpdate::frameRenderingQueued(const Ogre::FrameEvent &evt)
 { 
-	m_deltaTime = evt.timeSinceLastFrame;
+	m_deltaTime = evt.timeSinceLastFrame > 1.0 ? 1.0 : evt.timeSinceLastFrame;
 	OISCore::getSingletonPtr()->capture();
 	m_levelManager->update();
 	return !OgreCore::getSingletonPtr()->getWindow()->isClosed(); 

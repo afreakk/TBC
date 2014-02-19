@@ -20,11 +20,13 @@ ModelRecipeMutant::~ModelRecipeMutant()
 
 Ogre::Entity* ModelRecipeMutant::initMesh(Ogre::SceneManager* sMgr)
 {
-	auto ent = sMgr->createEntity(m_entityName, "ninja.mesh");
-	ent->setUpdateBoundingBoxFromSkeleton(true);
+	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("ninja.mesh", "Models") ;
+	auto mesh = resourcePtr.first.dynamicCast<Ogre::Mesh>();
 	unsigned short src, dest;
-	if (!ent->getMesh()->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
-		ent->getMesh()->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
+	if (!mesh->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
+		mesh->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
+	auto ent = sMgr->createEntity(m_entityName, mesh);
+	ent->setUpdateBoundingBoxFromSkeleton(true);
 	return ent;
 }
 

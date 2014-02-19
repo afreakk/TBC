@@ -8,20 +8,15 @@
 #include "BehaviourStateLimbo.h"
 
 
-PlayerHandlerStateSingleAttack::PlayerHandlerStateSingleAttack( Player* player )
+PlayerHandlerStateSingleAttack::PlayerHandlerStateSingleAttack( Player* player ,  unsigned targetIndex)
 : HandlerState(PLAYER_HANDLER_STATE::SINGLE_ATTACK)
-, m_mutantIdx(MutantContainer::getSingleton().getClosestMutant(player->getPolarCoordinates(), player->getModelHandler().getNormalDirection()))
+, m_targetIndex(targetIndex)
 , m_player(player)
-, m_lerpState(m_mutantIdx>= 0 ? new BehaviourStateLERP(MutantContainer::getSingleton().getMutants()[m_mutantIdx]->getNode(), &PlayerGlobalStats::getSingleton().getLERPSpeed_NoEnergy() ) : nullptr )
+, m_lerpState(new BehaviourStateLERP( MutantContainer::getSingleton().getMutants()[ m_targetIndex ]->getNode(), 
+&PlayerGlobalStats::getSingleton().getLERPSpeed_NoEnergy()))
+, m_currentTargetKilled(false)
 {
-	if (m_lerpState)
-		m_player->setState(m_lerpState.get());
-	else
-	{
-		m_limboState = unique_ptr<BehaviourState>(new BehaviourStateLimbo());
-		m_player->setState(m_limboState.get());
-		m_state = PLAYER_HANDLER_STATE::NORMAL;
-	}
+    m_player->setState(m_lerpState.get());
 }
 
 
@@ -31,11 +26,11 @@ PlayerHandlerStateSingleAttack::~PlayerHandlerStateSingleAttack()
 
 void PlayerHandlerStateSingleAttack::update()
 {
-	if (m_limboState)
-		return;
-	if (m_lerpState->nextTarget())
+	if (m_lerpState->enemyKilled() && !m_currentTargetKilled)
 	{
-		MutantContainer::getSingleton().killMutant(m_mutantIdx);
-        m_state = PLAYER_HANDLER_STATE::NORMAL;
+		MutantContainer::getSingleton().killMutantPlayer(m_targetIndex);
+		m_currentTargetKilled = true;
 	}
+	if (m_lerpState->nextTarget())
+        m_state = PLAYER_HANDLER_STATE::NORMAL;
 }

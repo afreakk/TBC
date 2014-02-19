@@ -18,5 +18,9 @@ public:
 	{
 		m_animStates[0]->setEnabled(false);
 	}
+	bool hasEnded() override
+	{
+		return false;
+	}
 };
 

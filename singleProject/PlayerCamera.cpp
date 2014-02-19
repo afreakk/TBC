@@ -36,7 +36,7 @@ void PlayerCamera::setNewState(PLAYER_HANDLER_STATE newState)
 	switch (newState)
 	{
 	case PLAYER_HANDLER_STATE::NORMAL:
-		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal( m_player->getNode()) };
+		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal( m_player )};
 		break;
 	case PLAYER_HANDLER_STATE::SELECTION:
 		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateSelection() };
@@ -51,7 +51,7 @@ void PlayerCamera::setNewState(PLAYER_HANDLER_STATE newState)
 		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateLERP(m_player->getNode()) };
 		break;
 	case PLAYER_HANDLER_STATE::TUMBLE:
-		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal( m_player->getNode()) };
+		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal( m_player ) };
 		break;
 	default:
 		assert(0);

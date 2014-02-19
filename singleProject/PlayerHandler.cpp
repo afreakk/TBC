@@ -8,6 +8,7 @@
 #include "PlayerHandlerStateTumble.h"
 #include "OISCore.h"
 #include "Player.h"
+#include "MutantContainer.h"
 
 
 PlayerHandler::PlayerHandler(Player* player) 
@@ -44,7 +45,7 @@ void PlayerHandler::switchState(PLAYER_HANDLER_STATE newState)
 		break;
 	case PLAYER_HANDLER_STATE::SINGLE_ATTACK:
 		m_currentState.reset();
-		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>( new PlayerHandlerStateSingleAttack(m_player));
+		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>( new PlayerHandlerStateSingleAttack(m_player, MutantContainer::getSingleton().getClosestMutant(m_player->getPolarCoordinates(), m_player->getModelHandler().getNormalDirection())));
 		break;
 	case PLAYER_HANDLER_STATE::DEAD:
 		m_currentState.reset();

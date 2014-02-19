@@ -9,6 +9,7 @@ public:
 	Ogre::Real getLane(unsigned index);
 	Ogre::Real getIncrement();
     Ogre::Real getHeight();
+	Ogre::Vector3 getVectorOf(unsigned index, const Ogre::Real& r, const Ogre::Real& height);
 	unsigned getLaneCount();
 private:
 	unsigned m_laneCount;

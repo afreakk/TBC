@@ -4,7 +4,7 @@
 #include "AnimationWalk.h"
 #include "AnimationDie.h"
 #include "AnimationTumble.h"
-
+#include "OgreCore.h"
 ModelRecipePlayer::ModelRecipePlayer()
 {
 }
@@ -14,12 +14,15 @@ ModelRecipePlayer::~ModelRecipePlayer()
 }
 Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
 {
-    Ogre::Entity* ent = sMgr->createEntity("PlayerEntity", "ninja.mesh");
-	ent->setQueryFlags(QueryMasks::PlayerMask);
-	ent->setUpdateBoundingBoxFromSkeleton(true);
+	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("ninja.mesh", "Models") ;
+	auto mesh = resourcePtr.first.dynamicCast<Ogre::Mesh>();
 	unsigned short src, dest;
-	if (!ent->getMesh()->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
-		ent->getMesh()->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
+	if (!mesh->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
+		mesh->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
+    Ogre::Entity* ent = sMgr->createEntity("PlayerEntity", mesh);
+	ent->setCastShadows(true);
+	ent->setUpdateBoundingBoxFromSkeleton(true);
+	ent->setQueryFlags(QueryMasks::PlayerMask);
 	return ent;
 }
 
@@ -46,6 +49,13 @@ BaseAnimation* ModelRecipePlayer::getAttack(Ogre::Entity* entity)
 }
 void ModelRecipePlayer::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 {
+	/*auto p = OgreCore::getSingleton().getSceneMgr()->createEntity("lowpoly_mainchar_final.mesh");
+	unsigned short src, dest;
+	if (!p->getMesh()->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
+		p->getMesh()->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
+	auto cNode = node->createChildSceneNode(Vector3(0.0,70.0,0.0));
+	cNode->scale(Vector3(1.0));
+	cNode->attachObject(p);*/
 	node->attachObject(ent);
 }
 BaseAnimation* ModelRecipePlayer::getTumble(Ogre::Entity* entity)

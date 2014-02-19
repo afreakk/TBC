@@ -320,6 +320,9 @@
     <ClCompile Include="ModelRecipeMutantSuicide.cpp">
       <Filter>Model\modelRecipe</Filter>
     </ClCompile>
+    <ClCompile Include="GlowMaterialListener.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
