@@ -30,8 +30,7 @@ void PlayerHandlerStateNormal::keyPressed(const OIS::KeyEvent& e)
 {
 	if (OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift) && e.key == OIS::KeyCode::KC_SPACE)
 		m_state = PLAYER_HANDLER_STATE::SELECTION;
-	else if ((e.key == OIS::KeyCode::KC_SPACE||e.key == OIS::KeyCode::KC_C)
-		&& MutantContainer::getSingleton().getClosestMutant(m_player->getPolarCoordinates(), m_player->getModelHandler().getNormalDirection()) >= 0)
+	else if (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C)
 		m_state = PLAYER_HANDLER_STATE::SINGLE_ATTACK;
 	if (e.key == OIS::KeyCode::KC_W)
 		m_tumble = TUMBLE_DIRECTION::DIRECTION_IN;

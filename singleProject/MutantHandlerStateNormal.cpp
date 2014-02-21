@@ -8,7 +8,7 @@ MutantHandlerStateNormal::MutantHandlerStateNormal(Mutant* mutant,const PolarCoo
 : HandlerState(MUTANT_HANDLER_STATE::NORMAL)
 , m_mutant(mutant)
 , m_playerCoords(plarerCoords)
-, m_walkingDirection{ m_mutant->getPolarCoordinates().r < m_playerCoords.r ? NormalDirection::dirRight : NormalDirection::dirLeft }
+, m_walkingDirection{ m_mutant->getPolarCoordinates().theta < m_playerCoords.theta ? NormalDirection::dirRight : NormalDirection::dirLeft }
 , m_normalState{ new BehaviourStateNormal{ &m_walkingDirection , &MutantGlobalStats::getSingleton().getWalkSpeed()}}
 {
 	m_mutant->setState(m_normalState.get());
@@ -21,7 +21,7 @@ MutantHandlerStateNormal::~MutantHandlerStateNormal()
 
 void MutantHandlerStateNormal::update()
 {
-	if (Math::Abs(m_mutant->getPolarCoordinates().r - m_playerCoords.r) < MutantGlobalStats::getSingleton().getAttackDistance())
+	if (Math::Abs(m_mutant->getPolarCoordinates().theta - m_playerCoords.theta) < MutantGlobalStats::getSingleton().getAttackDistance())
 		m_state = getAttackState();
 }
 

@@ -4,8 +4,7 @@
 #include "MutantContainer.h"
 #include "MainUpdate.h"
 PlayerCameraStateSelection::PlayerCameraStateSelection() 
-: m_mutants(MutantContainer::getSingleton().getMutants())
-, m_camera(OgreCore::getSingleton().getCamera())
+: m_camera(OgreCore::getSingleton().getCamera())
 , m_lookAt(Vector3::ZERO)
 {
 }
@@ -18,7 +17,7 @@ PlayerCameraStateSelection::~PlayerCameraStateSelection()
 void PlayerCameraStateSelection::update()
 {
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
-	for (const auto& mutant : m_mutants)
+	for (const auto& mutant : MutantContainer::getSingleton().getMutantIt())
 	{
 		ModelHandlerMutant& mutantModelHandler = static_cast<ModelHandlerMutant&>(mutant->getModelHandler());
 		if (mutantModelHandler.isHovered())

@@ -24,15 +24,13 @@ void ManualLine::init(Ogre::Vector3 fromPoint, Ogre::Vector3 toPoint, string mat
 }
 ManualLine::~ManualLine()
 {
-	if (!m_line)
-		assert(0);
+    assert(m_line);
     m_line->detachFromParent();
     OgreCore::getSingleton().getSceneMgr()->destroyManualObject(m_line);
 }
 void ManualLine::update(Vector3 fromPoint, Vector3 toPoint)
 {
-	if (!m_line)
-		assert(0);
+    assert(m_line);
 	m_line->beginUpdate(0);
 	m_line->position(fromPoint);
 	m_line->position(toPoint);

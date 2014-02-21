@@ -1,31 +1,32 @@
 #pragma once
 #include "HandlerState.h"
 #include "PlayerHandlerEnums.h"
+#include "MessageSubscriber.h"
 class BehaviourStateLERP;
 class Player;
+class BehaviourObject;
 namespace Ogre
 {
 	class SceneNode;
 }
 
-class PlayerHandlerStateMultiAttack : public HandlerState <PLAYER_HANDLER_STATE>
+class PlayerHandlerStateMultiAttack : public HandlerState <PLAYER_HANDLER_STATE>, public MessageSubscriber <std::string>
 {
 public:
-	PlayerHandlerStateMultiAttack(std::vector<unsigned> mutantList, Player* player);
+	PlayerHandlerStateMultiAttack(std::vector<std::string> mutantList, Player* player);
 	~PlayerHandlerStateMultiAttack();
 	void update() override;
-	void keyPressed(const OIS::KeyEvent&) override;
-	void keyReleased(const OIS::KeyEvent&) override;
+	void notify(std::string)override;
 private:
-	std::vector<unsigned> m_attackList;
+	std::vector<std::string> m_attackList;
 	Player* m_player;
-	unsigned m_listIndex;
 	unique_ptr<BehaviourStateLERP> m_currentLerpState;
-	unsigned m_currentTargetIndex;
+	std::vector<std::string>::iterator m_currentTargetIndex;
 	bool m_currentTargetKilled;
+	bool m_lerpingTowardsLane;
 
 	void setNextTarget();
-	void killTarget(unsigned idx);
-	void setNewState(Ogre::SceneNode* targetNode);
+	Ogre::Vector3* getClosestLanePosition();
+	void setNewState( Ogre::Vector3* targetPos);
 };
 

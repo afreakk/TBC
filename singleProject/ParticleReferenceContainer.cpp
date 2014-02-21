@@ -35,10 +35,6 @@ void ParticleReferenceContainer::removeParticle(ParticleEffect* prtEffect)
 }
 void ParticleReferenceContainer::update()
 {
-/*	for (std::vector<ParticleEffect*>::iterator itt = m_prtEffects.begin(); itt != m_prtEffects.end(); ++itt)
-		(*itt)->update();
-    for (const auto& prtEffect : m_prtEffects)
-        prtEffect->update();*/
     //todo: when weapon hits mutant and switches hit mutant state to dead "itterator not itterable" for next ->update()
     // for loop works though,, why lol
 	for (unsigned i = 0; i < m_prtEffects.size(); i++)

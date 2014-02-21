@@ -6,67 +6,89 @@
 #include "BehaviourStateLERP.h"
 #include "Player.h"
 #include "ModelHandler.h"
-PlayerHandlerStateMultiAttack::PlayerHandlerStateMultiAttack(std::vector<unsigned> mutantList, Player* player) 
+#include "LERPWalkAttack.h"
+#include "LERPWalk.h"
+#include "LaneSettings.h"
+
+PlayerHandlerStateMultiAttack::PlayerHandlerStateMultiAttack(std::vector<std::string> mutantList, Player* player) 
 : HandlerState(PLAYER_HANDLER_STATE::MULTI_ATTACK)
 , m_attackList(mutantList)
 , m_player(player)
-, m_listIndex(0)
 , m_currentLerpState(nullptr)
-, m_currentTargetIndex(0)
+, m_currentTargetIndex(m_attackList.begin())
 , m_currentTargetKilled(false)
+, m_lerpingTowardsLane(false)
 {
-	setNextTarget();
 	GlobalVariables::getSingleton().setSpeed(PlayerGlobalStats::getSingleton().getSlowMotionPower());
-	MutantContainer::getSingleton().compensateThis(&m_attackList);
+	MutantContainer::getSingleton().registerSubscriber(this, "PlayerHandlerStateMultiAttack");
+    setNewState(nullptr);
 }
 
 PlayerHandlerStateMultiAttack::~PlayerHandlerStateMultiAttack()
 {
-	MutantContainer::getSingleton().unCompensateThis(&m_attackList);
+	MutantContainer::getSingleton().removeSubscriber("PlayerHandlerStateMultiAttack");
 	GlobalVariables::getSingleton().setSpeed(1.0);
 }
 
 void PlayerHandlerStateMultiAttack::setNextTarget()
 {
-	if (m_listIndex < m_attackList.size())
+	if ((m_currentTargetIndex+1) != m_attackList.end())
 	{
-		m_currentTargetIndex = m_attackList[m_listIndex++];
-		SceneNode*const node = MutantContainer::getSingleton().getMutants()[ m_currentTargetIndex ]->getModelHandler().getNode();
-		setNewState(node);
+        m_currentTargetIndex++;
+		setNewState(nullptr);
+	}
+	else if (!m_lerpingTowardsLane)
+	{
+		setNewState(getClosestLanePosition());
+		m_lerpingTowardsLane = true;
 	}
 	else
+	{
         m_state = PLAYER_HANDLER_STATE::NORMAL;
+	}
 }
 
-void PlayerHandlerStateMultiAttack::setNewState(Ogre::SceneNode* targetNode)
+Ogre::Vector3* PlayerHandlerStateMultiAttack::getClosestLanePosition()
 {
+    unsigned idx = LaneSettings::getSingleton().getClosestLane(m_player->getNode()->getPosition());
+	return new Vector3(LaneSettings::getSingleton().getVectorOf(idx, m_player->getPolarCoordinates().theta, m_player->getPolarCoordinates().h));
+}
+void PlayerHandlerStateMultiAttack::setNewState( Ogre::Vector3* targetPos)
+{
+	BehaviourObject* targetObject = nullptr;
+	LERPBase* lerpConfiguration;
+	if (targetPos == nullptr)
+	{
+		if ((targetObject = MutantContainer::getSingleton().getMutant(*m_currentTargetIndex)) == nullptr)
+		{
+			setNextTarget();
+			return;
+		}
+		lerpConfiguration = new LERPWalkAttack();
+	}
+	else
+		lerpConfiguration = new LERPWalk();
     m_currentLerpState.reset();
-    m_currentLerpState = unique_ptr<BehaviourStateLERP>{ new BehaviourStateLERP(targetNode, &PlayerGlobalStats::getSingleton().getLERPSpeed_Energy() ) };
+    m_currentLerpState = unique_ptr<BehaviourStateLERP>{ 
+		new BehaviourStateLERP(targetObject, &PlayerGlobalStats::getSingleton().getLERPSpeed_Energy(), lerpConfiguration, targetPos) };
     m_player->setState(m_currentLerpState.get());
 }
 
+void PlayerHandlerStateMultiAttack::notify(std::string victim)
+{
+	if (*m_currentTargetIndex == victim && !m_currentLerpState->enemyKilled())
+		setNextTarget();
+}
 void PlayerHandlerStateMultiAttack::update()
 {
 	if (!m_currentTargetKilled && m_currentLerpState->enemyKilled())
 	{
-		killTarget(m_currentTargetIndex);
+        MutantContainer::getSingleton().killMutantPlayer(*m_currentTargetIndex);
 		m_currentTargetKilled = true;
 	}
-	if (m_currentLerpState->nextTarget())
+	else if (m_currentLerpState->nextTarget())
 	{
 		setNextTarget();
 		m_currentTargetKilled = false;
 	}
-}
-void PlayerHandlerStateMultiAttack::killTarget(unsigned idx)
-{
-    MutantContainer::getSingleton().killMutantPlayer(idx);
-}
-void PlayerHandlerStateMultiAttack::keyPressed(const OIS::KeyEvent&)
-{
-
-}
-void PlayerHandlerStateMultiAttack::keyReleased(const OIS::KeyEvent&)
-{
-
 }

@@ -2,46 +2,50 @@
 #include "Mutant.h"
 #include "MutantHandler.h"
 #include "simpleUtils.h"
-struct mutantCarcas
+#include "Messager.h"
+struct MutantPair
 {
-	unique_ptr<MutantHandler> handler;
-	unique_ptr<Mutant> mutant;
+	std::unique_ptr<MutantHandler> handler;
+	std::unique_ptr<Mutant> mutant;
+	Ogre::Real distance;
 	Real time;
-	mutantCarcas() : handler(nullptr), mutant(nullptr), time(0.0)
+	MutantPair(MutantHandler* h, Mutant* m) : handler(h), mutant(m), distance(0.0), time(0.0)
 	{}
 };
-class MutantContainer : public Singleton<MutantContainer>
+class MutantContainer : public Singleton<MutantContainer> , public Messager <std::string>
 {
 public:
 	MutantContainer();
     ~MutantContainer();
-	void killMutantPlayer(unsigned id);
-	void killMutant(unsigned id);
-    // returns -1 if not found
-	int getIndexOf(Ogre::SceneNode* node);
+	Mutant* getMutant(const std::string& name);
+	MutantHandler* getHandler(const std::string& name);
+	void killMutantPlayer(const std::string&);
+	void killMutant(const std::string&);
+    //replaces mutant names in list with killed if they get killed while list is being operated on.
     void addMutant(MutantHandler* mutantHandler, Mutant* mutant);
-    const std::vector<unique_ptr<Mutant>>& getMutants() const;
-    std::vector<unique_ptr<Mutant>>& getMutants();
-    std::vector<unique_ptr<Mutant>>& getAndSortMutants(Vector3 pos);
-	int getClosestMutant(PolarCoordinates pos, NormalDirection direction);
+	Mutant* getClosestHigherThan(const Ogre::Real& theta);
+	Mutant* getClosestLowerThan(const Ogre::Real& theta);
+	std::string getClosestMutant(PolarCoordinates pos, NormalDirection direction);
+	std::list<Mutant*> getMutantIt() { return m_aliveMutantIteratorList; }
+	std::list<MutantHandler*> getHandlerIt() { return m_aliveHandlerIteratorList; }
     void update();
-	void compensateThis(std::vector<unsigned>* attackList);
-	void unCompensateThis(std::vector<unsigned>* attackList);
+	virtual const std::string message() override;
 private:
 	Ogre::Real m_despawnTime;
-	std::vector<unique_ptr<MutantHandler>> m_handlers;
-	std::vector<unique_ptr<Mutant>> m_mutants;
+	std::map<std::string, MutantPair*> m_aliveMutants;
+	std::list<Mutant*> m_aliveMutantIteratorList;
+	std::list<MutantHandler*> m_aliveHandlerIteratorList;
 
-	std::vector<unique_ptr<mutantCarcas>> m_deadMutant;
-	std::vector<unsigned> m_toBeKilled;
+	std::map<std::string, MutantPair*> m_deadMutants;
+	std::string m_lastDeadMutant;
 
-	std::vector< std::vector<unsigned>* > m_listsToBeCompensated;
+	std::vector<std::string> m_executedMutants;
+	std::vector<std::string> m_toBeKilled;
 
+	Mutant* getClosest(bool higher, const Ogre::Real& theta);
 	void handleDeadMutants();
-	void checkDistance(const PolarCoordinates& pos, unsigned i, Ogre::Real* closestDistance , int* idx, bool left);
-	void moveMutant(unsigned id);
-    void sortByDistance(Vector3 playerPos);
-	void compensateLists(unsigned killedIndex);
-	static void compensateAttackList(unsigned killedIndex, std::vector<unsigned>* toBeKilledList );
-
+	void executeDoomedMutants();
+	bool checkDistance(const PolarCoordinates& pos, Mutant* mutant , Ogre::Real* closestDistance ,  bool left);
+	void moveMutant(const std::string& id);
+	void updateAliveMutants();
 };

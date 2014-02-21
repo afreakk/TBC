@@ -2,17 +2,23 @@
 #include "BehaviourStateLERP.h"
 #include "MainUpdate.h"
 #include "ModelHandler.h"
-BehaviourStateLERP::BehaviourStateLERP(SceneNode* target, const Real* speed) 
+#include "BehaviourObject.h"
+#include "MutantContainer.h"
+#include "PlayerContainer.h"
+#include "PlayerHandler.h"
+
+BehaviourStateLERP::BehaviourStateLERP(BehaviourObject* target, const Real* speed, LERPBase* mode, Ogre::Vector3* targetPosition) 
 : BehaviourState(BEHAVOUR_STATE::LERP)
-, m_lerpState(LERP_STATE::LERP_WALK)
+, m_lerpReturn(LerpTowardsReturn::RUNNING)
 , m_target(target)
+, m_targetPos(targetPosition) // optional
 , m_speed(*speed)
 , m_goNextTarget(false)
-, m_running(true)
 , m_killed(false)
+, m_lerpMode(mode)
 {
+	assert(m_target||targetPosition);
 }
-
 
 BehaviourStateLERP::~BehaviourStateLERP()
 {
@@ -28,33 +34,37 @@ bool BehaviourStateLERP::enemyKilled() const
 }
 void BehaviourStateLERP::update(ModelHandler& modelHandler)
 {
-	if (attackEnemy(modelHandler))
-		m_goNextTarget = true;
-}
-bool BehaviourStateLERP::attackEnemy(ModelHandler& modelHandler)
-{
-	const Ogre::Vector3& tPos = m_target->getPosition();
-	if (m_running)
-		m_running = modelHandler.lerpWalk(tPos, m_speed);
-	else
+	/*if ((!m_targetPos && !m_target) || !m_targetPos &&
+		(m_target->isDead() && ( m_lerpReturn == LerpTowardsReturn::RUNNING || m_lerpReturn == LerpTowardsReturn::ATTACKING )))
 	{
-		AttackReturn m = modelHandler.lerpAttack(tPos, m_speed);
-		switch (m)
+		const std::string& name = modelHandler.getNode()->getName();
+		switch (modelHandler.getType())
 		{
-		case AttackReturn::KILLED:
-			m_killed = true;
-			break;
-		case AttackReturn::ANIM_ENDED:
-			return true;
-			break;
+		case ModelHandlerType::Mutant:
+			MutantContainer::getSingleton().getHandler( name )->queSwitchState(MUTANT_HANDLER_STATE::NORMAL);
+			return;
+		case ModelHandlerType::Player:
+			PlayerContainer::getSingleton().getHandler()->queSwitchState(PLAYER_HANDLER_STATE::NORMAL);
+			return;
+		default:
+			assert(0);
+			return;
 		}
-	}
-
-
-	return false;
-}
-
-void BehaviourStateLERP::attack()
-{
-
+	}*/
+	m_lerpReturn = m_lerpMode->update(modelHandler, (m_targetPos ? *m_targetPos : m_target->getNode()->getPosition()), m_speed);
+    switch (m_lerpReturn)
+    {
+    case LerpTowardsReturn::RUNNING:
+        break;
+    case LerpTowardsReturn::ATTACKING:
+        break;
+    case LerpTowardsReturn::HIT:
+        m_killed = true;
+        break;
+    case LerpTowardsReturn::ANIMATION_END:
+        m_goNextTarget = true;
+        break;
+    default:
+        break;
+    }
 }

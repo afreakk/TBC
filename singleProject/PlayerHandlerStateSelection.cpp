@@ -9,50 +9,57 @@
 #include "ModelHandlerMutant.h"
 
 PlayerHandlerStateSelection::PlayerHandlerStateSelection(Player* player)
-: m_selectionHandler(player->getNode()->getPosition(), m_attackList)
+: m_selectionHandler(m_markedList)
 , HandlerState(PLAYER_HANDLER_STATE::SELECTION)
 , m_player(player)
-, m_selectionState(MutantContainer::getSingleton().getMutants().size() > 0 ? static_cast<BehaviourState*>(new PlayerSelectionState()) : static_cast<BehaviourState*>(new BehaviourStateLimbo()))
+, m_selectionState(static_cast<BehaviourState*>(new PlayerSelectionState() ) )
 {
-	MutantContainer::getSingleton().compensateThis(&m_attackList);
-	if (! (MutantContainer::getSingleton().getMutants().size()>0))
-        m_state = PLAYER_HANDLER_STATE::NORMAL;
 	m_player->setState(m_selectionState.get());
-	GlobalVariables::getSingleton().setSpeed(1.0 / 20.0);
+	GlobalVariables::getSingleton().setSpeed(PlayerGlobalStats::getSingleton().getSlowMotionPower());
+	MutantContainer::getSingleton().registerSubscriber(this,"PlayerHandlerStateSelection");
 }
 
 
 PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 {
-	MutantContainer::getSingleton().unCompensateThis(&m_attackList);
+	MutantContainer::getSingleton().removeSubscriber("PlayerHandlerStateSelection");
 	GlobalVariables::getSingleton().setSpeed(1.0);
-	for (auto idx:m_attackList)
-		static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[idx]->getModelHandler()).getNumer().unMarkNumber();
+	for (auto idx : m_markedList)
+	{
+		Mutant* mutant;
+		if((mutant = MutantContainer::getSingleton().getMutant(idx)) != nullptr)
+		    static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getNumer().unMarkNumber();
+	}
 }
 
 void PlayerHandlerStateSelection::update()
 {
-	auto siz = MutantContainer::getSingleton().getMutants().size();
-	if (! (siz>0))
-        m_state = PLAYER_HANDLER_STATE::NORMAL;
-	if (m_state != m_originalState)
-		return;
-	updateMarked();
-	markEnergy();
+	if(updateMarked())
+	    markEnergy();
 }
 void PlayerHandlerStateSelection::markEnergy()
 {
-	if (currentMarkedIsInList())
-	    PlayerGlobalStats::getSingleton().markEnergy( 0);
-	else
-	    PlayerGlobalStats::getSingleton().markEnergy( m_selectionHandler.getEnergyCostOfMarked() );
+    PlayerGlobalStats::getSingleton().markEnergy( m_selectionHandler.getEnergyCostOfMarked() );
 }
-void PlayerHandlerStateSelection::updateMarked()
+bool PlayerHandlerStateSelection::updateMarked()
 {
-	if (m_attackList.size() > 0)
-		m_selectionHandler.updateMarked(MutantContainer::getSingleton().getMutants()[m_attackList.back()]->getPolarCoordinates());
+	if (m_markedList.size() > 0)
+		return m_selectionHandler.updateMarked(getLatestMarkedPolar());
 	else
-		m_selectionHandler.updateMarked(m_player->getPolarCoordinates());
+		return m_selectionHandler.updateMarked(m_player->getPolarCoordinates());
+}
+void PlayerHandlerStateSelection::notify(std::string victim)
+{
+	auto w = m_markedList.end();
+	if ((w = std::find(m_markedList.begin(), m_markedList.end(), victim)) != m_markedList.end())
+		m_markedList.erase(w);
+}
+const PolarCoordinates& PlayerHandlerStateSelection::getLatestMarkedPolar(int lookLower)
+{
+	Mutant * mutant;
+	if ((mutant = MutantContainer::getSingleton().getMutant(*(m_markedList.end()-lookLower))) != nullptr)
+		return mutant->getPolarCoordinates();
+	getLatestMarkedPolar(lookLower+1);
 }
 void PlayerHandlerStateSelection::keyPressed(const OIS::KeyEvent& e)
 {
@@ -65,35 +72,29 @@ void PlayerHandlerStateSelection::keyReleased(const OIS::KeyEvent& e)
 }
 void PlayerHandlerStateSelection::handleSelection(const OIS::KeyEvent& e)
 {
-	if (e.key == OIS::KC_SPACE)
-		pushBackSelected();
+	if (e.key == OIS::KC_SPACE || e.key == OIS::KC_C)
+		selectMarked();
 	if (e.key == OIS::KC_Q)
 		m_state = PLAYER_HANDLER_STATE::NORMAL;
-	else if (e.key == OIS::KC_RETURN && m_attackList.size()>0)
+	else if (e.key == OIS::KC_RETURN && m_markedList.size()>0)
         m_state = PLAYER_HANDLER_STATE::MULTI_ATTACK;
 }
-void PlayerHandlerStateSelection::pushBackSelected()
+void PlayerHandlerStateSelection::selectMarked()
 {
-	if (currentMarkedIsInList())
+	const std::string& marked = m_selectionHandler.getMarked();
+	if (marked == "NONE")
 		return;
-	if (m_selectionHandler.getEnergyCostOfMarked() > PlayerGlobalStats::getSingleton().getEnergy())
+	Mutant* mutant;
+	if (m_selectionHandler.getEnergyCostOfMarked() > PlayerGlobalStats::getSingleton().getEnergy() 
+		|| (mutant = MutantContainer::getSingleton().getMutant(marked)) == nullptr)
 		return;
 	PlayerGlobalStats::getSingleton().modifyEnergy(-static_cast<int>(m_selectionHandler.getEnergyCostOfMarked()));
-	m_attackList.push_back(m_selectionHandler.getMarked());
-	static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutants()[m_attackList[m_attackList.size() - 1]]->getModelHandler()).getNumer().markAs(m_attackList.size());
+	m_markedList.push_back(marked);
+	static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getNumer().markAs(m_markedList.size());
 	m_selectionHandler.addLine();
 }
 
-bool PlayerHandlerStateSelection::currentMarkedIsInList()
+const std::vector<string>& PlayerHandlerStateSelection::getAttackList() const
 {
-	for (const auto& atk : m_attackList)
-	{
-		if (m_selectionHandler.getMarked() == atk)
-			return true;
-	}
-	return false;
-}
-std::vector<unsigned> PlayerHandlerStateSelection::getAttackList() const
-{
-	return m_attackList;
+	return m_markedList;
 }

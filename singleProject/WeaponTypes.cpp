@@ -51,31 +51,27 @@ void MutantFireBall::update()
 			m_collisionObserver->setEnabled(false);
 		}
 	}
-	else //not hit player
-	{
-		bool hitMutant = false;
-        for (unsigned i = 0; i < MutantContainer::getSingleton().getMutants().size(); i++)
+    bool hitMutant = false;
+    for (const auto& itt : MutantContainer::getSingleton().getMutantIt())
+    {
+        Node* iMutantNode = itt->getNode();
+        if (iMutantNode == (m_node->getParent()))
+            continue;
+        if (TBCRay::getSingleton().raycast(m_node->getParent()->getPosition()+ RayHeight,  m_node->getParent()->getOrientation() *Vector3(0.0, 0.0, -1.0), itt))
         {
-			Node* iMutantNode = MutantContainer::getSingleton().getMutants()[i]->getNode();
-			if (iMutantNode == (m_node->getParent()))
-				continue;
-            if (TBCRay::getSingleton().raycast(m_node->getParent()->getPosition()+ RayHeight,  m_node->getParent()->getOrientation() *Vector3(0.0, 0.0, -1.0)
-                , MutantContainer::getSingleton().getMutants()[i].get()))
+            hitMutant = true;
+            m_planeCollider->position.z = m_node->convertWorldToLocalPosition( itt->getNode()->getPosition() ).z ;
+            if (m_collisionObserver->isEnabled())
             {
-                hitMutant = true;
-                m_planeCollider->position.z = m_node->convertWorldToLocalPosition( MutantContainer::getSingleton().getMutants()[i]->getNode()->getPosition() ).z ;
-                if (m_collisionObserver->isEnabled())
-                {
-                    shootMutant(i);
-                    m_collisionObserver->setEnabled(false);
-					break;
-                }
+                MutantContainer::getSingleton().killMutant(itt->getNode()->getName());
+                m_collisionObserver->setEnabled(false);
+                break;
             }
-
         }
-		if (!hitMutant)
-            m_planeCollider->position.z = -40000.0;
-	}
+
+    }
+    if (!hitMutant)
+        m_planeCollider->position.z = -40000.0;
 	WeaponBeam::update();
 }
 
@@ -101,14 +97,12 @@ void MutantSuicide::detonate()
 	if (PlayerContainer::getSingleton().getPlayer()->getNode()->getPosition().distance(m_node->getParent()->getPosition()) < m_weaponRadius)
 		shootPlayer(50);
     //mutants
-    for (unsigned i = 0; i < MutantContainer::getSingleton().getMutants().size(); i++)
+	for (auto itt : MutantContainer::getSingleton().getMutantIt())
 	{
-        Node* iMutantNode = MutantContainer::getSingleton().getMutants()[i]->getNode();
+        Node* iMutantNode = itt->getNode();
         if (iMutantNode == (m_node->getParent()))
             continue;
 		if (iMutantNode->getPosition().distance(m_node->getParent()->getPosition())< m_weaponRadius)
-		{
-			shootMutant(i);
-		}
+			MutantContainer::getSingleton().killMutant(itt->getNode()->getName());
     }
 }

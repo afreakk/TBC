@@ -10,10 +10,10 @@ BaseAnimation::~BaseAnimation()
 }
 void BaseAnimation::disableOtherAnims(std::map<ANIMATIONS, std::unique_ptr<BaseAnimation> >& otherAnims)
 {
-    for (auto it = otherAnims.begin(); it != otherAnims.end(); it++)
+    for (auto& it : otherAnims)
     {
-        if (!it->second->isStopped() && it->second.get() != this)
-            it->second->endAnimation();
+        if (!it.second->isStopped() && it.second.get() != this)
+            it.second->endAnimation();
     }
 }
 void BaseAnimation::setStopped(bool val)

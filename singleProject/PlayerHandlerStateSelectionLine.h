@@ -5,7 +5,7 @@ class PlayerHandlerStateSelectionLine
 public:
 	PlayerHandlerStateSelectionLine();
 	~PlayerHandlerStateSelectionLine();
-	void setNewTarget(unsigned index);
+	void setNewTarget(Ogre::SceneNode* index);
 	void addEnemy();
 	void update();
 private:

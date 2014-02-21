@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "MutantHandlerStateSuicideBomb.h"
-#include "Mutant.h"
 #include "ModelHandlerMutant.h"
 #include "BehaviourStateLERP.h"
 #include "MutantGlobalStats.h"
 #include "MainUpdate.h"
 #include "MutantContainer.h"
+#include "LERPWalkAttack.h"
 
-MutantHandlerStateSuicideBomb::MutantHandlerStateSuicideBomb(Mutant* mutant, SceneNode* playerNode)
+MutantHandlerStateSuicideBomb::MutantHandlerStateSuicideBomb(BehaviourObject* mutant, BehaviourObject* playerObject)
 : HandlerState(MUTANT_HANDLER_STATE::RANGED_ATTACK)
 , m_mutant(mutant)
-, m_mutState{ new BehaviourStateLERP( playerNode, &MutantGlobalStats::getSingleton().getLERPSpeed() ) }
+, m_mutState{ new BehaviourStateLERP( playerObject, &MutantGlobalStats::getSingleton().getLERPSpeed(),new LERPWalkAttack() )  }
 , m_detonationTimer(5.0)
 , m_activated(false)
 {
@@ -30,13 +30,13 @@ void MutantHandlerStateSuicideBomb::update()
 	if (m_mutState->nextTarget())
 	{
 		static_cast<ModelHandlerMutant&>(m_mutant->getModelHandler()).fire();
-		MutantContainer::getSingleton().killMutant(MutantContainer::getSingleton().getIndexOf(m_mutant->getNode()));
+		MutantContainer::getSingleton().killMutant(m_mutant->getNode()->getName());
 		m_activated = true;
 	}
 	else if (m_detonationTimer <= 0.0)
 	{
 		static_cast<ModelHandlerMutant&>(m_mutant->getModelHandler()).fire();
-		MutantContainer::getSingleton().killMutant(MutantContainer::getSingleton().getIndexOf(m_mutant->getNode()));
+		MutantContainer::getSingleton().killMutant(m_mutant->getNode()->getName());
 		m_activated = true;
 	}
 }

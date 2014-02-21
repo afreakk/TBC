@@ -6,13 +6,14 @@
 using namespace Ogre;
 
 
-ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos)
+ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos, ModelHandlerType type)
 : m_crRecipe(recipe)
 , m_entity(m_crRecipe->initMesh(OgreCore::getSingletonPtr()->getSceneMgr()))
-, m_node(OgreCore::getSingletonPtr()->getSceneMgr()->getRootSceneNode()->createChildSceneNode())
+, m_node(m_crRecipe->createNode())
 , m_normalPosition(normalPos)
 , m_normalDirection(NormalDirection::None)
 , m_hasLerpAttacked(false)
+, m_modelHandlerType(type)
 {
 	parseScript();
 }
@@ -26,6 +27,10 @@ ModelHandler::~ModelHandler()
 	cout << "ModelHandler destrucotr " << endl;
 }
 
+const ModelHandlerType  ModelHandler::getType() const
+{
+	return m_modelHandlerType;
+}
 void ModelHandler::parseScript()
 {
 	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "ModelHandler");
@@ -45,7 +50,7 @@ void ModelHandler::init()
 void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
 	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*GlobalVariables::getSingleton().getNormalAnimWalkSpeed(), m_animations);
-	m_normalPosition.r += rInc;
+	m_normalPosition.theta += rInc;
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 	UnitCircleMovement::polarSetDirection(m_node, m_normalPosition, activeDirection);
 	m_normalDirection = rInc > 0 ? NormalDirection::dirRight : ( rInc < 0 ?NormalDirection::dirLeft : m_normalDirection );
@@ -80,9 +85,9 @@ AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const 
 	}
 
 }
-bool ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+bool ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt, bool allTheWay)
 {
-	if (lerp(nextPosition, dt, ANIMATIONS::WALK, m_LERPPrecision+m_startAttackDistance, GlobalVariables::getSingleton().getLERPAnimWalkRatio()))
+	if (lerp(nextPosition, dt, ANIMATIONS::WALK, m_LERPPrecision + (allTheWay ? 0.0 : m_startAttackDistance), GlobalVariables::getSingleton().getLERPAnimWalkRatio()))
 		return true;
 	return false;
 }
@@ -90,7 +95,7 @@ Ogre::Real ModelHandler::scaleTime(const Ogre::Real& time)
 {
 	return time*MainUpdate::getSingleton().getScaledDeltaTime();
 }
-bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, ANIMATIONS animation, Real minDistance, Real animLerpRatio, bool isRecursive)
+bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive)
 {
 	if (!isRecursive)
 		dt = scaleTime(dt);

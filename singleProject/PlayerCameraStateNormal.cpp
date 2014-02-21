@@ -25,6 +25,6 @@ void PlayerCameraStateNormal::update()
 	if (m_lerp< 1.0)
 		m_lerp += MainUpdate::getSingleton().getDeltaTime();
 	m_camera->setPosition( Ogre::Math::lerp<Ogre::Vector3>(m_camera->getPosition(),
-		LaneSettings::getSingleton().getVectorOf(1,m_player->getPolarCoordinates().r,m_height)*m_distance, MainUpdate::getSingleton().getDeltaTime()* 2.0)  );
+		LaneSettings::getSingleton().getVectorOf(1,m_player->getPolarCoordinates().theta,m_height)*m_distance, MainUpdate::getSingleton().getDeltaTime()* 2.0)  );
 	m_camera->lookAt(m_player->getNode()->getPosition()+Vector3(0.0,400.0,0.0));
 }

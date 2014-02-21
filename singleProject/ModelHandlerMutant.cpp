@@ -7,7 +7,7 @@
 #include "WeaponTypes.h"
 
 ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos, WeaponType weaponType, ModelRecipe* modlRecipe)
-: ModelHandler(modlRecipe, normalPos)
+: ModelHandler(modlRecipe, normalPos,ModelHandlerType::Mutant)
 , m_selectedTag(m_node)
 , m_bloodSplat(m_node, this)
 , m_weapon( nullptr)

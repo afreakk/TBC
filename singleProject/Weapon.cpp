@@ -27,10 +27,6 @@ void WeaponBase::shootPlayer(const int damage)
 {
 	PlayerGlobalStats::getSingleton().modifyHealth(-damage);
 }
-void WeaponBase::shootMutant(const unsigned idx)
-{
-	MutantContainer::getSingleton().killMutant(idx);
-}
 WeaponType WeaponBase::weaponTypeFromString(String weaponString)
 {
 	if (weaponString == "lazer")

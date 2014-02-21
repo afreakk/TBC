@@ -38,7 +38,7 @@ void EnemySpawner::instantiateNewEnemies()
 {
 	for (std::vector<MutantStartingInfo>::iterator posIter = begin(m_mutantStartingPositions); posIter != end(m_mutantStartingPositions); ++posIter)
 	{
-		if (isWithinRange(m_player->getPolarCoordinates().r, (*posIter).polar.r, m_spawnDistance))
+		if (isWithinRange(m_player->getPolarCoordinates().theta, (*posIter).polar.theta, m_spawnDistance))
 		{
 			ModelRecipe* modelRecipe = nullptr;
 			switch ((*posIter).weaponType)

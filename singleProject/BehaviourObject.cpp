@@ -3,9 +3,11 @@
 #include "BehaviourState.h"
 #include "ModelHandler.h"
 
-BehaviourObject::BehaviourObject(ModelHandler* modelHandler)
+BehaviourObject::BehaviourObject(ModelHandler* modelHandler, BObjectType type)
 : m_model(modelHandler)
 , m_currentState(nullptr)
+, m_dead(false)
+, m_objectType(type)
 {
 }
 
@@ -27,11 +29,15 @@ void BehaviourObject::setState(BehaviourState* newState)
 
 
 //gets
+BObjectType BehaviourObject::getObjectType() const
+{
+	return m_objectType;
+}
 BEHAVOUR_STATE BehaviourObject::getState() const
 {
 	return m_currentState->getState();
 }
-PolarCoordinates BehaviourObject::getPolarCoordinates() 
+const PolarCoordinates& BehaviourObject::getPolarCoordinates() 
 {
 	return m_model->getPolarCoordinates();
 }
@@ -42,4 +48,13 @@ SceneNode* BehaviourObject::getNode() const
 ModelHandler& BehaviourObject::getModelHandler()
 {
 	return *m_model.get();
+}
+bool BehaviourObject::isDead() const
+{
+	return m_dead;
+}
+//sett
+void BehaviourObject::setDead(const bool valu)
+{
+	m_dead = valu;
 }

@@ -2,12 +2,17 @@
 #include "PlayerHandlerStateSelectionHandler.h"
 #include "ModelHandlerMutant.h"
 #include "MutantContainer.h"
-PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler(Vector3 playerPos, const std::vector<unsigned>& attackList)
-: m_mutants(MutantContainer::getSingleton().getAndSortMutants(playerPos) )
-, m_markedIndex(0)
+
+const std::string NONE_STRING = "NONE";
+const Ogre::Real maxTheta = Math::PI*2.0;
+const Ogre::Real minTheta = 0.0;
+
+PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler( const std::vector<std::string>& attackList)
+: m_currentMarked(nullptr)
+, m_prevMarked(nullptr)
 , m_energyCostOfCurrentlyMarked(0)
-, m_lastMarkedIndex(m_markedIndex)
 , m_attackListConst(attackList)
+, m_currentTheta(&minTheta)
 {
 }
 
@@ -16,55 +21,61 @@ PlayerHandlerStateSelectionHandler::~PlayerHandlerStateSelectionHandler()
 {
 }
 
-void PlayerHandlerStateSelectionHandler::updateMarked(PolarCoordinates currentNode)
+bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& currentNode)
 {
+	bool markedChanged = false;
 	m_selectionLine.update();
-	m_selectionLine.setNewTarget(m_markedIndex);
-	ModelHandlerMutant& lastSelectedModelHandler = static_cast<ModelHandlerMutant&>(m_mutants[m_lastMarkedIndex]->getModelHandler());
-	if (m_lastMarkedIndex != m_markedIndex)
-		static_cast<ModelHandlerMutant&>(m_mutants[m_lastMarkedIndex]->getModelHandler()).setHovered(false);
-	static_cast<ModelHandlerMutant&>(m_mutants[m_markedIndex]->getModelHandler()).setHovered(true);
-	m_lastMarkedIndex = m_markedIndex;
-
-	m_energyCostOfCurrentlyMarked = energyCostOf(currentNode, static_cast<ModelHandlerMutant&>(m_mutants[m_markedIndex]->getModelHandler()).getPolarCoordinates());
+	if (m_prevMarked != m_currentMarked)
+	{
+		if (m_prevMarked)
+		    static_cast<ModelHandlerMutant&>(m_prevMarked->getModelHandler()).setHovered(false);
+		if (m_currentMarked)
+		{
+            static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).setHovered(true);
+            m_selectionLine.setNewTarget(m_currentMarked->getNode());
+            m_energyCostOfCurrentlyMarked = energyCostOf(currentNode, static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).getPolarCoordinates());
+            markedChanged = true;
+		}
+	}
+	m_prevMarked = m_currentMarked;
+	return markedChanged;
 }
 void PlayerHandlerStateSelectionHandler::handleIndex(const OIS::KeyEvent& e)
 {
-	int idxVelocity = 0;
 	if (e.key == OIS::KC_A)
-		idxVelocity--;
+		changeIndex(false);
 	if (e.key == OIS::KC_D)
-		idxVelocity++;
-	if (idxVelocity != 0)
-		changeIndex(idxVelocity);
-
-	int goTo = 0;
-	if (e.key == OIS::KC_W)
-		goTo++;
-	if (e.key == OIS::KC_S)
-		goTo--;
-	if (goTo != 0)
-		extremeChangeIndex(goTo);
+		changeIndex(true);
 }
-void PlayerHandlerStateSelectionHandler::changeIndex(int iVel)
-{
-	if (m_mutants.size() == m_attackListConst.size())
+void PlayerHandlerStateSelectionHandler::changeIndex(bool right)
+{ 
+	if (m_attackListConst.size() >= MutantContainer::getSingleton().getMutantIt().size())
 		return;
-	m_markedIndex += iVel;
-	if (m_markedIndex < 0)
+	if (right)
 	{
-		m_markedIndex = m_mutants.size()-1;
-		iVel = -1;
+		if ((m_currentMarked = MutantContainer::getSingleton().getClosestHigherThan(*m_currentTheta)) == nullptr)
+		{
+			m_currentTheta = &minTheta;
+			changeIndex(right);
+			return;
+		}
 	}
-	else if (m_markedIndex > m_mutants.size() - 1)
+	else
 	{
-		m_markedIndex = 0;
-		iVel = +1;
+		if((m_currentMarked = MutantContainer::getSingleton().getClosestLowerThan(*m_currentTheta)) == nullptr)
+		{
+			m_currentTheta = &maxTheta;
+			changeIndex(right);
+			return;
+		}
 	}
-	if (isInList(m_markedIndex))
-        changeIndex(iVel);
+	m_currentTheta = &(m_currentMarked->getPolarCoordinates().theta);
+	if (isInList(m_currentMarked->getModelHandler().getNode()->getName()))
+        changeIndex(right);
 }
-bool PlayerHandlerStateSelectionHandler::isInList(int elm)
+
+
+bool PlayerHandlerStateSelectionHandler::isInList(const std::string& elm)
 {
 	for (int i = 0; i < m_attackListConst.size(); i++)
 	{
@@ -73,28 +84,16 @@ bool PlayerHandlerStateSelectionHandler::isInList(int elm)
 	}
 	return false;
 }
-void PlayerHandlerStateSelectionHandler::extremeChangeIndex(int iVel, int move)
-{
-	if (m_mutants.size() == m_attackListConst.size())
-		return;
-	if (iVel > 0)
+const std::string& PlayerHandlerStateSelectionHandler::getMarked() const
+{   
+	if (m_currentMarked)
 	{
-		if (!isInList(m_mutants.size() - 1 - move))
-			m_markedIndex = m_mutants.size() - 1 - move;
-		else
-			extremeChangeIndex(iVel, ++move);
+		if (m_attackListConst.size() > 0 && m_currentMarked->getNode()->getName() == m_attackListConst.back())
+			return NONE_STRING;
+		return m_currentMarked->getModelHandler().getNode()->getName();
 	}
 	else
-	{
-		if (!isInList(0 + move))
-			m_markedIndex = 0 + move;
-		else
-			extremeChangeIndex(iVel, ++move);
-	}
-}
-int PlayerHandlerStateSelectionHandler::getMarked() const
-{
-	return m_markedIndex;
+		return NONE_STRING;
 }
 int PlayerHandlerStateSelectionHandler::getEnergyCostOfMarked() const
 {

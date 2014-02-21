@@ -64,3 +64,7 @@ BaseAnimation* ModelRecipePlayer::getTumble(Ogre::Entity* entity)
 	anims.push_back( entity->getAnimationState("Backflip") ) ;
 	return new AnimationTumble(anims);
 }
+Ogre::SceneNode* ModelRecipePlayer::createNode()
+{
+	return OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode("Player");
+}

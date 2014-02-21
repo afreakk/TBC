@@ -45,7 +45,7 @@ void PlayerCamera::setNewState(PLAYER_HANDLER_STATE newState)
 		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateLERP(m_player->getNode()) };
 		break;
 	case PLAYER_HANDLER_STATE::SINGLE_ATTACK:
-		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateLERP(m_player->getNode()) };
+		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal(m_player) };
 		break;
 	case PLAYER_HANDLER_STATE::DEAD:
 		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateLERP(m_player->getNode()) };

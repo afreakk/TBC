@@ -12,10 +12,9 @@ PlayerHandlerStateSelectionLine::PlayerHandlerStateSelectionLine()
 	m_lines.emplace_back(new Line(m_currentNode, m_currentNode, "Green"));
 }
 
-void PlayerHandlerStateSelectionLine::setNewTarget(unsigned index)
+void PlayerHandlerStateSelectionLine::setNewTarget(Ogre::SceneNode* node)
 {
-	m_currentNode = MutantContainer::getSingleton().getMutants()[index]->getNode();
-	m_lines[m_index]->newNode(m_currentNode);
+	m_lines[m_index]->newNode(node);
 }
 
 void PlayerHandlerStateSelectionLine::addEnemy()

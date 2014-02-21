@@ -19,3 +19,5 @@ Ogre::Vector3 vectorFromTumbleDirection(Ogre::Vector3 playerPos, TUMBLE_DIRECTIO
 PolarCoordinates polarFromStarting(Ogre::Real r, unsigned laneIdx);
 
 bool hitTestSide(PolarCoordinates left, PolarCoordinates right, Real* closestDistance, bool skipDistance=false);
+Ogre::Real radiusFromVector(const Ogre::Vector3& pos);
+Ogre::Real thetaFromVector(const Ogre::Vector3& pos);

@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "UnitCircleMovement.h"
 #include "LaneSettings.h"
-using namespace Ogre;
+#include <math.h>
 Ogre::Vector3 UnitCircleMovement::VectorFromPolar(PolarCoordinates p)
 {
-	return Ogre::Vector3(Ogre::Math::Sin(p.r)*p.d,p.h,Ogre::Math::Cos(p.r)*p.d);
+	return Ogre::Vector3(Ogre::Math::Sin(p.theta)*p.radius,p.h,Ogre::Math::Cos(p.theta)*p.radius);
 }
 void UnitCircleMovement::polarSetPosition(Ogre::SceneNode* node, PolarCoordinates p)
 {
@@ -15,10 +15,10 @@ void UnitCircleMovement::polarSetDirection(Ogre::SceneNode* node, PolarCoordinat
 	switch (direction)
 	{
 	case NormalDirection::dirRight:
-		p.r += Ogre::Math::PI/12.0;
+		p.theta += Ogre::Math::PI/12.0;
 		break;
 	case NormalDirection::dirLeft:
-		p.r -= Ogre::Math::PI/12.0;
+		p.theta -= Ogre::Math::PI/12.0;
 		break;
 	default:
 		return;
@@ -34,12 +34,11 @@ void keepWithinMax(Real* d)
 	while (*d < 0.0)
 		*d += Math::PI*2.0;
 }
-#include <math.h>
 unsigned energyCostOf(PolarCoordinates a, PolarCoordinates b)
 {
-	keepWithinMax(&a.r);
-	keepWithinMax(&b.r);
-	return static_cast<unsigned>(round( Ogre::Math::Abs(a.r - b.r)*200.0 ));
+	keepWithinMax(&a.theta);
+	keepWithinMax(&b.theta);
+	return static_cast<unsigned>(round( Ogre::Math::Abs(a.theta - b.theta)*200.0 ));
 }
 bool isWithinRange(Real r1, Real r2, Real distance)
 {
@@ -52,8 +51,16 @@ bool isWithinRange(Real r1, Real r2, Real distance)
 void vectorToPolar(const Vector3 vec, PolarCoordinates& norm)
 {
 	norm.h = vec.y;
-	norm.r = atan2(vec.x , vec.z);
-	norm.d = sqrt(vec.z*vec.z + vec.x*vec.x);
+	norm.theta = thetaFromVector(vec);
+	norm.radius = radiusFromVector(vec);
+}
+Ogre::Real thetaFromVector(const Ogre::Vector3& pos)
+{
+	return atan2(pos.x, pos.z);
+}
+Ogre::Real radiusFromVector(const Ogre::Vector3& pos)
+{
+	return sqrt(pos.z*pos.z + pos.x*pos.x);
 }
 Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction)
 {
@@ -62,10 +69,10 @@ Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction)
 	switch (direction)
 	{
 	case TUMBLE_DIRECTION::DIRECTION_IN:
-		polar.d -= LaneSettings::getSingleton().getIncrement();
+		polar.radius -= LaneSettings::getSingleton().getIncrement();
 		break;
 	case TUMBLE_DIRECTION::DIRECTION_OUT:
-		polar.d += LaneSettings::getSingleton().getIncrement();
+		polar.radius += LaneSettings::getSingleton().getIncrement();
 		break;
 	default:
 		assert(0);
@@ -75,7 +82,7 @@ Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction)
 	int laneIndex = -1;
 	for (int i = 0; i < LaneSettings::getSingleton().getLaneCount(); i++)
 	{
-		auto distance = abs(polar.d - LaneSettings::getSingleton().getLane(i));
+		auto distance = abs(polar.radius - LaneSettings::getSingleton().getLane(i));
 		if (distance < shortestDistance)
 		{
 			shortestDistance = distance;
@@ -83,7 +90,7 @@ Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction)
 		}
 	}
 	assert(laneIndex > -1);
-	polar.d = LaneSettings::getSingleton().getLane(laneIndex);
+	polar.radius = LaneSettings::getSingleton().getLane(laneIndex);
 	return UnitCircleMovement::VectorFromPolar(polar);
 }
 PolarCoordinates polarFromStarting(Real r, unsigned laneIdx)
@@ -92,10 +99,10 @@ PolarCoordinates polarFromStarting(Real r, unsigned laneIdx)
 }
 bool hitTestSide(PolarCoordinates left, PolarCoordinates right, Real* closestDistance, bool skipDistance)
 {
-    keepWithinMax(&right.r);
-    Real distance = right.r - left.r;
-    Real diff = right.r - left.r;
-    if (distance >= 0.0 && distance < Math::PI/168.0 && distance < *closestDistance && abs(right.d - left.d)<(skipDistance ? 600:100))
+    keepWithinMax(&right.theta);
+    Real distance = right.theta - left.theta;
+    Real diff = right.theta - left.theta;
+    if (distance >= 0.0 && distance < Math::PI/168.0 && distance < *closestDistance && abs(right.radius - left.radius)<(skipDistance ? 600:100))
     {
         *closestDistance = distance;
 		return true;

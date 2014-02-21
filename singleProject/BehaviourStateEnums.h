@@ -1,0 +1,27 @@
+#pragma once
+enum class BEHAVOUR_STATE
+{
+	NORMAL,
+	SELECTION,
+	LERP,
+	RANGED_ATTACK,
+	TUMBLE,
+	DEAD,
+    LIMBO
+};
+inline std::ostream& operator<<(std::ostream& out, const BEHAVOUR_STATE value){
+	static std::map<BEHAVOUR_STATE, std::string> strings;
+	if (strings.size() == 0){
+#define INSERT_ELEMENT(p) strings[p] = #p
+		INSERT_ELEMENT(BEHAVOUR_STATE::NORMAL);
+		INSERT_ELEMENT(BEHAVOUR_STATE::SELECTION);
+		INSERT_ELEMENT(BEHAVOUR_STATE::LERP);
+		INSERT_ELEMENT(BEHAVOUR_STATE::RANGED_ATTACK);
+		INSERT_ELEMENT(BEHAVOUR_STATE::TUMBLE);
+		INSERT_ELEMENT(BEHAVOUR_STATE::DEAD);
+		INSERT_ELEMENT(BEHAVOUR_STATE::LIMBO);
+#undef INSERT_ELEMENT
+	}
+
+	return out << strings[value];
+}

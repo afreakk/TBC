@@ -87,6 +87,18 @@
     <Filter Include="BehaviourStateHandler\TopLayer">
       <UniqueIdentifier>{33ce6766-adcc-4d57-9765-9f0bcafcc2ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BehaviourState\LERPConfigurations">
+      <UniqueIdentifier>{fbabf876-4397-42b5-aec8-98f4be804222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourState\NormalConfigurations">
+      <UniqueIdentifier>{de8c8ab0-1d16-488e-b663-e82e07681828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourStateHandler\Player\helpers">
+      <UniqueIdentifier>{117278f5-f1ee-4cdc-8b70-2a4a13cec256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourState\universal">
+      <UniqueIdentifier>{c2a1f50d-b626-4125-ba74-9ffbfc574683}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -114,9 +126,6 @@
       <Filter>BehaviourState</Filter>
     </ClCompile>
     <ClCompile Include="BehaviourStateNormal.cpp">
-      <Filter>BehaviourState</Filter>
-    </ClCompile>
-    <ClCompile Include="BehaviourStateNormalTranslator.cpp">
       <Filter>BehaviourState</Filter>
     </ClCompile>
     <ClCompile Include="PlayerCameraVars.cpp">
@@ -287,12 +296,6 @@
     <ClCompile Include="PlayerHandlerStateSelection.cpp">
       <Filter>BehaviourStateHandler\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateSelectionLine.cpp">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerHandlerStateTumble.cpp">
       <Filter>BehaviourStateHandler\Player</Filter>
     </ClCompile>
@@ -323,6 +326,21 @@
     <ClCompile Include="GlowMaterialListener.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="LERPWalkAttack.cpp">
+      <Filter>BehaviourState\LERPConfigurations</Filter>
+    </ClCompile>
+    <ClCompile Include="LERPWalk.cpp">
+      <Filter>BehaviourState\LERPConfigurations</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourStateNormalTranslator.cpp">
+      <Filter>BehaviourState\NormalConfigurations</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSelectionHandler.cpp">
+      <Filter>BehaviourStateHandler\Player\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSelectionLine.cpp">
+      <Filter>BehaviourStateHandler\Player\helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -334,9 +352,6 @@
     <ClInclude Include="OISCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="BehaviourState.h">
-      <Filter>BehaviourState</Filter>
-    </ClInclude>
     <ClInclude Include="BehaviourStateAttackRanged.h">
       <Filter>BehaviourState</Filter>
     </ClInclude>
@@ -347,9 +362,6 @@
       <Filter>BehaviourState</Filter>
     </ClInclude>
     <ClInclude Include="BehaviourStateNormal.h">
-      <Filter>BehaviourState</Filter>
-    </ClInclude>
-    <ClInclude Include="BehaviourStateNormalTranslator.h">
       <Filter>BehaviourState</Filter>
     </ClInclude>
     <ClInclude Include="BehaviourStateTumble.h">
@@ -577,12 +589,6 @@
     <ClInclude Include="PlayerHandlerStateSelection.h">
       <Filter>BehaviourStateHandler\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHandlerStateSelectionHandler.h">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateSelectionLine.h">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerHandlerStateTumble.h">
       <Filter>BehaviourStateHandler\Player</Filter>
     </ClInclude>
@@ -624,6 +630,30 @@
     </ClInclude>
     <ClInclude Include="ModelRecipeMutantSuicide.h">
       <Filter>Model\modelRecipe</Filter>
+    </ClInclude>
+    <ClInclude Include="LERPWalkAttack.h">
+      <Filter>BehaviourState\LERPConfigurations</Filter>
+    </ClInclude>
+    <ClInclude Include="LERPBase.h">
+      <Filter>BehaviourState\LERPConfigurations</Filter>
+    </ClInclude>
+    <ClInclude Include="LERPWalk.h">
+      <Filter>BehaviourState\LERPConfigurations</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateNormalTranslator.h">
+      <Filter>BehaviourState\NormalConfigurations</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSelectionHandler.h">
+      <Filter>BehaviourStateHandler\Player\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSelectionLine.h">
+      <Filter>BehaviourStateHandler\Player\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourState.h">
+      <Filter>BehaviourState\universal</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourStateEnums.h">
+      <Filter>BehaviourState\universal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

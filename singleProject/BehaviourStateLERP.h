@@ -2,6 +2,8 @@
 #include "BehaviourState.h"
 #include "ENUMLERPState.h"
 #include "OgreCommon.h"
+#include "LERPBase.h"
+class BehaviourObject;
 namespace Ogre
 {
 	class SceneNode;
@@ -9,20 +11,20 @@ namespace Ogre
 class BehaviourStateLERP:public BehaviourState
 {
 public:
-	BehaviourStateLERP(Ogre::SceneNode* target,const Ogre::Real* speed);
+	BehaviourStateLERP(BehaviourObject* target, const Real* speed, LERPBase* mode, Ogre::Vector3* targetPosition=nullptr);
 	~BehaviourStateLERP();
 	void update(ModelHandler& ) override;
 	bool nextTarget() const;
 	bool enemyKilled() const;
 private:
-	LERP_STATE m_lerpState;
-	Ogre::SceneNode*const m_target;
+	LerpTowardsReturn m_lerpReturn;
+	BehaviourObject*const m_target;
+	std::unique_ptr<Ogre::Vector3> m_targetPos; // optional
 	const Ogre::Real& m_speed;
 	bool m_goNextTarget;
-	bool m_running;
 	bool m_killed;
+	LerpTowardsReturn m_lerpValue;
+	std::unique_ptr<LERPBase> m_lerpMode;
 
-	void attack();
-	bool attackEnemy(ModelHandler& modelHandler);
 };
 

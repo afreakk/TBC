@@ -5,7 +5,7 @@
 
 #include "GlobalVariables.h"
 ModelHandlerPlayer::ModelHandlerPlayer(PolarCoordinates nwPos) 
-: ModelHandler(new ModelRecipePlayer(), nwPos)
+: ModelHandler(new ModelRecipePlayer(), nwPos,ModelHandlerType::Player)
 {
 }
 ModelHandlerPlayer::~ModelHandlerPlayer()

@@ -3,6 +3,7 @@
 #include "AnimationAttack.h"
 #include "AnimationWalk.h"
 #include "AnimationDie.h"
+#include "OgreCore.h"
 
 int ModelRecipeMutant::s_count = 0;
 ModelRecipeMutant::ModelRecipeMutant()
@@ -55,4 +56,9 @@ BaseAnimation* ModelRecipeMutant::getAttack(Ogre::Entity* entity)
 void ModelRecipeMutant::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 {
 	node->attachObject(ent);
+}
+
+Ogre::SceneNode* ModelRecipeMutant::createNode()
+{
+	return OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode(m_nodeName);
 }

@@ -26,6 +26,8 @@
     <ClCompile Include="GlowMaterialListener.cpp" />
     <ClCompile Include="GUIResources.cpp" />
     <ClCompile Include="LaneSettings.cpp" />
+    <ClCompile Include="LERPWalk.cpp" />
+    <ClCompile Include="LERPWalkAttack.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMenu.cpp" />
     <ClCompile Include="LevelOne.cpp" />
@@ -104,6 +106,7 @@
     <ClInclude Include="BehaviourState.h" />
     <ClInclude Include="BehaviourStateAttackRanged.h" />
     <ClInclude Include="BehaviourStateDead.h" />
+    <ClInclude Include="BehaviourStateEnums.h" />
     <ClInclude Include="BehaviourStateLERP.h" />
     <ClInclude Include="BehaviourStateLimbo.h" />
     <ClInclude Include="BehaviourStateNormal.h" />
@@ -124,6 +127,9 @@
     <ClInclude Include="HandlerState.h" />
     <ClInclude Include="ILevel.h" />
     <ClInclude Include="LaneSettings.h" />
+    <ClInclude Include="LERPBase.h" />
+    <ClInclude Include="LERPWalk.h" />
+    <ClInclude Include="LERPWalkAttack.h" />
     <ClInclude Include="LevelListing.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LevelMenu.h" />

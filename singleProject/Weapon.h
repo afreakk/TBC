@@ -25,7 +25,6 @@ protected:
 	ModelHandler* m_model;
 	ParticleUniverse::ParticleEmitter* m_emitter;
 	void shootPlayer(const int damage);
-	void shootMutant(const unsigned idx);
 };
 
 class WeaponBeam : public WeaponBase

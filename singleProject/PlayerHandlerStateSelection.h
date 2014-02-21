@@ -2,10 +2,11 @@
 #include "HandlerState.h"
 #include "PlayerHandlerStateSelectionHandler.h"
 #include "PlayerHandlerEnums.h"
+#include "MessageSubscriber.h"
 class Player;
 class PlayerSelectionState;
 class BehaviourState;
-class PlayerHandlerStateSelection : public HandlerState <PLAYER_HANDLER_STATE>
+class PlayerHandlerStateSelection : public HandlerState <PLAYER_HANDLER_STATE>, public MessageSubscriber<std::string>
 {
 public:
 	PlayerHandlerStateSelection(Player* player);
@@ -14,18 +15,18 @@ public:
 	void keyPressed(const OIS::KeyEvent&) override;
 	void keyReleased(const OIS::KeyEvent&) override;
 
-	std::vector<unsigned> getAttackList() const;
+	const std::vector<string>& getAttackList() const;
+	void notify(std::string) override;
 private:
 	PlayerHandlerStateSelectionHandler m_selectionHandler;
 	Player* m_player;
 	unique_ptr<BehaviourState> m_selectionState;
-	std::vector<unsigned> m_attackList;
+	std::vector<std::string> m_markedList;
 
 	void handleSelection(const OIS::KeyEvent&);
-	void pushBackSelected();
-	bool currentMarkedIsInList();
-	void updateMarked();
+	const PolarCoordinates& getLatestMarkedPolar(int lookLower=1);
+	void selectMarked();
+	bool updateMarked();
 	void markEnergy();
-
 };
 

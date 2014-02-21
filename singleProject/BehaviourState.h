@@ -1,17 +1,8 @@
 #pragma once
 #include "boost/noncopyable.hpp"
+#include "MutantHandlerEnums.h"
+#include "BehaviourStateEnums.h"
 class ModelHandler;
-
-enum class BEHAVOUR_STATE
-{
-	NORMAL,
-	SELECTION,
-	LERP,
-	RANGED_ATTACK,
-	TUMBLE,
-	DEAD,
-    LIMBO
-};
 class BehaviourState : public boost::noncopyable
 {
 public:
@@ -34,4 +25,3 @@ protected:
 	const BEHAVOUR_STATE m_state;
 	BEHAVOUR_STATE m_nextState;
 };
-

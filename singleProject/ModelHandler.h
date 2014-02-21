@@ -10,14 +10,19 @@ enum class AttackReturn
     KILLED,
     ANIM_ENDED
 };
+enum class ModelHandlerType
+{
+    Player,
+    Mutant
+};
 class ModelHandler : boost::noncopyable
 {
 public:
-	ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos);
+	ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos, ModelHandlerType type);
 	virtual ~ModelHandler();
 	void normalWalk(const Real& rInc, const NormalDirection& activeDirection);
 	AttackReturn lerpAttack(const Ogre::Vector3&, const Ogre::Real&);
-	bool lerpWalk(const Ogre::Vector3&, const Ogre::Real&);
+	bool lerpWalk(const Ogre::Vector3&, const Ogre::Real&, bool allTheWay=false );
 	void fallAndDie();
 	virtual void init();
 	const Vector3 getBonePos() const ;
@@ -26,7 +31,7 @@ public:
 	Ogre::Real scaleTime(const Ogre::Real& time);
 protected:
 	void updateNormalPos();
-	bool lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, ANIMATIONS animation, Real distance, Real animLerpRatio, bool isRecursive=false);
+	bool lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive=false);
 	void parseScript();
 
 	unique_ptr<ModelRecipe> m_crRecipe;
@@ -37,6 +42,7 @@ protected:
 	Real m_startAttackDistance;
 	NormalDirection m_normalDirection;
 	bool m_hasLerpAttacked;
+	ModelHandlerType m_modelHandlerType;
 
 
 	std::map<ANIMATIONS, unique_ptr<BaseAnimation> > m_animations;
@@ -47,6 +53,7 @@ public:
 	virtual const PolarCoordinates&	getPolarCoordinates() ;
 	virtual void					setNormalPos(PolarCoordinates newPos);
 	virtual const Vector3			getNormalVecPos() const;
+	virtual const ModelHandlerType  getType() const;
 
 };
 

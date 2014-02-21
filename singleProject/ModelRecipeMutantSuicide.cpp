@@ -3,6 +3,7 @@
 #include "AnimationAttack.h"
 #include "AnimationWalk.h"
 #include "AnimationDie.h"
+#include "OgreCore.h"
 
 int ModelRecipeMutantSuicide::s_count = 0;
 ModelRecipeMutantSuicide::ModelRecipeMutantSuicide()
@@ -53,4 +54,9 @@ void ModelRecipeMutantSuicide::attachNode(Ogre::SceneNode* node, Ogre::Entity* e
     childNode->rotate(Vector3(0.0, 1.0, 0.0), Angle(90.0));
 	childNode->scale(Vector3(3.0));
 	childNode->attachObject(ent);
+}
+
+Ogre::SceneNode* ModelRecipeMutantSuicide::createNode()
+{
+	return OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode(m_nodeName);
 }

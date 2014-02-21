@@ -11,6 +11,7 @@ public:
 	BaseAnimation* getDie(Ogre::Entity*) override;
 	BaseAnimation* getTumble(Ogre::Entity*);
 	virtual void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent);
+	Ogre::SceneNode* createNode() override;
 private:
 };
 

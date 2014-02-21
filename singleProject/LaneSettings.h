@@ -6,6 +6,7 @@ public:
 	LaneSettings();
 	~LaneSettings();
 	void initLanes();
+	unsigned getClosestLane(const Ogre::Vector3& position);
 	Ogre::Real getLane(unsigned index);
 	Ogre::Real getIncrement();
     Ogre::Real getHeight();

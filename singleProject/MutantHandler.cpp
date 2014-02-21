@@ -33,7 +33,7 @@ void MutantHandler::switchState(MUTANT_HANDLER_STATE newState)
 		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>(new MutantHandlerStateDead(m_mutant));
 		break;
 	case MUTANT_HANDLER_STATE::SUICIDE_ATTACK:
-		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>(new MutantHandlerStateSuicideBomb(m_mutant, m_player->getNode()));
+		m_currentState = unique_ptr<HandlerState<MUTANT_HANDLER_STATE>>(new MutantHandlerStateSuicideBomb(m_mutant, m_player));
 		break;
 	default:
 		assert(0);

@@ -12,6 +12,7 @@ public:
 	BaseAnimation* getAttack(Ogre::Entity*) override;
 	BaseAnimation* getDie(Ogre::Entity*) override;
 	virtual void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent);
+	Ogre::SceneNode* createNode() override;
 private:
 	const int m_id;
 	static int s_count;
