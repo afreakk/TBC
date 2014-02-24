@@ -20,7 +20,6 @@ public:
 	bool initScript();
 	bool initResources();   //second
 	bool initOverlaySystem();
-	bool initCompositor();
 	bool initShadowCasting();
 	//gets
 	const Ogre::Vector2&getResolution() const;

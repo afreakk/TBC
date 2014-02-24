@@ -32,6 +32,7 @@ public:
 	Ogre::SceneNode* getNode() const ;
 	const PolarCoordinates& getPolarCoordinates() ;
 	ModelHandler& getModelHandler();
+	const ModelHandler& getModelHandler() const;
 	BEHAVOUR_STATE getState() const;
 	void setDead(const bool valu);
 	bool isDead() const;

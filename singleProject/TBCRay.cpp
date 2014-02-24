@@ -38,20 +38,26 @@ void TBCRay::debugHit(const Ogre::Vector3& point, const Ogre::Vector3& endPoint)
 	//m_hitLine.update(point, endPoint);
 }
 
-bool TBCRay::raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, BehaviourObject* gameObject)
+bool TBCRay::raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, const BehaviourObject* gameObject)
 {
 	Vector3 normalised = normal.normalisedCopy();
 	debugRay(point, normalised*80000.0);
 	ray.setOrigin(point);
 	ray.setDirection(normalised);
 
-	Ogre::AxisAlignedBox boundingBox = gameObject->getModelHandler().getEntity()->getBoundingBox();
+	Entity* entity = gameObject->getModelHandler().getEntity();
+	Ogre::AxisAlignedBox boundingBox = entity->getBoundingBox();
 	Matrix4 mat;
-	SceneNode* playerNode = gameObject->getNode();
-	mat.makeTransform(playerNode->getPosition(), playerNode->getScale(), playerNode->getOrientation());
+    Node* playerNode = gameObject->getNode();
+    Node* entityNode = entity->getParentNode();
+	if (playerNode != entityNode)
+        mat.makeTransform(playerNode->getPosition(), entityNode->getScale(), entityNode->getOrientation());
+	else
+        mat.makeTransform(playerNode->getPosition(), playerNode->getScale(), playerNode->getOrientation());
+
 	boundingBox.transform(mat);
 
-	std::pair<bool, Real> result = OgreFix::intersects(ray,boundingBox);
+	const std::pair<bool, Real>& result = OgreFix::intersects(ray,boundingBox);
 	if (result.first)
 	{
 		debugHit(point, point+normalised*80000.0);

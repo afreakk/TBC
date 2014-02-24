@@ -9,7 +9,6 @@ BloodSplat::BloodSplat(SceneNode* parentNode, ModelHandler* model)
 , m_model(model)
 , m_emitter(m_particleSystem->getTechnique(0)->getEmitter("bloodemitter"))
 {
-	update();
 	auto collider = m_particleSystem->getTechnique(0)->getAffector("planecollider");
 	collider->position = Vector3(0.0, 0.0, 0.0);
 }

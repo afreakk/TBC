@@ -11,7 +11,7 @@ MutantHandlerStateSuicideBomb::MutantHandlerStateSuicideBomb(BehaviourObject* mu
 : HandlerState(MUTANT_HANDLER_STATE::RANGED_ATTACK)
 , m_mutant(mutant)
 , m_mutState{ new BehaviourStateLERP( playerObject, &MutantGlobalStats::getSingleton().getLERPSpeed(),new LERPWalkAttack() )  }
-, m_detonationTimer(5.0)
+, m_detonationTimer(15.0)
 , m_activated(false)
 {
 	m_mutant->setState(m_mutState.get());

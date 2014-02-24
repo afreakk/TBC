@@ -6,6 +6,7 @@
 #include "GlobalVariables.h"
 ModelHandlerPlayer::ModelHandlerPlayer(PolarCoordinates nwPos) 
 : ModelHandler(new ModelRecipePlayer(), nwPos,ModelHandlerType::Player)
+, m_slowMoParticle(m_node)
 {
 }
 ModelHandlerPlayer::~ModelHandlerPlayer()
@@ -21,4 +22,8 @@ void ModelHandlerPlayer::init()
 bool ModelHandlerPlayer::tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
 	return !lerp(nextPosition, dt, ANIMATIONS::TUMBLE, m_LERPPrecision, GlobalVariables::getSingleton().getLERPAnimTumblekRatio());
+}
+void ModelHandlerPlayer::displaySlowMotionParticle(bool enabled)
+{
+	m_slowMoParticle.select(enabled);
 }

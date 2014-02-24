@@ -23,10 +23,6 @@ WeaponBase::~WeaponBase()
 {
 
 }
-void WeaponBase::shootPlayer(const int damage)
-{
-	PlayerGlobalStats::getSingleton().modifyHealth(-damage);
-}
 WeaponType WeaponBase::weaponTypeFromString(String weaponString)
 {
 	if (weaponString == "lazer")
@@ -90,7 +86,6 @@ void WeaponBall::update()
 	m_node->translate(Vector3(0.0, 0.0, -MainUpdate::getSingleton().getDeltaTime()*200.0));
 	if (hitTest())
 	{
-//		PlayerContainer::getSingleton().killPlayer();
         m_endSpell = true;
 	}
 	else if (m_node->getPosition().z < -400.0)

@@ -20,9 +20,6 @@ LightHandler::LightHandler()
 }
 void LightHandler::update()
 {
-	float vvv = 7.0;
-	directionalLight->setPosition( Vector3( sin(vvv)*30000, 0, cos(vvv)*30000 ) );
-	directionalLight->setDirection( -1.0 , 0.0, -1.0 );
 }
 
 LightHandler::~LightHandler()

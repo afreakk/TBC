@@ -24,7 +24,6 @@ protected:
 	static int m_weaponCount;
 	ModelHandler* m_model;
 	ParticleUniverse::ParticleEmitter* m_emitter;
-	void shootPlayer(const int damage);
 };
 
 class WeaponBeam : public WeaponBase

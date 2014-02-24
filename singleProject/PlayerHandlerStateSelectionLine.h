@@ -1,5 +1,10 @@
 #pragma once
-class Line;
+#include "DynamicTubes.h"
+namespace Ogre
+{
+class SeriesOfTubes;
+class SceneNode;
+}
 class PlayerHandlerStateSelectionLine
 {
 public:
@@ -9,8 +14,9 @@ public:
 	void addEnemy();
 	void update();
 private:
-	std::vector<unique_ptr<Line>> m_lines;
-	Node* m_currentNode;
-	unsigned m_index;
+	std::unique_ptr<Ogre::SeriesOfTubes> m_tubeObj;
+	Ogre::SceneNode* m_tubeParentNode;
+	DynamicTubes m_path;
+	bool m_addHim;
 };
 

@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseAnimation.cpp" />
+    <ClCompile Include="BeamWeaponHitTest.cpp" />
     <ClCompile Include="BehaviourObject.cpp" />
     <ClCompile Include="BehaviourStateAttackRanged.cpp" />
     <ClCompile Include="BehaviourStateDead.cpp" />
@@ -21,6 +22,7 @@
     <ClCompile Include="BehaviourStateTumble.cpp" />
     <ClCompile Include="BloodSplat.cpp" />
     <ClCompile Include="ConfigScriptLoader.cpp" />
+    <ClCompile Include="CoreCompositor.cpp" />
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="GlowMaterialListener.cpp" />
@@ -32,7 +34,6 @@
     <ClCompile Include="LevelMenu.cpp" />
     <ClCompile Include="LevelOne.cpp" />
     <ClCompile Include="LightHandler.cpp" />
-    <ClCompile Include="Line.cpp" />
     <ClCompile Include="LvlOneEnvironment.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainLevelSetter.cpp" />
@@ -59,6 +60,9 @@
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
     <ClCompile Include="PlayerHandlerStateSingleAttack.cpp" />
+    <ClCompile Include="DynamicTubes.cpp" />
+    <ClCompile Include="SimpleShadow.cpp" />
+    <ClCompile Include="SlowMotionParticle.cpp" />
     <ClCompile Include="TBCRay.cpp" />
     <ClCompile Include="OISCore.cpp" />
     <ClCompile Include="ParticleEffect.cpp" />
@@ -91,6 +95,7 @@
     <ClCompile Include="tinyxml.cpp" />
     <ClCompile Include="tinyxmlerror.cpp" />
     <ClCompile Include="tinyxmlparser.cpp" />
+    <ClCompile Include="Tubes.cpp" />
     <ClCompile Include="UnitCircleMovement.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponTypes.cpp" />
@@ -102,6 +107,7 @@
     <ClInclude Include="AnimationWalk.h" />
     <ClInclude Include="BarTypes.h" />
     <ClInclude Include="BaseAnimation.h" />
+    <ClInclude Include="BeamWeaponHitTest.h" />
     <ClInclude Include="BehaviourObject.h" />
     <ClInclude Include="BehaviourState.h" />
     <ClInclude Include="BehaviourStateAttackRanged.h" />
@@ -115,6 +121,7 @@
     <ClInclude Include="BloodSplat.h" />
     <ClInclude Include="CameraBase.h" />
     <ClInclude Include="ConfigScriptLoader.h" />
+    <ClInclude Include="CoreCompositor.h" />
     <ClInclude Include="Distancer.h" />
     <ClInclude Include="DotSceneLoader.h" />
     <ClInclude Include="EnemySpawner.h" />
@@ -135,7 +142,6 @@
     <ClInclude Include="LevelMenu.h" />
     <ClInclude Include="LevelOne.h" />
     <ClInclude Include="LightHandler.h" />
-    <ClInclude Include="Line.h" />
     <ClInclude Include="LvlOneEnvironment.h" />
     <ClInclude Include="MainLevelSetter.h" />
     <ClInclude Include="MainUpdate.h" />
@@ -164,7 +170,11 @@
     <ClInclude Include="OgreFix.h" />
     <ClInclude Include="PlayerHandlerStateSingleAttack.h" />
     <ClInclude Include="PlayerStatus.h" />
+    <ClInclude Include="DynamicTubes.h" />
+    <ClInclude Include="SimpleShadow.h" />
+    <ClInclude Include="SlowMotionParticle.h" />
     <ClInclude Include="TBCRay.h" />
+    <ClInclude Include="Tubes.h" />
     <ClInclude Include="WeaponTypes.h" />
     <ClInclude Include="MutantNumber.h" />
     <ClInclude Include="OgreCore.h" />
@@ -200,6 +210,11 @@
     <ClInclude Include="tinyxml.h" />
     <ClInclude Include="UnitCircleMovement.h" />
     <ClInclude Include="Weapon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\procedural\procedural.vcxproj">
+      <Project>{ebec66a1-cabc-47d9-8f0f-0bbb14407d24}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2248A4F3-A880-41EA-9E97-E72F6B905311}</ProjectGuid>
@@ -253,7 +268,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>OgreMain_d.lib;OgreRTShaderSystem_d.lib;OgreTerrain_d.lib;OgrePaging_d.lib;OgreVolume_d.lib;OgreOverlay_d.lib;OIS_d.lib;libboost_thread-vc120-mt-gd-1_55.lib;libboost_date_time-vc120-mt-gd-1_55.lib;libboost_system-vc120-mt-gd-1_55.lib;libboost_chrono-vc120-mt-gd-1_55.lib;ParticleUniverse_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TBCDEP)\lib\boost\$(Configuration);$(TBCDEP)\lib\ogre\$(Configuration);$(TBCDEP)\lib\particleu\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <Profile>true</Profile>
+      <Profile>false</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -14,6 +14,7 @@ PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler( const st
 , m_attackListConst(attackList)
 , m_currentTheta(&minTheta)
 {
+	changeIndex(true);
 }
 
 
@@ -24,7 +25,6 @@ PlayerHandlerStateSelectionHandler::~PlayerHandlerStateSelectionHandler()
 bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& currentNode)
 {
 	bool markedChanged = false;
-	m_selectionLine.update();
 	if (m_prevMarked != m_currentMarked)
 	{
 		if (m_prevMarked)
@@ -32,7 +32,6 @@ bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& cu
 		if (m_currentMarked)
 		{
             static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).setHovered(true);
-            m_selectionLine.setNewTarget(m_currentMarked->getNode());
             m_energyCostOfCurrentlyMarked = energyCostOf(currentNode, static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).getPolarCoordinates());
             markedChanged = true;
 		}
@@ -99,7 +98,8 @@ int PlayerHandlerStateSelectionHandler::getEnergyCostOfMarked() const
 {
 	return m_energyCostOfCurrentlyMarked;
 }
-void PlayerHandlerStateSelectionHandler::addLine()
+Mutant* PlayerHandlerStateSelectionHandler::getCurrentMarkedMutant() const
 {
-	m_selectionLine.addEnemy();
+
+	return m_currentMarked;
 }

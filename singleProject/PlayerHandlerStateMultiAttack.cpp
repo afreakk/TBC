@@ -9,6 +9,7 @@
 #include "LERPWalkAttack.h"
 #include "LERPWalk.h"
 #include "LaneSettings.h"
+#include "CoreCompositor.h"
 
 PlayerHandlerStateMultiAttack::PlayerHandlerStateMultiAttack(std::vector<std::string> mutantList, Player* player) 
 : HandlerState(PLAYER_HANDLER_STATE::MULTI_ATTACK)
@@ -22,10 +23,12 @@ PlayerHandlerStateMultiAttack::PlayerHandlerStateMultiAttack(std::vector<std::st
 	GlobalVariables::getSingleton().setSpeed(PlayerGlobalStats::getSingleton().getSlowMotionPower());
 	MutantContainer::getSingleton().registerSubscriber(this, "PlayerHandlerStateMultiAttack");
     setNewState(nullptr);
+    CoreCompositor::getSingleton().blackAndWhite(true);
 }
 
 PlayerHandlerStateMultiAttack::~PlayerHandlerStateMultiAttack()
 {
+    CoreCompositor::getSingleton().blackAndWhite(false);
 	MutantContainer::getSingleton().removeSubscriber("PlayerHandlerStateMultiAttack");
 	GlobalVariables::getSingleton().setSpeed(1.0);
 }

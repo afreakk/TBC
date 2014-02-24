@@ -110,15 +110,32 @@ bool OgreCore::initSceneManager()
 }
 bool OgreCore::initShadowCasting()
 {
-	m_sceneMgr->setShadowTextureSelfShadow(true);
+	    m_sceneMgr->setShadowTechnique(SHADOWTYPE_STENCIL_MODULATIVE);
+	/*if (m_root->getRenderSystem()->getCapabilities()->hasCapability(RSC_HWRENDER_TO_TEXTURE))
+	    m_sceneMgr->setShadowTechnique(SHADOWTYPE_TEXTURE_ADDITIVE);
+	m_sceneMgr->setShadowColour(ColourValue(0.5, 0.5, 0.5));
+	m_sceneMgr->setShadowTextureSize(512);
+	m_sceneMgr->setShadowTextureCount(1);*/
+	auto sceneManager = m_sceneMgr;
+	/*sceneManager->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_TEXTURE_MODULATIVE);
+	sceneManager->setShadowTexturePixelFormat(Ogre::PF_R8G8B8);
+	sceneManager->setShadowTextureSize(512);*/
+/*	sceneManager->setShadowTextureSelfShadow(false);
+	sceneManager->setShadowTextureCasterMaterial("Ogre/DepthShadowmap/Caster/Float");
+	sceneManager->setShadowTextureCount(1);
+	sceneManager->setShadowTextureConfig(0, 1024*2, 1024*2, Ogre::PF_FLOAT32_R,1,50);
+	sceneManager->setShadowCasterRenderBackFaces(false);
+	sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);*/
+	/*m_sceneMgr->setShadowTextureSelfShadow(true);
 	// Set the caster material which uses the shaders defined above
 	m_sceneMgr->setShadowTextureCasterMaterial("Ogre/DepthShadowmap/Caster/Float");
+	m_sceneMgr->setShadowTextureSize(2048);
 	// Set the pixel format to floating point
-	m_sceneMgr->setShadowTexturePixelFormat(Ogre::PF_FLOAT32_R);
+//	m_sceneMgr->setShadowTexturePixelFormat(Ogre::PF_FLOAT32_R);
 	// You can switch this on or off, I suggest you try both and see which works best for you
 	m_sceneMgr->setShadowCasterRenderBackFaces(false);
 	// Finally enable the shadows using texture additive integrated
-	m_sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
+	m_sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);*/
 	return true;
 }
 
@@ -141,14 +158,6 @@ bool OgreCore::initViewport()
 {
 	m_viewport = m_window->addViewport(m_camera);
 	m_viewport->setBackgroundColour(Ogre::ColourValue(0.2f, 1.0f, 0.1f));
-	return true;
-}
-bool OgreCore::initCompositor()
-{
-/*	CompositorManager::getSingleton().addCompositor(m_camera->getViewport(), "Glow");
-	CompositorManager::getSingleton().setCompositorEnabled(m_camera->getViewport(), "Glow", true);
-	GlowMaterialListener *gml = new GlowMaterialListener();
-	Ogre::MaterialManager::getSingleton().addListener(gml);*/
 	return true;
 }
 //gets

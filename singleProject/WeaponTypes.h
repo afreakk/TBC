@@ -1,9 +1,11 @@
 #pragma once
 #include "Weapon.h"
+#include "SimpleShadow.h"
 /*
 Do not use activate() for killing of entities
 */
 class ModelHandler;
+class BehaviourObject;
 namespace Ogre
 {
 	class SceneNode;
@@ -34,12 +36,18 @@ class MutantFireBall : public WeaponBeam
 {
 public:
 	MutantFireBall(Ogre::SceneNode* parentNode, ModelHandler* model);
+	void activate() override;
 	void update() override;
 private:
 	ParticleUniverse::SphereCollider* m_planeCollider;
 	ParticleUniverse::ParticleAffector* m_collisionObserver;
 	unsigned m_weaponDamage;
+	SimpleShadow m_shadow;
+	Ogre::Vector3 m_shadowPos;
 
+
+	void resetShadow();
+	void updateShadowPos();
 };
 //suicidebomb
 class MutantSuicide : public WeaponBomb

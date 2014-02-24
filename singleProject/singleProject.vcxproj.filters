@@ -57,9 +57,6 @@
     <Filter Include="Template">
       <UniqueIdentifier>{d01bd3a7-574f-4a81-8671-edba551e8b2f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Props\Virtuals">
-      <UniqueIdentifier>{d19e6839-5796-476c-9e4b-4f0a19286a39}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Props\concrete">
       <UniqueIdentifier>{2d900581-2619-4cd3-9588-3c7869e584c6}</UniqueIdentifier>
     </Filter>
@@ -98,6 +95,15 @@
     </Filter>
     <Filter Include="BehaviourState\universal">
       <UniqueIdentifier>{c2a1f50d-b626-4125-ba74-9ffbfc574683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviourStateHandler\Player\States">
+      <UniqueIdentifier>{1dd43065-6098-4bc4-b6ec-6fd2e54d1914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Props\Bases">
+      <UniqueIdentifier>{d19e6839-5796-476c-9e4b-4f0a19286a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compositors">
+      <UniqueIdentifier>{f242dca8-40ca-4646-b6d1-5db4493f7b92}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -222,12 +228,9 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="ParticleEffect.cpp">
-      <Filter>Props\Virtuals</Filter>
+      <Filter>Props\Bases</Filter>
     </ClCompile>
     <ClCompile Include="BloodSplat.cpp">
-      <Filter>Props\concrete</Filter>
-    </ClCompile>
-    <ClCompile Include="Line.cpp">
       <Filter>Props\concrete</Filter>
     </ClCompile>
     <ClCompile Include="MutantNumber.cpp">
@@ -263,9 +266,6 @@
     <ClCompile Include="TBCRay.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
-    <ClCompile Include="ManualLine.cpp">
-      <Filter>Props\Virtuals</Filter>
-    </ClCompile>
     <ClCompile Include="OgreFix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -287,29 +287,11 @@
     <ClCompile Include="MutantHandlerStateNormal.cpp">
       <Filter>BehaviourStateHandler\Mutant</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerHandlerStateDead.cpp">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateNormal.cpp">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateSelection.cpp">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateTumble.cpp">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClCompile>
     <ClCompile Include="MutantHandler.cpp">
       <Filter>BehaviourStateHandler\TopLayer</Filter>
     </ClCompile>
     <ClCompile Include="PlayerHandler.cpp">
       <Filter>BehaviourStateHandler\TopLayer</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateMultiAttack.cpp">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandlerStateSingleAttack.cpp">
-      <Filter>BehaviourStateHandler\Player</Filter>
     </ClCompile>
     <ClCompile Include="MutantContainer.cpp">
       <Filter>Container</Filter>
@@ -322,9 +304,6 @@
     </ClCompile>
     <ClCompile Include="ModelRecipeMutantSuicide.cpp">
       <Filter>Model\modelRecipe</Filter>
-    </ClCompile>
-    <ClCompile Include="GlowMaterialListener.cpp">
-      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="LERPWalkAttack.cpp">
       <Filter>BehaviourState\LERPConfigurations</Filter>
@@ -340,6 +319,48 @@
     </ClCompile>
     <ClCompile Include="PlayerHandlerStateSelectionLine.cpp">
       <Filter>BehaviourStateHandler\Player\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateDead.cpp">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateMultiAttack.cpp">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateNormal.cpp">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSelection.cpp">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateSingleAttack.cpp">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandlerStateTumble.cpp">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Tubes.cpp">
+      <Filter>Props\Bases</Filter>
+    </ClCompile>
+    <ClCompile Include="ManualLine.cpp">
+      <Filter>Props\concrete</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicTubes.cpp">
+      <Filter>BehaviourStateHandler\Player\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreCompositor.cpp">
+      <Filter>Compositors</Filter>
+    </ClCompile>
+    <ClCompile Include="GlowMaterialListener.cpp">
+      <Filter>Compositors</Filter>
+    </ClCompile>
+    <ClCompile Include="SlowMotionParticle.cpp">
+      <Filter>Props\concrete</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleShadow.cpp">
+      <Filter>Props</Filter>
+    </ClCompile>
+    <ClCompile Include="BeamWeaponHitTest.cpp">
+      <Filter>Props\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -494,12 +515,9 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="ParticleEffect.h">
-      <Filter>Props\Virtuals</Filter>
+      <Filter>Props\Bases</Filter>
     </ClInclude>
     <ClInclude Include="BloodSplat.h">
-      <Filter>Props\concrete</Filter>
-    </ClInclude>
-    <ClInclude Include="Line.h">
       <Filter>Props\concrete</Filter>
     </ClInclude>
     <ClInclude Include="MutantNumber.h">
@@ -550,9 +568,6 @@
     <ClInclude Include="TBCRay.h">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="ManualLine.h">
-      <Filter>Props\Virtuals</Filter>
-    </ClInclude>
     <ClInclude Include="OgreFix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -580,18 +595,6 @@
     <ClInclude Include="MutantHandlerStateNormal.h">
       <Filter>BehaviourStateHandler\Mutant</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHandlerStateDead.h">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateNormal.h">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateSelection.h">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateTumble.h">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClInclude>
     <ClInclude Include="MutantHandler.h">
       <Filter>BehaviourStateHandler\TopLayer</Filter>
     </ClInclude>
@@ -610,17 +613,8 @@
     <ClInclude Include="StateHandler.h">
       <Filter>BehaviourStateHandler\TopLayer</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHandlerStateMultiAttack.h">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandlerStateSingleAttack.h">
-      <Filter>BehaviourStateHandler\Player</Filter>
-    </ClInclude>
     <ClInclude Include="BehaviourStateLimbo.h">
       <Filter>BehaviourState</Filter>
-    </ClInclude>
-    <ClInclude Include="GlowMaterialListener.h">
-      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="MainLevelSetter.h">
       <Filter>Header Files</Filter>
@@ -654,6 +648,48 @@
     </ClInclude>
     <ClInclude Include="BehaviourStateEnums.h">
       <Filter>BehaviourState\universal</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateTumble.h">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateDead.h">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateMultiAttack.h">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateNormal.h">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSelection.h">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateSingleAttack.h">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Tubes.h">
+      <Filter>Props\Bases</Filter>
+    </ClInclude>
+    <ClInclude Include="ManualLine.h">
+      <Filter>Props\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicTubes.h">
+      <Filter>BehaviourStateHandler\Player\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreCompositor.h">
+      <Filter>Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="GlowMaterialListener.h">
+      <Filter>Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="SlowMotionParticle.h">
+      <Filter>Props\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleShadow.h">
+      <Filter>Props</Filter>
+    </ClInclude>
+    <ClInclude Include="BeamWeaponHitTest.h">
+      <Filter>Props\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

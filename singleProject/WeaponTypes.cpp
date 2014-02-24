@@ -8,7 +8,9 @@
 #include "MutantContainer.h"
 #include "Player.h"
 #include "TBCRay.h"
-static const Vector3 RayHeight(0.0, 100.0, 0.0);
+#include "MainUpdate.h"
+#include "PlayerGlobalStats.h"
+#include "BeamWeaponHitTest.h"
 //MutantLazer
 MutantLazer::MutantLazer(SceneNode* parentNode, ModelHandler* model)
 : WeaponBeam(parentNode, model, "MutantLazer", "lazer", "lazerEmitter")
@@ -33,45 +35,35 @@ void MutantFlameThrower::update()
 MutantFireBall::MutantFireBall(SceneNode* parentNode, ModelHandler* model)
 : WeaponBeam(parentNode, model, "MutantFireBall", "FireBall", "FireEmitter" )
 , m_weaponDamage(40)
+, m_shadow(parentNode)
+, m_shadowPos(Vector3::ZERO)
 {
 	m_collisionObserver = static_cast<ParticleUniverse::ParticleAffector*>(m_particleSystem->getTechnique(0)->getAffector("boolman"));
 	m_planeCollider = static_cast<ParticleUniverse::SphereCollider*>(m_particleSystem->getTechnique(0)->getAffector("planecollider"));
 }
+void MutantFireBall::activate()
+{
+	resetShadow();
+	WeaponBeam::activate();
+}
+void MutantFireBall::resetShadow()
+{
+	m_shadowPos = Vector3::ZERO;
+	if (m_shadow.isCreated())
+		m_shadow.setPosition(m_shadowPos);
+	else
+		m_shadow.create();
+}
+void MutantFireBall::updateShadowPos()
+{
+    Ogre::Real particleVelocity = 2500* m_particleSystem->getScaleVelocity();
+    m_shadowPos.z -= particleVelocity * MainUpdate::getSingleton().getDeltaTime();
+	m_shadow.setPosition(m_shadowPos);
+}
 void MutantFireBall::update()
 {
-	m_planeCollider->position.y = m_emitter->position.y;
-	m_planeCollider->position.x = m_emitter->position.x;
-	if (TBCRay::getSingleton().raycast(m_node->getParent()->getPosition()+ RayHeight
-		,  m_node->getParent()->getOrientation() *Vector3(0.0, 0.0, -1.0), PlayerContainer::getSingleton().getPlayer()))
-	{
-        m_planeCollider->position.z = m_node->convertWorldToLocalPosition( PlayerContainer::getSingleton().getPlayer()->getNode()->getPosition() ).z ;
-		if (m_collisionObserver->isEnabled())
-		{
-			shootPlayer(m_weaponDamage);
-			m_collisionObserver->setEnabled(false);
-		}
-	}
-    bool hitMutant = false;
-    for (const auto& itt : MutantContainer::getSingleton().getMutantIt())
-    {
-        Node* iMutantNode = itt->getNode();
-        if (iMutantNode == (m_node->getParent()))
-            continue;
-        if (TBCRay::getSingleton().raycast(m_node->getParent()->getPosition()+ RayHeight,  m_node->getParent()->getOrientation() *Vector3(0.0, 0.0, -1.0), itt))
-        {
-            hitMutant = true;
-            m_planeCollider->position.z = m_node->convertWorldToLocalPosition( itt->getNode()->getPosition() ).z ;
-            if (m_collisionObserver->isEnabled())
-            {
-                MutantContainer::getSingleton().killMutant(itt->getNode()->getName());
-                m_collisionObserver->setEnabled(false);
-                break;
-            }
-        }
-
-    }
-    if (!hitMutant)
-        m_planeCollider->position.z = -40000.0;
+	BeamWeaponHitTest::hitTest(m_planeCollider, m_collisionObserver, m_emitter, m_node, m_weaponDamage, 100.0, m_shadowPos.z);
+	updateShadowPos();
 	WeaponBeam::update();
 }
 
@@ -95,7 +87,7 @@ void MutantSuicide::detonate()
 {
     //player
 	if (PlayerContainer::getSingleton().getPlayer()->getNode()->getPosition().distance(m_node->getParent()->getPosition()) < m_weaponRadius)
-		shootPlayer(50);
+        PlayerGlobalStats::getSingleton().modifyHealth(-50);
     //mutants
 	for (auto itt : MutantContainer::getSingleton().getMutantIt())
 	{

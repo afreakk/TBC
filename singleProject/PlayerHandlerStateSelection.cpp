@@ -7,21 +7,24 @@
 #include "BehaviourStateLimbo.h"
 #include "Player.h"
 #include "ModelHandlerMutant.h"
+#include "CoreCompositor.h"
 
 PlayerHandlerStateSelection::PlayerHandlerStateSelection(Player* player)
 : m_selectionHandler(m_markedList)
 , HandlerState(PLAYER_HANDLER_STATE::SELECTION)
 , m_player(player)
-, m_selectionState(static_cast<BehaviourState*>(new PlayerSelectionState() ) )
+, m_selectionState(static_cast<BehaviourState*>(new PlayerSelectionState(&m_player->getModelHandler()) ) )
 {
 	m_player->setState(m_selectionState.get());
 	GlobalVariables::getSingleton().setSpeed(PlayerGlobalStats::getSingleton().getSlowMotionPower());
 	MutantContainer::getSingleton().registerSubscriber(this,"PlayerHandlerStateSelection");
+    CoreCompositor::getSingleton().blackAndWhite(true);
 }
 
 
 PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 {
+    CoreCompositor::getSingleton().blackAndWhite(false);
 	MutantContainer::getSingleton().removeSubscriber("PlayerHandlerStateSelection");
 	GlobalVariables::getSingleton().setSpeed(1.0);
 	for (auto idx : m_markedList)
@@ -34,8 +37,14 @@ PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 
 void PlayerHandlerStateSelection::update()
 {
-	if(updateMarked())
-	    markEnergy();
+	m_selectionLine.update();
+	if (updateMarked())
+		newMarked();
+}
+void PlayerHandlerStateSelection::newMarked()
+{
+    m_selectionLine.setNewTarget(m_selectionHandler.getCurrentMarkedMutant()->getNode());
+    markEnergy();
 }
 void PlayerHandlerStateSelection::markEnergy()
 {
@@ -91,7 +100,7 @@ void PlayerHandlerStateSelection::selectMarked()
 	PlayerGlobalStats::getSingleton().modifyEnergy(-static_cast<int>(m_selectionHandler.getEnergyCostOfMarked()));
 	m_markedList.push_back(marked);
 	static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getNumer().markAs(m_markedList.size());
-	m_selectionHandler.addLine();
+	m_selectionLine.addEnemy();
 }
 
 const std::vector<string>& PlayerHandlerStateSelection::getAttackList() const

@@ -3,6 +3,7 @@
 #include "ParticleReferenceContainer.h"
 #include "GlobalVariables.h"
 #include "ParticleUniverseSystemManager.h"
+#include "OgreCore.h"
 
 ParticleEffect::ParticleEffect(SceneNode* parentNode, const int id, const Ogre::String & 	name, const Ogre::String & 	templateName, Ogre::SceneManager * 	sceneManager)
     : m_id(id)
@@ -11,7 +12,9 @@ ParticleEffect::ParticleEffect(SceneNode* parentNode, const int id, const Ogre::
     , m_node(parentNode->createChildSceneNode())
     , m_added(false)
 {
+
     m_particleSystem->prepare();
+	m_particleSystem->setTightBoundingBox(true);
     m_node->attachObject(m_particleSystem);
 }
 ParticleEffect::~ParticleEffect()

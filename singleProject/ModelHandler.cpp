@@ -65,7 +65,7 @@ AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const 
 {
 	if (!m_hasLerpAttacked)
 	{
-		if (!lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
+		if (!lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision+50.0, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
 			m_hasLerpAttacked = true;
 		return AttackReturn::NOT_KILLED;
 	}

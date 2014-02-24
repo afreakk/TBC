@@ -49,6 +49,10 @@ ModelHandler& BehaviourObject::getModelHandler()
 {
 	return *m_model.get();
 }
+const ModelHandler& BehaviourObject::getModelHandler() const
+{
+	return *m_model.get();
+}
 bool BehaviourObject::isDead() const
 {
 	return m_dead;

@@ -7,6 +7,8 @@
 #include "PlayerContainer.h"
 #include "PlayerGlobalStats.h"
 #include "PlayerHandler.h"
+#include "CoreCompositor.h"
+#include "../procedural/ProceduralPlaneGenerator.h"
 LevelOne::LevelOne() 
 : ILevel(LevelID::LEVEL_ONE)
 , m_particleRefContainer(new ParticleReferenceContainer())
@@ -19,6 +21,10 @@ LevelOne::LevelOne()
 	m_playerCamera.init(m_playerContainer->getPlayer());
 
 	SceneManager* sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
+	/*Procedural::PlaneGenerator().setNumSegX(24).setNumSegY(24).setSizeX(24000*2).setSizeY(24000*2).setUTile(5.0).setVTile(5.0).realizeMesh("groundBox");
+	auto cNode = sMgr->getRootSceneNode()->createChildSceneNode();
+	auto ent = sMgr->createEntity("groundBox");
+	cNode->attachObject(ent);*/
 	m_dotSceneLoader.parseDotScene("environment03.scene", "SceneOne", sMgr, m_environmentNode );
 	/*auto e = sMgr->createEntity("Environment02Waterfront", "Environment02Waterfront.mesh");
 	e->setMaterialName("Examples/Ninja");
@@ -30,7 +36,6 @@ LevelOne::LevelOne()
 	PlayerGlobalStats::getSingletonPtr()->registerSubscriber(m_playerContainer.get(), "PlayerContainer");
 	m_playerContainer->getHandler()->registerSubscriber(&m_playerCamera, "playerCamera");
 
-    OgreCore::getSingleton().initCompositor();
 }
 
 

@@ -9,7 +9,7 @@ private:
 
 public:
 	TBCRay(Ogre::SceneManager* sceneMgr);
-	bool raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, BehaviourObject* gameObjectt);
+	bool raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, const BehaviourObject* gameObjectt);
 	bool RaycastFromPoint(const Ogre::Vector3& point, const Ogre::Vector3& normal, Ogre::Vector3& result);
 
 private:
