@@ -7,7 +7,7 @@
 #include "PlayerContainer.h"
 #include "PlayerHandler.h"
 
-BehaviourStateLERP::BehaviourStateLERP(BehaviourObject* target, const Real* speed, LERPBase* mode, Ogre::Vector3* targetPosition) 
+BehaviourStateLERP::BehaviourStateLERP(BehaviourObject* target, const Real* speed, LERPBase* mode, const Ogre::Vector3& targetPosition) 
 : BehaviourState(BEHAVOUR_STATE::LERP)
 , m_lerpReturn(LerpTowardsReturn::RUNNING)
 , m_target(target)
@@ -16,8 +16,10 @@ BehaviourStateLERP::BehaviourStateLERP(BehaviourObject* target, const Real* spee
 , m_goNextTarget(false)
 , m_killed(false)
 , m_lerpMode(mode)
+, m_usingTargetPosition((m_targetPos != Vector3::ZERO)?true:false)
 {
-	assert(m_target||targetPosition);
+	assert(m_target||m_usingTargetPosition);
+	assert(!(m_target&&m_usingTargetPosition));
 }
 
 BehaviourStateLERP::~BehaviourStateLERP()
@@ -34,24 +36,7 @@ bool BehaviourStateLERP::enemyKilled() const
 }
 void BehaviourStateLERP::update(ModelHandler& modelHandler)
 {
-	/*if ((!m_targetPos && !m_target) || !m_targetPos &&
-		(m_target->isDead() && ( m_lerpReturn == LerpTowardsReturn::RUNNING || m_lerpReturn == LerpTowardsReturn::ATTACKING )))
-	{
-		const std::string& name = modelHandler.getNode()->getName();
-		switch (modelHandler.getType())
-		{
-		case ModelHandlerType::Mutant:
-			MutantContainer::getSingleton().getHandler( name )->queSwitchState(MUTANT_HANDLER_STATE::NORMAL);
-			return;
-		case ModelHandlerType::Player:
-			PlayerContainer::getSingleton().getHandler()->queSwitchState(PLAYER_HANDLER_STATE::NORMAL);
-			return;
-		default:
-			assert(0);
-			return;
-		}
-	}*/
-	m_lerpReturn = m_lerpMode->update(modelHandler, (m_targetPos ? *m_targetPos : m_target->getNode()->getPosition()), m_speed);
+	m_lerpReturn = m_lerpMode->update(modelHandler, (m_usingTargetPosition ? m_targetPos : m_target->getNode()->getPosition()), m_speed);
     switch (m_lerpReturn)
     {
     case LerpTowardsReturn::RUNNING:

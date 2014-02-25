@@ -3,13 +3,15 @@ class SimpleShadow
 {
 public:
 	SimpleShadow(Ogre::SceneNode* parentNode);
-	void create(const Ogre::Vector3& pos=Vector3::ZERO);
+	~SimpleShadow();
+	void create();
 	void setPosition(const Ogre::Vector3& pos);
 	void setZ(const Ogre::Real& zPos);
 	bool isCreated();
+	void setVisible(bool visible);
 private:
 	Ogre::BillboardSet* m_billboardSet;
-	std::unique_ptr<Ogre::Billboard> m_billboard;
-	Ogre::SceneNode* m_parentNode;
+	Ogre::Billboard* m_billboard;
+	Ogre::SceneNode* m_sceneNode;
 	bool m_isCreated;
 };

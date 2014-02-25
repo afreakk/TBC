@@ -6,6 +6,7 @@
 #include "PlayerHandlerStateSingleAttack.h"
 #include "PlayerHandlerStateDead.h"
 #include "PlayerHandlerStateTumble.h"
+#include "PlayerHandlerStateBlankAttack.h"
 #include "OISCore.h"
 #include "Player.h"
 #include "MutantContainer.h"
@@ -48,15 +49,11 @@ void PlayerHandler::switchState(PLAYER_HANDLER_STATE newState)
 	{
         std::string closestMutant;
         closestMutant = MutantContainer::getSingleton().getClosestMutant(m_player->getPolarCoordinates(), m_player->getModelHandler().getNormalDirection());
-        if (closestMutant == "NONE")
-        {
-            m_currentState->setState(PLAYER_HANDLER_STATE::NORMAL);
-            return;
-        }
         m_currentState.reset();
-        m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateSingleAttack(m_player, closestMutant));
-	}
+		m_currentState = (closestMutant == "NONE") ? unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateBlankAttack(m_player))
+			: unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateSingleAttack(m_player, closestMutant));
 		break;
+	}
 	case PLAYER_HANDLER_STATE::DEAD:
 		m_currentState.reset();
 		m_currentState = unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateDead(m_player));

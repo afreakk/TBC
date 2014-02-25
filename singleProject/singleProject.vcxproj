@@ -34,6 +34,7 @@
     <ClCompile Include="LevelMenu.cpp" />
     <ClCompile Include="LevelOne.cpp" />
     <ClCompile Include="LightHandler.cpp" />
+    <ClCompile Include="LineBillboardSet.cpp" />
     <ClCompile Include="LvlOneEnvironment.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainLevelSetter.cpp" />
@@ -59,8 +60,11 @@
     <ClCompile Include="MutantNumber.cpp" />
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
+    <ClCompile Include="PlayerHandlerStateBlankAttack.cpp" />
     <ClCompile Include="PlayerHandlerStateSingleAttack.cpp" />
     <ClCompile Include="DynamicTubes.cpp" />
+    <ClCompile Include="PlayerSelectionLine.cpp" />
+    <ClCompile Include="StapledLine.cpp" />
     <ClCompile Include="SimpleShadow.cpp" />
     <ClCompile Include="SlowMotionParticle.cpp" />
     <ClCompile Include="TBCRay.cpp" />
@@ -121,6 +125,7 @@
     <ClInclude Include="BloodSplat.h" />
     <ClInclude Include="CameraBase.h" />
     <ClInclude Include="ConfigScriptLoader.h" />
+    <ClInclude Include="LineBillboardSet.h" />
     <ClInclude Include="CoreCompositor.h" />
     <ClInclude Include="Distancer.h" />
     <ClInclude Include="DotSceneLoader.h" />
@@ -168,7 +173,10 @@
     <ClInclude Include="MutantHandlerStateNormal.h" />
     <ClInclude Include="MutantHandlerStateSuicideBomb.h" />
     <ClInclude Include="OgreFix.h" />
+    <ClInclude Include="PlayerHandlerStateBlankAttack.h" />
     <ClInclude Include="PlayerHandlerStateSingleAttack.h" />
+    <ClInclude Include="PlayerSelectionLine.h" />
+    <ClInclude Include="StapledLine.h" />
     <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="DynamicTubes.h" />
     <ClInclude Include="SimpleShadow.h" />

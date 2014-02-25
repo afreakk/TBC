@@ -12,12 +12,14 @@ public:
 	virtual void update();
 	virtual void activate();
 protected:
-	void stop();
-	void destroyThis();
 	const int m_id;
 	bool m_added;
 	Ogre::SceneManager* m_sMgr;
 	SceneNode* m_node;
 	ParticleUniverse::ParticleSystem* m_particleSystem;
+
+	void setParticleSystem(bool enabled);
+	void stop();
+	void destroyThis();
 };
 

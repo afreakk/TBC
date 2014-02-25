@@ -10,8 +10,18 @@ MutantContainer::MutantContainer()
 {
 }
 MutantContainer::~MutantContainer()
-{}
-
+{
+	for (auto& i  : m_deadMutants)
+	{
+        i.second->handler.reset();
+        i.second->mutant.reset(); 
+	}
+	for (auto& i : m_aliveMutants)
+	{
+        i.second->handler.reset();
+        i.second->mutant.reset(); 
+	}
+}
 
 const std::string MutantContainer::message()
 {
@@ -60,22 +70,24 @@ void MutantContainer::addMutant(MutantHandler* mutantHandler, Mutant* mutant)
 	m_aliveMutantIteratorList.push_back(mutant);
 	m_aliveHandlerIteratorList.push_back(mutantHandler);
 }
-Mutant* MutantContainer::getClosestHigherThan(const Ogre::Real& theta)
+Mutant* MutantContainer::getClosestHigherThan(const Ogre::Real& theta, Mutant* mutant)
 {
-	return getClosest(true, theta);
+	return getClosest(true, theta, mutant);
 }
-Mutant* MutantContainer::getClosestLowerThan(const Ogre::Real& theta)
+Mutant* MutantContainer::getClosestLowerThan(const Ogre::Real& theta, Mutant* mutant)
 {
-	return getClosest(false, theta);
+	return getClosest(false, theta, mutant);
 }
-Mutant* MutantContainer::getClosest(bool higher, const Ogre::Real& theta)
+Mutant* MutantContainer::getClosest(bool higher, const Ogre::Real& theta, Mutant* mutant)
 {
 	Real closestDistance = 100000.0;
 	Mutant* mutPtr = nullptr;
 	for (const auto& itt : m_aliveMutantIteratorList)
 	{
+		if (itt == mutant)
+			continue;
 		Real distance = (higher ? itt->getPolarCoordinates().theta : theta ) - (higher ? theta : itt->getPolarCoordinates().theta );
-		if (distance > 0.0 && distance < closestDistance)
+		if (distance >= 0.0 && distance < closestDistance)
 		{
 			closestDistance = distance;
 			mutPtr = itt;
@@ -127,8 +139,8 @@ void MutantContainer::handleDeadMutants()
     }
 	for (const auto& it : toDespawn)
 	{
-//		m_deadMutants[it]->handler.reset();
-		// m_deadMutants[it]->mutant.reset(); test when project is in better condition
+		m_deadMutants[it]->handler.reset();
+		m_deadMutants[it]->mutant.reset(); 
         m_deadMutants.erase(it);
 	}
 }

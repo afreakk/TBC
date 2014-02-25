@@ -67,7 +67,7 @@ bool LevelOne::update()
 	m_enemySpawner.update();
 	m_playerCamera.update();
 	m_environment.update();
-/*	if (m_time > 0.1)
+/*	if (m_time > 10.1)
 		MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::MENU);*/
 	return false;
 }

@@ -42,6 +42,7 @@ WeaponType WeaponBase::weaponTypeFromString(String weaponString)
 WeaponBeam::WeaponBeam(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName)
 : WeaponBase(parentNode, model, id, templateName, emitterName)
 {
+	m_emitter->position = m_model->getBonePos();
 }
 WeaponBeam::~WeaponBeam()
 {

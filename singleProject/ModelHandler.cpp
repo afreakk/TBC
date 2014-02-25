@@ -61,11 +61,15 @@ void ModelHandler::fallAndDie()
 	Real animVel = MainUpdate::getSingleton().getScaledDeltaTime() * GlobalVariables::getSingleton().getAnimDieSpeed();
 	m_animations[ANIMATIONS::DIE]->addTime(animVel , m_animations);
 }
+void ModelHandler::blankAttack()
+{
+	m_animations[ANIMATIONS::ATTACK]->addTime( scaleTime(800)*GlobalVariables::getSingleton().getLERPAnimAttackRatio(), m_animations);
+}
 AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
 	if (!m_hasLerpAttacked)
 	{
-		if (!lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision+50.0, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
+		if (!lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision+75.0, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
 			m_hasLerpAttacked = true;
 		return AttackReturn::NOT_KILLED;
 	}

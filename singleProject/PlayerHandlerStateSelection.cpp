@@ -14,6 +14,7 @@ PlayerHandlerStateSelection::PlayerHandlerStateSelection(Player* player)
 , HandlerState(PLAYER_HANDLER_STATE::SELECTION)
 , m_player(player)
 , m_selectionState(static_cast<BehaviourState*>(new PlayerSelectionState(&m_player->getModelHandler()) ) )
+, m_line(player->getNode(),2.0)
 {
 	m_player->setState(m_selectionState.get());
 	GlobalVariables::getSingleton().setSpeed(PlayerGlobalStats::getSingleton().getSlowMotionPower());
@@ -37,18 +38,15 @@ PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 
 void PlayerHandlerStateSelection::update()
 {
-	m_selectionLine.update();
+	m_line.update(boost::numeric_cast<Real>(PlayerGlobalStats::getSingleton().getEnergy()/boost::numeric_cast<Real>(m_selectionHandler.getEnergyCostOfMarked())));
+    PlayerGlobalStats::getSingleton().markEnergy( m_selectionHandler.getEnergyCostOfMarked() );
 	if (updateMarked())
 		newMarked();
 }
 void PlayerHandlerStateSelection::newMarked()
 {
-    m_selectionLine.setNewTarget(m_selectionHandler.getCurrentMarkedMutant()->getNode());
-    markEnergy();
-}
-void PlayerHandlerStateSelection::markEnergy()
-{
-    PlayerGlobalStats::getSingleton().markEnergy( m_selectionHandler.getEnergyCostOfMarked() );
+	m_lastSelectedNode = m_selectionHandler.getCurrentMarkedMutant()->getNode();
+	m_line.updateBack(m_lastSelectedNode);
 }
 bool PlayerHandlerStateSelection::updateMarked()
 {
@@ -97,10 +95,11 @@ void PlayerHandlerStateSelection::selectMarked()
 	if (m_selectionHandler.getEnergyCostOfMarked() > PlayerGlobalStats::getSingleton().getEnergy() 
 		|| (mutant = MutantContainer::getSingleton().getMutant(marked)) == nullptr)
 		return;
+    PlayerGlobalStats::getSingleton().markEnergy(0);
 	PlayerGlobalStats::getSingleton().modifyEnergy(-static_cast<int>(m_selectionHandler.getEnergyCostOfMarked()));
 	m_markedList.push_back(marked);
 	static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getNumer().markAs(m_markedList.size());
-	m_selectionLine.addEnemy();
+	m_line.addNode(m_lastSelectedNode);
 }
 
 const std::vector<string>& PlayerHandlerStateSelection::getAttackList() const

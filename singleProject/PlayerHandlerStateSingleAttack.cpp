@@ -47,7 +47,7 @@ void PlayerHandlerStateSingleAttack::setLerpToLane()
 	m_lerpState.reset();
     unsigned idx = LaneSettings::getSingleton().getClosestLane(m_player->getNode()->getPosition());
     Vector3 targetPos = LaneSettings::getSingleton().getVectorOf(idx, m_player->getPolarCoordinates().theta, m_player->getPolarCoordinates().h);
-	m_lerpState = unique_ptr<BehaviourStateLERP>(new BehaviourStateLERP( nullptr, &PlayerGlobalStats::getSingleton().getLERPSpeed_NoEnergy(), new LERPWalk(), new Vector3(targetPos) ));
+	m_lerpState = unique_ptr<BehaviourStateLERP>(new BehaviourStateLERP( nullptr, &PlayerGlobalStats::getSingleton().getLERPSpeed_NoEnergy(), new LERPWalk(), targetPos ));
 	m_player->setState(m_lerpState.get());
 }
 void PlayerHandlerStateSingleAttack::handleMurder()

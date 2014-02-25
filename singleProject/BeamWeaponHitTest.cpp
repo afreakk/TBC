@@ -8,9 +8,10 @@
 #include "PlayerGlobalStats.h"
 #include "TBCRay.h"
 
-void BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, ParticleUniverse::ParticleAffector* collisionObserver
+bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, ParticleUniverse::ParticleAffector* collisionObserver
 	, ParticleUniverse::ParticleEmitter* emitter, Ogre::Node* node, int damage, const Ogre::Real& rayHeight, const Ogre::Real& mainMassZPos)
 {
+	bool BeamHitSomething = false;
 	colliderObject->position.y = emitter->position.y;
 	colliderObject->position.x = emitter->position.x;
 	std::pair<bool, Real> rayHitSomething = { false, 0.0 };
@@ -21,8 +22,11 @@ void BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
 		{
             rayHitSomething.first=true;
             rayHitSomething.second = zPos;
-			if (didItHit(zPos,colliderObject,collisionObserver))
+			if (didItHit(zPos, colliderObject, collisionObserver))
+			{
                 PlayerGlobalStats::getSingleton().modifyHealth(-damage);
+				BeamHitSomething = true;
+			}
 		}
 	}
     for (const auto& itt : MutantContainer::getSingleton().getMutantIt())
@@ -38,8 +42,11 @@ void BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
 			{
                 rayHitSomething.first=true;
                 rayHitSomething.second = zPos;
-				if (didItHit(zPos,colliderObject,collisionObserver))
+				if (didItHit(zPos, colliderObject, collisionObserver))
+				{
                     MutantContainer::getSingleton().killMutant(itt->getNode()->getName());
+					BeamHitSomething = true;
+				}
 			}
         }
 
@@ -48,7 +55,7 @@ void BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
 		colliderObject->position.z = -40000.0;
 	else
 		colliderObject->position.z = rayHitSomething.second;
-
+	return BeamHitSomething;
 }
 bool BeamWeaponHitTest::rayCastTarget(const BehaviourObject* obj, Ogre::Node* node, const Ogre::Real& rayHeight)
 {
@@ -67,7 +74,8 @@ bool BeamWeaponHitTest::didItHit(const Ogre::Real& zPos, ParticleUniverse::BaseC
     Real distance = Math::Abs(colliderObject->position.z - zPos);
     if (collisionObserver->isEnabled() && distance < 100.0)
     {
-        collisionObserver->setEnabled(false);
+//        collisionObserver->setEnabled(false); thought this was necesarry but it just creates ugly behaviour on particle impact, maybe it will call kill the
+        // same entity over and over becuase this is commented out
 		return true;
     }
 	return false;

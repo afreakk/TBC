@@ -11,7 +11,7 @@ namespace Ogre
 class BehaviourStateLERP:public BehaviourState
 {
 public:
-	BehaviourStateLERP(BehaviourObject* target, const Real* speed, LERPBase* mode, Ogre::Vector3* targetPosition=nullptr);
+	BehaviourStateLERP(BehaviourObject* target, const Real* speed, LERPBase* mode,const Ogre::Vector3& targetPosition=Vector3::ZERO);
 	~BehaviourStateLERP();
 	void update(ModelHandler& ) override;
 	bool nextTarget() const;
@@ -19,12 +19,13 @@ public:
 private:
 	LerpTowardsReturn m_lerpReturn;
 	BehaviourObject*const m_target;
-	std::unique_ptr<Ogre::Vector3> m_targetPos; // optional
+	const Ogre::Vector3 m_targetPos; // optional
 	const Ogre::Real& m_speed;
 	bool m_goNextTarget;
 	bool m_killed;
 	LerpTowardsReturn m_lerpValue;
 	std::unique_ptr<LERPBase> m_lerpMode;
+	bool m_usingTargetPosition;
 
 };
 

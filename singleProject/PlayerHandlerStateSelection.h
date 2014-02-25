@@ -3,7 +3,7 @@
 #include "PlayerHandlerStateSelectionHandler.h"
 #include "PlayerHandlerEnums.h"
 #include "MessageSubscriber.h"
-#include "PlayerHandlerStateSelectionLine.h"
+#include "PlayerSelectionLine.h"
 class Player;
 class PlayerSelectionState;
 class BehaviourState;
@@ -23,13 +23,13 @@ private:
 	Player* m_player;
 	unique_ptr<BehaviourState> m_selectionState;
 	std::vector<std::string> m_markedList;
-	PlayerHandlerStateSelectionLine m_selectionLine;
+	PlayerSelectionLine m_line;
+	Ogre::Node* m_lastSelectedNode;
 
 	void newMarked();
 	void handleSelection(const OIS::KeyEvent&);
 	const PolarCoordinates& getLatestMarkedPolar(int lookLower=1);
 	void selectMarked();
 	bool updateMarked();
-	void markEnergy();
 };
 

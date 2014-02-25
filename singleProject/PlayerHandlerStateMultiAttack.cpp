@@ -22,7 +22,7 @@ PlayerHandlerStateMultiAttack::PlayerHandlerStateMultiAttack(std::vector<std::st
 {
 	GlobalVariables::getSingleton().setSpeed(PlayerGlobalStats::getSingleton().getSlowMotionPower());
 	MutantContainer::getSingleton().registerSubscriber(this, "PlayerHandlerStateMultiAttack");
-    setNewState(nullptr);
+    setNewState();
     CoreCompositor::getSingleton().blackAndWhite(true);
 }
 
@@ -38,7 +38,7 @@ void PlayerHandlerStateMultiAttack::setNextTarget()
 	if ((m_currentTargetIndex+1) != m_attackList.end())
 	{
         m_currentTargetIndex++;
-		setNewState(nullptr);
+		setNewState();
 	}
 	else if (!m_lerpingTowardsLane)
 	{
@@ -51,16 +51,16 @@ void PlayerHandlerStateMultiAttack::setNextTarget()
 	}
 }
 
-Ogre::Vector3* PlayerHandlerStateMultiAttack::getClosestLanePosition()
+Ogre::Vector3 PlayerHandlerStateMultiAttack::getClosestLanePosition()
 {
     unsigned idx = LaneSettings::getSingleton().getClosestLane(m_player->getNode()->getPosition());
-	return new Vector3(LaneSettings::getSingleton().getVectorOf(idx, m_player->getPolarCoordinates().theta, m_player->getPolarCoordinates().h));
+	return LaneSettings::getSingleton().getVectorOf(idx, m_player->getPolarCoordinates().theta, m_player->getPolarCoordinates().h);
 }
-void PlayerHandlerStateMultiAttack::setNewState( Ogre::Vector3* targetPos)
+void PlayerHandlerStateMultiAttack::setNewState( const Ogre::Vector3& targetPos)
 {
 	BehaviourObject* targetObject = nullptr;
 	LERPBase* lerpConfiguration;
-	if (targetPos == nullptr)
+	if (targetPos == Vector3::ZERO)
 	{
 		if ((targetObject = MutantContainer::getSingleton().getMutant(*m_currentTargetIndex)) == nullptr)
 		{

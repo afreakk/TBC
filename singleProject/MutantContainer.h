@@ -23,8 +23,8 @@ public:
 	void killMutant(const std::string&);
     //replaces mutant names in list with killed if they get killed while list is being operated on.
     void addMutant(MutantHandler* mutantHandler, Mutant* mutant);
-	Mutant* getClosestHigherThan(const Ogre::Real& theta);
-	Mutant* getClosestLowerThan(const Ogre::Real& theta);
+	Mutant* getClosestHigherThan(const Ogre::Real& theta, Mutant* mutant);
+	Mutant* getClosestLowerThan(const Ogre::Real& theta, Mutant* mutant);
 	std::string getClosestMutant(PolarCoordinates pos, NormalDirection direction);
 	std::list<Mutant*> getMutantIt() { return m_aliveMutantIteratorList; }
 	std::list<MutantHandler*> getHandlerIt() { return m_aliveHandlerIteratorList; }
@@ -42,7 +42,7 @@ private:
 	std::vector<std::string> m_executedMutants;
 	std::vector<std::string> m_toBeKilled;
 
-	Mutant* getClosest(bool higher, const Ogre::Real& theta);
+	Mutant* getClosest(bool higher, const Ogre::Real& theta, Mutant* mutant);
 	void handleDeadMutants();
 	void executeDoomedMutants();
 	bool checkDistance(const PolarCoordinates& pos, Mutant* mutant , Ogre::Real* closestDistance ,  bool left);

@@ -53,6 +53,9 @@ void PlayerCamera::setNewState(PLAYER_HANDLER_STATE newState)
 	case PLAYER_HANDLER_STATE::TUMBLE:
 		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal( m_player ) };
 		break;
+	case PLAYER_HANDLER_STATE::BLANK_ATTACK:
+		m_currentState = unique_ptr<PlayerCameraState>{ new PlayerCameraStateNormal( m_player ) };
+		break;
 	default:
 		assert(0);
 		break;

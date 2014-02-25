@@ -22,7 +22,7 @@ PlayerHandlerStateSelectionHandler::~PlayerHandlerStateSelectionHandler()
 {
 }
 
-bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& currentNode)
+bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& markedPolarCoordinates)
 {
 	bool markedChanged = false;
 	if (m_prevMarked != m_currentMarked)
@@ -32,10 +32,10 @@ bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& cu
 		if (m_currentMarked)
 		{
             static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).setHovered(true);
-            m_energyCostOfCurrentlyMarked = energyCostOf(currentNode, static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).getPolarCoordinates());
             markedChanged = true;
 		}
 	}
+    m_energyCostOfCurrentlyMarked = energyCostOf(markedPolarCoordinates, static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).getPolarCoordinates());
 	m_prevMarked = m_currentMarked;
 	return markedChanged;
 }
@@ -52,7 +52,7 @@ void PlayerHandlerStateSelectionHandler::changeIndex(bool right)
 		return;
 	if (right)
 	{
-		if ((m_currentMarked = MutantContainer::getSingleton().getClosestHigherThan(*m_currentTheta)) == nullptr)
+		if ((m_currentMarked = MutantContainer::getSingleton().getClosestHigherThan(*m_currentTheta,m_currentMarked)) == nullptr)
 		{
 			m_currentTheta = &minTheta;
 			changeIndex(right);
@@ -61,7 +61,7 @@ void PlayerHandlerStateSelectionHandler::changeIndex(bool right)
 	}
 	else
 	{
-		if((m_currentMarked = MutantContainer::getSingleton().getClosestLowerThan(*m_currentTheta)) == nullptr)
+		if((m_currentMarked = MutantContainer::getSingleton().getClosestLowerThan(*m_currentTheta,m_currentMarked)) == nullptr)
 		{
 			m_currentTheta = &maxTheta;
 			changeIndex(right);

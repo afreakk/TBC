@@ -26,7 +26,7 @@ private:
 	bool m_lerpingTowardsLane;
 
 	void setNextTarget();
-	Ogre::Vector3* getClosestLanePosition();
-	void setNewState( Ogre::Vector3* targetPos);
+	Ogre::Vector3 getClosestLanePosition();
+	void setNewState( const Ogre::Vector3& targetPos=Vector3::ZERO);
 };
 

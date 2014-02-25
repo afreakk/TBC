@@ -362,6 +362,18 @@
     <ClCompile Include="BeamWeaponHitTest.cpp">
       <Filter>Props\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerHandlerStateBlankAttack.cpp">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="LineBillboardSet.cpp">
+      <Filter>Props\Bases</Filter>
+    </ClCompile>
+    <ClCompile Include="StapledLine.cpp">
+      <Filter>Props\concrete</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSelectionLine.cpp">
+      <Filter>Props\concrete</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -690,6 +702,18 @@
     </ClInclude>
     <ClInclude Include="BeamWeaponHitTest.h">
       <Filter>Props\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandlerStateBlankAttack.h">
+      <Filter>BehaviourStateHandler\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="LineBillboardSet.h">
+      <Filter>Props\Bases</Filter>
+    </ClInclude>
+    <ClInclude Include="StapledLine.h">
+      <Filter>Props\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSelectionLine.h">
+      <Filter>Props\concrete</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
