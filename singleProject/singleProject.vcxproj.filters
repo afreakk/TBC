@@ -377,6 +377,9 @@
     <ClCompile Include="AnimationPrepare.cpp">
       <Filter>Model\Animations</Filter>
     </ClCompile>
+    <ClCompile Include="Occupado.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -720,6 +723,9 @@
     </ClInclude>
     <ClInclude Include="AnimationPrepare.h">
       <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Occupado.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

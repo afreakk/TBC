@@ -2,6 +2,7 @@
 #include "ModelHandler.h"
 #include "GlobalVariables.h"
 #include "MainUpdate.h"
+#include "Occupado.h"
 
 using namespace Ogre;
 
@@ -51,6 +52,8 @@ void ModelHandler::init()
 void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
 	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*GlobalVariables::getSingleton().getNormalAnimWalkSpeed(), m_animations);
+	if (Occupado::isOccupied(m_normalPosition, rInc))
+		return;
 	m_normalPosition.theta += rInc;
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 	UnitCircleMovement::polarSetDirection(m_node, m_normalPosition, activeDirection);
