@@ -13,9 +13,11 @@ public:
 	BaseAnimation* getDie(Ogre::Entity*) override;
 	virtual void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent);
 	Ogre::SceneNode* createNode() override;
+	const std::string& getMaterialName() override;
 private:
 	const int m_id;
 	static int s_count;
 	string m_entityName;
 	string m_nodeName;
+	string m_materialName;
 };

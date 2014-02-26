@@ -57,7 +57,7 @@
     <ClCompile Include="MutantHandlerStateDead.cpp" />
     <ClCompile Include="MutantHandlerStateNormal.cpp" />
     <ClCompile Include="MutantHandlerStateSuicideBomb.cpp" />
-    <ClCompile Include="MutantNumber.cpp" />
+    <ClCompile Include="BillboardNumber.cpp" />
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
     <ClCompile Include="PlayerHandlerStateBlankAttack.cpp" />
@@ -184,7 +184,7 @@
     <ClInclude Include="TBCRay.h" />
     <ClInclude Include="Tubes.h" />
     <ClInclude Include="WeaponTypes.h" />
-    <ClInclude Include="MutantNumber.h" />
+    <ClInclude Include="BillboardNumber.h" />
     <ClInclude Include="OgreCore.h" />
     <ClInclude Include="OISCore.h" />
     <ClInclude Include="ParticleEffect.h" />

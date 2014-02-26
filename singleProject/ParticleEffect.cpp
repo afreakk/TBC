@@ -11,7 +11,9 @@ ParticleEffect::ParticleEffect(SceneNode* parentNode, const int id, const Ogre::
     , m_particleSystem(ParticleUniverse::ParticleSystemManager::getSingleton().createParticleSystem(name + boost::lexical_cast<string>(m_id), templateName, m_sMgr))
     , m_node(parentNode->createChildSceneNode())
     , m_added(false)
-{}
+{
+	m_particleSystem->prepare();
+}
 ParticleEffect::~ParticleEffect()
 {
 	stop();

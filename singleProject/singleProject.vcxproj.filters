@@ -233,9 +233,6 @@
     <ClCompile Include="BloodSplat.cpp">
       <Filter>Props\concrete</Filter>
     </ClCompile>
-    <ClCompile Include="MutantNumber.cpp">
-      <Filter>Props\concrete</Filter>
-    </ClCompile>
     <ClCompile Include="SelectedTag.cpp">
       <Filter>Props\concrete</Filter>
     </ClCompile>
@@ -372,6 +369,9 @@
       <Filter>Props\concrete</Filter>
     </ClCompile>
     <ClCompile Include="PlayerSelectionLine.cpp">
+      <Filter>Props\concrete</Filter>
+    </ClCompile>
+    <ClCompile Include="BillboardNumber.cpp">
       <Filter>Props\concrete</Filter>
     </ClCompile>
   </ItemGroup>
@@ -530,9 +530,6 @@
       <Filter>Props\Bases</Filter>
     </ClInclude>
     <ClInclude Include="BloodSplat.h">
-      <Filter>Props\concrete</Filter>
-    </ClInclude>
-    <ClInclude Include="MutantNumber.h">
       <Filter>Props\concrete</Filter>
     </ClInclude>
     <ClInclude Include="SelectedTag.h">
@@ -713,6 +710,9 @@
       <Filter>Props\concrete</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSelectionLine.h">
+      <Filter>Props\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="BillboardNumber.h">
       <Filter>Props\concrete</Filter>
     </ClInclude>
   </ItemGroup>

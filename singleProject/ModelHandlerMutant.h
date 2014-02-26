@@ -2,33 +2,33 @@
 #include "ModelHandler.h"
 #include "SelectedTag.h"
 #include "BloodSplat.h"
-#include "MutantNumber.h"
 #include "Weapon.h"
+enum class selectedType
+{
+    HOVERED,
+    SELECTED,
+    DEFAULT,
+    UNHOVERED
+
+};
 class ModelHandlerMutant : public ModelHandler
 {
 public:
 	ModelHandlerMutant(PolarCoordinates normalPos,  WeaponType weaponType, ModelRecipe* modlRecipe);
 	~ModelHandlerMutant();
-	void setHovered(bool);
-	bool isHovered() const
-	{
-		return m_hovered;
-	}
+	void setHovered(selectedType);
 	void fire();
 	void init() override;
 	void damage(Vector3 direction);
-	MutantNumber& getNumer()
-	{
-		return m_number;
-	}
 	WeaponType getWeaponType();
+	bool isHovered();
 private:
 	SelectedTag m_selectedTag;
 	BloodSplat m_bloodSplat;
 	unique_ptr<WeaponBase> m_weapon;
-	MutantNumber m_number;
-	bool m_hovered;
 	WeaponType m_type;
+	bool m_hovered;
+	bool m_selected;
 
 	void setWeapon(WeaponType weaponType);
 

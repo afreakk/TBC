@@ -1,4 +1,5 @@
 #pragma once
+#include "ENUMNormalDirection.h"
 class Mutant;
 class PolarCoordinates;
 class PlayerHandlerStateSelectionHandler
@@ -6,8 +7,7 @@ class PlayerHandlerStateSelectionHandler
 public:
 	PlayerHandlerStateSelectionHandler(const std::vector<std::string>& attackList);
 	~PlayerHandlerStateSelectionHandler();
-	void handleIndex(const OIS::KeyEvent&);
-	void changeIndex(bool right);
+	void handleKeys(const OIS::KeyEvent&);
 	bool updateMarked(const PolarCoordinates& currentNode);
 	const std::string& getMarked()const ;
 	Mutant* getCurrentMarkedMutant() const;
@@ -17,9 +17,11 @@ private:
 	const std::vector<std::string>& m_attackListConst;
 	Mutant* m_currentMarked;
 	Mutant* m_prevMarked;
-	const Ogre::Real* m_currentTheta;
 	int m_energyCostOfCurrentlyMarked;
 
-	void cycleTheta();
+	void changeMarkedMutants(bool right);
+	const Ogre::Real getTheta(Mutant* currentMarked,NormalDirection directionOverflow=NormalDirection::None) const;
+	Mutant* getNewMarkedMutant(bool right, Mutant* currentMarked, unsigned mutantWasInListCount=0,NormalDirection directionOverflow=NormalDirection::None);
+
 };
 

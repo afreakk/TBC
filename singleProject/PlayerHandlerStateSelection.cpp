@@ -28,12 +28,8 @@ PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
     CoreCompositor::getSingleton().blackAndWhite(false);
 	MutantContainer::getSingleton().removeSubscriber("PlayerHandlerStateSelection");
 	GlobalVariables::getSingleton().setSpeed(1.0);
-	for (auto idx : m_markedList)
-	{
-		Mutant* mutant;
-		if((mutant = MutantContainer::getSingleton().getMutant(idx)) != nullptr)
-		    static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getNumer().unMarkNumber();
-	}
+	for (auto& i : m_markedList)
+		static_cast<ModelHandlerMutant&>(MutantContainer::getSingleton().getMutant(i)->getModelHandler()).setHovered(selectedType::DEFAULT);
 }
 
 void PlayerHandlerStateSelection::update()
@@ -59,7 +55,10 @@ void PlayerHandlerStateSelection::notify(std::string victim)
 {
 	auto w = m_markedList.end();
 	if ((w = std::find(m_markedList.begin(), m_markedList.end(), victim)) != m_markedList.end())
+	{
 		m_markedList.erase(w);
+		m_line.removeNode(victim);
+	}
 }
 const PolarCoordinates& PlayerHandlerStateSelection::getLatestMarkedPolar(int lookLower)
 {
@@ -70,7 +69,7 @@ const PolarCoordinates& PlayerHandlerStateSelection::getLatestMarkedPolar(int lo
 }
 void PlayerHandlerStateSelection::keyPressed(const OIS::KeyEvent& e)
 {
-	m_selectionHandler.handleIndex(e);
+	m_selectionHandler.handleKeys(e);
 	handleSelection(e);
 }
 void PlayerHandlerStateSelection::keyReleased(const OIS::KeyEvent& e)
@@ -97,8 +96,8 @@ void PlayerHandlerStateSelection::selectMarked()
 		return;
     PlayerGlobalStats::getSingleton().markEnergy(0);
 	PlayerGlobalStats::getSingleton().modifyEnergy(-static_cast<int>(m_selectionHandler.getEnergyCostOfMarked()));
+	static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).setHovered(selectedType::SELECTED);
 	m_markedList.push_back(marked);
-	static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getNumer().markAs(m_markedList.size());
 	m_line.addNode(m_lastSelectedNode);
 }
 

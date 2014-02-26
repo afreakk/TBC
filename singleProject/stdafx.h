@@ -14,7 +14,13 @@ using namespace Ogre;
 using namespace std;
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+const Real EPSILON = 10e-5;
 
+template<typename T>
+bool float_compare(const T& a, const T& b, const T& tolerance = EPSILON)
+{
+	return (((a - b) < tolerance) && ((a - b) > (tolerance / -1)));
+}
 
 
 // TODO: reference additional headers your program requires here

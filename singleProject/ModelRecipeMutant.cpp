@@ -8,6 +8,7 @@
 int ModelRecipeMutant::s_count = 0;
 ModelRecipeMutant::ModelRecipeMutant()
 : m_id(++s_count)
+, m_materialName("Examples/Ninja")
 , m_entityName("MutantNode"+boost::lexical_cast<string>(m_id))
 , m_nodeName("MutantEntity"+boost::lexical_cast<string>(m_id))
 {
@@ -31,6 +32,10 @@ Ogre::Entity* ModelRecipeMutant::initMesh(Ogre::SceneManager* sMgr)
 	return ent;
 }
 
+const std::string& ModelRecipeMutant::getMaterialName()
+{
+	return m_materialName;
+}
 BaseAnimation* ModelRecipeMutant::getDie(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;

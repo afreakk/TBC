@@ -17,6 +17,7 @@ public:
 	{
 		return m_dimension;
 	}
+	void setSceneNode(Ogre::SceneNode* node);
 private:
 	Ogre::BillboardSet* m_billboardSet;
 	std::vector<Ogre::Billboard*> m_billboard;

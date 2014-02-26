@@ -10,6 +10,7 @@ ModelRecipeMutantSuicide::ModelRecipeMutantSuicide()
 : m_id(++s_count)
 , m_entityName("MutantNodeSuicide"+boost::lexical_cast<string>(m_id))
 , m_nodeName("MutantEntitySuicide"+boost::lexical_cast<string>(m_id))
+, m_materialName("Examples/Robot")
 {
 }
 
@@ -29,6 +30,10 @@ Ogre::Entity* ModelRecipeMutantSuicide::initMesh(Ogre::SceneManager* sMgr)
 	return ent;
 }
 
+const std::string& ModelRecipeMutantSuicide::getMaterialName()
+{
+	return m_materialName;
+}
 BaseAnimation* ModelRecipeMutantSuicide::getDie(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;

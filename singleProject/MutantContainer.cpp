@@ -3,6 +3,7 @@
 #include "ModelHandlerMutant.h"
 #include "PlayerGlobalStats.h"
 #include "MainUpdate.h"
+#include "LaneSettings.h"
 template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
 static const unsigned energyPerMutant = 10;
 MutantContainer::MutantContainer()
@@ -11,6 +12,7 @@ MutantContainer::MutantContainer()
 }
 MutantContainer::~MutantContainer()
 {
+	/*  should noe be needed now with shared ptrz
 	for (auto& i  : m_deadMutants)
 	{
         i.second->handler.reset();
@@ -20,7 +22,7 @@ MutantContainer::~MutantContainer()
 	{
         i.second->handler.reset();
         i.second->mutant.reset(); 
-	}
+	}*/
 }
 
 const std::string MutantContainer::message()
@@ -52,7 +54,7 @@ void MutantContainer::killMutant(const std::string& name)
 }
 void MutantContainer::moveMutant(const std::string& id)
 {
-	MutantPair* pair = m_aliveMutants[id];
+	std::shared_ptr<MutantPair> pair = m_aliveMutants[id];
 	pair->handler->switchState(MUTANT_HANDLER_STATE::DEAD);
 	pair->mutant->setDead(true);
 	m_deadMutants[id] = pair;
@@ -66,7 +68,7 @@ void MutantContainer::moveMutant(const std::string& id)
 void MutantContainer::addMutant(MutantHandler* mutantHandler, Mutant* mutant)
 {
 	std::string name = mutant->getNode()->getName();
-	m_aliveMutants[name] = new MutantPair( mutantHandler, mutant );
+	m_aliveMutants[name] = shared_ptr<MutantPair>(new MutantPair( mutantHandler, mutant ));
 	m_aliveMutantIteratorList.push_back(mutant);
 	m_aliveHandlerIteratorList.push_back(mutantHandler);
 }
@@ -80,20 +82,47 @@ Mutant* MutantContainer::getClosestLowerThan(const Ogre::Real& theta, Mutant* mu
 }
 Mutant* MutantContainer::getClosest(bool higher, const Ogre::Real& theta, Mutant* mutant)
 {
-	Real closestDistance = 100000.0;
-	Mutant* mutPtr = nullptr;
+	Real closestDistance = numeric_limits<Real>::max();
+	Mutant* closestLegalMutant = nullptr;
 	for (const auto& itt : m_aliveMutantIteratorList)
 	{
 		if (itt == mutant)
 			continue;
-		Real distance = (higher ? itt->getPolarCoordinates().theta : theta ) - (higher ? theta : itt->getPolarCoordinates().theta );
-		if (distance >= 0.0 && distance < closestDistance)
+		Real distance = (higher ? itt->getSelectionTheta() : theta ) - (higher ? theta : itt->getSelectionTheta() );
+		if (distance > 0.0 && distance < closestDistance)
 		{
 			closestDistance = distance;
-			mutPtr = itt;
+			closestLegalMutant = itt;
 		}
+        else if (float_compare(distance,Real(0.0)))
+        {
+			itt->setSelectionThetaOffset(EPSILON);
+			return getClosest(higher, theta, mutant);
+        }
 	}
-	return mutPtr;
+	return closestLegalMutant;
+}
+Mutant* MutantContainer::getClosest(bool higher, const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant)
+{
+	Real closestDistance = numeric_limits<Real>::max();
+	Mutant* closestLegalMutant = nullptr;
+	for (const auto& itt : m_aliveMutantIteratorList)
+	{
+		if (! float_compare( itt->getPolarCoordinates().radius, radius, LaneSettings::getSingleton().getIncrement() ) || itt == mutant)
+			continue;
+		Real distance = (higher ? itt->getSelectionTheta() : theta ) - (higher ? theta : itt->getSelectionTheta() );
+		if (distance > 0.0 && distance < closestDistance)
+		{
+			closestDistance = distance;
+			closestLegalMutant = itt;
+		}
+        else if (float_compare(distance,Real(0.0)))
+        {
+			itt->setSelectionThetaOffset(EPSILON);
+			return getClosest(higher, theta, mutant);
+        }
+	}
+	return closestLegalMutant;
 }
 void MutantContainer::update()
 {

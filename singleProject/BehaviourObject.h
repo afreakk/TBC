@@ -25,12 +25,15 @@ protected:
 	std::unique_ptr<ModelHandler> m_model;
 	const BObjectType m_objectType;
 	BehaviourState* m_currentState;
+	Ogre::Real m_selectionPhaseThetaOffset;
 	bool m_dead;
 public:
 	//gets
 	BObjectType getObjectType() const;
 	Ogre::SceneNode* getNode() const ;
-	const PolarCoordinates& getPolarCoordinates() ;
+	const PolarCoordinates& getPolarCoordinates() const;
+	const Ogre::Real getSelectionTheta() const;
+	void setSelectionThetaOffset(const Ogre::Real& offset);
 	ModelHandler& getModelHandler();
 	const ModelHandler& getModelHandler() const;
 	BEHAVOUR_STATE getState() const;

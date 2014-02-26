@@ -8,18 +8,21 @@ const Ogre::Real maxTheta = Math::PI*2.0;
 const Ogre::Real minTheta = 0.0;
 
 PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler( const std::vector<std::string>& attackList)
-: m_currentMarked(nullptr)
+: m_currentMarked{ nullptr }
 , m_prevMarked(nullptr)
 , m_energyCostOfCurrentlyMarked(0)
 , m_attackListConst(attackList)
-, m_currentTheta(&minTheta)
 {
-	changeIndex(true);
+    changeMarkedMutants(true);
 }
 
 
 PlayerHandlerStateSelectionHandler::~PlayerHandlerStateSelectionHandler()
 {
+	if (m_currentMarked)
+        static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).setHovered(selectedType::DEFAULT);
+    if (m_prevMarked)
+        static_cast<ModelHandlerMutant&>(m_prevMarked->getModelHandler()).setHovered(selectedType::DEFAULT);
 }
 
 bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& markedPolarCoordinates)
@@ -28,10 +31,10 @@ bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& ma
 	if (m_prevMarked != m_currentMarked)
 	{
 		if (m_prevMarked)
-		    static_cast<ModelHandlerMutant&>(m_prevMarked->getModelHandler()).setHovered(false);
+		    static_cast<ModelHandlerMutant&>(m_prevMarked->getModelHandler()).setHovered(selectedType::UNHOVERED);
 		if (m_currentMarked)
 		{
-            static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).setHovered(true);
+            static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).setHovered(selectedType::HOVERED);
             markedChanged = true;
 		}
 	}
@@ -39,50 +42,72 @@ bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& ma
 	m_prevMarked = m_currentMarked;
 	return markedChanged;
 }
-void PlayerHandlerStateSelectionHandler::handleIndex(const OIS::KeyEvent& e)
+
+void PlayerHandlerStateSelectionHandler::handleKeys(const OIS::KeyEvent& e)
 {
 	if (e.key == OIS::KC_A)
-		changeIndex(false);
+		changeMarkedMutants(false);
 	if (e.key == OIS::KC_D)
-		changeIndex(true);
+		changeMarkedMutants(true);
 }
-void PlayerHandlerStateSelectionHandler::changeIndex(bool right)
+
+void PlayerHandlerStateSelectionHandler::changeMarkedMutants(bool right)
+{
+    m_currentMarked = getNewMarkedMutant(right,m_currentMarked);
+}
+Mutant* PlayerHandlerStateSelectionHandler::getNewMarkedMutant(bool right, Mutant* currentMarked, unsigned mutantWasInListCount, NormalDirection directionOverflow)
 { 
-	if (m_attackListConst.size() >= MutantContainer::getSingleton().getMutantIt().size())
-		return;
+    if (mutantWasInListCount >= MutantContainer::getSingleton().getMutantIt().size())
+        return currentMarked;
+	Real theta = getTheta(currentMarked,directionOverflow);
+	Mutant* closestMutant;
 	if (right)
 	{
-		if ((m_currentMarked = MutantContainer::getSingleton().getClosestHigherThan(*m_currentTheta,m_currentMarked)) == nullptr)
-		{
-			m_currentTheta = &minTheta;
-			changeIndex(right);
-			return;
-		}
+		closestMutant = MutantContainer::getSingleton().getClosestHigherThan(theta, currentMarked);
+		if (!closestMutant)
+            return getNewMarkedMutant(right,nullptr,mutantWasInListCount,NormalDirection::dirRight);
 	}
 	else
 	{
-		if((m_currentMarked = MutantContainer::getSingleton().getClosestLowerThan(*m_currentTheta,m_currentMarked)) == nullptr)
-		{
-			m_currentTheta = &maxTheta;
-			changeIndex(right);
-			return;
-		}
-	}
-	m_currentTheta = &(m_currentMarked->getPolarCoordinates().theta);
-	if (isInList(m_currentMarked->getModelHandler().getNode()->getName()))
-        changeIndex(right);
+		closestMutant = MutantContainer::getSingleton().getClosestLowerThan(theta, currentMarked);
+		if (!closestMutant)
+            return getNewMarkedMutant(right,nullptr,mutantWasInListCount,NormalDirection::dirLeft);
+    }
+	if (isInList(closestMutant->getModelHandler().getNode()->getName()))
+        return getNewMarkedMutant(right,closestMutant,++mutantWasInListCount);
+	return closestMutant;
 }
-
+const Ogre::Real PlayerHandlerStateSelectionHandler::getTheta(Mutant* currentMarked,NormalDirection directionOverflow) const
+{
+	Real theta = minTheta;
+	switch (directionOverflow)
+	{
+	case NormalDirection::dirRight:
+        theta = minTheta;
+		break;
+	case NormalDirection::dirLeft:
+        theta = maxTheta;
+		break;
+	case NormalDirection::None:
+        if (currentMarked)
+            theta = currentMarked->getSelectionTheta();
+		break;
+	default:
+		break;
+	}
+	return theta;
+}
 
 bool PlayerHandlerStateSelectionHandler::isInList(const std::string& elm)
 {
-	for (int i = 0; i < m_attackListConst.size(); i++)
+	for (unsigned i = 0; i < m_attackListConst.size(); i++)
 	{
 		if (m_attackListConst[i]== elm)
 			return true;
 	}
 	return false;
 }
+
 const std::string& PlayerHandlerStateSelectionHandler::getMarked() const
 {   
 	if (m_currentMarked)

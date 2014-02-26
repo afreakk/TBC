@@ -23,6 +23,7 @@ public:
 	void killMutant(const std::string&);
     //replaces mutant names in list with killed if they get killed while list is being operated on.
     void addMutant(MutantHandler* mutantHandler, Mutant* mutant);
+    // intersects = bool, 
 	Mutant* getClosestHigherThan(const Ogre::Real& theta, Mutant* mutant);
 	Mutant* getClosestLowerThan(const Ogre::Real& theta, Mutant* mutant);
 	std::string getClosestMutant(PolarCoordinates pos, NormalDirection direction);
@@ -32,17 +33,18 @@ public:
 	virtual const std::string message() override;
 private:
 	Ogre::Real m_despawnTime;
-	std::map<std::string, MutantPair*> m_aliveMutants;
+	std::map<std::string, std::shared_ptr<MutantPair>> m_aliveMutants;
 	std::list<Mutant*> m_aliveMutantIteratorList;
 	std::list<MutantHandler*> m_aliveHandlerIteratorList;
 
-	std::map<std::string, MutantPair*> m_deadMutants;
+	std::map<std::string, std::shared_ptr<MutantPair>> m_deadMutants;
 	std::string m_lastDeadMutant;
 
 	std::vector<std::string> m_executedMutants;
 	std::vector<std::string> m_toBeKilled;
 
 	Mutant* getClosest(bool higher, const Ogre::Real& theta, Mutant* mutant);
+	Mutant* getClosest(bool higher, const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant);
 	void handleDeadMutants();
 	void executeDoomedMutants();
 	bool checkDistance(const PolarCoordinates& pos, Mutant* mutant , Ogre::Real* closestDistance ,  bool left);

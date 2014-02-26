@@ -12,6 +12,8 @@ public:
 	BaseAnimation* getTumble(Ogre::Entity*);
 	virtual void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent);
 	Ogre::SceneNode* createNode() override;
+	const std::string& getMaterialName() override;
 private:
+	string m_materialName;
 };
 

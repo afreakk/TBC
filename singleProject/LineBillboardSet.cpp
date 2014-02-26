@@ -15,6 +15,12 @@ LineBillboardSet::LineBillboardSet(Ogre::SceneNode* parentNode)
     m_sceneNode->attachObject(m_billboardSet);
 }
 
+void LineBillboardSet::setSceneNode(Ogre::SceneNode* node)
+{
+	m_sceneNode->detachObject(m_billboardSet);
+	m_sceneNode = node;
+	m_sceneNode->attachObject(m_billboardSet);
+}
 LineBillboardSet::~LineBillboardSet()
 {
 	for (auto& i : m_billboard)

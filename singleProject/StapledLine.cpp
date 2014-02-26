@@ -5,12 +5,17 @@
 
 StapledLine::StapledLine(Ogre::SceneNode* sceneNode, const Ogre::Real& spacing)
 : m_set(sceneNode)
+, m_parentNode(sceneNode)
 , m_numLines(0)
 , m_colourScale(1.0)
 , m_spacing(spacing)
 {
 }
 
+Ogre::Node* StapledLine::getParentNode()
+{
+	return m_parentNode;
+}
 
 StapledLine::~StapledLine()
 {
@@ -52,6 +57,10 @@ void StapledLine::destroyBillboards(unsigned numLines)
 		m_set.destroyBillboard(m_billboards.back());
 		m_billboards.pop_back();
 	}
+}
+void StapledLine::setParentSceneNode(Ogre::SceneNode* sceneNode)
+{
+	m_set.setSceneNode(sceneNode);
 }
 void StapledLine::getBillboards(unsigned count)
 {

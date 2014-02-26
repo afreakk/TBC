@@ -6,6 +6,7 @@
 #include "AnimationTumble.h"
 #include "OgreCore.h"
 ModelRecipePlayer::ModelRecipePlayer()
+: m_materialName("Examples/Ninja")
 {
 }
 ModelRecipePlayer::~ModelRecipePlayer()
@@ -26,6 +27,10 @@ Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
 	return ent;
 }
 
+const std::string& ModelRecipePlayer::getMaterialName()
+{
+	return m_materialName;
+}
 BaseAnimation* ModelRecipePlayer::getDie(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;

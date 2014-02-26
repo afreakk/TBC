@@ -11,12 +11,11 @@ ModelHandlerMutant::ModelHandlerMutant(PolarCoordinates normalPos, WeaponType we
 , m_selectedTag(m_node)
 , m_bloodSplat(m_node, this)
 , m_weapon( nullptr)
-, m_number(m_node)
-, m_hovered(false)
 , m_type(WeaponType::NOTHING)
+, m_hovered(false)
+, m_selected(false)
 {
 	setWeapon(weaponType);
-	setHovered(false);
 }
 ModelHandlerMutant::~ModelHandlerMutant()
 {
@@ -37,11 +36,36 @@ void ModelHandlerMutant::fire()
 {
 	m_weapon->activate();
 }
-void ModelHandlerMutant::setHovered(bool selected)
+bool ModelHandlerMutant::isHovered()
 {
-	m_hovered = selected;
-	if (m_hovered)
-		m_selectedTag.select();
+	return m_hovered;
+}
+void ModelHandlerMutant::setHovered(selectedType type)
+{
+	switch (type)
+	{
+	case selectedType::HOVERED:
+		m_entity->setMaterialName("HoveredMaterial");
+        m_selectedTag.select();
+		m_hovered = true;
+		break;
+	case selectedType::SELECTED:
+		m_entity->setMaterialName("SelectedMaterial");
+		m_selected = true;
+		break;
+	case selectedType::DEFAULT:
+		m_entity->setMaterialName(m_crRecipe->getMaterialName());
+		m_selected = false;
+		m_hovered = false;
+		break;
+	case selectedType::UNHOVERED:
+		if (!m_selected)
+		    m_entity->setMaterialName(m_crRecipe->getMaterialName());
+		m_hovered = false;
+		break;
+	default:
+		break;
+	}
 }
 void ModelHandlerMutant::setWeapon(WeaponType weaponType)
 {

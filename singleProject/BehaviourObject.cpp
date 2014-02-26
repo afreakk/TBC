@@ -8,6 +8,7 @@ BehaviourObject::BehaviourObject(ModelHandler* modelHandler, BObjectType type)
 , m_currentState(nullptr)
 , m_dead(false)
 , m_objectType(type)
+, m_selectionPhaseThetaOffset(0.0)
 {
 }
 
@@ -37,9 +38,17 @@ BEHAVOUR_STATE BehaviourObject::getState() const
 {
 	return m_currentState->getState();
 }
-const PolarCoordinates& BehaviourObject::getPolarCoordinates() 
+const PolarCoordinates& BehaviourObject::getPolarCoordinates() const
 {
 	return m_model->getPolarCoordinates();
+}
+const Ogre::Real BehaviourObject::getSelectionTheta() const
+{
+	return m_model->getPolarCoordinates().theta + m_selectionPhaseThetaOffset;
+}
+void BehaviourObject::setSelectionThetaOffset(const Ogre::Real& offset)
+{
+	m_selectionPhaseThetaOffset = offset;
 }
 SceneNode* BehaviourObject::getNode() const 
 {

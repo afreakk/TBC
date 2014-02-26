@@ -8,8 +8,11 @@ public:
 	~StapledLine();
 	void setLine(const Ogre::Vector3& from, const Ogre::Vector3& to);
 	void setColourScale(const Ogre::Real& scale);
+	Ogre::Node* getParentNode();
+	void setParentSceneNode(Ogre::SceneNode* sceneNode);
 private:
 	LineBillboardSet m_set;
+	Ogre::Node* m_parentNode;
 	std::vector<Ogre::Billboard*> m_billboards;
 	unsigned m_numLines;
 	Ogre::Real m_colourScale;
