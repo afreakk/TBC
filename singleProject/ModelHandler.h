@@ -29,7 +29,7 @@ public:
 	const Vector3 getBoneOrientation() const;
 	const NormalDirection getNormalDirection() const;
 	Ogre::Real scaleTime(const Ogre::Real& time);
-	void blankAttack();
+	void playAnimation(ANIMATIONS);
 protected:
 	void updateNormalPos();
 	bool lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive=false);

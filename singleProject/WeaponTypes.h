@@ -17,7 +17,7 @@ namespace ParticleUniverse
 	class ParticleAffector;
 }
 //Lazer
-class MutantLazer : public WeaponBeam
+class MutantLazer : public WeaponMissile
 {
 public:
 	MutantLazer(Ogre::SceneNode* parentNode, ModelHandler* model);
@@ -25,14 +25,14 @@ public:
 
 };
 //FlameThrower
-class MutantFlameThrower : public WeaponBeam
+class MutantFlameThrower : public WeaponMissile
 {
 public:
 	MutantFlameThrower(Ogre::SceneNode* parentNode, ModelHandler* model);
 	void update() override;
 };
 //FireBall
-class MutantFireBall : public WeaponBeam
+class MutantFireBall : public WeaponMissile
 {
 public:
 	MutantFireBall(Ogre::SceneNode* parentNode, ModelHandler* model);

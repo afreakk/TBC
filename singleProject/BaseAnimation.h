@@ -8,7 +8,8 @@ enum class ANIMATIONS
 	ATTACK,
 	DIE,
 	BLOCK,
-	TUMBLE
+	TUMBLE,
+    PREPARE
 };
 namespace Ogre
 {

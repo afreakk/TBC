@@ -44,6 +44,7 @@ void ModelHandler::init()
 	m_animations[ANIMATIONS::ATTACK]= unique_ptr<BaseAnimation>(m_crRecipe->getAttack(m_entity) );
 	m_animations[ANIMATIONS::WALK]	= unique_ptr<BaseAnimation>(m_crRecipe->getWalk(m_entity) );
 	m_animations[ANIMATIONS::DIE]	= unique_ptr<BaseAnimation>(m_crRecipe->getDie(m_entity) );
+	m_animations[ANIMATIONS::PREPARE] = unique_ptr<BaseAnimation>(m_crRecipe->getPrepare(m_entity));
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 }
 
@@ -61,9 +62,9 @@ void ModelHandler::fallAndDie()
 	Real animVel = MainUpdate::getSingleton().getScaledDeltaTime() * GlobalVariables::getSingleton().getAnimDieSpeed();
 	m_animations[ANIMATIONS::DIE]->addTime(animVel , m_animations);
 }
-void ModelHandler::blankAttack()
+void ModelHandler::playAnimation(ANIMATIONS type)
 {
-	m_animations[ANIMATIONS::ATTACK]->addTime( scaleTime(800)*GlobalVariables::getSingleton().getLERPAnimAttackRatio(), m_animations);
+	m_animations[type]->addTime( scaleTime(800)*GlobalVariables::getSingleton().getLERPAnimAttackRatio(), m_animations);
 }
 AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {

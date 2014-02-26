@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationPrepare.cpp" />
     <ClCompile Include="BaseAnimation.cpp" />
     <ClCompile Include="BeamWeaponHitTest.cpp" />
     <ClCompile Include="BehaviourObject.cpp" />
@@ -107,6 +108,7 @@
   <ItemGroup>
     <ClInclude Include="AnimationAttack.h" />
     <ClInclude Include="AnimationDie.h" />
+    <ClInclude Include="AnimationPrepare.h" />
     <ClInclude Include="AnimationTumble.h" />
     <ClInclude Include="AnimationWalk.h" />
     <ClInclude Include="BarTypes.h" />

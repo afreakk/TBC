@@ -13,27 +13,27 @@
 #include "BeamWeaponHitTest.h"
 //MutantLazer
 MutantLazer::MutantLazer(SceneNode* parentNode, ModelHandler* model)
-: WeaponBeam(parentNode, model, "MutantLazer", "lazer", "lazerEmitter")
+: WeaponMissile(parentNode, model, "MutantLazer", "lazer", "lazerEmitter")
 {
 }
 void MutantLazer::update()
 {
 
-	WeaponBeam::update();
+	WeaponMissile::update();
 }
 //MutantFlameThrower
 MutantFlameThrower::MutantFlameThrower(SceneNode* parentNode, ModelHandler* model)
-: WeaponBeam(parentNode, model, "MutantflameThrower", "flamethrower", "FlameEmitter" )
+: WeaponMissile(parentNode, model, "MutantflameThrower", "flamethrower", "FlameEmitter" )
 {
 }
 void MutantFlameThrower::update()
 {
 
-	WeaponBeam::update();
+	WeaponMissile::update();
 }
 //MutantFireBall
 MutantFireBall::MutantFireBall(SceneNode* parentNode, ModelHandler* model)
-: WeaponBeam(parentNode, model, "MutantFireBall", "FireBall", "FireEmitter" )
+: WeaponMissile(parentNode, model, "MutantFireBall", "FireBall", "FireEmitter" )
 , m_weaponDamage(40)
 , m_shadow(parentNode)
 , m_shadowPos(Vector3::ZERO)
@@ -47,7 +47,7 @@ void MutantFireBall::activate()
 {
 	resetShadow();
 	m_shadow.setVisible(true);
-	WeaponBeam::activate();
+	WeaponMissile::activate();
 }
 void MutantFireBall::resetShadow()
 {
@@ -62,9 +62,9 @@ void MutantFireBall::updateShadowPos()
 }
 void MutantFireBall::update()
 {
-	WeaponBeam::update();
+	WeaponMissile::update();
 	updateShadowPos();
-	if (BeamWeaponHitTest::hitTest(m_planeCollider, m_collisionObserver, m_emitter, m_node, m_weaponDamage, 100.0, m_shadowPos.z))
+	if (BeamWeaponHitTest::hitTest(m_planeCollider, m_collisionObserver, m_emitter, m_node, m_weaponDamage, m_height, m_shadowPos.z))
 		m_shadow.setVisible(false);
 }
 

@@ -5,6 +5,8 @@
 #include "AnimationDie.h"
 #include "AnimationTumble.h"
 #include "OgreCore.h"
+#include "AnimationPrepare.h"
+
 ModelRecipePlayer::ModelRecipePlayer()
 : m_materialName("Examples/Ninja")
 {
@@ -12,6 +14,12 @@ ModelRecipePlayer::ModelRecipePlayer()
 ModelRecipePlayer::~ModelRecipePlayer()
 {
 
+}
+BaseAnimation* ModelRecipePlayer::getPrepare(Ogre::Entity* entity)
+{
+	std::vector<AnimationState*> anims;
+	anims.push_back(entity->getAnimationState("Stealth"));
+	return new AnimationPrepare(anims);
 }
 Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
 {

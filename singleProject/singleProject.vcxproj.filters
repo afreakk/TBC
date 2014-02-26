@@ -374,6 +374,9 @@
     <ClCompile Include="BillboardNumber.cpp">
       <Filter>Props\concrete</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationPrepare.cpp">
+      <Filter>Model\Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -714,6 +717,9 @@
     </ClInclude>
     <ClInclude Include="BillboardNumber.h">
       <Filter>Props\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationPrepare.h">
+      <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

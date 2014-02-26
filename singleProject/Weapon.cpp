@@ -37,20 +37,20 @@ WeaponType WeaponBase::weaponTypeFromString(String weaponString)
 	return WeaponType::NOTHING;
 }
 
-//WeaponBeam
+//WeaponMissile
 
-WeaponBeam::WeaponBeam(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName)
+WeaponMissile::WeaponMissile(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName)
 : WeaponBase(parentNode, model, id, templateName, emitterName)
+, m_height(150.0)
 {
-	m_emitter->position = m_model->getBonePos();
+	m_emitter->position.y = m_height;
 }
-WeaponBeam::~WeaponBeam()
+WeaponMissile::~WeaponMissile()
 {
 }
 
-void WeaponBeam::update()
+void WeaponMissile::update()
 {
-	m_emitter->position = m_model->getBonePos();
 	WeaponBase::update();
 }
 

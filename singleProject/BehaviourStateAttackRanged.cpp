@@ -32,11 +32,14 @@ void BehaviourStateAttackRanged::update(ModelHandler& modelHandler)
 	{
 	case AttackRangedPhase::shooting:
 		m_phase = shootingPhase(modelHandler, dt);
+        modelHandler.playAnimation(ANIMATIONS::ATTACK);
 		break;
 	case AttackRangedPhase::reloading:
+        modelHandler.playAnimation(ANIMATIONS::PREPARE);
 		m_phase = reloadPhase(modelHandler, dt);
 		break;
 	default:
+        modelHandler.playAnimation(ANIMATIONS::ATTACK);
 		m_phase = waiting(modelHandler, dt);
 		break;
 	}

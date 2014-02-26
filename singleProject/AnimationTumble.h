@@ -29,10 +29,6 @@ public:
 	{
 		return m_animStates[m_idx]->hasEnded();
 	}
-	bool isStopped() override
-	{
-		return m_stopped;
-	}
 private:
 	unsigned m_idx;
 };

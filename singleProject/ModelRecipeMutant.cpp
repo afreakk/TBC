@@ -3,6 +3,7 @@
 #include "AnimationAttack.h"
 #include "AnimationWalk.h"
 #include "AnimationDie.h"
+#include "AnimationPrepare.h"
 #include "OgreCore.h"
 
 int ModelRecipeMutant::s_count = 0;
@@ -32,6 +33,12 @@ Ogre::Entity* ModelRecipeMutant::initMesh(Ogre::SceneManager* sMgr)
 	return ent;
 }
 
+BaseAnimation* ModelRecipeMutant::getPrepare(Ogre::Entity* entity)
+{
+	std::vector<AnimationState*> anims;
+	anims.push_back(entity->getAnimationState("Stealth"));
+	return new AnimationPrepare(anims);
+}
 const std::string& ModelRecipeMutant::getMaterialName()
 {
 	return m_materialName;

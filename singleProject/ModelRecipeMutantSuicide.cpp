@@ -4,6 +4,7 @@
 #include "AnimationWalk.h"
 #include "AnimationDie.h"
 #include "OgreCore.h"
+#include "AnimationPrepare.h"
 
 int ModelRecipeMutantSuicide::s_count = 0;
 ModelRecipeMutantSuicide::ModelRecipeMutantSuicide()
@@ -18,6 +19,12 @@ ModelRecipeMutantSuicide::~ModelRecipeMutantSuicide()
 {
 }
 
+BaseAnimation* ModelRecipeMutantSuicide::getPrepare(Ogre::Entity* entity)
+{
+	std::vector<AnimationState*> anims;
+	anims.push_back(entity->getAnimationState("Die")); // doeznthaveitz
+	return new AnimationPrepare(anims);
+}
 Ogre::Entity* ModelRecipeMutantSuicide::initMesh(Ogre::SceneManager* sMgr)
 {
 	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("robot.mesh", "Models") ;

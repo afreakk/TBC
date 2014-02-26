@@ -26,12 +26,14 @@ protected:
 	ParticleUniverse::ParticleEmitter* m_emitter;
 };
 
-class WeaponBeam : public WeaponBase
+class WeaponMissile : public WeaponBase
 {
 public:
-	WeaponBeam(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName);
-	virtual ~WeaponBeam();
+	WeaponMissile(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName);
+	virtual ~WeaponMissile();
 	virtual void update() override;
+protected:
+	Ogre::Real m_height;
 };
 
 class WeaponBall : public WeaponBase
