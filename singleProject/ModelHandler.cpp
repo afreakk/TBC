@@ -52,7 +52,7 @@ void ModelHandler::init()
 void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
 	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*GlobalVariables::getSingleton().getNormalAnimWalkSpeed(), m_animations);
-	if (Occupado::isOccupied(m_normalPosition, rInc))
+	if (Occupado::isOccupiedVelocity(m_normalPosition, rInc))
 		return;
 	m_normalPosition.theta += rInc;
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
@@ -162,3 +162,4 @@ const Vector3 ModelHandler::getBoneOrientation() const
 {
 	return (*(m_entity->getSkeleton()->getBoneIterator().begin() + 5))->_getDerivedOrientation().yAxis();
 }
+

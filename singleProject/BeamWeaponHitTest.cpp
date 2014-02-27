@@ -46,6 +46,7 @@ bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
 				{
                     MutantContainer::getSingleton().killMutant(itt->getNode()->getName());
 					BeamHitSomething = true;
+					break; // maybe this will help from double-killing i think ive seen once or twice
 				}
 			}
         }

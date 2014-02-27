@@ -11,10 +11,15 @@ PlayerHandlerStateNormal::PlayerHandlerStateNormal(Player* player)
 , m_walkingDirection{ NormalDirection::None }
 , m_normalState{ new BehaviourStateNormal{ &m_walkingDirection , &PlayerGlobalStats::getSingleton().getWalkingSpeed()}}
 , m_tumble(TUMBLE_DIRECTION::DIRECTION_NONE)
+, m_tumbleAttack(false)
 {
 	m_player->setState(m_normalState.get());
 }
 
+bool PlayerHandlerStateNormal::tumbleAttack() const
+{
+	return m_tumbleAttack;
+}
 
 PlayerHandlerStateNormal::~PlayerHandlerStateNormal()
 {

@@ -17,11 +17,13 @@ public:
 	{
 		return m_tumble;
 	}
+	bool tumbleAttack() const;
 private:
 	Player* m_player;
 	TUMBLE_DIRECTION m_tumble;
 	NormalDirection m_walkingDirection;
 	unique_ptr<BehaviourStateNormal> m_normalState;
+	bool m_tumbleAttack;
 	
 	NormalDirection getWalkingDirection();
 };

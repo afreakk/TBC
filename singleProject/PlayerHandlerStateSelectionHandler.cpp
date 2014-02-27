@@ -2,6 +2,7 @@
 #include "PlayerHandlerStateSelectionHandler.h"
 #include "ModelHandlerMutant.h"
 #include "MutantContainer.h"
+#include "LaneSettings.h"
 
 const std::string NONE_STRING = "NONE";
 const Ogre::Real maxTheta = Math::PI*2.0;
@@ -12,8 +13,9 @@ PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler( const st
 , m_prevMarked(nullptr)
 , m_energyCostOfCurrentlyMarked(0)
 , m_attackListConst(attackList)
+, m_laneIdx(LaneSettings::getSingleton().getLaneCount()-1 )
 {
-    changeMarkedMutants(true);
+    changeMarkedMutant(true);
 }
 
 
@@ -38,43 +40,98 @@ bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& ma
             markedChanged = true;
 		}
 	}
-    m_energyCostOfCurrentlyMarked = energyCostOf(markedPolarCoordinates, static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).getPolarCoordinates());
+	if (m_currentMarked)
+        m_energyCostOfCurrentlyMarked = energyCostOf(markedPolarCoordinates, static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).getPolarCoordinates());
 	m_prevMarked = m_currentMarked;
 	return markedChanged;
 }
 
 void PlayerHandlerStateSelectionHandler::handleKeys(const OIS::KeyEvent& e)
 {
+	if (e.key == OIS::KC_S)
+		changeMarkedMutant(true,false,false);
+	if (e.key == OIS::KC_W)
+		changeMarkedMutant(true,false,true);
 	if (e.key == OIS::KC_A)
-		changeMarkedMutants(false);
+		changeMarkedMutant(false);
 	if (e.key == OIS::KC_D)
-		changeMarkedMutants(true);
+		changeMarkedMutant(true);
 }
 
-void PlayerHandlerStateSelectionHandler::changeMarkedMutants(bool right)
+void PlayerHandlerStateSelectionHandler::changeLaneIdx(bool up)
 {
-    m_currentMarked = getNewMarkedMutant(right,m_currentMarked);
-}
-Mutant* PlayerHandlerStateSelectionHandler::getNewMarkedMutant(bool right, Mutant* currentMarked, unsigned mutantWasInListCount, NormalDirection directionOverflow)
-{ 
-    if (mutantWasInListCount >= MutantContainer::getSingleton().getMutantIt().size())
-        return currentMarked;
-	Real theta = getTheta(currentMarked,directionOverflow);
-	Mutant* closestMutant;
-	if (right)
+	if (up)
 	{
-		closestMutant = MutantContainer::getSingleton().getClosestHigherThan(theta, currentMarked);
-		if (!closestMutant)
-            return getNewMarkedMutant(right,nullptr,mutantWasInListCount,NormalDirection::dirRight);
+		if (m_laneIdx > 0)
+			m_laneIdx--;
+		else
+			m_laneIdx = static_cast<int>(LaneSettings::getSingleton().getLaneCount()) - 1;
 	}
 	else
 	{
-		closestMutant = MutantContainer::getSingleton().getClosestLowerThan(theta, currentMarked);
-		if (!closestMutant)
-            return getNewMarkedMutant(right,nullptr,mutantWasInListCount,NormalDirection::dirLeft);
+		if (m_laneIdx < static_cast<int>(LaneSettings::getSingleton().getLaneCount()) - 1)
+			m_laneIdx++;
+		else
+			m_laneIdx = 0;
+	}
+}
+void PlayerHandlerStateSelectionHandler::changeMarkedMutant(bool right, bool horizontal, bool up)
+{
+	if (!horizontal)
+		changeLaneIdx(up);
+	auto oldMarked = m_currentMarked;
+    m_currentMarked = getNewMarkedMutant(right,m_currentMarked,horizontal);
+	unsigned times = 0;
+    while ((oldMarked == m_currentMarked || isInList(m_currentMarked->getModelHandler().getNode()->getName())) && times  < LaneSettings::getSingleton().getLaneCount())
+    {
+		changeLaneIdx(up);
+        m_currentMarked = getNewMarkedMutant(right,m_currentMarked,horizontal);
+		times++;
     }
+}
+Mutant* PlayerHandlerStateSelectionHandler::getNewMarkedMutant(bool right, Mutant* currentMarked, bool horizontal, unsigned mutantWasInListCount
+	, NormalDirection directionOverflow	, unsigned spunAroundCount)
+{ 
+	MutantContainer& mutantContainer = MutantContainer::getSingleton();
+    if (mutantWasInListCount >= mutantContainer.getMutantIt().size() || spunAroundCount > 1)
+        return currentMarked;
+	Real theta = getTheta(currentMarked,directionOverflow);
+	Mutant* closestMutant;
+	if (horizontal)
+	{
+        if (right)
+        {
+            closestMutant = mutantContainer.getClosestHigherThanRadiusBased(theta, LaneSettings::getSingleton().getLane(m_laneIdx),currentMarked);
+			if (!closestMutant)
+			{
+				closestMutant = mutantContainer.getClosestHigherThan(theta, currentMarked);
+				if (!closestMutant)
+					return getNewMarkedMutant(right, nullptr, horizontal, mutantWasInListCount, NormalDirection::dirRight, ++spunAroundCount);
+				else
+					m_laneIdx = LaneSettings::getSingleton().getClosestLane(closestMutant->getNode()->getPosition());
+			}
+        }
+        else
+        {
+            closestMutant = mutantContainer.getClosestLowerThanRadiusBased(theta, LaneSettings::getSingleton().getLane(m_laneIdx), currentMarked);
+			if (!closestMutant)
+			{
+				closestMutant = mutantContainer.getClosestLowerThan(theta, currentMarked);
+				if (!closestMutant)
+					return getNewMarkedMutant(right, nullptr, horizontal, mutantWasInListCount, NormalDirection::dirLeft, ++spunAroundCount);
+				else
+					m_laneIdx = LaneSettings::getSingleton().getClosestLane(closestMutant->getNode()->getPosition());
+			}
+        }
+	}
+	else
+	{
+		closestMutant = mutantContainer.getClosestRadiusBased(theta, LaneSettings::getSingleton().getLane(m_laneIdx), currentMarked);
+		if (!closestMutant)
+			return currentMarked;
+	}
 	if (isInList(closestMutant->getModelHandler().getNode()->getName()))
-        return getNewMarkedMutant(right,closestMutant,++mutantWasInListCount);
+        return getNewMarkedMutant(right,closestMutant, horizontal, ++mutantWasInListCount);
 	return closestMutant;
 }
 const Ogre::Real PlayerHandlerStateSelectionHandler::getTheta(Mutant* currentMarked,NormalDirection directionOverflow) const

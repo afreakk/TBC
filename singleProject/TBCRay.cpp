@@ -54,7 +54,7 @@ bool TBCRay::raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, co
         mat.makeTransform(playerNode->getPosition(), entityNode->getScale(), entityNode->getOrientation());
 	else
         mat.makeTransform(playerNode->getPosition(), playerNode->getScale(), playerNode->getOrientation());
-
+    // this is hax because robot is being "innerscaled"  
 	boundingBox.transform(mat);
 
 	const std::pair<bool, Real>& result = OgreFix::intersects(ray,boundingBox);

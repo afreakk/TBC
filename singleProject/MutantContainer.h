@@ -26,15 +26,25 @@ public:
     // intersects = bool, 
 	Mutant* getClosestHigherThan(const Ogre::Real& theta, Mutant* mutant);
 	Mutant* getClosestLowerThan(const Ogre::Real& theta, Mutant* mutant);
+	Mutant* getClosestRadiusBased(const Ogre::Real& theta,  const Ogre::Real& radius, Mutant* mutant);
+	Mutant* getClosestHigherThanRadiusBased(const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant);
+	Mutant* getClosestLowerThanRadiusBased(const Ogre::Real& theta,  const Ogre::Real& radius, Mutant* mutant);
 	std::string getClosestMutant(PolarCoordinates pos, NormalDirection direction);
+	std::string getClosestMutant(PolarCoordinates pos);
 	std::list<Mutant*> getMutantIt() { return m_aliveMutantIteratorList; }
 	std::list<MutantHandler*> getHandlerIt() { return m_aliveHandlerIteratorList; }
     void update();
 	virtual const std::string message() override;
+	static bool isInstantiated()
+	{
+		return m_isInstantiated;
+	}
 private:
+	static bool m_isInstantiated;
 	Ogre::Real m_despawnTime;
 	std::map<std::string, std::shared_ptr<MutantPair>> m_aliveMutants;
 	std::list<Mutant*> m_aliveMutantIteratorList;
+	std::list<Mutant*> m_aliveNotSuicideList;
 	std::list<MutantHandler*> m_aliveHandlerIteratorList;
 
 	std::map<std::string, std::shared_ptr<MutantPair>> m_deadMutants;
@@ -43,8 +53,6 @@ private:
 	std::vector<std::string> m_executedMutants;
 	std::vector<std::string> m_toBeKilled;
 
-	Mutant* getClosest(bool higher, const Ogre::Real& theta, Mutant* mutant);
-	Mutant* getClosest(bool higher, const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant);
 	void handleDeadMutants();
 	void executeDoomedMutants();
 	bool checkDistance(const PolarCoordinates& pos, Mutant* mutant , Ogre::Real* closestDistance ,  bool left);

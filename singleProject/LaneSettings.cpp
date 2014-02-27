@@ -44,8 +44,9 @@ void LaneSettings::initLanes()
     for (unsigned i = 0; i < m_laneCount; i++)
         m_laneArray[i] = m_firstLane + m_increment*i;
 }
-Real LaneSettings::getLane(unsigned index)
+Real LaneSettings::getLane(const unsigned index)
 {
+	cout << "requesting lane#" << index << endl;
     return m_laneArray[index];
 }
 Real LaneSettings::getIncrement()

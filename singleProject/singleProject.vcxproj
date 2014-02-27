@@ -23,6 +23,7 @@
     <ClCompile Include="BehaviourStateTumble.cpp" />
     <ClCompile Include="BloodSplat.cpp" />
     <ClCompile Include="ConfigScriptLoader.cpp" />
+    <ClCompile Include="ContainerLogic.cpp" />
     <ClCompile Include="CoreCompositor.cpp" />
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="BloodSplat.h" />
     <ClInclude Include="CameraBase.h" />
     <ClInclude Include="ConfigScriptLoader.h" />
+    <ClInclude Include="ContainerLogic.h" />
     <ClInclude Include="LineBillboardSet.h" />
     <ClInclude Include="CoreCompositor.h" />
     <ClInclude Include="Distancer.h" />

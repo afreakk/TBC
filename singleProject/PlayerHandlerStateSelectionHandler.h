@@ -18,10 +18,14 @@ private:
 	Mutant* m_currentMarked;
 	Mutant* m_prevMarked;
 	int m_energyCostOfCurrentlyMarked;
+	int m_laneIdx;
 
-	void changeMarkedMutants(bool right);
+	void changeMarkedMutant(bool right, bool horizontal=true, bool up=false);
 	const Ogre::Real getTheta(Mutant* currentMarked,NormalDirection directionOverflow=NormalDirection::None) const;
-	Mutant* getNewMarkedMutant(bool right, Mutant* currentMarked, unsigned mutantWasInListCount=0,NormalDirection directionOverflow=NormalDirection::None);
+	Mutant* getNewMarkedMutant(bool right, Mutant* currentMarked, bool horizontal, unsigned mutantWasInListCount=0,NormalDirection directionOverflow=NormalDirection::None
+		, unsigned spunAroundCount=0);
+	void changeLaneIdx(bool up);
 
+      
 };
 

@@ -10,6 +10,7 @@
 ModelRecipePlayer::ModelRecipePlayer()
 : m_materialName("Examples/Ninja")
 {
+	m_name = "Player";
 }
 ModelRecipePlayer::~ModelRecipePlayer()
 {

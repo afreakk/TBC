@@ -380,6 +380,9 @@
     <ClCompile Include="Occupado.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ContainerLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -725,6 +728,9 @@
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="Occupado.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContainerLogic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

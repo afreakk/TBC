@@ -4,11 +4,14 @@
 #include "PlayerGlobalStats.h"
 #include "MainUpdate.h"
 #include "LaneSettings.h"
+#include "ContainerLogic.h"
 template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
 static const unsigned energyPerMutant = 10;
+bool MutantContainer::m_isInstantiated = false;
 MutantContainer::MutantContainer()
 : m_despawnTime(2.0)
 {
+	m_isInstantiated = true;
 }
 MutantContainer::~MutantContainer()
 {
@@ -52,12 +55,15 @@ void MutantContainer::killMutant(const std::string& name)
 {
 	m_toBeKilled.push_back(name);
 }
+#include "boost/algorithm/string/predicate.hpp"
 void MutantContainer::moveMutant(const std::string& id)
 {
 	std::shared_ptr<MutantPair> pair = m_aliveMutants[id];
 	pair->handler->switchState(MUTANT_HANDLER_STATE::DEAD);
 	pair->mutant->setDead(true);
 	m_deadMutants[id] = pair;
+	if (!boost::algorithm::starts_with(id, "MutantSuicide"))
+		m_aliveNotSuicideList.erase(std::find(m_aliveNotSuicideList.begin(), m_aliveNotSuicideList.end(), pair->mutant.get()));
 	m_aliveMutantIteratorList.erase( std::find( m_aliveMutantIteratorList.begin(), m_aliveMutantIteratorList.end(), pair->mutant.get() ) );
 	m_aliveHandlerIteratorList.erase( std::find( m_aliveHandlerIteratorList.begin(), m_aliveHandlerIteratorList.end(), pair->handler.get() ) );
 	m_aliveMutants.erase(id);
@@ -69,60 +75,30 @@ void MutantContainer::addMutant(MutantHandler* mutantHandler, Mutant* mutant)
 {
 	std::string name = mutant->getNode()->getName();
 	m_aliveMutants[name] = shared_ptr<MutantPair>(new MutantPair( mutantHandler, mutant ));
+	if (!boost::algorithm::starts_with(name, "MutantSuicide"))
+		m_aliveNotSuicideList.push_back(mutant);
 	m_aliveMutantIteratorList.push_back(mutant);
 	m_aliveHandlerIteratorList.push_back(mutantHandler);
 }
 Mutant* MutantContainer::getClosestHigherThan(const Ogre::Real& theta, Mutant* mutant)
 {
-	return getClosest(true, theta, mutant);
+	return ContainerLogic::getClosest(m_aliveNotSuicideList, theta, mutant,false,true);
 }
 Mutant* MutantContainer::getClosestLowerThan(const Ogre::Real& theta, Mutant* mutant)
 {
-	return getClosest(false, theta, mutant);
+	return ContainerLogic::getClosest(m_aliveNotSuicideList, theta, mutant,false,false);
 }
-Mutant* MutantContainer::getClosest(bool higher, const Ogre::Real& theta, Mutant* mutant)
+Mutant* MutantContainer::getClosestHigherThanRadiusBased(const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant)
 {
-	Real closestDistance = numeric_limits<Real>::max();
-	Mutant* closestLegalMutant = nullptr;
-	for (const auto& itt : m_aliveMutantIteratorList)
-	{
-		if (itt == mutant)
-			continue;
-		Real distance = (higher ? itt->getSelectionTheta() : theta ) - (higher ? theta : itt->getSelectionTheta() );
-		if (distance > 0.0 && distance < closestDistance)
-		{
-			closestDistance = distance;
-			closestLegalMutant = itt;
-		}
-        else if (float_compare(distance,Real(0.0)))
-        {
-			itt->setSelectionThetaOffset(EPSILON);
-			return getClosest(higher, theta, mutant);
-        }
-	}
-	return closestLegalMutant;
+	return ContainerLogic::getClosest(m_aliveNotSuicideList, theta, radius, mutant,false,true);
 }
-Mutant* MutantContainer::getClosest(bool higher, const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant)
+Mutant* MutantContainer::getClosestLowerThanRadiusBased(const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant)
 {
-	Real closestDistance = numeric_limits<Real>::max();
-	Mutant* closestLegalMutant = nullptr;
-	for (const auto& itt : m_aliveMutantIteratorList)
-	{
-		if (! float_compare( itt->getPolarCoordinates().radius, radius, LaneSettings::getSingleton().getIncrement() ) || itt == mutant)
-			continue;
-		Real distance = (higher ? itt->getSelectionTheta() : theta ) - (higher ? theta : itt->getSelectionTheta() );
-		if (distance > 0.0 && distance < closestDistance)
-		{
-			closestDistance = distance;
-			closestLegalMutant = itt;
-		}
-        else if (float_compare(distance,Real(0.0)))
-        {
-			itt->setSelectionThetaOffset(EPSILON);
-			return getClosest(higher, theta, mutant);
-        }
-	}
-	return closestLegalMutant;
+	return ContainerLogic::getClosest(m_aliveNotSuicideList,theta, radius, mutant,false,false);
+}
+Mutant* MutantContainer::getClosestRadiusBased(const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant)
+{
+	return ContainerLogic::getClosest(m_aliveNotSuicideList,theta, radius, mutant, true,false);
 }
 void MutantContainer::update()
 {
@@ -173,6 +149,22 @@ void MutantContainer::handleDeadMutants()
         m_deadMutants.erase(it);
 	}
 }
+std::string MutantContainer::getClosestMutant(PolarCoordinates pos)
+{
+	Real closesDistance = 100000.0;
+	std::string idx = "NONE";
+	keepWithinMax(&pos.theta);
+    for (auto& itt : m_aliveMutantIteratorList)
+    {
+		Real distance = abs(itt->getPolarCoordinates().theta - pos.theta);
+		if (distance < closesDistance)
+		{
+			distance = closesDistance;
+            idx = itt->getNode()->getName();
+		}
+    }
+	return idx;
+}
 std::string MutantContainer::getClosestMutant(PolarCoordinates pos, NormalDirection direction)
 {
 	bool left;
@@ -210,4 +202,5 @@ bool MutantContainer::checkDistance(const PolarCoordinates& pos, Mutant* mutant 
 		return true;
 	return false;
 }
+
 

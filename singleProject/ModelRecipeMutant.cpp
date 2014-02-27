@@ -10,9 +10,10 @@ int ModelRecipeMutant::s_count = 0;
 ModelRecipeMutant::ModelRecipeMutant()
 : m_id(++s_count)
 , m_materialName("Examples/Ninja")
-, m_entityName("MutantNode"+boost::lexical_cast<string>(m_id))
-, m_nodeName("MutantEntity"+boost::lexical_cast<string>(m_id))
+, m_entityName("MutantRanged"+boost::lexical_cast<string>(m_id))
+, m_nodeName("MutantRanged"+boost::lexical_cast<string>(m_id))
 {
+	m_name="MutantRanged";
 	cout << "MutantEntity: " << m_entityName << endl;
 }
 
