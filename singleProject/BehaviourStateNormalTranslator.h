@@ -6,7 +6,7 @@ class BehaviourStateNormalTranslator
 public:
 	BehaviourStateNormalTranslator(const Real* speed);
 	~BehaviourStateNormalTranslator();
-	void update(ModelHandler& playerModel, NormalDirection activeDirection);
+	bool update(ModelHandler& playerModel, NormalDirection activeDirection);
 private:
 	void handleVelocity(NormalDirection activeDirection);
 	void increaseVelocity(const Real& ammount);

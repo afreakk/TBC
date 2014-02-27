@@ -17,6 +17,7 @@ private:
 	NormalDirection m_walkingDirection;
 	unique_ptr<BehaviourStateNormal> m_normalState;
 
-	MUTANT_HANDLER_STATE getAttackState();
+	void goAttack();
+	void steerTowardsPlayer();
 };
 

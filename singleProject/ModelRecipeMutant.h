@@ -11,6 +11,7 @@ public:
 	BaseAnimation* getAttack(Ogre::Entity*) override;
 	BaseAnimation* getDie(Ogre::Entity*) override;
 	BaseAnimation* getPrepare(Ogre::Entity*)override;
+	BaseAnimation* getTumble(Ogre::Entity*) override;
 	void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent);
 	Ogre::SceneNode* createNode() override;
     const std::string& getMaterialName() override;

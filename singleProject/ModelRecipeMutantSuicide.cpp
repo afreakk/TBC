@@ -5,6 +5,7 @@
 #include "AnimationDie.h"
 #include "OgreCore.h"
 #include "AnimationPrepare.h"
+#include "AnimationTumble.h"
 
 int ModelRecipeMutantSuicide::s_count = 0;
 ModelRecipeMutantSuicide::ModelRecipeMutantSuicide()
@@ -72,4 +73,10 @@ void ModelRecipeMutantSuicide::attachNode(Ogre::SceneNode* node, Ogre::Entity* e
 Ogre::SceneNode* ModelRecipeMutantSuicide::createNode()
 {
 	return OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode(m_nodeName);
+}
+BaseAnimation* ModelRecipeMutantSuicide::getTumble(Ogre::Entity* entity)
+{
+	std::vector<AnimationState*> anims;
+	anims.push_back( entity->getAnimationState("Shoot") ) ;
+	return new AnimationTumble(anims);
 }

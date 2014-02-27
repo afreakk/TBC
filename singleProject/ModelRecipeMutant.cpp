@@ -5,6 +5,7 @@
 #include "AnimationDie.h"
 #include "AnimationPrepare.h"
 #include "OgreCore.h"
+#include "AnimationTumble.h"
 
 int ModelRecipeMutant::s_count = 0;
 ModelRecipeMutant::ModelRecipeMutant()
@@ -74,4 +75,10 @@ void ModelRecipeMutant::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 Ogre::SceneNode* ModelRecipeMutant::createNode()
 {
 	return OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode(m_nodeName);
+}
+BaseAnimation* ModelRecipeMutant::getTumble(Ogre::Entity* entity)
+{
+	std::vector<AnimationState*> anims;
+	anims.push_back( entity->getAnimationState("Backflip") ) ;
+	return new AnimationTumble(anims);
 }

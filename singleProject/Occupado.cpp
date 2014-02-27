@@ -5,8 +5,6 @@
 #include "PlayerContainer.h"
 #include "Player.h"
 #include "LaneSettings.h"
-const Ogre::Real NormalModeModelSpacing = Math::PI/1024.0;
-const Ogre::Real LerpModeSpacing = 200.0;
 
 bool Occupado::isOccupiedVelocity(const PolarCoordinates& e , const Ogre::Real& velocity)
 {

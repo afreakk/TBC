@@ -377,11 +377,14 @@
     <ClCompile Include="AnimationPrepare.cpp">
       <Filter>Model\Animations</Filter>
     </ClCompile>
-    <ClCompile Include="Occupado.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ContainerLogic.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MutantHandlerStateTumble.cpp">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClCompile>
+    <ClCompile Include="Occupado.cpp">
+      <Filter>Rules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -727,11 +730,14 @@
     <ClInclude Include="AnimationPrepare.h">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="Occupado.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ContainerLogic.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MutantHandlerStateTumble.h">
+      <Filter>BehaviourStateHandler\Mutant</Filter>
+    </ClInclude>
+    <ClInclude Include="Occupado.h">
+      <Filter>Rules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

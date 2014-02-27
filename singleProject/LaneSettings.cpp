@@ -28,6 +28,22 @@ unsigned LaneSettings::getClosestLane(const Ogre::Vector3& position)
 	}
 	return index;
 }
+unsigned LaneSettings::getClosestLane(const PolarCoordinates& pos)
+{
+	unsigned index = 0;
+	Real radius = pos.radius;
+	Real closest = 10000.0;
+	for (unsigned i = 0; i < getLaneCount(); i++)
+	{
+		Real distanceOffset = abs(getLane(i) - radius);
+		if (distanceOffset < closest)
+		{
+			index=i;
+			closest = distanceOffset;
+		}
+	}
+	return index;
+}
 Ogre::Vector3 LaneSettings::getVectorOf(unsigned index, const Ogre::Real& r, const Ogre::Real& height)
 {
 	Real d = getLane(index);

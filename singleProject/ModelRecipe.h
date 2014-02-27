@@ -17,6 +17,7 @@ public:
 	virtual BaseAnimation* getAttack(Ogre::Entity*) = 0;
 	virtual BaseAnimation* getDie(Ogre::Entity*) = 0;
 	virtual BaseAnimation* getPrepare(Ogre::Entity*) = 0;
+	virtual BaseAnimation* getTumble(Ogre::Entity*) = 0;
 	virtual void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent) = 0;
 	virtual Ogre::SceneNode* createNode()=0;
 	virtual const std::string& getMaterialName() = 0;

@@ -14,11 +14,12 @@ BehaviourStateNormalTranslator::~BehaviourStateNormalTranslator()
 {
 }
 
-void BehaviourStateNormalTranslator::update(ModelHandler& playerModel, NormalDirection activeDirection)
+bool BehaviourStateNormalTranslator::update(ModelHandler& playerModel, NormalDirection activeDirection)
 {
 	handleVelocity(activeDirection);
-	playerModel.normalWalk(m_velocity, activeDirection);
+	bool success = playerModel.normalWalk(m_velocity, activeDirection);
 	m_velocity = 0.0;
+	return success;
 }
 void BehaviourStateNormalTranslator::increaseVelocity(const Real& ammount)
 {

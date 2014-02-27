@@ -18,10 +18,15 @@ BehaviourStateNormal::~BehaviourStateNormal()
 void BehaviourStateNormal::update(ModelHandler& playerModel)
 {
 	handleDirection();
-	m_translator.update(playerModel, m_walkingDirection);
+	m_success = m_translator.update(playerModel, m_walkingDirection);
 }
 void BehaviourStateNormal::handleDirection()
 {
 	if (m_walkingDirection != NormalDirection::None)
 		m_direction = m_walkingDirection;
+}
+
+bool BehaviourStateNormal::getSuccess()
+{
+	return m_success;
 }

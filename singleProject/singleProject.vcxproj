@@ -60,6 +60,7 @@
     <ClCompile Include="MutantHandlerStateNormal.cpp" />
     <ClCompile Include="MutantHandlerStateSuicideBomb.cpp" />
     <ClCompile Include="BillboardNumber.cpp" />
+    <ClCompile Include="MutantHandlerStateTumble.cpp" />
     <ClCompile Include="Occupado.cpp" />
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="MutantHandlerStateDead.h" />
     <ClInclude Include="MutantHandlerStateNormal.h" />
     <ClInclude Include="MutantHandlerStateSuicideBomb.h" />
+    <ClInclude Include="MutantHandlerStateTumble.h" />
     <ClInclude Include="Occupado.h" />
     <ClInclude Include="OgreFix.h" />
     <ClInclude Include="PlayerHandlerStateBlankAttack.h" />

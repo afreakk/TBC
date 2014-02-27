@@ -1,5 +1,6 @@
 #pragma once
 #include "OgreSingleton.h"
+class PolarCoordinates;
 class LaneSettings : public Ogre::Singleton<LaneSettings>
 {
 public:
@@ -7,6 +8,7 @@ public:
 	~LaneSettings();
 	void initLanes();
 	unsigned getClosestLane(const Ogre::Vector3& position);
+	unsigned getClosestLane(const PolarCoordinates& pos);
 	Ogre::Real getLane(const unsigned index);
 	Ogre::Real getIncrement();
     Ogre::Real getHeight();

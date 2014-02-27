@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "BehaviourStateTumble.h"
-#include "ModelHandlerPlayer.h"
 #include "MainUpdate.h"
-
+#include "ModelHandler.h"
 
 BehaviourStateTumble::BehaviourStateTumble(Vector3 tumbleToPos, Real speed)
 : BehaviourState(BEHAVOUR_STATE::TUMBLE)
@@ -19,5 +18,10 @@ BehaviourStateTumble::~BehaviourStateTumble()
 
 void BehaviourStateTumble::update(ModelHandler& modelHandler)
 {
-	m_reachedEnd = static_cast<ModelHandlerPlayer&>(modelHandler).tumble(m_tumbleToPos,m_speed);
+	m_reachedEnd = modelHandler.tumble(m_tumbleToPos,m_speed);
+}
+
+bool BehaviourStateTumble::hasReachedEnd() const 
+{
+    return m_reachedEnd;
 }

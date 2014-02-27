@@ -17,11 +17,6 @@ ModelHandlerPlayer::~ModelHandlerPlayer()
 void ModelHandlerPlayer::init()
 {
 	ModelHandler::init();
-	m_animations[ANIMATIONS::TUMBLE]	= unique_ptr<BaseAnimation>(static_cast<ModelRecipePlayer*>(m_crRecipe.get())->getTumble(m_entity) );
-}
-bool ModelHandlerPlayer::tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
-{
-	return !lerp(nextPosition, dt, ANIMATIONS::TUMBLE, m_LERPPrecision, GlobalVariables::getSingleton().getLERPAnimTumblekRatio());
 }
 void ModelHandlerPlayer::displaySlowMotionParticle(bool enabled)
 {

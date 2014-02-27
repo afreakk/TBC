@@ -39,6 +39,10 @@ void ModelHandler::parseScript()
 	m_startAttackDistance = rootNode->findChild("startAttackDistance")->getValueR(0);
 
 }
+bool ModelHandler::tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
+{
+	return !lerp(nextPosition, dt, ANIMATIONS::TUMBLE, m_LERPPrecision, GlobalVariables::getSingleton().getLERPAnimTumblekRatio());
+}
 void ModelHandler::init() 
 {
 	m_crRecipe->attachNode(m_node, m_entity);
@@ -46,18 +50,20 @@ void ModelHandler::init()
 	m_animations[ANIMATIONS::WALK]	= unique_ptr<BaseAnimation>(m_crRecipe->getWalk(m_entity) );
 	m_animations[ANIMATIONS::DIE]	= unique_ptr<BaseAnimation>(m_crRecipe->getDie(m_entity) );
 	m_animations[ANIMATIONS::PREPARE] = unique_ptr<BaseAnimation>(m_crRecipe->getPrepare(m_entity));
+	m_animations[ANIMATIONS::TUMBLE]	= unique_ptr<BaseAnimation>(m_crRecipe->getTumble(m_entity) );
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 }
 
-void ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
+bool ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
 	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*GlobalVariables::getSingleton().getNormalAnimWalkSpeed(), m_animations);
 	if (Occupado::isOccupiedVelocity(m_normalPosition, rInc))
-		return;
+		return false;
 	m_normalPosition.theta += rInc;
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 	UnitCircleMovement::polarSetDirection(m_node, m_normalPosition, activeDirection);
 	m_normalDirection = rInc > 0 ? NormalDirection::dirRight : ( rInc < 0 ?NormalDirection::dirLeft : m_normalDirection );
+	return true;
 }
 
 void ModelHandler::fallAndDie()
