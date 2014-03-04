@@ -9,7 +9,9 @@ public:
 	~ModelHandlerPlayer();
 	void init()override;
 	void displaySlowMotionParticle(bool enabled);
+	void teleport();
 protected:
 	SlowMotionParticle m_slowMoParticle;
+	TeleportParticle m_teleportParticle;
 };
 

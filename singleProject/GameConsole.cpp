@@ -10,9 +10,7 @@ template<> GameConsole* Ogre::Singleton<GameConsole>::msSingleton = 0;
 GameConsole::GameConsole()
 : m_visible(false)
 {
-	m_gorilla = new Gorilla::Silverback();
-	m_gorilla->loadAtlas("dejavu");
-	m_screen = m_gorilla->createScreen(OgreCore::getSingleton().getViewport(), "dejavu");
+	m_screen = Gorilla::Silverback::getSingleton().createScreen(OgreCore::getSingleton().getViewport(), "dejavu");
 	m_console.init(m_screen);
 	m_console.setVisible(m_visible);
 	OISCore::getSingleton().addKeyListener(this, "GameConsole");
@@ -23,6 +21,7 @@ GameConsole::GameConsole()
 GameConsole::~GameConsole()
 {
 	OISCore::getSingleton().removeKeyListener("GameConsole");
+//	Gorilla::Silverback::getSingleton().destroyScreen(m_screen);
 }
 
 void COMMANDhi(Ogre::StringVector& vec)
@@ -40,7 +39,7 @@ void GameConsole::setupCommands()
 }
 bool GameConsole::keyPressed(const OIS::KeyEvent &arg)
 {
-	if (arg.key == OIS::KC_ESCAPE)
+	if (arg.key == OIS::KC_GRAVE)
 	{
 		m_visible = !m_visible;
 		m_console.setVisible(m_visible);

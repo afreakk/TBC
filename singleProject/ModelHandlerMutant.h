@@ -17,7 +17,7 @@ public:
 	ModelHandlerMutant(PolarCoordinates normalPos,  WeaponType weaponType, ModelRecipe* modlRecipe);
 	~ModelHandlerMutant();
 	void setHovered(selectedType);
-	void fire();
+	void fire(bool run=true);
 	void init() override;
 	void damage(Vector3 direction);
 	WeaponType getWeaponType();

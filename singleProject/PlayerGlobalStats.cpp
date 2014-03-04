@@ -18,8 +18,8 @@ void PlayerGlobalStats::parseScript()
 {
 	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "PlayerStats");
 
-	m_status.energy = rootNode->findChild("energy")->getValueU(0);
-	m_status.maxEnergy = m_status.energy;
+	m_status.energy = 0;
+	m_status.maxEnergy = rootNode->findChild("energy")->getValueU(0);
 	m_status.health = rootNode->findChild("healthPoints")->getValueU(0);
 	m_status.maxHealth = m_status.health;
 

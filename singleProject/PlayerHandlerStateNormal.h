@@ -26,5 +26,6 @@ private:
 	bool m_tumbleAttack;
 	
 	NormalDirection getWalkingDirection();
+	void teleport();
 };
 

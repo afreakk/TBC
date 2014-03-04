@@ -31,6 +31,11 @@ public:
 	MutantFlameThrower(Ogre::SceneNode* parentNode, ModelHandler* model);
 	void update() override;
 };
+class FrostBolt : public WeaponBall
+{
+public:
+	FrostBolt(Ogre::SceneNode* parentNode, ModelHandler* model);
+};
 //FireBall
 class MutantFireBall : public WeaponMissile
 {
@@ -38,6 +43,7 @@ public:
 	MutantFireBall(Ogre::SceneNode* parentNode, ModelHandler* model);
 	void activate() override;
 	void update() override;
+	void stop() override;
 private:
 	ParticleUniverse::SphereCollider* m_planeCollider;
 	ParticleUniverse::ParticleAffector* m_collisionObserver;

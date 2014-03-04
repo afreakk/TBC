@@ -29,6 +29,8 @@ int main()
 		OgreCore::getSingletonPtr()->initResources();
 		OgreCore::getSingleton().initShadowCasting();
 //		OgreCore::getSingletonPtr()->getSceneMgr()->showBoundingBoxes(true);
+		unique_ptr<Gorilla::Silverback> gorilla_silverback = unique_ptr<Gorilla::Silverback>(new Gorilla::Silverback());
+		gorilla_silverback->loadAtlas("dejavu");
 		unique_ptr<GUIResources> guiResources = unique_ptr<GUIResources>(new GUIResources("GameOverlay"));
 		guiResources->show(true);
 
@@ -38,7 +40,7 @@ int main()
 		unique_ptr<LaneSettings> laneSettings = unique_ptr<LaneSettings>(new LaneSettings() );
 		laneSettings->initLanes();
 		unique_ptr<TBCRay> raycasting = unique_ptr<TBCRay>(new TBCRay(OgreCore::getSingletonPtr()->getSceneMgr()));
-
+    
         new CoreCompositor(OgreCore::getSingleton().getCamera()->getViewport());
 		unique_ptr<GlobalVariables> m_globalVars = unique_ptr<GlobalVariables>(new GlobalVariables());
 		unique_ptr<PlayerGlobalStats> m_playerStats = unique_ptr<PlayerGlobalStats>(new PlayerGlobalStats());

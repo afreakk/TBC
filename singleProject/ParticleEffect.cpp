@@ -35,8 +35,8 @@ void ParticleEffect::update()
 }
 void ParticleEffect::activate()
 {
-    m_particleSystem->start();
-	setParticleSystem(true);
+        m_particleSystem->start();
+        setParticleSystem(true);
 }
 
 void ParticleEffect::setParticleSystem(bool enabled)

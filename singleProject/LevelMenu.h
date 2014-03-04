@@ -1,5 +1,6 @@
 #pragma once
 #include "ILevel.h"
+#include "MainMenu.h"
 class LevelMenu :public ILevel
 {
 public:
@@ -8,5 +9,6 @@ public:
 	bool update() override;
 private:
 	Ogre::Real m_time;
+	MainMenu m_menu;
 };
 

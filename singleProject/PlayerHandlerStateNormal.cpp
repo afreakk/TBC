@@ -29,13 +29,23 @@ void PlayerHandlerStateNormal::update()
 	m_walkingDirection = getWalkingDirection();
 	if (m_tumble != TUMBLE_DIRECTION::DIRECTION_NONE)
 		m_state = PLAYER_HANDLER_STATE::TUMBLE;
+	if (PlayerGlobalStats::getSingleton().getEnergy() == 100)
+		m_state = PLAYER_HANDLER_STATE::SELECTION;
+
+}
+#include "ModelHandlerPlayer.h"
+void PlayerHandlerStateNormal::teleport()
+{
+	static_cast<ModelHandlerPlayer&>(m_player->getModelHandler()).teleport();
 }
 
 void PlayerHandlerStateNormal::keyPressed(const OIS::KeyEvent& e)
 {
-	if (OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift) && (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C))
-		m_state = PLAYER_HANDLER_STATE::SELECTION;
-	else if (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C)
+//	if (OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift) && (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C))
+	//	m_state = PLAYER_HANDLER_STATE::SELECTION;
+	if (e.key == OIS::KeyCode::KC_E)
+		teleport();
+	if (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C)
 		m_state = PLAYER_HANDLER_STATE::SINGLE_ATTACK;
 	if (e.key == OIS::KeyCode::KC_W)
 		m_tumble = TUMBLE_DIRECTION::DIRECTION_IN;

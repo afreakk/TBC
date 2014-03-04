@@ -11,7 +11,6 @@ public:
 	OgreConsole& getConsole(){ return m_console; }
 private:
 	OgreConsole m_console;
-	Gorilla::Silverback* m_gorilla;
 	Gorilla::Screen* m_screen;
 	bool m_visible;
 

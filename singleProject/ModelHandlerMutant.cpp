@@ -32,9 +32,12 @@ void ModelHandlerMutant::damage(Vector3 direction)
 	m_bloodSplat.setDirection(direction);
 	m_bloodSplat.activate();
 }
-void ModelHandlerMutant::fire()
+void ModelHandlerMutant::fire(bool run)
 {
-	m_weapon->activate();
+	if (run)
+		m_weapon->activate();
+	else
+		m_weapon->stop();
 }
 bool ModelHandlerMutant::isHovered()
 {
@@ -83,6 +86,9 @@ void ModelHandlerMutant::setWeapon(WeaponType weaponType)
 		break;
 	case WeaponType::SUICIDE_BOMB:
 		m_weapon = unique_ptr<WeaponBase>(new MutantSuicide(m_node, this));
+		break;
+	case WeaponType::FROSTBOLT:
+		m_weapon = unique_ptr<WeaponBase>(new FrostBolt(m_node, this));
 		break;
 	default:
 		assert(0);

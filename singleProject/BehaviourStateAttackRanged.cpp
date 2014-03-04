@@ -38,6 +38,7 @@ void BehaviourStateAttackRanged::update(ModelHandler& modelHandler)
         modelHandler.playAnimation(ANIMATIONS::PREPARE);
 		m_phase = reloadPhase(modelHandler, dt);
 		break;
+        //waiting
 	default:
         modelHandler.playAnimation(ANIMATIONS::ATTACK);
 		m_phase = waiting(modelHandler, dt);
@@ -50,6 +51,7 @@ AttackRangedPhase BehaviourStateAttackRanged::waiting(ModelHandler& modelHandler
 	if (m_localTime >= m_shootDelay)
 	{
 		m_localTime = 0.0;
+		static_cast<ModelHandlerMutant&>(modelHandler).fire(false);
 		return AttackRangedPhase::reloading;
 	}
 	return AttackRangedPhase::waiting;

@@ -11,6 +11,7 @@ public:
 	virtual~ParticleEffect();
 	virtual void update();
 	virtual void activate();
+	virtual void stop();
 protected:
 	const int m_id;
 	bool m_added;
@@ -19,7 +20,6 @@ protected:
 	ParticleUniverse::ParticleSystem* m_particleSystem;
 
 	void setParticleSystem(bool enabled);
-	void stop();
 	void destroyThis();
 };
 

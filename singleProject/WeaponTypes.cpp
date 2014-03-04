@@ -31,6 +31,10 @@ void MutantFlameThrower::update()
 
 	WeaponMissile::update();
 }
+FrostBolt::FrostBolt(Ogre::SceneNode* parentNode, ModelHandler* model)
+:WeaponBall(parentNode, model, "MutantFrostBolt", "Flare/mp_fireball_02", "")
+{
+}
 //MutantFireBall
 MutantFireBall::MutantFireBall(SceneNode* parentNode, ModelHandler* model)
 : WeaponMissile(parentNode, model, "MutantFireBall", "FireBall", "FireEmitter" )
@@ -76,6 +80,11 @@ void MutantFireBall::disable()
 {
     m_shadow.setVisible(false);
 	m_doHitTest = false;
+}
+void MutantFireBall::stop()
+{
+	disable();
+	WeaponMissile::stop();
 }
 
 MutantSuicide::MutantSuicide(Ogre::SceneNode* parentNode, ModelHandler* model)

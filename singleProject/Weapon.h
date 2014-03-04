@@ -7,6 +7,7 @@ enum class WeaponType
     FLAMETHROWER,
     FIREBALL,
     SUICIDE_BOMB,
+    FROSTBOLT,
     NOTHING
 };
 namespace ParticleUniverse
@@ -35,16 +36,20 @@ public:
 protected:
 	Ogre::Real m_height;
 };
-
+#include "SimpleShadow.h"
 class WeaponBall : public WeaponBase
 {
 public:
 	WeaponBall(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName);
 	virtual ~WeaponBall();
 	virtual void update() override;
+	virtual void activate() override;
+	virtual void stop() override;
 protected:
 	Ogre::Real m_ballDamageRadius;
-	bool m_endSpell;
+	Ogre::Vector3 m_startingPos;
+	SimpleShadow m_shadow;
+
 	bool hitTest();
 };
 class WeaponBomb : public WeaponBase

@@ -105,6 +105,9 @@
     <Filter Include="Compositors">
       <UniqueIdentifier>{f242dca8-40ca-4646-b6d1-5db4493f7b92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{559121f0-ee0e-47ce-a2ee-9dba3f40e099}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -293,9 +296,6 @@
     <ClCompile Include="MutantContainer.cpp">
       <Filter>Container</Filter>
     </ClCompile>
-    <ClCompile Include="MainLevelSetter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MutantHandlerStateSuicideBomb.cpp">
       <Filter>BehaviourStateHandler\Mutant</Filter>
     </ClCompile>
@@ -377,9 +377,6 @@
     <ClCompile Include="AnimationPrepare.cpp">
       <Filter>Model\Animations</Filter>
     </ClCompile>
-    <ClCompile Include="ContainerLogic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MutantHandlerStateTumble.cpp">
       <Filter>BehaviourStateHandler\Mutant</Filter>
     </ClCompile>
@@ -389,11 +386,20 @@
     <ClCompile Include="Gorilla.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OgreConsoleForGorilla.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ContainerLogic.cpp">
+      <Filter>Container</Filter>
     </ClCompile>
     <ClCompile Include="GameConsole.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MainLevelSetter.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="OgreConsoleForGorilla.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -646,9 +652,6 @@
     <ClInclude Include="BehaviourStateLimbo.h">
       <Filter>BehaviourState</Filter>
     </ClInclude>
-    <ClInclude Include="MainLevelSetter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MutantHandlerStateSuicideBomb.h">
       <Filter>BehaviourStateHandler\Mutant</Filter>
     </ClInclude>
@@ -739,9 +742,6 @@
     <ClInclude Include="AnimationPrepare.h">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="ContainerLogic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MutantHandlerStateTumble.h">
       <Filter>BehaviourStateHandler\Mutant</Filter>
     </ClInclude>
@@ -751,11 +751,20 @@
     <ClInclude Include="Gorilla.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OgreConsoleForGorilla.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ContainerLogic.h">
+      <Filter>Container</Filter>
     </ClInclude>
     <ClInclude Include="GameConsole.h">
-      <Filter>Header Files</Filter>
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLevelSetter.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="OgreConsoleForGorilla.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

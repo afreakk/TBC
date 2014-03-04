@@ -42,6 +42,7 @@
     <ClCompile Include="LvlOneEnvironment.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainLevelSetter.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MainUpdate.cpp" />
     <ClCompile Include="ManualLine.cpp" />
     <ClCompile Include="MeshEmitter.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="LightHandler.h" />
     <ClInclude Include="LvlOneEnvironment.h" />
     <ClInclude Include="MainLevelSetter.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MainUpdate.h" />
     <ClInclude Include="ManualLine.h" />
     <ClInclude Include="MeshEmitter.h" />

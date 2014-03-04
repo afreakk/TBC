@@ -54,12 +54,10 @@ void OgreConsole::init(Gorilla::Screen* screen)
    mConsoleText->width(mScreen->getWidth() - 10);
    mPromptText = mLayer->createCaption(CONSOLE_FONT_INDEX,  10,10, "> _");
    mDecoration = mLayer->createRectangle(8,8, mScreen->getWidth() - 16, mGlyphData->mLineHeight );
-   mDecoration->background_gradient(Gorilla::Gradient_NorthSouth, Gorilla::rgb(128,128,128,128), Gorilla::rgb(64,64,64,128));
+   mDecoration->background_gradient(Gorilla::Gradient_NorthSouth, Gorilla::rgb(128,128,128,255), Gorilla::rgb(64,64,64,255));
    mDecoration->border(2, Gorilla::rgb(128,128,128,128));
    
    mIsInitialised = true;
-   
-   print("%5Ogre%R%6Console%0 Activated. Press F1 to show/hide.%R");
 }
 
 void OgreConsole::shutdown()
@@ -98,7 +96,6 @@ void OgreConsole::onKeyPressed(const OIS::KeyEvent &arg)
         {
             if((*i).first==params[0])
             {
-				cout << "hpbndddd" << endl;
                  if((*i).second)
                       (*i).second(params);
                  break;

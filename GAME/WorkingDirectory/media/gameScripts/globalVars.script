@@ -41,8 +41,8 @@ entity PlayerCameraLERP
 entity Enemies
 {
 	r 			0.7 0.71 0.72 0.73  0.74 0.75  0.775  0.79 0.8  0.8 0.8 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88
-	lane 		0 	0 	 0    0     0    0 	   0      0    2    0   1   1    1    2    2    1    2    1    2
-	weaponType	suicide fireball fireball suicide fireball fireball suicide fireball fireball suicide fireball suicide fireball suicide fireball suicide fireball suicide fireball suicide
+	lane 		1 	1 	 2    2     0    1 	   2      0    0    0   1   1    1    2    2    2    1    2    1
+	weaponType	frostbolt frostbolt fireball suicide fireball fireball suicide fireball fireball suicide fireball suicide fireball suicide fireball suicide fireball suicide fireball suicide
 }
 entity EnemyStats
 {

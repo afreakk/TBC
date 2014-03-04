@@ -6,7 +6,7 @@
 #include "LaneSettings.h"
 #include "ContainerLogic.h"
 template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
-static const unsigned energyPerMutant = 10;
+static const unsigned energyPerMutant = 20;
 bool MutantContainer::m_isInstantiated = false;
 MutantContainer::MutantContainer()
 : m_despawnTime(2.0)
