@@ -39,14 +39,14 @@ void StapledLine::setLine(const Ogre::Vector3& from, const Ogre::Vector3& to)
 {
 	unsigned numLines = boost::numeric_cast<unsigned>(from.distance(to)/(m_set.getDimension()*m_spacing));
 	Real clrScale = m_colourScale;
-	Real increments = 1.0 / (boost::numeric_cast<Real>(numLines)/2.0);
+	Real increments = 1.0f / (boost::numeric_cast<Real>(numLines)/2.0f);
 	if (m_numLines != numLines)
 	    refresh(numLines);
 	for (unsigned i = 0; i < numLines; i++)
 	{
-		Real lerpVal = ( boost::numeric_cast<Real>(i) + 0.5) / ( boost::numeric_cast<Real>(numLines) - 0.5 );
+		Real lerpVal = ( boost::numeric_cast<Real>(i) + 0.5f) / ( boost::numeric_cast<Real>(numLines) - 0.5f );
 		m_billboards[i]->setPosition(Math::lerp(from, to, lerpVal));
-		m_billboards[i]->setColour(Ogre::ColourValue(0.0,((clrScale>0.0)?1.0:0.0),0.0,1.0));
+		m_billboards[i]->setColour(Ogre::ColourValue(0.0f,((clrScale>0.0f)?1.0f:0.0f),0.0f,1.0f));
 		clrScale -= increments;
 	}
 }

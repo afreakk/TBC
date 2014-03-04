@@ -88,13 +88,13 @@ void PlayerGlobalStats::setHealth(const unsigned newEnergy)
 }
 void PlayerGlobalStats::modifyHealth(const int modifier)
 {
-	/*if (static_cast<int>(m_status.health)+modifier<0)
+	if (static_cast<int>(m_status.health)+modifier<0)
 		m_status.health = 0;
 	else if (m_status.health + modifier>m_status.maxHealth)
 		m_status.health = m_status.maxHealth;
 	else
         m_status.health += modifier;
-	notifySubscribers();*/
+	notifySubscribers();
 }
 void PlayerGlobalStats::markHealth(const unsigned markedHealth)
 {

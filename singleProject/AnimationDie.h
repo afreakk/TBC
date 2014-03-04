@@ -22,6 +22,7 @@ public:
 	}
 	void endAnimation() override
 	{
+		m_animStates[m_idx]->setTimePosition(0.0f);
 		m_animStates[m_idx]->setEnabled(false);
 		BaseAnimation::setStopped(true);
 	}

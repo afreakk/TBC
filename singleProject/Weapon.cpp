@@ -84,7 +84,7 @@ void WeaponBall::update()
 {
 	if (m_endSpell)
 		return;
-	m_node->translate(Vector3(0.0, 0.0, -MainUpdate::getSingleton().getDeltaTime()*200.0));
+	m_node->translate(Vector3(0.0f, 0.0f, -MainUpdate::getSingleton().getDeltaTime()*200.0f));
 	if (hitTest())
 	{
         m_endSpell = true;

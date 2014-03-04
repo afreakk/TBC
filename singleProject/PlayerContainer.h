@@ -14,8 +14,11 @@ public:
 	Player* getPlayer();
 	PlayerHandler* getHandler();
 	void notify(PlayerStatus) override;
+	void destroyHandlers();
+	void respawnPlayer();
 private:
 	void killPlayer();
+
 	std::unique_ptr<Player> m_player;
 	std::unique_ptr<PlayerHandler> m_handler;
 

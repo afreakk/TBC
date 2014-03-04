@@ -1,8 +1,8 @@
 #pragma once
 class PolarCoordinates;
 class BehaviourObject;
-const Ogre::Real NormalModeModelSpacing = Math::PI/1024.0;
-const Ogre::Real LerpModeSpacing = 200.0;
+const Ogre::Real NormalModeModelSpacing = Math::PI/1024.0f;
+const Ogre::Real LerpModeSpacing = 200.0f;
 class Occupado
 {
 public:

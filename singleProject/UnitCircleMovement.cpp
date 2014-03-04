@@ -15,10 +15,10 @@ void UnitCircleMovement::polarSetDirection(Ogre::SceneNode* node, PolarCoordinat
 	switch (direction)
 	{
 	case NormalDirection::dirRight:
-		p.theta += Ogre::Math::PI/12.0;
+		p.theta += Ogre::Math::PI/12.0f;
 		break;
 	case NormalDirection::dirLeft:
-		p.theta -= Ogre::Math::PI/12.0;
+		p.theta -= Ogre::Math::PI/12.0f;
 		break;
 	default:
 		return;
@@ -29,10 +29,10 @@ void UnitCircleMovement::polarSetDirection(Ogre::SceneNode* node, PolarCoordinat
 
 void keepWithinMax(Real* d)
 {
-	while (*d > Math::PI*2.0)
-		*d -= Math::PI*2.0;
+	while (*d > Math::PI*2.0f)
+		*d -= Math::PI*2.0f;
 	while (*d < 0.0)
-		*d += Math::PI*2.0;
+		*d += Math::PI*2.0f;
 }
 unsigned energyCostOf(PolarCoordinates a, PolarCoordinates b)
 {
@@ -80,13 +80,13 @@ Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction)
 	}
 	Real shortestDistance = 100000.0;
 	int laneIndex = -1;
-	for (int i = 0; i < LaneSettings::getSingleton().getLaneCount(); i++)
+	for (unsigned i = 0; i < LaneSettings::getSingleton().getLaneCount(); i++)
 	{
 		auto distance = abs(polar.radius - LaneSettings::getSingleton().getLane(i));
 		if (distance < shortestDistance)
 		{
 			shortestDistance = distance;
-			laneIndex = i;
+			laneIndex = static_cast<int>(i);
 		}
 	}
 	assert(laneIndex > -1);

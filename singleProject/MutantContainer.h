@@ -39,6 +39,7 @@ public:
 	{
 		return m_isInstantiated;
 	}
+	void destroyHandlers();
 private:
 	static bool m_isInstantiated;
 	Ogre::Real m_despawnTime;

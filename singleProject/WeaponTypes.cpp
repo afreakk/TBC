@@ -37,6 +37,7 @@ MutantFireBall::MutantFireBall(SceneNode* parentNode, ModelHandler* model)
 , m_weaponDamage(40)
 , m_shadow(parentNode)
 , m_shadowPos(Vector3::ZERO)
+, m_doHitTest(false)
 {
 	m_collisionObserver = static_cast<ParticleUniverse::ParticleAffector*>(m_particleSystem->getTechnique(0)->getAffector("boolman"));
 	m_planeCollider = static_cast<ParticleUniverse::SphereCollider*>(m_particleSystem->getTechnique(0)->getAffector("planecollider"));
@@ -47,6 +48,7 @@ void MutantFireBall::activate()
 {
 	resetShadow();
 	m_shadow.setVisible(true);
+	m_doHitTest = true;
 	WeaponMissile::activate();
 }
 void MutantFireBall::resetShadow()
@@ -56,7 +58,7 @@ void MutantFireBall::resetShadow()
 }
 void MutantFireBall::updateShadowPos()
 {
-    Ogre::Real particleVelocity = 1500.0 * m_particleSystem->getScaleTime(); // 1500 = velocity in this particular prticlesystem
+    Ogre::Real particleVelocity = 1500.0f * m_particleSystem->getScaleTime(); // 1500 = velocity in this particular prticlesystem
     m_shadowPos.z -= particleVelocity * MainUpdate::getSingleton().getDeltaTime();
 	m_shadow.setPosition(m_shadowPos);
 }
@@ -64,8 +66,16 @@ void MutantFireBall::update()
 {
 	WeaponMissile::update();
 	updateShadowPos();
-	if (BeamWeaponHitTest::hitTest(m_planeCollider, m_collisionObserver, m_emitter, m_node, m_weaponDamage, m_height, m_shadowPos.z))
-		m_shadow.setVisible(false);
+	if (m_doHitTest)
+	{
+        if (BeamWeaponHitTest::hitTest(m_planeCollider, m_collisionObserver, m_emitter, m_node, m_weaponDamage, m_height, m_shadowPos.z))
+            disable();
+	}
+}
+void MutantFireBall::disable()
+{
+    m_shadow.setVisible(false);
+	m_doHitTest = false;
 }
 
 MutantSuicide::MutantSuicide(Ogre::SceneNode* parentNode, ModelHandler* model)

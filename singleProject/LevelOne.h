@@ -5,6 +5,7 @@
 #include "EnemySpawner.h"
 #include "PlayerGUI.h"
 #include "DotSceneLoader.h"
+#include "GameConsole.h"
 class PlayerContainer;
 class ParticleReferenceContainer;
 class LevelOne : public ILevel
@@ -25,6 +26,11 @@ private:
 	LvlOneEnvironment m_environment;
 	PlayerGUI m_playerGUI;
 	DotSceneLoader m_dotSceneLoader;
+	unique_ptr<GameConsole> m_console;
+
+	void destroyWorld();
+	void unLinkSubscribers();
+	void linkSubscribers();
 
 
 };

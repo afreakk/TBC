@@ -14,7 +14,7 @@ bool MainUpdate::frameEnded(const Ogre::FrameEvent &evt)
 }
 bool MainUpdate::frameRenderingQueued(const Ogre::FrameEvent &evt)
 { 
-	m_deltaTime = evt.timeSinceLastFrame > 1.0 ? 1.0 : evt.timeSinceLastFrame;
+	m_deltaTime = evt.timeSinceLastFrame > 1.0f ? 1.0f : evt.timeSinceLastFrame;
 	m_scaledDeltaTime = m_deltaTime * GlobalVariables::getSingleton().getSpeed();
 	OISCore::getSingletonPtr()->capture();
 	m_levelManager->update();

@@ -94,7 +94,7 @@ namespace Ogre
 		else
 			mTubeObject->begin(mMaterial->getName());
 
-		Quaternion qRotation(Degree(360.0 / (Real)mSideCount), Vector3::UNIT_Z);
+		Quaternion qRotation(Degree(360.0f / (Real)mSideCount), Vector3::UNIT_Z);
 
 		const uint iVertCount = mSideCount + 1;
 
@@ -102,7 +102,7 @@ namespace Ogre
 		Vector3 vPos = Vector3::UNIT_Y * mRadius;
 
 
-		for (int i = 0; i<iVertCount; i++)
+		for (unsigned i = 0; i<iVertCount; i++)
 		{
 			vCoreVerts[i] = vPos;
 			vPos = qRotation * vPos;
@@ -116,7 +116,7 @@ namespace Ogre
 
 		Vector3* vCylinderVerts = new Vector3[iVertCount * 2];
 
-		for (int i = 1; i<mLineVertices.size(); i++)
+		for (unsigned i = 1; i<mLineVertices.size(); i++)
 		{
 			vLineVertA = mLineVertices[i - 1]->getPosition()+m_offset;
 			vLineVertB = mLineVertices[i]->getPosition()+m_offset;
@@ -126,18 +126,18 @@ namespace Ogre
 
 			qRotation = Vector3::UNIT_Z.getRotationTo(vLine);
 
-			for (int j = 0; j<iVertCount; j++)
+			for (unsigned j = 0; j<iVertCount; j++)
 			{
 				vCylinderVerts[j] = (qRotation * vCoreVerts[j]);
 				vCylinderVerts[j + iVertCount] = (qRotation * (vCoreVerts[j] + (Vector3::UNIT_Z * dDistance)));
 			}
 
 			Real u, v, delta;
-			delta = 1.0 / (Real)(iVertCount - 1);
-			u = 0.0;
-			v = 1.0;
+			delta = 1.0f / (Real)(iVertCount - 1);
+			u = 0.0f;
+			v = 1.0f;
 
-			for (int j = 0; j<(iVertCount * 2); j++)
+			for (unsigned j = 0; j<(iVertCount * 2); j++)
 			{
 				mTubeObject->position(vCylinderVerts[j] + vLineVertA);
 				if (disableNormals == false)
@@ -156,7 +156,7 @@ namespace Ogre
 			}
 
 			iOffset = (i - 1) * (iVertCount * 2);
-			for (int j = 0; j<iVertCount; j++)
+			for (unsigned j = 0; j<iVertCount; j++)
 			{
 				// End A: 0-(Sides-1)
 				// End B: Sides-(Sides*2-1)
@@ -212,7 +212,7 @@ namespace Ogre
 		std::vector<const Ogre::Node*>::iterator it = mLineVertices.begin() + 1;
 		for (int i = 1; it != (mLineVertices.end() - 1); ++it, i++)
 		{
-			if (mSpheresJoints.size() < i)
+			if (static_cast<int>(mSpheresJoints.size()) < i)
 			{
 				pEnt = mSceneMgr->createEntity(mTubeObject->getName() + "_SphereEnt" + StringConverter::toString(i), mSphereMesh->getName());
 				pEnt->setMaterialName(mMaterial->getName());
@@ -341,12 +341,12 @@ namespace Ogre
 		unsigned short wVerticeIndex = 0;
 
 		// Generate the group of rings for the sphere
-		for (int ring = 0; ring <= mSphereRings; ring++) {
+		for (int ring = 0; ring <= static_cast<int>(mSphereRings); ring++) {
 			float r0 = mSphereRadius * sinf(ring * fDeltaRingAngle);
 			float y0 = mSphereRadius * cosf(ring * fDeltaRingAngle);
 
 			// Generate the group of segments for the current ring
-			for (int seg = 0; seg <= mSphereSegments; seg++) {
+			for (int seg = 0; seg <= static_cast<int>(mSphereSegments); seg++) {
 				float x0 = r0 * sinf(seg * fDeltaSegAngle);
 				float z0 = r0 * cosf(seg * fDeltaSegAngle);
 

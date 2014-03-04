@@ -27,7 +27,9 @@
     <ClCompile Include="CoreCompositor.cpp" />
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
+    <ClCompile Include="GameConsole.cpp" />
     <ClCompile Include="GlowMaterialListener.cpp" />
+    <ClCompile Include="Gorilla.cpp" />
     <ClCompile Include="GUIResources.cpp" />
     <ClCompile Include="LaneSettings.cpp" />
     <ClCompile Include="LERPWalk.cpp" />
@@ -62,6 +64,7 @@
     <ClCompile Include="BillboardNumber.cpp" />
     <ClCompile Include="MutantHandlerStateTumble.cpp" />
     <ClCompile Include="Occupado.cpp" />
+    <ClCompile Include="OgreConsoleForGorilla.cpp" />
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
     <ClCompile Include="PlayerHandlerStateBlankAttack.cpp" />
@@ -131,6 +134,8 @@
     <ClInclude Include="CameraBase.h" />
     <ClInclude Include="ConfigScriptLoader.h" />
     <ClInclude Include="ContainerLogic.h" />
+    <ClInclude Include="GameConsole.h" />
+    <ClInclude Include="Gorilla.h" />
     <ClInclude Include="LineBillboardSet.h" />
     <ClInclude Include="CoreCompositor.h" />
     <ClInclude Include="Distancer.h" />
@@ -180,6 +185,7 @@
     <ClInclude Include="MutantHandlerStateSuicideBomb.h" />
     <ClInclude Include="MutantHandlerStateTumble.h" />
     <ClInclude Include="Occupado.h" />
+    <ClInclude Include="OgreConsoleForGorilla.h" />
     <ClInclude Include="OgreFix.h" />
     <ClInclude Include="PlayerHandlerStateBlankAttack.h" />
     <ClInclude Include="PlayerHandlerStateSingleAttack.h" />

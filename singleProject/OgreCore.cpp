@@ -149,7 +149,7 @@ bool OgreCore::initOverlaySystem()
 bool OgreCore::initCamera(const Ogre::String cameraName)
 {
 	m_camera = m_sceneMgr->createCamera(cameraName);
-	m_camera->setNearClipDistance(0.1);
+	m_camera->setNearClipDistance(0.1f);
 	m_camera->setAspectRatio(m_resolution.x / m_resolution.y);
 	return true;
 }

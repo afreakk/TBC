@@ -5,8 +5,8 @@
 #include "LaneSettings.h"
 
 const std::string NONE_STRING = "NONE";
-const Ogre::Real maxTheta = Math::PI*2.0;
-const Ogre::Real minTheta = 0.0;
+const Ogre::Real maxTheta = Math::PI*2.0f;
+const Ogre::Real minTheta = 0.0f;
 
 PlayerHandlerStateSelectionHandler::PlayerHandlerStateSelectionHandler( const std::vector<std::string>& attackList)
 : m_currentMarked{ nullptr }

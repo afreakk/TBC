@@ -62,7 +62,6 @@ void LaneSettings::initLanes()
 }
 Real LaneSettings::getLane(const unsigned index)
 {
-	cout << "requesting lane#" << index << endl;
     return m_laneArray[index];
 }
 Real LaneSettings::getIncrement()

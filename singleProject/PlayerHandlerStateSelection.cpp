@@ -65,7 +65,7 @@ const PolarCoordinates& PlayerHandlerStateSelection::getLatestMarkedPolar(int lo
 	Mutant * mutant;
 	if ((mutant = MutantContainer::getSingleton().getMutant(*(m_markedList.end()-lookLower))) != nullptr)
 		return mutant->getPolarCoordinates();
-	getLatestMarkedPolar(lookLower+1);
+	return getLatestMarkedPolar(lookLower+1);
 }
 void PlayerHandlerStateSelection::keyPressed(const OIS::KeyEvent& e)
 {
@@ -91,7 +91,7 @@ void PlayerHandlerStateSelection::selectMarked()
 	if (marked == "NONE")
 		return;
 	Mutant* mutant;
-	if (m_selectionHandler.getEnergyCostOfMarked() > PlayerGlobalStats::getSingleton().getEnergy() 
+	if (m_selectionHandler.getEnergyCostOfMarked() > static_cast<int>(PlayerGlobalStats::getSingleton().getEnergy())
 		|| (mutant = MutantContainer::getSingleton().getMutant(marked)) == nullptr)
 		return;
     PlayerGlobalStats::getSingleton().markEnergy(0);

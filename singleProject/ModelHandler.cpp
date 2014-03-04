@@ -79,7 +79,7 @@ AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const 
 {
 	if (!m_hasLerpAttacked)
 	{
-		if (!lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision+75.0, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
+		if (!lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision+75.0f, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
 			m_hasLerpAttacked = true;
 		return AttackReturn::NOT_KILLED;
 	}
@@ -101,7 +101,7 @@ AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const 
 }
 bool ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real& dt, bool allTheWay)
 {
-	if (lerp(nextPosition, dt, ANIMATIONS::WALK, m_LERPPrecision + (allTheWay ? 0.0 : m_startAttackDistance), GlobalVariables::getSingleton().getLERPAnimWalkRatio()))
+	if (lerp(nextPosition, dt, ANIMATIONS::WALK, m_LERPPrecision + (allTheWay ? 0.0f : m_startAttackDistance), GlobalVariables::getSingleton().getLERPAnimWalkRatio()))
 		return true;
 	return false;
 }

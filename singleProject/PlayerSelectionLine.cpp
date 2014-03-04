@@ -43,6 +43,8 @@ std::vector<std::pair<std::string, Ogre::Node*> >::iterator PlayerSelectionLine:
 		if ((*itt).first == name)
 			return itt;
 	}
+	assert(0);
+	return m_nodes.begin();
 }
 void PlayerSelectionLine::update(const Ogre::Real& energyCostScale)
 {

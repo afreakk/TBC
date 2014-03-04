@@ -15,17 +15,13 @@ MutantContainer::MutantContainer()
 }
 MutantContainer::~MutantContainer()
 {
-	/*  should noe be needed now with shared ptrz
+}
+void MutantContainer::destroyHandlers()
+{
 	for (auto& i  : m_deadMutants)
-	{
         i.second->handler.reset();
-        i.second->mutant.reset(); 
-	}
 	for (auto& i : m_aliveMutants)
-	{
         i.second->handler.reset();
-        i.second->mutant.reset(); 
-	}*/
 }
 
 const std::string MutantContainer::message()

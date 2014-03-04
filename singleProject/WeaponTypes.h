@@ -44,10 +44,12 @@ private:
 	unsigned m_weaponDamage;
 	SimpleShadow m_shadow;
 	Ogre::Vector3 m_shadowPos;
+	bool m_doHitTest;
 
 
 	void resetShadow();
 	void updateShadowPos();
+	void disable();
 };
 //suicidebomb
 class MutantSuicide : public WeaponBomb

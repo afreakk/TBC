@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "PlayerHandler.h"
 #include "UnitCircleMovement.h"
+#include "PlayerGlobalStats.h"
 using namespace Ogre;
 template<> PlayerContainer* Ogre::Singleton<PlayerContainer>::msSingleton = 0;
 PlayerContainer::PlayerContainer()
@@ -23,6 +24,10 @@ PlayerContainer::~PlayerContainer()
 {
 }
 
+void PlayerContainer::destroyHandlers()
+{
+	m_handler.reset();
+}
 void PlayerContainer::update()
 {
     m_player->update();
@@ -44,4 +49,9 @@ void PlayerContainer::notify(PlayerStatus p)
 {
 	if (p.health == 0)
 		killPlayer();
+}
+void PlayerContainer::respawnPlayer()
+{
+	PlayerGlobalStats::getSingleton().setHealth(100);
+	m_handler->switchState(PLAYER_HANDLER_STATE::NORMAL);
 }
