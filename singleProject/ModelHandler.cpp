@@ -12,7 +12,7 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos, Mode
 , m_entity(m_crRecipe->initMesh(OgreCore::getSingletonPtr()->getSceneMgr()))
 , m_node(m_crRecipe->createNode())
 , m_normalPosition(normalPos)
-, m_normalDirection(NormalDirection::None)
+, m_normalDirection(NormalDirection::dirRight)
 , m_hasLerpAttacked(false)
 , m_modelHandlerType(type)
 {
@@ -57,6 +57,7 @@ void ModelHandler::init()
 bool ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
 {
 	m_normalDirection = rInc > 0.0f ? NormalDirection::dirRight : ( rInc < 0.0f ?NormalDirection::dirLeft : m_normalDirection );
+	assert(m_normalDirection != NormalDirection::None);
 	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*GlobalVariables::getSingleton().getNormalAnimWalkSpeed(), m_animations);
 	if (Occupado::isOccupiedVelocity(m_normalPosition, rInc))
 		return false;

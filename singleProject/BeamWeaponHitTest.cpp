@@ -6,6 +6,7 @@
 #include "ParticleAffectors/ParticleUniverseSphereCollider.h"
 #include "ParticleUniverseEmitter.h"
 #include "PlayerGlobalStats.h"
+#include "ModelHandlerPlayer.h"
 #include "TBCRay.h"
 
 bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, ParticleUniverse::ParticleAffector* collisionObserver
@@ -15,19 +16,23 @@ bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
 	colliderObject->position.y = emitter->position.y;
 	colliderObject->position.x = emitter->position.x;
 	std::pair<bool, Real> rayHitSomething = { false, 0.0 };
-    if (rayCastTarget(PlayerContainer::getSingleton().getPlayer(),node,rayHeight))
+	Player* player = PlayerContainer::getSingleton().getPlayer();
+	if (!static_cast<ModelHandlerPlayer&>(player->getModelHandler()).isTeleporting())
 	{
-        Real zPos = node->convertWorldToLocalPosition( PlayerContainer::getSingleton().getPlayer()->getNode()->getPosition() ).z;
-		if (isInFrontOfBall(zPos,mainMassZPos))
-		{
-            rayHitSomething.first=true;
-            rayHitSomething.second = zPos;
-			if (didItHit(zPos, colliderObject, collisionObserver))
-			{
-                PlayerGlobalStats::getSingleton().modifyHealth(-damage);
-				BeamHitSomething = true;
-			}
-		}
+        if (rayCastTarget(player,node,rayHeight))
+        {
+            Real zPos = node->convertWorldToLocalPosition( player->getNode()->getPosition() ).z;
+            if (isInFrontOfBall(zPos,mainMassZPos))
+            {
+                rayHitSomething.first=true;
+                rayHitSomething.second = zPos;
+                if (didItHit(zPos, colliderObject, collisionObserver))
+                {
+                    PlayerGlobalStats::getSingleton().modifyHealth(-damage);
+                    BeamHitSomething = true;
+                }
+            }
+        }
 	}
     for (const auto& itt : MutantContainer::getSingleton().getMutantIt())
     {

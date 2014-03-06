@@ -3,6 +3,14 @@
 #include "ENUMTumbleDirection.h"
 #include "ENUMNormalDirection.h"
 #include "PlayerHandlerEnums.h"
+enum class TeleportState
+{
+    TELEPORT_IN,
+    TELEPORT_WAIT,
+    TELEPORT_OUT,
+    COOLDOWN,
+    NOTHING
+};
 class Player;
 class BehaviourStateNormal;
 class PlayerHandlerStateNormal : public HandlerState <PLAYER_HANDLER_STATE>
@@ -24,8 +32,11 @@ private:
 	NormalDirection m_walkingDirection;
 	unique_ptr<BehaviourStateNormal> m_normalState;
 	bool m_tumbleAttack;
+	TeleportState m_teleportState;
+	Ogre::Real m_teleportTimer;
 	
 	NormalDirection getWalkingDirection();
+	void handleTeleport();
 	void teleport();
 };
 
