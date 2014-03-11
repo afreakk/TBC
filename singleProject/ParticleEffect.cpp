@@ -12,16 +12,20 @@ ParticleEffect::ParticleEffect(SceneNode* parentNode, const int id, const Ogre::
     , m_node(parentNode->createChildSceneNode())
     , m_added(false)
 {
+    m_node->attachObject(m_particleSystem);
 	m_particleSystem->prepare();
 }
 ParticleEffect::~ParticleEffect()
 {
-	stop();
+	stop(true);
 	destroyThis();
 }
-void ParticleEffect::stop()
+void ParticleEffect::stop(bool brute)
 {
-    m_particleSystem->stop();
+	if (brute)
+        m_particleSystem->stop();
+	else
+        m_particleSystem->stopFade();
 	setParticleSystem(false);
 }
 
@@ -45,7 +49,6 @@ void ParticleEffect::setParticleSystem(bool enabled)
 	{
         if (!m_added)
         {
-            m_node->attachObject(m_particleSystem);
             ParticleReferenceContainer::getSingleton().addParticle(this);
             m_added = true;
         }
@@ -54,7 +57,6 @@ void ParticleEffect::setParticleSystem(bool enabled)
 	{
         if (m_added)
         {
-            m_node->detachObject(m_particleSystem);
             ParticleReferenceContainer::getSingleton().removeParticle(this);
             m_added = false;
         }

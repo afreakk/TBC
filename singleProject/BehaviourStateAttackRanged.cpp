@@ -16,6 +16,7 @@ BehaviourStateAttackRanged::BehaviourStateAttackRanged()
 , m_shootDelay(MutantGlobalStats::getSingleton().getRangedCooldown())
 , m_localTime(0.0)
 , m_hasAimed(false)
+, m_stoppedPS(false)
 {
 }
 
@@ -51,8 +52,14 @@ AttackRangedPhase BehaviourStateAttackRanged::waiting(ModelHandler& modelHandler
 	if (m_localTime >= m_shootDelay)
 	{
 		m_localTime = 0.0;
-		static_cast<ModelHandlerMutant&>(modelHandler).fire(false);
+		m_stoppedPS = false;
 		return AttackRangedPhase::reloading;
+	}
+	else if (m_localTime >= m_shootDelay - 1.0f && ! m_stoppedPS)
+	{
+
+		m_stoppedPS = true;
+		static_cast<ModelHandlerMutant&>(modelHandler).fire(false);
 	}
 	return AttackRangedPhase::waiting;
 

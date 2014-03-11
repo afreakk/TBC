@@ -15,6 +15,7 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos, Mode
 , m_normalDirection(NormalDirection::dirRight)
 , m_hasLerpAttacked(false)
 , m_modelHandlerType(type)
+, m_freezeTimer(-0.5f)
 {
 	parseScript();
 }
@@ -43,6 +44,10 @@ bool ModelHandler::tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& d
 {
 	return !lerp(nextPosition, dt, ANIMATIONS::TUMBLE, m_LERPPrecision, GlobalVariables::getSingleton().getLERPAnimTumblekRatio());
 }
+void ModelHandler::freeze()
+{
+	m_freezeTimer = 4.0;
+}
 void ModelHandler::init() 
 {
 	m_crRecipe->attachNode(m_node, m_entity);
@@ -54,8 +59,13 @@ void ModelHandler::init()
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 }
 
-bool ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& activeDirection)
+bool ModelHandler::normalWalk(const Ogre::Real& speed, const NormalDirection& activeDirection, bool noScale)
 {
+	Real rInc;
+	if (noScale)
+		rInc = speed;
+	else
+		rInc = scaleTime(speed, true);
 	m_normalDirection = rInc > 0.0f ? NormalDirection::dirRight : ( rInc < 0.0f ?NormalDirection::dirLeft : m_normalDirection );
 	assert(m_normalDirection != NormalDirection::None);
 	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*GlobalVariables::getSingleton().getNormalAnimWalkSpeed(), m_animations);
@@ -69,12 +79,12 @@ bool ModelHandler::normalWalk(const Ogre::Real& rInc, const NormalDirection& act
 
 void ModelHandler::fallAndDie()
 {
-	Real animVel = MainUpdate::getSingleton().getScaledDeltaTime() * GlobalVariables::getSingleton().getAnimDieSpeed();
+	Real animVel = scaleTime(1.0f) * GlobalVariables::getSingleton().getAnimDieSpeed();
 	m_animations[ANIMATIONS::DIE]->addTime(animVel , m_animations);
 }
 void ModelHandler::playAnimation(ANIMATIONS type)
 {
-	m_animations[type]->addTime( scaleTime(800)*GlobalVariables::getSingleton().getLERPAnimAttackRatio(), m_animations);
+	m_animations[type]->addTime( scaleTime(800.0f)*GlobalVariables::getSingleton().getLERPAnimAttackRatio(), m_animations);
 }
 AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
@@ -106,14 +116,23 @@ bool ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real&
 		return true;
 	return false;
 }
-Ogre::Real ModelHandler::scaleTime(const Ogre::Real& time)
+Ogre::Real ModelHandler::scaleTime(const Ogre::Real& time, bool rad)
 {
-	return time*MainUpdate::getSingleton().getScaledDeltaTime();
+	Real sTime = time*MainUpdate::getSingleton().getScaledDeltaTime();
+	m_freezeTimer -= Math::Abs( sTime ) * (rad ? 200.0f: 0.1f);
+	Real freezeVar = 1.0f;
+	if (m_freezeTimer > 0.0)
+	{
+		freezeVar = 0.2f;
+	}
+	return sTime * freezeVar;
 }
 bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive)
 {
 	if (!isRecursive)
+	{
 		dt = scaleTime(dt);
+	}
 	if (dt > minDistance)
 	{
 		lerp(nextPosition, dt-minDistance, animation, minDistance, animLerpRatio, true);

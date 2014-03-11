@@ -10,6 +10,7 @@ public:
 	void init()override;
 	void displaySlowMotionParticle(bool enabled);
 	void teleportIn();
+	void teleportMove();
 	void teleportOut();
 	bool isTeleporting();
 protected:

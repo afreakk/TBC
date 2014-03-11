@@ -26,6 +26,7 @@ private:
 	const Real& m_shootDelay;
 	Real m_localTime;
 	bool m_hasAimed;
+	bool m_stoppedPS;
 
 	void aim(ModelHandler& modelHandler);
 

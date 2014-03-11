@@ -401,6 +401,12 @@
     <ClCompile Include="OgreConsoleForGorilla.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="DetonateWeaponHitTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WeatherSnow.cpp">
+      <Filter>Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -765,6 +771,12 @@
     </ClInclude>
     <ClInclude Include="OgreConsoleForGorilla.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="DetonateWeaponHitTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherSnow.h">
+      <Filter>Environment</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 #include "ParticleUniverseSystem.h"
 #include "MainUpdate.h"
 
+#include "DetonateWeaponHitTest.h"
 #include "PlayerGlobalStats.h"
 #include "PlayerContainer.h"
 #include "MutantContainer.h"
@@ -75,7 +76,8 @@ void WeaponBomb::update()
 
 WeaponBall::WeaponBall(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName)
 : WeaponBase(parentNode, model, id, templateName, emitterName)
-, m_ballDamageRadius(100.0f)
+, m_ballDamageRadius(200.0f)
+, m_detonation(0.0f, false, false)
 , m_startingPos(0.0f,LaunchHeight,0.0f)
 , m_shadow(m_node)
 {
@@ -90,24 +92,34 @@ WeaponBall::~WeaponBall()
 
 void WeaponBall::activate()
 {
+	m_detonation.stopped = false;
 	m_shadow.setVisible(true);
 	m_node->setPosition(m_startingPos);
 	WeaponBase::activate();
 }
 void WeaponBall::update()
 {
-	m_node->translate(Vector3(0.0f, 0.0f, -MainUpdate::getSingleton().getDeltaTime()*1000.0f));
+	if (!m_detonation.stopped)
+	{
+        m_node->translate(Vector3(0.0f, 0.0f, -MainUpdate::getSingleton().getDeltaTime()*1000.0f));
+		if (DetonateWeaponHitTest::detonate(m_node, m_ballDamageRadius, true) && m_detonation.timer == false)
+			m_detonation.timerStarted = true;
+		if (m_detonation.timerStarted)
+		{
+			m_detonation.timer += MainUpdate::getSingleton().getScaledDeltaTime();
+			if (m_detonation.timer > 0.2f)
+			{
+                m_particleSystem->stopFade();
+				m_detonation.timer = 0.0f;
+				m_detonation.timerStarted = false;
+				m_detonation.stopped = true;
+			}
+		}
+	}
 	WeaponBase::update();
 }
-bool WeaponBall::hitTest()
-{
-	if (m_node->_getDerivedPosition().distance(PlayerContainer::getSingleton().getPlayer()->getNode()->getPosition()) < m_ballDamageRadius)
-		return true;
-	return false;
-}
-
-void WeaponBall::stop()
+void WeaponBall::stop(bool v)
 {
 	m_shadow.setVisible(false);
-	WeaponBase::stop();
+	WeaponBase::stop(v);
 }

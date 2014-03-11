@@ -11,7 +11,7 @@ public:
 	virtual~ParticleEffect();
 	virtual void update();
 	virtual void activate();
-	virtual void stop();
+	virtual void stop(bool brute=false);
 protected:
 	const int m_id;
 	bool m_added;

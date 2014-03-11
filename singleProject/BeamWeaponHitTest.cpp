@@ -29,7 +29,9 @@ bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
                 if (didItHit(zPos, colliderObject, collisionObserver))
                 {
                     PlayerGlobalStats::getSingleton().modifyHealth(-damage);
-                    BeamHitSomething = true;
+					BeamHitSomething = true;
+                    colliderObject->position.z = rayHitSomething.second;
+					return BeamHitSomething;
                 }
             }
         }
@@ -51,7 +53,8 @@ bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
 				{
                     MutantContainer::getSingleton().killMutant(itt->getNode()->getName());
 					BeamHitSomething = true;
-					break; // maybe this will help from double-killing i think ive seen once or twice
+                    colliderObject->position.z = rayHitSomething.second;
+					return BeamHitSomething;
 				}
 			}
         }

@@ -49,7 +49,7 @@ entity EnemyStats
 	walkSpeed 0.016
 	LERPSpeed 500.0
 	attackDistance 0.01
-	rangedCooldown 2.0
+	rangedCooldown 3.0
 }
 
 //Player

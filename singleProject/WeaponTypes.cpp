@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "WeaponTypes.h"
-#include "ParticleAffectors/ParticleUniversePlaneCollider.h"
 #include "ParticleAffectors/ParticleUniverseSphereCollider.h"
-#include "ParticleObservers/ParticleUniverseOnCollisionObserver.h"
+#include "ParticleAffectors/ParticleUniverseLinearForceAffector.h"
 #include "ParticleUniverseSystem.h"
 #include "PlayerContainer.h"
 #include "MutantContainer.h"
@@ -11,6 +10,7 @@
 #include "MainUpdate.h"
 #include "PlayerGlobalStats.h"
 #include "BeamWeaponHitTest.h"
+#include "DetonateWeaponHitTest.h"
 //MutantLazer
 MutantLazer::MutantLazer(SceneNode* parentNode, ModelHandler* model)
 : WeaponMissile(parentNode, model, "MutantLazer", "lazer", "lazerEmitter")
@@ -32,8 +32,32 @@ void MutantFlameThrower::update()
 	WeaponMissile::update();
 }
 FrostBolt::FrostBolt(Ogre::SceneNode* parentNode, ModelHandler* model)
-:WeaponBall(parentNode, model, "MutantFrostBolt", "Flare/mp_fireball_02", "")
+:WeaponBall(parentNode, model, "MutantFrostBolt", "frostbolt", "")
+, m_lForceAffector(static_cast<ParticleUniverse::LinearForceAffector*>(m_particleSystem->getTechnique(1)->getAffector("force")))
 {
+//    static_cast<ParticleUniverse::LinearForceAffector*>(m_particleSystem->getTechniquedd(1)->
+}
+void FrostBolt::activate()
+{
+	WeaponBall::activate();
+}
+#include "MutantGlobalStats.h"
+void FrostBolt::update()
+{
+	if (!m_detonation.stopped)
+	{
+		Vector3 lforce = Vector3(0, 0, 1500);
+        setForce(lforce);
+	}
+	else
+	{
+		m_lForceAffector->setEnabled(false);
+	}
+	WeaponBall::update();
+}
+void FrostBolt::setForce(const Ogre::Vector3& localForceDirection)
+{
+	m_lForceAffector->setForceVector(m_node->getParent()->getOrientation()*localForceDirection);
 }
 //MutantFireBall
 MutantFireBall::MutantFireBall(SceneNode* parentNode, ModelHandler* model)
@@ -81,10 +105,10 @@ void MutantFireBall::disable()
     m_shadow.setVisible(false);
 	m_doHitTest = false;
 }
-void MutantFireBall::stop()
+void MutantFireBall::stop(bool v)
 {
 	disable();
-	WeaponMissile::stop();
+	WeaponMissile::stop(v);
 }
 
 MutantSuicide::MutantSuicide(Ogre::SceneNode* parentNode, ModelHandler* model)
@@ -99,22 +123,7 @@ void MutantSuicide::update()
 	WeaponBomb::update();
 	if (!m_detonated)
 	{
-		detonate();
+		DetonateWeaponHitTest::detonate(m_node->getParent() , m_weaponRadius);
 		m_detonated = true;
 	}
-}
-void MutantSuicide::detonate()
-{
-    //player
-	if (PlayerContainer::getSingleton().getPlayer()->getNode()->getPosition().distance(m_node->getParent()->getPosition()) < m_weaponRadius)
-        PlayerGlobalStats::getSingleton().modifyHealth(-50);
-    //mutants
-	for (auto itt : MutantContainer::getSingleton().getMutantIt())
-	{
-        Node* iMutantNode = itt->getNode();
-        if (iMutantNode == (m_node->getParent()))
-            continue;
-		if (iMutantNode->getPosition().distance(m_node->getParent()->getPosition())< m_weaponRadius)
-			MutantContainer::getSingleton().killMutant(itt->getNode()->getName());
-    }
 }

@@ -29,10 +29,13 @@ void ModelHandlerPlayer::teleportIn()
 {
 	m_teleportParticle.select(true);
 	m_entity->setVisible(false);
-	ModelHandler::normalWalk(m_normalDirection == NormalDirection::dirLeft ? -Math::PI / 64.0f : Math::PI / 64.0f, m_normalDirection);
 	m_isTeleporting = true;
 }
 
+void ModelHandlerPlayer::teleportMove()
+{
+	ModelHandler::normalWalk(m_normalDirection == NormalDirection::dirLeft ? -Math::PI / 64.0f : Math::PI / 64.0f, m_normalDirection,true);
+}
 void ModelHandlerPlayer::teleportOut()
 {
 	m_teleportParticle.select(true);

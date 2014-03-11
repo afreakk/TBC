@@ -15,6 +15,7 @@ namespace ParticleUniverse
 	class SphereCollider;
 	class OnCollisionObserver;
 	class ParticleAffector;
+	class LinearForceAffector;
 }
 //Lazer
 class MutantLazer : public WeaponMissile
@@ -35,6 +36,11 @@ class FrostBolt : public WeaponBall
 {
 public:
 	FrostBolt(Ogre::SceneNode* parentNode, ModelHandler* model);
+	void activate() override;
+	void update() override;
+private:
+	void setForce(const Ogre::Vector3& localForceDirection);
+	ParticleUniverse::LinearForceAffector* m_lForceAffector;
 };
 //FireBall
 class MutantFireBall : public WeaponMissile
@@ -43,7 +49,7 @@ public:
 	MutantFireBall(Ogre::SceneNode* parentNode, ModelHandler* model);
 	void activate() override;
 	void update() override;
-	void stop() override;
+	void stop(bool) override;
 private:
 	ParticleUniverse::SphereCollider* m_planeCollider;
 	ParticleUniverse::ParticleAffector* m_collisionObserver;
@@ -64,7 +70,6 @@ public:
 	MutantSuicide(Ogre::SceneNode* parentNode, ModelHandler* model);
 	void update() override;
 private:
-	void detonate();
 	Ogre::Real m_weaponRadius;
 	bool m_detonated;
 };

@@ -20,7 +20,7 @@ class ModelHandler : boost::noncopyable
 public:
 	ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos, ModelHandlerType type);
 	virtual ~ModelHandler();
-	bool normalWalk(const Real& rInc, const NormalDirection& activeDirection);
+	bool normalWalk(const Real& rInc, const NormalDirection& activeDirection, bool noScale=false);
 	AttackReturn lerpAttack(const Ogre::Vector3&, const Ogre::Real&);
 	bool lerpWalk(const Ogre::Vector3&, const Ogre::Real&, bool allTheWay=false );
 	void fallAndDie();
@@ -28,9 +28,10 @@ public:
 	const Vector3 getBonePos() const ;
 	const Vector3 getBoneOrientation() const;
 	const NormalDirection getNormalDirection() const;
-	Ogre::Real scaleTime(const Ogre::Real& time);
+	Ogre::Real scaleTime(const Ogre::Real& time, bool rad = false);
 	void playAnimation(ANIMATIONS);
 	bool tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt);
+	void freeze();
 protected:
 	void updateNormalPos();
 	bool lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive=false);
@@ -45,6 +46,7 @@ protected:
 	NormalDirection m_normalDirection;
 	bool m_hasLerpAttacked;
 	ModelHandlerType m_modelHandlerType;
+	Ogre::Real m_freezeTimer;
 
 
 	std::map<ANIMATIONS, unique_ptr<BaseAnimation> > m_animations;

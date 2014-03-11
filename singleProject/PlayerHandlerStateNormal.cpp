@@ -40,8 +40,8 @@ void PlayerHandlerStateNormal::update()
         m_walkingDirection = getWalkingDirection();
         if (m_tumble != TUMBLE_DIRECTION::DIRECTION_NONE)
             m_state = PLAYER_HANDLER_STATE::TUMBLE;
-        if (PlayerGlobalStats::getSingleton().getEnergy() == 100)
-            m_state = PLAYER_HANDLER_STATE::SELECTION;
+    //    if (PlayerGlobalStats::getSingleton().getEnergy() == 100 )
+      //      m_state = PLAYER_HANDLER_STATE::SELECTION;
 	}
 
 }
@@ -57,6 +57,7 @@ void PlayerHandlerStateNormal::handleTeleport()
         m_teleportTimer += MainUpdate::getSingleton().getDeltaTime();
 		if (m_teleportTimer > 0.5f)
 		{
+            static_cast<ModelHandlerPlayer&>(m_player->getModelHandler()).teleportMove();
 			m_teleportState = TeleportState::TELEPORT_OUT;
 			m_teleportTimer = 0.0f;
 		}
@@ -89,11 +90,11 @@ void PlayerHandlerStateNormal::teleport()
 }
 void PlayerHandlerStateNormal::keyPressed(const OIS::KeyEvent& e)
 {
-//	if (OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift) && (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C))
-	//	m_state = PLAYER_HANDLER_STATE::SELECTION;
-	if (e.key == OIS::KeyCode::KC_E)
+	if (OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift) && (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C))
+		m_state = PLAYER_HANDLER_STATE::SELECTION;
+	else if (e.key == OIS::KeyCode::KC_E)
 		teleport();
-	if (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C)
+	else if (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C)
 		m_state = PLAYER_HANDLER_STATE::SINGLE_ATTACK;
 	if (e.key == OIS::KeyCode::KC_W)
 		m_tumble = TUMBLE_DIRECTION::DIRECTION_IN;

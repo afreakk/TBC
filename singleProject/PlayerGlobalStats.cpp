@@ -38,7 +38,6 @@ unsigned PlayerGlobalStats::getEnergy() const
 	return m_status.energy;
 }
 
-
 const Real& PlayerGlobalStats::getSlowMotionPower() const
 {
 	return m_slowMotionPower;

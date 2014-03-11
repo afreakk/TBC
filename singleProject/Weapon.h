@@ -14,6 +14,13 @@ namespace ParticleUniverse
 {
 	class ParticleEmitter;
 }
+struct BallDetonation
+{
+	Ogre::Real timer;
+	bool stopped;
+	bool timerStarted;
+	BallDetonation(Ogre::Real t, bool s, bool ts) :timer(t), stopped(s), timerStarted(ts) {}
+};
 
 class WeaponBase : public ParticleEffect
 {
@@ -44,13 +51,13 @@ public:
 	virtual ~WeaponBall();
 	virtual void update() override;
 	virtual void activate() override;
-	virtual void stop() override;
+	virtual void stop(bool) override;
 protected:
 	Ogre::Real m_ballDamageRadius;
+	BallDetonation m_detonation;
 	Ogre::Vector3 m_startingPos;
 	SimpleShadow m_shadow;
 
-	bool hitTest();
 };
 class WeaponBomb : public WeaponBase
 {

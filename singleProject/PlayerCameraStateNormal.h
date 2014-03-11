@@ -12,6 +12,9 @@ private:
 	Player* m_player;
 	Ogre::Real m_distance;
 	Ogre::Real m_height;
-	Real m_lerp;
+	Ogre::Real m_lerp;
+	static Ogre::Vector3 m_lerpedPlayerPos;
+
+	void lerpPlayerPos(const Ogre::Real& dt);
 };
 

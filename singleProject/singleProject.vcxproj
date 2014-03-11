@@ -25,6 +25,7 @@
     <ClCompile Include="ConfigScriptLoader.cpp" />
     <ClCompile Include="ContainerLogic.cpp" />
     <ClCompile Include="CoreCompositor.cpp" />
+    <ClCompile Include="DetonateWeaponHitTest.cpp" />
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="GameConsole.cpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="UnitCircleMovement.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponTypes.cpp" />
+    <ClCompile Include="WeatherSnow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationAttack.h" />
@@ -135,6 +137,7 @@
     <ClInclude Include="CameraBase.h" />
     <ClInclude Include="ConfigScriptLoader.h" />
     <ClInclude Include="ContainerLogic.h" />
+    <ClInclude Include="DetonateWeaponHitTest.h" />
     <ClInclude Include="GameConsole.h" />
     <ClInclude Include="Gorilla.h" />
     <ClInclude Include="LineBillboardSet.h" />
@@ -234,6 +237,7 @@
     <ClInclude Include="tinyxml.h" />
     <ClInclude Include="UnitCircleMovement.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeatherSnow.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\procedural\procedural.vcxproj">

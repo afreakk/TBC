@@ -4,6 +4,7 @@
 
 LvlOneEnvironment::LvlOneEnvironment()
 {
+	m_snow.activate();
 	OgreCore::getSingleton().getSceneMgr()->setSkyBox(true, "skytrippy");
 }
 
