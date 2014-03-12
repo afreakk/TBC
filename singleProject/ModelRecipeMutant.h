@@ -14,12 +14,13 @@ public:
 	BaseAnimation* getTumble(Ogre::Entity*) override;
 	void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent);
 	Ogre::SceneNode* createNode() override;
-    const std::string& getMaterialName() override;
+    const std::string& getMaterialName(const std::string& type) override;
 private:
 	const int m_id;
 	static int s_count;
 	string m_entityName;
 	string m_nodeName;
 	string m_materialName;
+	string m_hoveredName;
 };
 

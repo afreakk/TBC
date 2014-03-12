@@ -10,6 +10,8 @@ public:
 	void update();
 private:
 	LightHandler m_lightHandler;
-	WeatherSnow m_snow;
+	std::vector<std::unique_ptr<WeatherSnow> >m_snowRenderers;
+	std::unique_ptr<SnowInstance> m_snowParticles;
+	void initSnow();
 };
 

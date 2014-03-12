@@ -16,7 +16,6 @@ bool DetonateWeaponHitTest::detonate(Ogre::Node* m_node, const Ogre::Real& radiu
 	if (!static_cast<ModelHandlerPlayer&>(player->getModelHandler()).isTeleporting())
 	{
 		Real dist = player->getNode()->getPosition().distance(nodePos);
-		cout << dist << endl;
 		if (dist < radius)
 		{
 			didHit = true;

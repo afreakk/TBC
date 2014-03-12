@@ -20,7 +20,7 @@ public:
 	virtual BaseAnimation* getTumble(Ogre::Entity*) = 0;
 	virtual void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent) = 0;
 	virtual Ogre::SceneNode* createNode()=0;
-	virtual const std::string& getMaterialName() = 0;
+	virtual const std::string& getMaterialName(const std::string& type) = 0;
 	const std::string& getName()
 	{
 		return m_name;

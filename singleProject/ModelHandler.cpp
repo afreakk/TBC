@@ -46,7 +46,7 @@ bool ModelHandler::tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& d
 }
 void ModelHandler::freeze()
 {
-	m_freezeTimer = 4.0;
+	m_freezeTimer = 8.0;
 }
 void ModelHandler::init() 
 {
@@ -119,13 +119,12 @@ bool ModelHandler::lerpWalk(const Ogre::Vector3& nextPosition, const Ogre::Real&
 Ogre::Real ModelHandler::scaleTime(const Ogre::Real& time, bool rad)
 {
 	Real sTime = time*MainUpdate::getSingleton().getScaledDeltaTime();
-	m_freezeTimer -= Math::Abs( sTime ) * (rad ? 200.0f: 0.1f);
-	Real freezeVar = 1.0f;
 	if (m_freezeTimer > 0.0)
 	{
-		freezeVar = 0.2f;
+        m_freezeTimer -= Math::Abs( sTime ) * (rad ? 200.0f: 0.1f);
+		sTime *= 0.2f;
 	}
-	return sTime * freezeVar;
+	return sTime;
 }
 bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive)
 {

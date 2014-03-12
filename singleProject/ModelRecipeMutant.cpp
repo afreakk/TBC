@@ -13,6 +13,7 @@ ModelRecipeMutant::ModelRecipeMutant()
 , m_materialName("Examples/Ninja")
 , m_entityName("MutantRanged"+boost::lexical_cast<string>(m_id))
 , m_nodeName("MutantRanged"+boost::lexical_cast<string>(m_id))
+, m_hoveredName("HoveredRanged")
 {
 	m_name="MutantRanged";
 	cout << "MutantEntity: " << m_entityName << endl;
@@ -41,9 +42,16 @@ BaseAnimation* ModelRecipeMutant::getPrepare(Ogre::Entity* entity)
 	anims.push_back(entity->getAnimationState("Stealth"));
 	return new AnimationPrepare(anims);
 }
-const std::string& ModelRecipeMutant::getMaterialName()
+const std::string& ModelRecipeMutant::getMaterialName(const std::string& type)
 {
-	return m_materialName;
+	if (type == "default")
+		return m_materialName;
+	else if (type == "hovered")
+		return m_hoveredName;
+	else if (type == "selected")
+		return m_hoveredName;
+	assert(0);
+	return "error";
 }
 BaseAnimation* ModelRecipeMutant::getDie(Ogre::Entity* entity)
 {

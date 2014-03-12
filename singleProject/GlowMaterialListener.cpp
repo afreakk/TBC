@@ -15,8 +15,8 @@ Ogre::Technique* GlowMaterialListener::handleSchemeNotFound(unsigned short, cons
 {
     if (schemeName == "blood")
     {
-		if ((mat->getName().compare( 0,particleMaterialPrefix.length(), particleMaterialPrefix )==0)||mat->getName()=="PathIndicator"
-			||mat->getName()=="wooshMat"||mat->getName()=="PUMediaPack/Watch"||mat->getName() =="selectionLine")
+		if ((mat->getName().compare(0, particleMaterialPrefix.length(), particleMaterialPrefix) == 0) || mat->getName() == "HoveredSuicide" 
+			|| mat->getName() == "HoveredRanged"||mat->getName()=="wooshMat"||mat->getName()=="PUMediaPack/Watch"||mat->getName() =="selectionLine")
 		    return NULL;
         return mBlackMat->getTechnique(0);
     }

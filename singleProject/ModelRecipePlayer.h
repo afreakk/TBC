@@ -13,7 +13,7 @@ public:
 	virtual void attachNode(Ogre::SceneNode* node, Ogre::Entity* ent);
 	Ogre::SceneNode* createNode() override;
 	BaseAnimation* getPrepare(Ogre::Entity*)override;
-	const std::string& getMaterialName() override;
+	const std::string& getMaterialName(const std::string& typ) override;
 private:
 	string m_materialName;
 };

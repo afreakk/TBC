@@ -101,7 +101,7 @@ void WeaponBall::update()
 {
 	if (!m_detonation.stopped)
 	{
-        m_node->translate(Vector3(0.0f, 0.0f, -MainUpdate::getSingleton().getDeltaTime()*1000.0f));
+        m_node->translate(Vector3(0.0f, 0.0f, -MainUpdate::getSingleton().getScaledDeltaTime()*1000.0f));
 		if (DetonateWeaponHitTest::detonate(m_node, m_ballDamageRadius, true) && m_detonation.timer == false)
 			m_detonation.timerStarted = true;
 		if (m_detonation.timerStarted)

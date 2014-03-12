@@ -48,22 +48,22 @@ void ModelHandlerMutant::setHovered(selectedType type)
 	switch (type)
 	{
 	case selectedType::HOVERED:
-		m_entity->setMaterialName("HoveredMaterial");
+		m_entity->setMaterialName(m_crRecipe->getMaterialName("hovered"));
         m_selectedTag.select();
 		m_hovered = true;
 		break;
 	case selectedType::SELECTED:
-		m_entity->setMaterialName("SelectedMaterial");
+		m_entity->setMaterialName(m_crRecipe->getMaterialName("selected"));
 		m_selected = true;
 		break;
 	case selectedType::DEFAULT:
-		m_entity->setMaterialName(m_crRecipe->getMaterialName());
+		m_entity->setMaterialName(m_crRecipe->getMaterialName("default"));
 		m_selected = false;
 		m_hovered = false;
 		break;
 	case selectedType::UNHOVERED:
 		if (!m_selected)
-		    m_entity->setMaterialName(m_crRecipe->getMaterialName());
+		    m_entity->setMaterialName(m_crRecipe->getMaterialName("default"));
 		m_hovered = false;
 		break;
 	default:

@@ -37,9 +37,6 @@ TUMBLE_DIRECTION MutantHandlerStateTumble::getTumbleDirection(Mutant* mutant)
 		return TUMBLE_DIRECTION::DIRECTION_OUT;
 	else if (lane + 1 == LaneSettings::getSingleton().getLaneCount())
 		return TUMBLE_DIRECTION::DIRECTION_IN;
-    PolarCoordinates in = mutant->getPolarCoordinates();
-    in.radius -= LaneSettings::getSingleton().getIncrement();
-    if (!Occupado::isOccupiedWidth(in))
-        return TUMBLE_DIRECTION::DIRECTION_IN;
-    return TUMBLE_DIRECTION::DIRECTION_OUT;
+	else
+		return Ogre::Math::RangeRandom(-1.0f, 1.0f) > 0.0 ? TUMBLE_DIRECTION::DIRECTION_IN : TUMBLE_DIRECTION::DIRECTION_OUT;
 }

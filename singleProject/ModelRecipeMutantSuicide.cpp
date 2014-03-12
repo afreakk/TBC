@@ -13,6 +13,7 @@ ModelRecipeMutantSuicide::ModelRecipeMutantSuicide()
 , m_entityName("MutantSuicide"+boost::lexical_cast<string>(m_id))
 , m_nodeName("MutantSuicide"+boost::lexical_cast<string>(m_id))
 , m_materialName("Examples/Robot")
+, m_hoveredName("HoveredSuicide")
 {
 	m_name = "MutantSuicide";
 }
@@ -39,9 +40,16 @@ Ogre::Entity* ModelRecipeMutantSuicide::initMesh(Ogre::SceneManager* sMgr)
 	return ent;
 }
 
-const std::string& ModelRecipeMutantSuicide::getMaterialName()
+const std::string& ModelRecipeMutantSuicide::getMaterialName(const std::string& type)
 {
-	return m_materialName;
+	if (type == "default")
+		return m_materialName;
+	else if (type == "hovered")
+		return m_hoveredName;
+	else if (type == "selected")
+		return m_hoveredName;
+	assert(0);
+	return "error";
 }
 BaseAnimation* ModelRecipeMutantSuicide::getDie(Ogre::Entity* entity)
 {

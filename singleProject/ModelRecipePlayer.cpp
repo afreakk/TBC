@@ -36,7 +36,7 @@ Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
 	return ent;
 }
 
-const std::string& ModelRecipePlayer::getMaterialName()
+const std::string& ModelRecipePlayer::getMaterialName(const std::string& typ)
 {
 	return m_materialName;
 }
