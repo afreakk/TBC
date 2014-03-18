@@ -407,6 +407,9 @@
     <ClCompile Include="DetonateWeaponHitTest.cpp">
       <Filter>Props\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="SoundFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -777,6 +780,9 @@
     </ClInclude>
     <ClInclude Include="DetonateWeaponHitTest.h">
       <Filter>Props\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundFactory.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

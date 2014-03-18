@@ -35,7 +35,7 @@
 #include "Ogre.h"
 
 #ifndef GORILLA_USES_EXCEPTIONS
-#  define GORILLA_USES_EXCEPTIONS 0
+#  define GORILLA_USES_EXCEPTIONS 1
 #endif
 
 #if OGRE_COMP == OGRE_COMPILER_GNUC
@@ -1719,7 +1719,7 @@ namespace Gorilla
       if (sprite == 0)
       {
 #if GORILLA_USES_EXCEPTIONS == 1
-       OGRE_EXCEPT( Ogre::Exception::ERR_ITEM_NOT_FOUND, "Sprite name not found", __FUNC__ );
+       OGRE_EXCEPT( Ogre::Exception::ERR_ITEM_NOT_FOUND, "Sprite name not found: "+sprite_name_or_none, __FUNC__ );
 #else
        return;
 #endif

@@ -8,8 +8,8 @@ entity ModelHandler
 entity globalLanes
 {
 	laneCount 3
-	laneIncrement 1000
-	firstLane 23000
+	laneIncrement 800
+	firstLane 23500
 	laneHeight 0
 }
 
@@ -48,7 +48,7 @@ entity EnemyStats
 {
 	walkSpeed 0.016
 	LERPSpeed 500.0
-	attackDistance 0.01
+	attackDistance 0.1
 	rangedCooldown 3.0
 }
 

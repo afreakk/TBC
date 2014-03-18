@@ -73,6 +73,7 @@
     <ClCompile Include="PlayerHandlerStateSingleAttack.cpp" />
     <ClCompile Include="DynamicTubes.cpp" />
     <ClCompile Include="PlayerSelectionLine.cpp" />
+    <ClCompile Include="SoundFactory.cpp" />
     <ClCompile Include="StapledLine.cpp" />
     <ClCompile Include="SimpleShadow.cpp" />
     <ClCompile Include="SlowMotionParticle.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="PlayerHandlerStateBlankAttack.h" />
     <ClInclude Include="PlayerHandlerStateSingleAttack.h" />
     <ClInclude Include="PlayerSelectionLine.h" />
+    <ClInclude Include="SoundFactory.h" />
     <ClInclude Include="StapledLine.h" />
     <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="DynamicTubes.h" />
@@ -288,14 +290,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(TBCDEP)\include\OIS;$(TBCDEP)\include\OGRE\Overlay;$(TBCDEP)\include\OGRE;$(TBCDEP)\include\boost;$(TBCDEP)\include\particleu</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TBCDEP)\include\OIS;$(TBCDEP)\include\OGRE\Overlay;$(TBCDEP)\include\OGRE;$(TBCDEP)\include\boost;$(TBCDEP)\include\SFML;$(TBCDEP)\include\particleu</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zm209 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OgreMain_d.lib;OgreRTShaderSystem_d.lib;OgreTerrain_d.lib;OgrePaging_d.lib;OgreVolume_d.lib;OgreOverlay_d.lib;OIS_d.lib;libboost_thread-vc120-mt-gd-1_55.lib;libboost_date_time-vc120-mt-gd-1_55.lib;libboost_system-vc120-mt-gd-1_55.lib;libboost_chrono-vc120-mt-gd-1_55.lib;ParticleUniverse_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(TBCDEP)\lib\boost\$(Configuration);$(TBCDEP)\lib\ogre\$(Configuration);$(TBCDEP)\lib\particleu\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;OgreRTShaderSystem_d.lib;OgreTerrain_d.lib;OgrePaging_d.lib;OgreVolume_d.lib;OgreOverlay_d.lib;OIS_d.lib;libboost_thread-vc120-mt-gd-1_55.lib;libboost_date_time-vc120-mt-gd-1_55.lib;libboost_system-vc120-mt-gd-1_55.lib;libboost_chrono-vc120-mt-gd-1_55.lib;ParticleUniverse_d.lib;sfml-audio-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(TBCDEP)\lib\boost\$(Configuration);$(TBCDEP)\lib\ogre\$(Configuration);$(TBCDEP)\lib\SFML\$(Configuration);$(TBCDEP)\lib\particleu\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <Profile>false</Profile>
     </Link>
   </ItemDefinitionGroup>
@@ -309,15 +311,15 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/Zm209 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(TBCDEP)\include\OIS;$(TBCDEP)\include\OGRE\Overlay;$(TBCDEP)\include\OGRE;$(TBCDEP)\include\boost;$(TBCDEP)\include\particleu</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TBCDEP)\include\OIS;$(TBCDEP)\include\OGRE\Overlay;$(TBCDEP)\include\OGRE;$(TBCDEP)\include\boost;$(TBCDEP)\include\SFML;$(TBCDEP)\include\particleu</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libboost_thread-vc120-mt-1_55.lib;libboost_date_time-vc120-mt-1_55.lib;libboost_system-vc120-mt-1_55.lib;libboost_chrono-vc120-mt-1_55.lib;OgreMain.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgrePaging.lib;OgreVolume.lib;OgreOverlay.lib;OIS.lib;ParticleUniverse.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(TBCDEP)\lib\boost\$(Configuration);$(TBCDEP)\lib\ogre\$(Configuration);$(TBCDEP)\lib\particleu\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libboost_thread-vc120-mt-1_55.lib;libboost_date_time-vc120-mt-1_55.lib;libboost_system-vc120-mt-1_55.lib;libboost_chrono-vc120-mt-1_55.lib;OgreMain.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgrePaging.lib;OgreVolume.lib;OgreOverlay.lib;OIS.lib;ParticleUniverse.lib;sfml-audio.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(TBCDEP)\lib\boost\$(Configuration);$(TBCDEP)\lib\ogre\$(Configuration);$(TBCDEP)\lib\SFML\$(Configuration);$(TBCDEP)\lib\particleu\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
