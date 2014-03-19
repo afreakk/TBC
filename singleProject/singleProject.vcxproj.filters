@@ -410,6 +410,9 @@
     <ClCompile Include="SoundFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tooltip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -782,6 +785,9 @@
       <Filter>Props\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="SoundFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tooltip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

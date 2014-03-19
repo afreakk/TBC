@@ -2819,6 +2819,7 @@ namespace Gorilla
    
    public:
     
+	static Ogre::Real        TEXTSIZEHACK;
     /*! function. top
         desc.
             Get where the text should be drawn vertically.

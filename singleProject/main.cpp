@@ -32,7 +32,7 @@ int main()
 		OgreCore::getSingleton().initShadowCasting();
 //		OgreCore::getSingletonPtr()->getSceneMgr()->showBoundingBoxes(true);
 		unique_ptr<Gorilla::Silverback> gorilla_silverback = unique_ptr<Gorilla::Silverback>(new Gorilla::Silverback());
-//		gorilla_silverback->loadAtlas("dejavu");
+		gorilla_silverback->loadAtlas("dejavu");
 		unique_ptr<GUIResources> guiResources = unique_ptr<GUIResources>(new GUIResources("GameOverlay"));
 		guiResources->show(true);
 
@@ -48,7 +48,7 @@ int main()
 		unique_ptr<PlayerGlobalStats> m_playerStats = unique_ptr<PlayerGlobalStats>(new PlayerGlobalStats());
         unique_ptr<MutantGlobalStats> m_mutantGlobalStats = unique_ptr<MutantGlobalStats>(new MutantGlobalStats());
 
-		unique_ptr<MainLevelSetter> lvlSetter = unique_ptr<MainLevelSetter>(new MainLevelSetter(MainLevelEnums::MENU));
+		unique_ptr<MainLevelSetter> lvlSetter = unique_ptr<MainLevelSetter>(new MainLevelSetter(MainLevelEnums::LVL1));
 		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(lvlSetter->getLevelManager()));
 		Ogre::Root::getSingletonPtr()->startRendering();
 		cout << "rendering stopped ." << endl;

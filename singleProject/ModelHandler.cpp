@@ -16,6 +16,7 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos, Mode
 , m_hasLerpAttacked(false)
 , m_modelHandlerType(type)
 , m_freezeTimer(-0.5f)
+, m_tooltip(m_node)
 {
 	parseScript();
 }
@@ -28,7 +29,9 @@ ModelHandler::~ModelHandler()
 	OgreCore::getSingleton().getSceneMgr()->destroySceneNode(parent->getName());
 	cout << "ModelHandler destrucotr " << endl;
 }
-
+void ModelHandler::tooltip(std::string msg)
+{
+}
 const ModelHandlerType  ModelHandler::getType() const
 {
 	return m_modelHandlerType;

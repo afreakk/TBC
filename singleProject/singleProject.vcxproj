@@ -109,6 +109,7 @@
     <ClCompile Include="tinyxml.cpp" />
     <ClCompile Include="tinyxmlerror.cpp" />
     <ClCompile Include="tinyxmlparser.cpp" />
+    <ClCompile Include="Tooltip.cpp" />
     <ClCompile Include="Tubes.cpp" />
     <ClCompile Include="UnitCircleMovement.cpp" />
     <ClCompile Include="Weapon.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="SimpleShadow.h" />
     <ClInclude Include="SlowMotionParticle.h" />
     <ClInclude Include="TBCRay.h" />
+    <ClInclude Include="Tooltip.h" />
     <ClInclude Include="Tubes.h" />
     <ClInclude Include="WeaponTypes.h" />
     <ClInclude Include="BillboardNumber.h" />

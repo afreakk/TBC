@@ -2259,7 +2259,7 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
      return glyph->glyphAdvance + kerning;
  }
 
-
+ Ogre::Real MarkupText::TEXTSIZEHACK = 1.0f;
  MarkupText::MarkupText(Ogre::uint defaultGlyphIndex, Ogre::Real left, Ogre::Real top, const Ogre::String& text, Layer* parent)
  : mLayer(parent)
  {
@@ -2290,6 +2290,7 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
  
  void MarkupText::_calculateCharacters()
  {
+    const float TEXT_SIZE_MULT = TEXTSIZEHACK;
   if (mTextDirty == false)
    return;
   
@@ -2306,7 +2307,7 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
   bool fixedWidth = false;
   
   GlyphData* glyphData = mDefaultGlyphData;
-  Ogre::Real lineHeight = glyphData->mLineHeight;
+  Ogre::Real lineHeight = glyphData->mLineHeight * TEXT_SIZE_MULT;
   
   for(size_t i=0;i < mText.length();i++)
   {
@@ -2316,7 +2317,7 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
    if (thisChar == ' ')
    {
     lastChar = thisChar;
-    cursorX += glyphData->mSpaceLength;
+    cursorX += glyphData->mSpaceLength * TEXT_SIZE_MULT;
     continue;
    }
    
@@ -2325,7 +2326,7 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
     lastChar = thisChar;
     cursorX = mLeft;
     cursorY += lineHeight;
-    lineHeight = glyphData->mLineHeight;
+    lineHeight = glyphData->mLineHeight * TEXT_SIZE_MULT;
     continue;
    }
    
@@ -2385,7 +2386,7 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
       glyphData = mLayer->_getGlyphData(index);
       if (glyphData == 0)
        return;
-      lineHeight = std::max(lineHeight, glyphData->mLineHeight);
+      lineHeight = std::max(lineHeight, glyphData->mLineHeight * TEXT_SIZE_MULT);
       continue;
      }
      else if (thisChar == ':')
@@ -2413,9 +2414,9 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
        continue;
       
       left = cursorX - texelOffsetX;
-      top = cursorY - texelOffsetY + glyph->verticalOffset;
-      right = left + sprite->spriteWidth + texelOffsetX;
-      bottom = top + sprite->spriteHeight + texelOffsetY;
+      top = cursorY - texelOffsetY + glyph->verticalOffset * TEXT_SIZE_MULT;
+      right = left + sprite->spriteWidth * TEXT_SIZE_MULT + texelOffsetX;
+      bottom = top + sprite->spriteHeight * TEXT_SIZE_MULT + texelOffsetY;
       
       Character c;
       c.mIndex = i;
@@ -2435,9 +2436,9 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
       
       mCharacters.push_back(c);
       
-      cursorX  += sprite->spriteWidth;
+      cursorX  += sprite->spriteWidth * TEXT_SIZE_MULT;
       
-      lineHeight = std::max(lineHeight, sprite->spriteHeight);
+      lineHeight = std::max(lineHeight, sprite->spriteHeight * TEXT_SIZE_MULT);
       
       continue;
      }
@@ -2452,15 +2453,15 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
    
    if (!fixedWidth)
    {
-    kerning = glyph->getKerning(lastChar);
+    kerning = glyph->getKerning(lastChar) * TEXT_SIZE_MULT;
     if (kerning == 0)
-     kerning = glyphData->mLetterSpacing;
+     kerning = glyphData->mLetterSpacing * TEXT_SIZE_MULT;
    }
    
    left = cursorX;
-   top = cursorY + glyph->verticalOffset;
-   right = cursorX + glyph->glyphWidth + texelOffsetX;
-   bottom = top + glyph->glyphHeight + texelOffsetY;
+   top = cursorY + glyph->verticalOffset * TEXT_SIZE_MULT;
+   right = cursorX + glyph->glyphWidth * TEXT_SIZE_MULT + texelOffsetX;
+   bottom = top + glyph->glyphHeight * TEXT_SIZE_MULT + texelOffsetY;
 
 
    if (fixedWidth)
@@ -2489,9 +2490,9 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
    mCharacters.push_back(c);
    
    if (fixedWidth)
-     cursorX  += glyphData->mMonoWidth;
+     cursorX  += glyphData->mMonoWidth * TEXT_SIZE_MULT;
    else
-     cursorX  += glyph->glyphAdvance + kerning;
+     cursorX  += glyph->glyphAdvance * TEXT_SIZE_MULT + kerning;
    
    if( cursorX > mMaxTextWidth )
        mMaxTextWidth = cursorX;

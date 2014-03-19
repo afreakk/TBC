@@ -4,6 +4,7 @@
 #include "ModelRecipe.h"
 #include "ENUMLERPState.h"
 #include "boost/noncopyable.hpp"
+#include "Tooltip.h"
 enum class AttackReturn
 {
     NOT_KILLED,
@@ -32,6 +33,7 @@ public:
 	void playAnimation(ANIMATIONS);
 	bool tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt);
 	void freeze();
+	void tooltip(std::string msg);
 protected:
 	void updateNormalPos();
 	bool lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive=false);
@@ -47,6 +49,7 @@ protected:
 	bool m_hasLerpAttacked;
 	ModelHandlerType m_modelHandlerType;
 	Ogre::Real m_freezeTimer;
+	Tooltip m_tooltip;
 
 
 	std::map<ANIMATIONS, unique_ptr<BaseAnimation> > m_animations;
