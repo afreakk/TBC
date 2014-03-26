@@ -32,6 +32,7 @@
     <ClCompile Include="GlowMaterialListener.cpp" />
     <ClCompile Include="Gorilla.cpp" />
     <ClCompile Include="GUIResources.cpp" />
+    <ClCompile Include="HDRCompositor.cpp" />
     <ClCompile Include="LaneSettings.cpp" />
     <ClCompile Include="LERPWalk.cpp" />
     <ClCompile Include="LERPWalkAttack.cpp" />
@@ -69,6 +70,7 @@
     <ClCompile Include="OgreConsoleForGorilla.cpp" />
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
+    <ClCompile Include="PillarHider.cpp" />
     <ClCompile Include="PlayerHandlerStateBlankAttack.cpp" />
     <ClCompile Include="PlayerHandlerStateSingleAttack.cpp" />
     <ClCompile Include="DynamicTubes.cpp" />
@@ -142,6 +144,7 @@
     <ClInclude Include="DetonateWeaponHitTest.h" />
     <ClInclude Include="GameConsole.h" />
     <ClInclude Include="Gorilla.h" />
+    <ClInclude Include="HDRCompositor.h" />
     <ClInclude Include="LineBillboardSet.h" />
     <ClInclude Include="CoreCompositor.h" />
     <ClInclude Include="Distancer.h" />
@@ -194,6 +197,7 @@
     <ClInclude Include="Occupado.h" />
     <ClInclude Include="OgreConsoleForGorilla.h" />
     <ClInclude Include="OgreFix.h" />
+    <ClInclude Include="PillarHider.h" />
     <ClInclude Include="PlayerHandlerStateBlankAttack.h" />
     <ClInclude Include="PlayerHandlerStateSingleAttack.h" />
     <ClInclude Include="PlayerSelectionLine.h" />
@@ -204,6 +208,7 @@
     <ClInclude Include="SimpleShadow.h" />
     <ClInclude Include="SlowMotionParticle.h" />
     <ClInclude Include="TBCRay.h" />
+    <ClInclude Include="TeleportHelp.h" />
     <ClInclude Include="Tooltip.h" />
     <ClInclude Include="Tubes.h" />
     <ClInclude Include="WeaponTypes.h" />

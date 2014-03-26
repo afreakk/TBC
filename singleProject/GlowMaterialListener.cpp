@@ -20,5 +20,12 @@ Ogre::Technique* GlowMaterialListener::handleSchemeNotFound(unsigned short, cons
 		    return NULL;
         return mBlackMat->getTechnique(0);
     }
+	else if (schemeName == "blur")
+	{
+		if ((mat->getName().compare(0, particleMaterialPrefix.length(), particleMaterialPrefix) == 0) || mat->getName() == "HoveredSuicide" 
+			|| mat->getName() == "HoveredRanged"||mat->getName()=="wooshMat"||mat->getName()=="PUMediaPack/Watch"||mat->getName() =="selectionLine")
+		    return NULL;
+        return mBlackMat->getTechnique(0);
+	}
     return NULL;
 }

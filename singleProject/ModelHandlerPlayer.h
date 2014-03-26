@@ -11,6 +11,7 @@ public:
 	void displaySlowMotionParticle(bool enabled);
 	void teleportIn();
 	void teleportMove();
+	void teleportMove(const Ogre::Vector3& to);
 	void teleportOut();
 	bool isTeleporting();
 protected:

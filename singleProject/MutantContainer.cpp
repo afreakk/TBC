@@ -5,8 +5,9 @@
 #include "MainUpdate.h"
 #include "LaneSettings.h"
 #include "ContainerLogic.h"
+#include "boost/algorithm/string/predicate.hpp"
 template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
-static const unsigned energyPerMutant = 20;
+static const unsigned energyPerMutant = 40;
 bool MutantContainer::m_isInstantiated = false;
 MutantContainer::MutantContainer()
 : m_despawnTime(2.0)
@@ -51,7 +52,6 @@ void MutantContainer::killMutant(const std::string& name)
 {
 	m_toBeKilled.push_back(name);
 }
-#include "boost/algorithm/string/predicate.hpp"
 void MutantContainer::moveMutant(const std::string& id)
 {
 	std::shared_ptr<MutantPair> pair = m_aliveMutants[id];
@@ -92,9 +92,23 @@ Mutant* MutantContainer::getClosestLowerThanRadiusBased(const Ogre::Real& theta,
 {
 	return ContainerLogic::getClosest(m_aliveNotSuicideList,theta, radius, mutant,false,false);
 }
-Mutant* MutantContainer::getClosestRadiusBased(const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant)
+Mutant* MutantContainer::getClosestRadiusBased(const Ogre::Real& theta, const Ogre::Real& radius, Mutant* notThisMutant, NormalDirection dir)
 {
-	return ContainerLogic::getClosest(m_aliveNotSuicideList,theta, radius, mutant, true,false);
+	bool higher = false;
+	bool abs = false;
+	switch (dir)
+	{
+	case NormalDirection::dirLeft:
+		higher = false;
+		break;
+	case NormalDirection::dirRight:
+		higher = true;
+		break;
+	case NormalDirection::None:
+		abs = true;
+		break;
+	}
+	return ContainerLogic::getClosest(m_aliveNotSuicideList,theta, radius, notThisMutant, abs,higher);
 }
 void MutantContainer::update()
 {
@@ -145,58 +159,3 @@ void MutantContainer::handleDeadMutants()
         m_deadMutants.erase(it);
 	}
 }
-std::string MutantContainer::getClosestMutant(PolarCoordinates pos)
-{
-	Real closesDistance = 100000.0;
-	std::string idx = "NONE";
-	keepWithinMax(&pos.theta);
-    for (auto& itt : m_aliveMutantIteratorList)
-    {
-		Real distance = abs(itt->getPolarCoordinates().theta - pos.theta);
-		if (distance < closesDistance)
-		{
-			distance = closesDistance;
-            idx = itt->getNode()->getName();
-		}
-    }
-	return idx;
-}
-std::string MutantContainer::getClosestMutant(PolarCoordinates pos, NormalDirection direction)
-{
-	bool left;
-    switch (direction)
-    {
-		case NormalDirection::dirRight:
-			left = false;
-			break;
-		case NormalDirection::dirLeft:
-			left = true;
-			break;
-		case NormalDirection::None:
-			assert(0);
-			break;
-		default:
-			assert(0);
-			break;
-    }
-	Real closesDistance = 100000.0;
-	std::string idx = "NONE";
-	keepWithinMax(&pos.theta);
-    for (auto& itt : m_aliveMutantIteratorList)
-    {
-        if (checkDistance(pos, itt, &closesDistance, left))
-            idx = itt->getNode()->getName();
-    }
-	return idx;
-}
-
-bool MutantContainer::checkDistance(const PolarCoordinates& pos, Mutant* mutant , Ogre::Real* closestDistance ,  bool left)
-{
-    PolarCoordinates mutantPos = mutant->getPolarCoordinates();
-    bool skipDistanceCheck = (static_cast<ModelHandlerMutant&>(mutant->getModelHandler()).getWeaponType() == WeaponType::SUICIDE_BOMB);
-	if (hitTestSide(left ? mutantPos : pos, left ? pos : mutantPos, closestDistance, skipDistanceCheck))
-		return true;
-	return false;
-}
-
-

@@ -26,11 +26,9 @@ public:
     // intersects = bool, 
 	Mutant* getClosestHigherThan(const Ogre::Real& theta, Mutant* mutant);
 	Mutant* getClosestLowerThan(const Ogre::Real& theta, Mutant* mutant);
-	Mutant* getClosestRadiusBased(const Ogre::Real& theta,  const Ogre::Real& radius, Mutant* mutant);
+	Mutant* getClosestRadiusBased(const Ogre::Real& theta,  const Ogre::Real& radius, Mutant* notThisMutant, NormalDirection dir=NormalDirection::None);
 	Mutant* getClosestHigherThanRadiusBased(const Ogre::Real& theta, const Ogre::Real& radius, Mutant* mutant);
 	Mutant* getClosestLowerThanRadiusBased(const Ogre::Real& theta,  const Ogre::Real& radius, Mutant* mutant);
-	std::string getClosestMutant(PolarCoordinates pos, NormalDirection direction);
-	std::string getClosestMutant(PolarCoordinates pos);
 	std::list<Mutant*> getMutantIt() { return m_aliveMutantIteratorList; }
 	std::list<MutantHandler*> getHandlerIt() { return m_aliveHandlerIteratorList; }
     void update();
@@ -56,7 +54,6 @@ private:
 
 	void handleDeadMutants();
 	void executeDoomedMutants();
-	bool checkDistance(const PolarCoordinates& pos, Mutant* mutant , Ogre::Real* closestDistance ,  bool left);
 	void moveMutant(const std::string& id);
 	void updateAliveMutants();
 };

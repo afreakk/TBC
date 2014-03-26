@@ -17,7 +17,6 @@ public:
 	void update();
 private:
 	Real m_spawnDistance;
-	Real m_attackDistance;
 	MutantContainer* m_mutantContainer;
 	Player* m_player;
 	

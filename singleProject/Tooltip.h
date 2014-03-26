@@ -5,6 +5,7 @@ public:
 	Tooltip(Ogre::SceneNode* parentNode);
 	~Tooltip();
 	void update();
+	void enable(bool v);
 private:
 	const Ogre::Vector2 m_tooltipSize;
 	const Ogre::Vector2 m_rectSize;

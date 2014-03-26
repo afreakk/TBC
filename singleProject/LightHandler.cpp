@@ -10,8 +10,8 @@ LightHandler::LightHandler()
 	auto sMgr = OgreCore::getSingletonPtr()->getSceneMgr();
 	directionalLight = sMgr->createLight("DirectionalLight");
 	directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
-	directionalLight->setDiffuseColour(Ogre::ColourValue(.95f, .95f, .95f));
-	directionalLight->setSpecularColour(Ogre::ColourValue(.95f, .95f, .95f));
+	directionalLight->setDiffuseColour(Ogre::ColourValue(.5f, .5f, .5f));
+	directionalLight->setSpecularColour(Ogre::ColourValue(.95f, .5f, .5f));
 	directionalLight->setDirection(Ogre::Vector3(-0.5f, -0.5f, -0.5f));
 
 

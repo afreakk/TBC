@@ -9,6 +9,9 @@ Tooltip::Tooltip(Ogre::SceneNode* parentNode)
 , m_screen ( Gorilla::Silverback::getSingleton().createScreenRenderable(m_tooltipSize, "dejavu") )
 , m_node ( parentNode->createChildSceneNode(Vector3(0.0f, 450.0f, 0.0f)) ) 
 {
+}
+void Tooltip::enable(bool v)
+{
 	m_layer = m_screen->createLayer(0);
 	Gorilla::MarkupText::TEXTSIZEHACK = 200.0f;
 	const Ogre::Vector2 padding = m_rectSize / 32.0f;

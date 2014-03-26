@@ -43,13 +43,13 @@ int main()
 		laneSettings->initLanes();
 		unique_ptr<TBCRay> raycasting = unique_ptr<TBCRay>(new TBCRay(OgreCore::getSingletonPtr()->getSceneMgr()));
     
-        new CoreCompositor(OgreCore::getSingleton().getCamera()->getViewport());
 		unique_ptr<GlobalVariables> m_globalVars = unique_ptr<GlobalVariables>(new GlobalVariables());
 		unique_ptr<PlayerGlobalStats> m_playerStats = unique_ptr<PlayerGlobalStats>(new PlayerGlobalStats());
         unique_ptr<MutantGlobalStats> m_mutantGlobalStats = unique_ptr<MutantGlobalStats>(new MutantGlobalStats());
 
 		unique_ptr<MainLevelSetter> lvlSetter = unique_ptr<MainLevelSetter>(new MainLevelSetter(MainLevelEnums::LVL1));
 		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(lvlSetter->getLevelManager()));
+        new CoreCompositor(OgreCore::getSingleton().getCamera()->getViewport());
 		Ogre::Root::getSingletonPtr()->startRendering();
 		cout << "rendering stopped ." << endl;
 	}

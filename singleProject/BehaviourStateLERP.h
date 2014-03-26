@@ -16,6 +16,7 @@ public:
 	void update(ModelHandler& ) override;
 	bool nextTarget() const;
 	bool enemyKilled() const;
+	void setPause(bool enabled);
 private:
 	LerpTowardsReturn m_lerpReturn;
 	BehaviourObject*const m_target;
@@ -26,6 +27,7 @@ private:
 	LerpTowardsReturn m_lerpValue;
 	std::unique_ptr<LERPBase> m_lerpMode;
 	bool m_usingTargetPosition;
+	bool m_pause;
 
 };
 

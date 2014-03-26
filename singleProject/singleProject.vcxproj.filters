@@ -413,6 +413,12 @@
     <ClCompile Include="Tooltip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HDRCompositor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PillarHider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -789,6 +795,15 @@
     </ClInclude>
     <ClInclude Include="Tooltip.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HDRCompositor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PillarHider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TeleportHelp.h">
+      <Filter>BehaviourStateHandler\Player\helpers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

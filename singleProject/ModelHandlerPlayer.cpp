@@ -36,6 +36,10 @@ void ModelHandlerPlayer::teleportMove()
 {
 	ModelHandler::normalWalk(m_normalDirection == NormalDirection::dirLeft ? -Math::PI / 64.0f : Math::PI / 64.0f, m_normalDirection,true);
 }
+void ModelHandlerPlayer::teleportMove(const Ogre::Vector3& to)
+{
+	ModelHandler::move(to);
+}
 void ModelHandlerPlayer::teleportOut()
 {
 	m_teleportParticle.select(true);

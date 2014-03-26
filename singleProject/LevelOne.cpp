@@ -16,12 +16,14 @@ LevelOne::LevelOne()
 , m_mutantContainer(new MutantContainer())
 , m_environmentNode(OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode())
 , m_time(0.0)
+, m_pillarHider(m_environmentNode)
 {
 	m_console = unique_ptr<GameConsole>(new GameConsole());
 	m_enemySpawner.init(m_mutantContainer.get(), m_playerContainer->getPlayer());
 	m_playerCamera.init(m_playerContainer->getPlayer());
-	m_dotSceneLoader.parseDotScene("environment03.scene", "SceneOne", OgreCore::getSingletonPtr()->getSceneMgr(), m_environmentNode );
-
+	m_dotSceneLoader.parseDotScene("Tutorial_level01.scene", "SceneOne", OgreCore::getSingletonPtr()->getSceneMgr(), m_environmentNode );
+	m_environmentNode->rotate(Vector3::UNIT_Y, Radian(Degree(180)));
+	m_environmentNode->setPosition(Vector3(0, -10.0, 0));
 	linkSubscribers();
 }
 
@@ -63,6 +65,7 @@ bool LevelOne::update()
 		cout << OgreCore::getSingleton().getWindow()->getAverageFPS() << endl;
 	}
 	m_time += MainUpdate::getSingleton().getDeltaTime();
+	m_pillarHider.update();
 	m_particleRefContainer->update();
 	m_playerContainer->update();
 	m_mutantContainer->update();

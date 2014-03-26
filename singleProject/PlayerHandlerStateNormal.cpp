@@ -14,8 +14,7 @@ PlayerHandlerStateNormal::PlayerHandlerStateNormal(Player* player)
 , m_normalState{ new BehaviourStateNormal{ &m_walkingDirection , &PlayerGlobalStats::getSingleton().getWalkingSpeed()}}
 , m_tumble(TUMBLE_DIRECTION::DIRECTION_NONE)
 , m_tumbleAttack(false)
-, m_teleportTimer(0.0)
-, m_teleportState(TeleportState::NOTHING)
+, m_teleporter(player)
 {
 	m_player->setState(m_normalState.get());
 }
@@ -30,12 +29,7 @@ PlayerHandlerStateNormal::~PlayerHandlerStateNormal()
 }
 void PlayerHandlerStateNormal::update()
 {
-	if (m_teleportState != TeleportState::NOTHING)
-	{
-		m_walkingDirection = NormalDirection::None;
-        handleTeleport();
-	}
-	else
+	if(!m_teleporter.handleTeleport())
 	{
         m_walkingDirection = getWalkingDirection();
         if (m_tumble != TUMBLE_DIRECTION::DIRECTION_NONE)
@@ -43,57 +37,18 @@ void PlayerHandlerStateNormal::update()
     //    if (PlayerGlobalStats::getSingleton().getEnergy() == 100 )
       //      m_state = PLAYER_HANDLER_STATE::SELECTION;
 	}
+	else
+		m_walkingDirection = NormalDirection::None;
+
 
 }
-void PlayerHandlerStateNormal::handleTeleport()
-{
-	switch (m_teleportState)
-	{
-	case TeleportState::TELEPORT_IN:
-        static_cast<ModelHandlerPlayer&>(m_player->getModelHandler()).teleportIn();
-		m_teleportState = TeleportState::TELEPORT_WAIT;
-		break;
-	case TeleportState::TELEPORT_WAIT:
-        m_teleportTimer += MainUpdate::getSingleton().getDeltaTime();
-		if (m_teleportTimer > 0.5f)
-		{
-            static_cast<ModelHandlerPlayer&>(m_player->getModelHandler()).teleportMove();
-			m_teleportState = TeleportState::TELEPORT_OUT;
-			m_teleportTimer = 0.0f;
-		}
-		break;
-	case TeleportState::TELEPORT_OUT:
-		static_cast<ModelHandlerPlayer&>(m_player->getModelHandler()).teleportOut();
-		m_teleportState = TeleportState::COOLDOWN;
-		break;
-	case TeleportState::COOLDOWN:
-        m_teleportTimer += MainUpdate::getSingleton().getDeltaTime();
-		if (m_teleportTimer > 0.2f)
-		{
-			m_teleportState = TeleportState::NOTHING;
-            m_teleportTimer = 0.0;
-		}
-		break;
-	case TeleportState::NOTHING:
-		assert(0);
-		break;
-	default:
-		assert(0);
-		break;
-	}
-}
 
-void PlayerHandlerStateNormal::teleport()
-{
-	if (m_teleportState == TeleportState::NOTHING)
-        m_teleportState = TeleportState::TELEPORT_IN;
-}
 void PlayerHandlerStateNormal::keyPressed(const OIS::KeyEvent& e)
 {
 	if (OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift) && (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C))
 		m_state = PLAYER_HANDLER_STATE::SELECTION;
 	else if (e.key == OIS::KeyCode::KC_E)
-		teleport();
+		m_teleporter.teleport();
 	else if (e.key == OIS::KeyCode::KC_SPACE || e.key == OIS::KeyCode::KC_C)
 		m_state = PLAYER_HANDLER_STATE::SINGLE_ATTACK;
 	if (e.key == OIS::KeyCode::KC_W)

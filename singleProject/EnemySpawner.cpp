@@ -5,8 +5,7 @@
 #include "ModelRecipeMutantSuicide.h"
 #include "ModelRecipeMutant.h"
 EnemySpawner::EnemySpawner() 
-: m_spawnDistance(Ogre::Math::PI / 64.0)
-, m_attackDistance(0.5)
+: m_spawnDistance(Ogre::Math::PI / 4.0)
 , m_mutantContainer(nullptr)
 , m_player(nullptr)
 {

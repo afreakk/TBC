@@ -2,6 +2,7 @@
 #include "HandlerState.h"
 #include "PlayerHandlerEnums.h"
 #include "MessageSubscriber.h"
+#include "TeleportHelp.h"
 class BehaviourStateLERP;
 class Player;
 class BehaviourObject;
@@ -24,9 +25,11 @@ private:
 	std::vector<std::string>::iterator m_currentTargetIndex;
 	bool m_currentTargetKilled;
 	bool m_lerpingTowardsLane;
+	Teleporter m_teleporter;
 
 	void setNextTarget();
 	Ogre::Vector3 getClosestLanePosition();
 	void setNewState( const Ogre::Vector3& targetPos=Vector3::ZERO);
+	void teleport(const Ogre::Vector3& targetPos);
 };
 

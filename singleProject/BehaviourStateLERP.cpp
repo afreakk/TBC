@@ -17,6 +17,7 @@ BehaviourStateLERP::BehaviourStateLERP(BehaviourObject* target, const Real* spee
 , m_killed(false)
 , m_lerpMode(mode)
 , m_usingTargetPosition((m_targetPos != Vector3::ZERO)?true:false)
+, m_pause(false)
 {
 	assert(m_target||m_usingTargetPosition);
 	assert(!(m_target&&m_usingTargetPosition));
@@ -34,8 +35,14 @@ bool BehaviourStateLERP::enemyKilled() const
 {
 	return m_killed;
 }
+void BehaviourStateLERP::setPause(bool enabled)
+{
+	m_pause = enabled;
+}
 void BehaviourStateLERP::update(ModelHandler& modelHandler)
 {
+	if (m_pause)
+		return;
 	m_lerpReturn = m_lerpMode->update(modelHandler, (m_usingTargetPosition ? m_targetPos : m_target->getNode()->getPosition()), m_speed);
     switch (m_lerpReturn)
     {

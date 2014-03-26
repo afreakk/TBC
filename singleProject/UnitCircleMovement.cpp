@@ -6,6 +6,14 @@ Ogre::Vector3 UnitCircleMovement::VectorFromPolar(PolarCoordinates p)
 {
 	return Ogre::Vector3(Ogre::Math::Sin(p.theta)*p.radius,p.h,Ogre::Math::Cos(p.theta)*p.radius);
 }
+PolarCoordinates UnitCircleMovement::PolarFromVector(Ogre::Vector3 p)
+{
+	PolarCoordinates polar;
+	polar.h = p.y;
+	polar.theta = thetaFromVector(p);
+	polar.radius = radiusFromVector(p);
+	return polar;
+}
 void UnitCircleMovement::polarSetPosition(Ogre::SceneNode* node, PolarCoordinates p)
 {
 	node->setPosition(VectorFromPolar(p));
@@ -38,7 +46,7 @@ unsigned energyCostOf(PolarCoordinates a, PolarCoordinates b)
 {
 	keepWithinMax(&a.theta);
 	keepWithinMax(&b.theta);
-	return static_cast<unsigned>(round( Ogre::Math::Abs(a.theta - b.theta)*200.0 ));
+	return static_cast<unsigned>(round( Ogre::Math::Abs(a.theta - b.theta)*10.0 ));
 }
 bool isWithinRange(Real r1, Real r2, Real distance)
 {
@@ -96,18 +104,4 @@ Vector3 vectorFromTumbleDirection(Vector3 playerPos, TUMBLE_DIRECTION direction)
 PolarCoordinates polarFromStarting(Real r, unsigned laneIdx)
 {
 	return PolarCoordinates(r, LaneSettings::getSingleton().getLane(laneIdx), LaneSettings::getSingleton().getHeight());
-}
-bool hitTestSide(PolarCoordinates left, PolarCoordinates right, Real* closestDistance, bool skipDistance)
-{
-    keepWithinMax(&right.theta);
-    Real distance = right.theta - left.theta;
-    Real diff = right.theta - left.theta;
-    if (distance >= 0.0 && distance < Math::PI/168.0 && distance < *closestDistance && abs(right.radius - left.radius)<(skipDistance ? 600:100))
-    {
-        *closestDistance = distance;
-		return true;
-
-    }
-	return false;
-
 }

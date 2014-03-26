@@ -34,6 +34,7 @@ public:
 	bool tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt);
 	void freeze();
 	void tooltip(std::string msg);
+	void move(const Ogre::Vector3& to);
 protected:
 	void updateNormalPos();
 	bool lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive=false);

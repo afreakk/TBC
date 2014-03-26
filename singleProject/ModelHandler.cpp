@@ -152,6 +152,11 @@ bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const 
 	return false;
 }
 
+void ModelHandler::move(const Ogre::Vector3& to)
+{
+	m_node->setPosition(to);
+	updateNormalPos();
+}
 const NormalDirection ModelHandler::getNormalDirection() const
 {
 	return m_normalDirection;

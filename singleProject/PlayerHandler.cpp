@@ -47,11 +47,12 @@ void PlayerHandler::switchState(PLAYER_HANDLER_STATE newState)
 	}
 	case PLAYER_HANDLER_STATE::SINGLE_ATTACK:
 	{
-        std::string closestMutant;
-        closestMutant = MutantContainer::getSingleton().getClosestMutant(m_player->getPolarCoordinates(), m_player->getModelHandler().getNormalDirection());
+        Mutant* closestMutant;
+		closestMutant = MutantContainer::getSingleton().getClosestRadiusBased(m_player->getPolarCoordinates().theta, 
+			m_player->getPolarCoordinates().radius, nullptr, m_player->getModelHandler().getNormalDirection());
         m_currentState.reset();
-		m_currentState = (closestMutant == "NONE") ? unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateBlankAttack(m_player))
-			: unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateSingleAttack(m_player, closestMutant));
+		m_currentState = (closestMutant == nullptr) ? unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateBlankAttack(m_player))
+			: unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateSingleAttack(m_player, closestMutant->getNode()->getName()));
 		break;
 	}
 	case PLAYER_HANDLER_STATE::DEAD:

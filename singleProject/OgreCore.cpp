@@ -63,6 +63,8 @@ bool OgreCore::initResources()
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/soloMaterials/materialScripts", "FileSystem", "SoloMaterials");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/soloMaterials/textures", "FileSystem", "SoloMaterials");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/soloMaterials/HDR/Programs", "FileSystem", "SoloMaterials");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/soloMaterials/HDR/Scripts", "FileSystem", "SoloMaterials");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/mesh", "FileSystem", "SceneOne");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/material", "FileSystem", "SceneOne");
@@ -99,6 +101,7 @@ bool OgreCore::initWindow(const int xResolution, const int yResolution, const Og
 	Ogre::NameValuePairList opts;
 	opts["title"] = "www";
 	opts["vsync"] = "false";
+	opts["FSAA"] = "4";
 	bool fullscreen = false;
 	m_window = m_root->createRenderWindow(renderWindowName, static_cast<int>(m_resolution.x), static_cast<int>(m_resolution.y), fullscreen, &opts);
 	return true;
@@ -150,7 +153,7 @@ bool OgreCore::initOverlaySystem()
 bool OgreCore::initCamera(const Ogre::String cameraName)
 {
 	m_camera = m_sceneMgr->createCamera(cameraName);
-	m_camera->setNearClipDistance(0.1f);
+	m_camera->setNearClipDistance(50.0f);
 	m_camera->setAspectRatio(m_resolution.x / m_resolution.y);
 	return true;
 }

@@ -29,7 +29,7 @@ void PlayerCameraStateNormal::update()
 	lerpPlayerPos(dt);
 	m_camera->setPosition( Ogre::Math::lerp<Ogre::Vector3>(m_camera->getPosition(),
 		LaneSettings::getSingleton().getVectorOf(1,m_player->getPolarCoordinates().theta,m_height)*m_distance, MainUpdate::getSingleton().getDeltaTime()* 2.0)  );
-	m_camera->lookAt(m_lerpedPlayerPos+Vector3(0.0,400.0,0.0));
+	m_camera->lookAt(m_lerpedPlayerPos+Vector3(0.0,150.0,0.0));
 }
 
 void PlayerCameraStateNormal::lerpPlayerPos(const Ogre::Real& dt)
