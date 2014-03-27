@@ -20,7 +20,7 @@ void Tooltip::enable(bool v)
 	m_lineList = m_layer->createLineList();
 	m_lineList->begin(500.0f, Gorilla::Colours::Aquamarine);
 	const Ogre::Vector2 chopSize = m_rectSize/7.0f;
-	m_lineList->position(Vector2(0.0f, 0.0f));
+	m_lineList->position(Vector2(0.0f           , 0.0f));
 	m_lineList->position(Vector2(0.0f           , m_rectSize.y));
 	m_lineList->position(Vector2(chopSize.x*3.0f, m_rectSize.y));
 	m_lineList->position(Vector2(chopSize.x*5.0f, m_rectSize.y*1.5f));
@@ -37,5 +37,25 @@ void Tooltip::update()
 }
 Tooltip::~Tooltip()
 {
-	TooltipUpdates::removeTooltip(this);
+//	TooltipUpdates::removeTooltip(this);
+    // fix this hobo
+}
+
+
+void TooltipUpdates::update()
+{
+    for (auto& tooltip : m_tooltips)
+        tooltip->update();
+}
+void TooltipUpdates::addTooltip(Tooltip* tooltip)
+{
+    m_tooltips.push_back(tooltip);
+}
+void TooltipUpdates::removeTooltip(Tooltip* tooltip)
+{
+    auto it = std::find(m_tooltips.begin(), m_tooltips.end(), tooltip);
+    if (it != m_tooltips.end())
+        m_tooltips.erase(it);
+    else
+        assert(0);
 }

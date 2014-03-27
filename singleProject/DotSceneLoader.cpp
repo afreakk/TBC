@@ -641,19 +641,9 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 	// Process attributes
 	String name = getAttrib(XMLNode, "name");
 	String id = getAttrib(XMLNode, "id");
-
 	String meshFile = getAttrib(XMLNode, "meshFile");
-	std::vector<String> MaterialSyntax = { "materialFile", "materialName" };
-	String materialFile;
-	for (const auto & matSyn : MaterialSyntax)
-	{
-        materialFile = getAttrib(XMLNode, matSyn);
-		if (materialFile.size() > 0)
-			break;
-	}
-	materialFile = "blinn7";
 	bool isStatic = getAttribBool(XMLNode, "static", false);;
-	bool castShadows = getAttribBool(XMLNode, "castShadows");
+	bool castShadows = getAttribBool(XMLNode, "castShadows", true);
 	// TEMP: Maintain a list of static and dynamic objects
 	if (isStatic)
 		staticObjects.push_back(name);
@@ -661,6 +651,14 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 		dynamicObjects.push_back(name);
 	TiXmlElement *pElement;
 	// Process vertexBuffer (?)
+	pElement = XMLNode->FirstChildElement("subentities");
+	String materialFile = "wut";
+	if (pElement)
+	{
+		pElement = pElement->FirstChildElement("subentity");
+		if (pElement)
+			materialFile = pElement->Attribute("materialName");
+	}
 	pElement = XMLNode->FirstChildElement("vertexBuffer");
 	if (pElement)
 		;//processVertexBuffer(pElement);

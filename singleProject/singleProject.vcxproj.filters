@@ -81,9 +81,6 @@
     <Filter Include="BehaviourStateHandler\Mutant">
       <UniqueIdentifier>{8da10da5-2433-45eb-b883-3d3e137ce754}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BehaviourStateHandler\TopLayer">
-      <UniqueIdentifier>{33ce6766-adcc-4d57-9765-9f0bcafcc2ab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="BehaviourState\LERPConfigurations">
       <UniqueIdentifier>{fbabf876-4397-42b5-aec8-98f4be804222}</UniqueIdentifier>
     </Filter>
@@ -107,6 +104,9 @@
     </Filter>
     <Filter Include="Menu">
       <UniqueIdentifier>{559121f0-ee0e-47ce-a2ee-9dba3f40e099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment\TopLayer">
+      <UniqueIdentifier>{33ce6766-adcc-4d57-9765-9f0bcafcc2ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -288,10 +288,10 @@
       <Filter>BehaviourStateHandler\Mutant</Filter>
     </ClCompile>
     <ClCompile Include="MutantHandler.cpp">
-      <Filter>BehaviourStateHandler\TopLayer</Filter>
+      <Filter>Environment\TopLayer</Filter>
     </ClCompile>
     <ClCompile Include="PlayerHandler.cpp">
-      <Filter>BehaviourStateHandler\TopLayer</Filter>
+      <Filter>Environment\TopLayer</Filter>
     </ClCompile>
     <ClCompile Include="MutantContainer.cpp">
       <Filter>Container</Filter>
@@ -650,22 +650,22 @@
       <Filter>BehaviourStateHandler\Mutant</Filter>
     </ClInclude>
     <ClInclude Include="MutantHandler.h">
-      <Filter>BehaviourStateHandler\TopLayer</Filter>
+      <Filter>Environment\TopLayer</Filter>
     </ClInclude>
     <ClInclude Include="PlayerHandler.h">
-      <Filter>BehaviourStateHandler\TopLayer</Filter>
+      <Filter>Environment\TopLayer</Filter>
     </ClInclude>
     <ClInclude Include="MutantHandlerEnums.h">
-      <Filter>BehaviourStateHandler\TopLayer</Filter>
+      <Filter>Environment\TopLayer</Filter>
     </ClInclude>
     <ClInclude Include="PlayerHandlerEnums.h">
-      <Filter>BehaviourStateHandler\TopLayer</Filter>
+      <Filter>Environment\TopLayer</Filter>
     </ClInclude>
     <ClInclude Include="HandlerState.h">
-      <Filter>BehaviourStateHandler\TopLayer</Filter>
+      <Filter>Environment\TopLayer</Filter>
     </ClInclude>
     <ClInclude Include="StateHandler.h">
-      <Filter>BehaviourStateHandler\TopLayer</Filter>
+      <Filter>Environment\TopLayer</Filter>
     </ClInclude>
     <ClInclude Include="BehaviourStateLimbo.h">
       <Filter>BehaviourState</Filter>

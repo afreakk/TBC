@@ -22,23 +22,9 @@ private:
 class TooltipUpdates
 {
 public:
-	static void update()
-	{
-		for (auto& tooltip : m_tooltips)
-			tooltip->update();
-	}
-	static void addTooltip(Tooltip* tooltip)
-	{
-		m_tooltips.push_back(tooltip);
-	}
-	static void removeTooltip(Tooltip* tooltip)
-	{
-		auto it = std::find(m_tooltips.begin(), m_tooltips.end(), tooltip);
-		if (it != m_tooltips.end())
-			m_tooltips.erase(it);
-		else
-			assert(0);
-	}
+	static void update();
+	static void addTooltip(Tooltip* tooltip);
+	static void removeTooltip(Tooltip* tooltip);
 private:
 	static std::vector< Tooltip*> m_tooltips;
 };

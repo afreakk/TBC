@@ -15,7 +15,7 @@ PillarHider::~PillarHider()
 
 void PillarHider::update()
 {
-	std::vector<string> meshNames = {"midPillar", "sidePillar"};
+	std::vector<string> meshNames = {"midPillar", "endPillar"};
 	auto rootItterator = m_environmentNode->getChildIterator();
 	while (rootItterator.hasMoreElements())
 	{
@@ -31,6 +31,7 @@ void PillarHider::update()
                     auto envObjs = static_cast<SceneNode*>(node)->getAttachedObjectIterator();
                     if (envObjs.hasMoreElements())
                     {
+
                         auto roofPipeEnt = envObjs.getNext();
                         PolarCoordinates polarPos = UnitCircleMovement::PolarFromVector(node->_getDerivedPosition());
 						if (float_compare(polarPos.theta, PlayerContainer::getSingleton().getPlayer()->getPolarCoordinates().theta, 0.2f))
