@@ -51,6 +51,11 @@ void PlayerHandler::switchState(PLAYER_HANDLER_STATE newState)
 		closestMutant = MutantContainer::getSingleton().getClosestRadiusBased(m_player->getPolarCoordinates().theta, 
 			m_player->getPolarCoordinates().radius, nullptr, m_player->getModelHandler().getNormalDirection());
         m_currentState.reset();
+		if (closestMutant != nullptr)
+		{
+			if (closestMutant->getNode()->getPosition().distance(m_player->getNode()->getPosition()) > 200.0f)
+				closestMutant = nullptr;
+		}
 		m_currentState = (closestMutant == nullptr) ? unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateBlankAttack(m_player))
 			: unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateSingleAttack(m_player, closestMutant->getNode()->getName()));
 		break;

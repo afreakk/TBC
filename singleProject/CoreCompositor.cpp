@@ -13,6 +13,11 @@ CoreCompositor::CoreCompositor(Ogre::Viewport* viewport)
     CompositorManager::getSingleton().addCompositor(m_vp, "B&W");
 	CompositorManager::getSingleton().addCompositor(m_vp, "blurStuff");
 	CompositorManager::getSingleton().setCompositorEnabled(m_vp, "blurStuff", true);
+	CompositorManager::getSingleton().addCompositor(m_vp, "tooltipShow");
+}
+void CoreCompositor::tooltipComp(bool enabled)
+{
+	CompositorManager::getSingleton().setCompositorEnabled(m_vp, "tooltipShow", enabled);
 }
 void CoreCompositor::initHDR()
 {

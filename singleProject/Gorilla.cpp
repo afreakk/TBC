@@ -2285,6 +2285,8 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
   mHeight         = 0.0f;
   mText           = text;
   mBackground.a   = 0.0f;
+  mMaxTextHeight = 0.0f;
+  mMaxTextWidth = 0.0f;
 
  }
  
@@ -2299,6 +2301,7 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
   Glyph* glyph = 0;
 
   mMaxTextWidth = 0;
+  mMaxTextHeight = 0;
   
   mCharacters.remove_all();
   
@@ -2496,6 +2499,8 @@ void  QuadList::border(Ogre::Real x, Ogre::Real y, Ogre::Real w, Ogre::Real h, O
    
    if( cursorX > mMaxTextWidth )
        mMaxTextWidth = cursorX;
+   if (top+lineHeight > mMaxTextHeight)
+	   mMaxTextHeight = top+lineHeight;
 
    lastChar = thisChar;
   }

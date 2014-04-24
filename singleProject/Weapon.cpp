@@ -92,17 +92,17 @@ WeaponBall::~WeaponBall()
 
 void WeaponBall::activate()
 {
-	m_detonation.stopped = false;
+	m_detonation.deactivated = false;
 	m_shadow.setVisible(true);
 	m_node->setPosition(m_startingPos);
 	WeaponBase::activate();
 }
 void WeaponBall::update()
 {
-	if (!m_detonation.stopped)
+	if (!m_detonation.deactivated)
 	{
         m_node->translate(Vector3(0.0f, 0.0f, -MainUpdate::getSingleton().getScaledDeltaTime()*1000.0f));
-		if (DetonateWeaponHitTest::detonate(m_node, m_ballDamageRadius, true) && m_detonation.timer == false)
+		if (DetonateWeaponHitTest::detonate(m_node, m_ballDamageRadius, true) && m_detonation.timerStarted == false)
 			m_detonation.timerStarted = true;
 		if (m_detonation.timerStarted)
 		{
@@ -112,7 +112,7 @@ void WeaponBall::update()
                 m_particleSystem->stopFade();
 				m_detonation.timer = 0.0f;
 				m_detonation.timerStarted = false;
-				m_detonation.stopped = true;
+				m_detonation.deactivated = true;
 			}
 		}
 	}

@@ -74,18 +74,22 @@ bool BeamWeaponHitTest::rayCastTarget(const BehaviourObject* obj, Ogre::Node* no
 }
 bool BeamWeaponHitTest::isInFrontOfBall(const Ogre::Real& zPos, const Ogre::Real& mainMassZPos)
 {
-	if (zPos <= mainMassZPos + 100.0)
+	if (zPos <= mainMassZPos )
 		return true;
 	return false;
 }
 bool BeamWeaponHitTest::didItHit(const Ogre::Real& zPos, ParticleUniverse::BaseCollider* colliderObject, ParticleUniverse::ParticleAffector* collisionObserver)
 {
-    Real distance = Math::Abs(colliderObject->position.z - zPos);
-    if (collisionObserver->isEnabled() && distance < 100.0)
+	bool collision = collisionObserver->isEnabled();
+    if ( collision )
     {
-//        collisionObserver->setEnabled(false); thought this was necesarry but it just creates ugly behaviour on particle impact, maybe it will call kill the
-        // same entity over and over becuase this is commented out
-		return true;
+        Real distance = Math::Abs(colliderObject->position.z - zPos);
+		if (distance < 100.0)
+		{
+    //        collisionObserver->setEnabled(false); thought this was necesarry but it just creates ugly behaviour on particle impact, maybe it will call kill the
+            // same entity over and over becuase this is commented out
+            return true;
+		}
     }
 	return false;
 }

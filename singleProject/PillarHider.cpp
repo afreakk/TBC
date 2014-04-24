@@ -15,7 +15,7 @@ PillarHider::~PillarHider()
 
 void PillarHider::update()
 {
-	std::vector<string> meshNames = {"midPillar", "endPillar"};
+	std::vector<string> meshNames = {"mid_Pillar", "endPillar"};
 	auto rootItterator = m_environmentNode->getChildIterator();
 	while (rootItterator.hasMoreElements())
 	{

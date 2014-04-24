@@ -7,12 +7,13 @@
 #include "Player.h"
 #include "MainUpdate.h"
 Ogre::Vector3 PlayerCameraStateNormal::m_lerpedPlayerPos = Vector3::ZERO;
-PlayerCameraStateNormal::PlayerCameraStateNormal(Player* player) 
+PlayerCameraStateNormal::PlayerCameraStateNormal(Player* player)
 : m_player(player)
 , m_camera(OgreCore::getSingleton().getCamera())
 , m_distance(PlayerCameraVars::getSingleton().getPlayerCameraNormal().distance)
 , m_height(PlayerCameraVars::getSingleton().getPlayerCameraNormal().height)
 , m_lerp(0.0)
+, m_playerThetaLerp(m_player->getPolarCoordinates().theta)
 {
 }
 
@@ -34,5 +35,7 @@ void PlayerCameraStateNormal::update()
 
 void PlayerCameraStateNormal::lerpPlayerPos(const Ogre::Real& dt)
 {
-	m_lerpedPlayerPos = Math::lerp(m_lerpedPlayerPos, m_player->getNode()->getPosition(), dt*8.0);
+	m_playerThetaLerp = Math::lerp(m_playerThetaLerp, m_player->getPolarCoordinates().theta, dt*8.0);
+	m_lerpedPlayerPos = LaneSettings::getSingleton().getVectorOf(1, m_playerThetaLerp, 150.0f);
+	//m_lerpedPlayerPos = Math::lerp(m_lerpedPlayerPos, Vector3(m_player->getNode()->getPosition()., dt*8.0);
 }

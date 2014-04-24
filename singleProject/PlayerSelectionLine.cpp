@@ -56,7 +56,7 @@ void PlayerSelectionLine::update(const Ogre::Real& energyCostScale)
 	{
 		if (m_nodes[i] == m_nodes[i + 1])
 			continue;
-		Vector3 localPosTo = m_nodes[i].second->convertWorldToLocalPosition(m_nodes[i+1].second->getPosition());
+		Vector3 localPosTo = m_nodes[i].second->convertWorldToLocalPosition(m_nodes[i+1].second->getPosition())+Vector3(0,1,0);
 		if (j+1 > m_lines.size())
             m_lines.emplace_back(unique_ptr<StapledLine>(new StapledLine(static_cast<SceneNode*>(m_nodes[i].second),m_spacing)), 
 			unique_ptr<BillboardNumber>(new BillboardNumber(static_cast<SceneNode*>(m_nodes[i].second))));

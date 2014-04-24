@@ -16,7 +16,7 @@ MutantHandlerStateSuicideBomb::MutantHandlerStateSuicideBomb(BehaviourObject* mu
 , m_speed(MutantGlobalStats::getSingleton().getWalkSpeed())
 , m_mutant(mutant)
 , m_mutState{ new BehaviourStateNormal(&m_direction,&m_speed) }
-, m_detonationTimer(15.0)
+, m_detonationTimer(5.0)
 , m_activated(false)
 , m_player(playerObject)
 , m_tumbleDirection(TUMBLE_DIRECTION::DIRECTION_NONE)

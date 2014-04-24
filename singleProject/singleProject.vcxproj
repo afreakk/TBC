@@ -113,6 +113,7 @@
     <ClCompile Include="tinyxmlparser.cpp" />
     <ClCompile Include="Tooltip.cpp" />
     <ClCompile Include="Tubes.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="UnitCircleMovement.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponTypes.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="TeleportHelp.h" />
     <ClInclude Include="Tooltip.h" />
     <ClInclude Include="Tubes.h" />
+    <ClInclude Include="Tutorial.h" />
     <ClInclude Include="WeaponTypes.h" />
     <ClInclude Include="BillboardNumber.h" />
     <ClInclude Include="OgreCore.h" />

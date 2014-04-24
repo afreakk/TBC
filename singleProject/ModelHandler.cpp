@@ -31,6 +31,11 @@ ModelHandler::~ModelHandler()
 }
 void ModelHandler::tooltip(std::string msg)
 {
+	m_tooltip.show(msg);
+}
+void ModelHandler::hideTooltip()
+{
+	m_tooltip.hide();
 }
 const ModelHandlerType  ModelHandler::getType() const
 {

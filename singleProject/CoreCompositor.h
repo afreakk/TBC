@@ -7,6 +7,7 @@ class CoreCompositor : public Ogre::Singleton<CoreCompositor>
 public:
 	CoreCompositor(Ogre::Viewport* viewport);
 	void blackAndWhite(bool enabled);
+	void tooltipComp(bool enabled);
 private:
 	Ogre::Viewport* m_vp;
 	std::unique_ptr<GlowMaterialListener> gml;

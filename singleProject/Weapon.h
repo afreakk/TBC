@@ -17,9 +17,9 @@ namespace ParticleUniverse
 struct BallDetonation
 {
 	Ogre::Real timer;
-	bool stopped;
+	bool deactivated;
 	bool timerStarted;
-	BallDetonation(Ogre::Real t, bool s, bool ts) :timer(t), stopped(s), timerStarted(ts) {}
+	BallDetonation(Ogre::Real t, bool s, bool ts) :timer(t), deactivated(s), timerStarted(ts) {}
 };
 
 class WeaponBase : public ParticleEffect

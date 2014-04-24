@@ -419,6 +419,9 @@
     <ClCompile Include="PillarHider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tutorial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -804,6 +807,9 @@
     </ClInclude>
     <ClInclude Include="TeleportHelp.h">
       <Filter>BehaviourStateHandler\Player\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Tutorial.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

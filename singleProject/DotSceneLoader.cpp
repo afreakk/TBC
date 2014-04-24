@@ -351,7 +351,7 @@ void DotSceneLoader::processLight(TiXmlElement *XMLNode, SceneNode *pParent)
 	String name = getAttrib(XMLNode, "name");
 	String id = getAttrib(XMLNode, "id");
 	// Create the light
-	Light *pLight = mSceneMgr->createLight(name);
+	Light *pLight = mSceneMgr->createLight();
 	if (pParent)
 		pParent->attachObject(pLight);
 	String sValue = getAttrib(XMLNode, "type");
@@ -374,10 +374,17 @@ void DotSceneLoader::processLight(TiXmlElement *XMLNode, SceneNode *pParent)
 	pElement = XMLNode->FirstChildElement("normal");
 	if (pElement)
 		pLight->setDirection(parseVector3(pElement));
+//	else
+	//	pLight->setDirection(Vector3(0, -1, 0));
 	// Process colourDiffuse (?)
 	pElement = XMLNode->FirstChildElement("colourDiffuse");
 	if (pElement)
 		pLight->setDiffuseColour(parseColour(pElement));
+
+	/*pElement = XMLNode->FirstChildElement("rotation");
+	if (pElement)
+		pLight->getParentNode()->rotate(parseQuaternion(pElement));*/
+
 	// Process colourSpecular (?)
 	pElement = XMLNode->FirstChildElement("colourSpecular");
 	if (pElement)
@@ -394,6 +401,7 @@ void DotSceneLoader::processLight(TiXmlElement *XMLNode, SceneNode *pParent)
 	pElement = XMLNode->FirstChildElement("userDataReference");
 	if (pElement)
 		;//processUserDataReference(pElement, pLight);
+
 }
 void DotSceneLoader::processCamera(TiXmlElement *XMLNode, SceneNode *pParent)
 {
@@ -535,7 +543,7 @@ void DotSceneLoader::processNode(TiXmlElement *XMLNode, SceneNode *pParent)
 	pElement = XMLNode->FirstChildElement("light");
 	while (pElement)
 	{
-		processLight(pElement, pNode);
+//		processLight(pElement, pNode);
 		pElement = pElement->NextSiblingElement("light");
 	}
 	// Process camera (*)

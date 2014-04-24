@@ -13,6 +13,7 @@ private:
 	Ogre::Real m_distance;
 	Ogre::Real m_height;
 	Ogre::Real m_lerp;
+	Ogre::Real m_playerThetaLerp;
 	static Ogre::Vector3 m_lerpedPlayerPos;
 
 	void lerpPlayerPos(const Ogre::Real& dt);

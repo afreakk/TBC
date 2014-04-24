@@ -10,7 +10,7 @@
 int ModelRecipeMutant::s_count = 0;
 ModelRecipeMutant::ModelRecipeMutant()
 : m_id(++s_count)
-, m_materialName("Examples/Ninja")
+, m_materialName("NinjaEnemy")
 , m_entityName("MutantRanged"+boost::lexical_cast<string>(m_id))
 , m_nodeName("MutantRanged"+boost::lexical_cast<string>(m_id))
 , m_hoveredName("HoveredRanged")
@@ -33,6 +33,7 @@ Ogre::Entity* ModelRecipeMutant::initMesh(Ogre::SceneManager* sMgr)
 		mesh->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
 	auto ent = sMgr->createEntity(m_entityName, mesh);
 	ent->setUpdateBoundingBoxFromSkeleton(true);
+	ent->setMaterialName(m_materialName);
 	return ent;
 }
 

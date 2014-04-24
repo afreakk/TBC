@@ -59,20 +59,22 @@ void LevelOne::destroyWorld()
 Real avgFps = 0.0;
 bool LevelOne::update()
 {
-	if (avgFps != OgreCore::getSingleton().getWindow()->getAverageFPS())
+	/*if (avgFps != OgreCore::getSingleton().getWindow()->getAverageFPS())
 	{
 		avgFps = OgreCore::getSingleton().getWindow()->getAverageFPS();
 		cout << OgreCore::getSingleton().getWindow()->getAverageFPS() << endl;
-	}
+	}*/
 	m_time += MainUpdate::getSingleton().getDeltaTime();
 	m_pillarHider.update();
 	m_particleRefContainer->update();
 	m_playerContainer->update();
 	m_mutantContainer->update();
-	m_enemySpawner.update();
 	m_playerCamera.update();
 	m_environment.update();
+	m_tutorial.update();
 	TooltipUpdates::update();
+	if (m_tutorial.canSpawn())
+	    m_enemySpawner.update();
 	//if (m_time > 3.1)
 //		MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::MENU);
 	return false;

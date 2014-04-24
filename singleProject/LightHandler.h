@@ -10,7 +10,7 @@ public:
 	~LightHandler();
 	void update();
 private:
-	Ogre::Light* directionalLight;
+	std::vector<Ogre::Light*> m_roofLigths;
 	Ogre::Real time;
 };
 

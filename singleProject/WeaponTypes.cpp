@@ -44,7 +44,7 @@ void FrostBolt::activate()
 #include "MutantGlobalStats.h"
 void FrostBolt::update()
 {
-	if (!m_detonation.stopped)
+	if (!m_detonation.deactivated)
 	{
 		Vector3 lforce = Vector3(0, 0, 1500);
         setForce(lforce);

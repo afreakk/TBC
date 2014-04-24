@@ -32,7 +32,6 @@
 #ifndef GORILLA_H
 #define GORILLA_H
 
-#include "Ogre.h"
 
 #ifndef GORILLA_USES_EXCEPTIONS
 #  define GORILLA_USES_EXCEPTIONS 1
@@ -2928,6 +2927,12 @@ namespace Gorilla
      return mMaxTextWidth;
     }
 
+    Ogre::Real maxTextHeight(bool dirty)
+    {
+		if (dirty)
+            _calculateCharacters();
+     return mMaxTextHeight;
+    }
     /*! function. caption
         desc.
             Get the text indented to show.
@@ -3013,6 +3018,7 @@ namespace Gorilla
     GlyphData*            mDefaultGlyphData;
     Ogre::Real            mLeft, mTop, mWidth, mHeight;
     Ogre::Real            mMaxTextWidth;
+	Ogre::Real            mMaxTextHeight;
     Ogre::String          mText;
     Ogre::ColourValue     mBackground;
     bool                  mDirty, mTextDirty;

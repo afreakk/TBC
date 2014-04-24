@@ -34,6 +34,7 @@ public:
 	bool tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt);
 	void freeze();
 	void tooltip(std::string msg);
+	void hideTooltip();
 	void move(const Ogre::Vector3& to);
 protected:
 	void updateNormalPos();
@@ -50,7 +51,7 @@ protected:
 	bool m_hasLerpAttacked;
 	ModelHandlerType m_modelHandlerType;
 	Ogre::Real m_freezeTimer;
-	Tooltip m_tooltip;
+	TwoDTooltip m_tooltip;
 
 
 	std::map<ANIMATIONS, unique_ptr<BaseAnimation> > m_animations;

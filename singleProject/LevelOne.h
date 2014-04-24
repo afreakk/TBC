@@ -7,6 +7,7 @@
 #include "DotSceneLoader.h"
 #include "GameConsole.h"
 #include "PillarHider.h"
+#include "Tutorial.h"
 class PlayerContainer;
 class ParticleReferenceContainer;
 class LevelOne : public ILevel
@@ -29,6 +30,7 @@ private:
 	DotSceneLoader m_dotSceneLoader;
 	unique_ptr<GameConsole> m_console;
 	PillarHider m_pillarHider;
+	Tutorial m_tutorial;
 
 	void destroyWorld();
 	void unLinkSubscribers();

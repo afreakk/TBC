@@ -1,8 +1,8 @@
 #include "GUIBar.h"
 #pragma once
-static const Ogre::Real BAR_HEIGHT = 0.05f;
+static const Ogre::Real BAR_HEIGHT = 0.1f;
 static const Ogre::Real BAR_WIDTH = BAR_HEIGHT*3.726744186046512f;
-static const Ogre::Real BAR_SPACING = 0.001f;
+static const Ogre::Real BAR_SPACING = 0.01f;
 class HealthBar : public GUIBar
 {
 public:
