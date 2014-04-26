@@ -3,6 +3,7 @@ class Player;
 class ModelHandler;
 enum class TutorialScript
 {
+    debug,
 	even_one,
 	even_two,
 	even_three,
@@ -48,6 +49,18 @@ enum class TutorialScript
     suicide_five,
     suicide_six,
     slowmo_one,
+    slowmo_two,
+    slowmo_three,
+    slowmo_four,
+    slowmo_five,
+    slowmo_six,
+    slowmo_seven,
+    slowmo_listen,
+    slowmo_allKilled,
+    slowmo_allKilled_two,
+    slowmo_allKilled_three,
+    slowmo_allKilled_four,
+    change_level
 };
 class Tutorial
 {
@@ -56,6 +69,7 @@ public:
 	~Tutorial();
 	void update();
 	bool canSpawn();
+	bool plzChangeLevel();
 private:
 	Player* m_player;
 	TutorialScript m_tooltipIdx;
@@ -65,6 +79,7 @@ private:
 	Ogre::Real m_pauseTimer;
 	int m_mutantSize;
 	bool m_canSpawn;
+	bool m_changeLevel;
 
 	void showTooltipSlowMotion(ModelHandler& model,const  std::string& msg);
 	void showTooltipNormie(ModelHandler& model,const  std::string& msg);
@@ -77,6 +92,7 @@ private:
 	bool mutantSpawned();
 	bool mutantDied();
 	bool mutantIsClose();
+	bool allKilled();
 
 	void genericPress(TutorialScript changeTo, OIS::KeyCode keyCode = OIS::KeyCode::KC_RETURN);
 };

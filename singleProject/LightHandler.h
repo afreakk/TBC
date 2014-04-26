@@ -12,5 +12,6 @@ public:
 private:
 	std::vector<Ogre::Light*> m_roofLigths;
 	Ogre::Real time;
+	Ogre::Light* m_dirLight;
 };
 

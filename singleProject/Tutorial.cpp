@@ -7,15 +7,17 @@
 #include "CoreCompositor.h"
 #include "OISCore.h"
 #include "MainUpdate.h"
+#include "MutantContainer.h"
 
 Tutorial::Tutorial()
 : m_player(PlayerContainer::getSingleton().getPlayer())
-, m_tooltipIdx(TutorialScript::even_one)
+, m_tooltipIdx(/*TutorialScript::even_one*/TutorialScript::debug)
 , m_enterReleased(true)
 , m_compositorOn(false)
 , m_pauseTimer(0.0f)
 , m_mutantSize(0)
 , m_canSpawn(false)
+, m_changeLevel(false)
 {
 }
 
@@ -31,6 +33,10 @@ void Tutorial::update()
 	{
         switch (m_tooltipIdx)
         {
+		case TutorialScript::debug:
+            showTooltipSlowMotion(m_player->getModelHandler(), "debug..");
+			genericPress(TutorialScript::slowmo_allKilled_four);
+            break;
         case TutorialScript::even_one:
             showTooltipSlowMotion(m_player->getModelHandler(), "It looks like\nthe mission rests\non my shoulders.");
 			genericPress(TutorialScript::even_two);
@@ -208,12 +214,57 @@ void Tutorial::update()
 			genericPress(TutorialScript::slowmo_one);
 			break;
 		case TutorialScript::slowmo_one:
-			showTooltipSlowMotion(m_player->getModelHandler(), "Todo..");
+			if (mutantSpawned())
+				m_tooltipIdx = TutorialScript::slowmo_two;
+			hideTooltip(m_player->getModelHandler());
 			break;
-/*		case TutorialScript::even_teleport_actual:
-			if (press(OIS::KeyCode::KC_E))
-                m_tooltipIdx = TutorialScript::even_monster_two
-				break;*/
+		case TutorialScript::slowmo_two:
+			showTooltipSlowMotion(m_player->getModelHandler(), "My powersuit is overflowing with power!");
+			genericPress(TutorialScript::slowmo_three);
+			break;
+		case TutorialScript::slowmo_three:
+			showTooltipSlowMotion(m_player->getModelHandler(), "With this much energy I can enter a state of superhuman senses by pressing shift+space.");
+			if(OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift))
+			    genericPress(TutorialScript::slowmo_four,OIS::KC_SPACE);
+			break;
+		case TutorialScript::slowmo_four:
+			if (pauseTimer())
+				m_tooltipIdx = TutorialScript::slowmo_five;
+			hideTooltip(m_player->getModelHandler());
+			break;
+		case TutorialScript::slowmo_five:
+			showTooltipSlowMotion(m_player->getModelHandler(), "I can then focus on picking my next targets and easily take them out with super speed!");
+			genericPress(TutorialScript::slowmo_six);
+			break;
+		case TutorialScript::slowmo_six:
+			showTooltipSlowMotion(m_player->getModelHandler(), "I’ll test it out on those mutants over there!");
+			genericPress(TutorialScript::slowmo_seven);
+			break;
+		case TutorialScript::slowmo_seven:
+			hideTooltip(m_player->getModelHandler());
+			if (allKilled())
+				m_tooltipIdx = TutorialScript::slowmo_allKilled;
+			break;
+		case TutorialScript::slowmo_allKilled:
+			showTooltipSlowMotion(m_player->getModelHandler(), "Easy peasy, lemon squeezy!");
+			genericPress(TutorialScript::slowmo_allKilled_two);
+			break;
+		case TutorialScript::slowmo_allKilled_two:
+			showTooltipSlowMotion(m_player->getModelHandler(), "I should get out of this lab and follow the mutants trail into the forest.");
+			genericPress(TutorialScript::slowmo_allKilled_three);
+			break;
+		case TutorialScript::slowmo_allKilled_three:
+			showTooltipSlowMotion(m_player->getModelHandler(), "Guys! I won’t let your deaths be in vain!");
+			genericPress(TutorialScript::slowmo_allKilled_four);
+			break;
+		case TutorialScript::slowmo_allKilled_four:
+			hideTooltip(m_player->getModelHandler());
+			if (pauseTimer())
+				m_tooltipIdx = TutorialScript::change_level;
+			break;
+		case TutorialScript::change_level:
+			m_changeLevel = true;
+			break;
         default:
             break;
         }
@@ -221,11 +272,18 @@ void Tutorial::update()
 	if (!OISCore::getSingleton().getKeyboard()->isKeyDown(OIS::KeyCode::KC_RETURN))
 		m_enterReleased = true;
 }
+bool Tutorial::plzChangeLevel()
+{
+	return m_changeLevel;
+}
+bool Tutorial::allKilled()
+{
+	return MutantContainer::getSingleton().getMutantIt().size() == 0;
+}
 bool Tutorial::canSpawn()
 {
 	return m_canSpawn;
 }
-#include "MutantContainer.h"
 bool Tutorial::mutantIsClose()
 {
 	return float_compare(MutantContainer::getSingleton().getMutantIt().back()->getPolarCoordinates().theta, m_player->getPolarCoordinates().theta, 0.1f);

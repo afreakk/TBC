@@ -16,6 +16,10 @@ MutantContainer::MutantContainer()
 }
 MutantContainer::~MutantContainer()
 {
+	for (auto& i  : m_deadMutants)
+        i.second->mutant.reset();
+	for (auto& i : m_aliveMutants)
+        i.second->mutant.reset();
 }
 void MutantContainer::destroyHandlers()
 {

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainLevelSetter.h"
 #include "LevelOne.h"
+#include "LevelTwo.h"
 #include "LevelMenu.h"
 #include "LevelManager.h"
 
@@ -15,9 +16,19 @@ MainLevelSetter::~MainLevelSetter()
 {
 }
 
+void MainLevelSetter::update()
+{
+	if (m_nextLevel != MainLevelEnums::NONE)
+	{
+        m_levelMgr->deleteCurrenLevel();
+        m_levelMgr->changeLevel(setLevel(m_nextLevel));
+		m_nextLevel = MainLevelEnums::NONE;
+	}
+
+}
 void MainLevelSetter::changeLevel(MainLevelEnums newLvl)
 {
-	m_levelMgr->changeLevel(setLevel(newLvl));
+	m_nextLevel = newLvl;
 }
 ILevel* MainLevelSetter::setLevel(MainLevelEnums newLvl)
 {
@@ -27,6 +38,8 @@ ILevel* MainLevelSetter::setLevel(MainLevelEnums newLvl)
 		return new LevelMenu();
 	case MainLevelEnums::LVL1:
 		return new LevelOne();
+	case MainLevelEnums::LVL2:
+		return new LevelTwo();
 	default:
 		assert(0);
 		return nullptr;

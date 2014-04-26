@@ -22,12 +22,12 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos, Mode
 }
 ModelHandler::~ModelHandler()
 {
+	cout << "modelhandlerDestructor: " << m_node->getName() << endl;
 	SceneNode* parent = m_entity->getParentSceneNode();
 	parent->detachObject(m_entity);
-	OgreCore::getSingleton().getSceneMgr()->destroyEntity(m_entity->getName());
+	OgreCore::getSingleton().getSceneMgr()->destroyEntity(m_entity);
 	parent->removeAndDestroyAllChildren();
-	OgreCore::getSingleton().getSceneMgr()->destroySceneNode(parent->getName());
-	cout << "ModelHandler destrucotr " << endl;
+	OgreCore::getSingleton().getSceneMgr()->destroySceneNode(parent);
 }
 void ModelHandler::tooltip(std::string msg)
 {

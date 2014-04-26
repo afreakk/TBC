@@ -22,6 +22,7 @@ PlayerContainer::PlayerContainer()
 
 PlayerContainer::~PlayerContainer()
 {
+	m_player.reset();
 }
 
 void PlayerContainer::destroyHandlers()

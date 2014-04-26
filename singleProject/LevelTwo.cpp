@@ -1,5 +1,6 @@
+
 #include "stdafx.h"
-#include "LevelOne.h"
+#include "LevelTwo.h"
 #include "OgreCore.h"
 #include "MainLevelSetter.h"
 #include "MainUpdate.h"
@@ -9,17 +10,17 @@
 #include "PlayerHandler.h"
 #include "CoreCompositor.h"
 #include "../procedural/ProceduralPlaneGenerator.h"
-LevelOne::LevelOne() 
+LevelTwo::LevelTwo() 
 : ILevel(LevelID::LEVEL_ONE)
 , m_particleRefContainer(new ParticleReferenceContainer())
 , m_playerContainer(new PlayerContainer())
 , m_mutantContainer(new MutantContainer())
 , m_environmentNode(OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode())
-, m_enemySpawner("Tutorial")
+, m_enemySpawner("LvlOne")
 , m_time(0.0)
 , m_pillarHider(m_environmentNode)
 {
-	Ogre::LogManager::getSingleton().logMessage("hnz: lvl1 Const");
+	Ogre::LogManager::getSingleton().logMessage("hnz: lvl2 Const");
 	m_console = unique_ptr<GameConsole>(new GameConsole());
 	m_enemySpawner.init(m_mutantContainer.get(), m_playerContainer->getPlayer());
 	m_playerCamera.init(m_playerContainer->getPlayer());
@@ -30,44 +31,28 @@ LevelOne::LevelOne()
 }
 
 
-LevelOne::~LevelOne()
+LevelTwo::~LevelTwo()
 {
-	Ogre::LogManager::getSingleton().logMessage("hnz: lvl1 Dest");
+	Ogre::LogManager::getSingleton().logMessage("hnz: lvl2 Dest");
 	m_mutantContainer->destroyHandlers();
 	m_playerContainer->destroyHandlers();
 	destroyWorld();
 	unLinkSubscribers();
-	/* Destroy envNode + childEntity and nodes ? Seems to be destroyed somehow*/
-	/*for (auto it : m_dotSceneLoader.dynamicObjects)
-	{
-	}
-	auto nodes = m_environmentNode->getChildIterator();
-	while (nodes.hasMoreElements())
-	{
-		auto it = nodes.getNext()
-	}
-	auto env = m_environmentNode->getAttachedObjectIterator();
-	while (env.hasMoreElements())
-	{
-		auto it = env.getNext();
-		OgreCore::getSingleton().getSceneMgr()->destroyMovableObject(it);
-	}*/
-	Ogre::LogManager::getSingleton().logMessage("hnz: lvl1 Dest / end");
 }
-void LevelOne::linkSubscribers()
+void LevelTwo::linkSubscribers()
 {
 	PlayerGlobalStats::getSingletonPtr()->registerSubscriber(&m_playerGUI, "PlayerGUI");
 	PlayerGlobalStats::getSingletonPtr()->registerSubscriber(m_playerContainer.get(), "PlayerContainer");
 	m_playerContainer->getHandler()->registerSubscriber(&m_playerCamera, "playerCamera");
 }
-void LevelOne::unLinkSubscribers()
+void LevelTwo::unLinkSubscribers()
 {
 	m_playerContainer->getPlayer()->removeSubscriber("playerCamera");
 	PlayerGlobalStats::getSingletonPtr()->removeSubscriber("PlayerGUI");
 	PlayerGlobalStats::getSingletonPtr()->removeSubscriber("PlayerContainer");
 }
 
-void LevelOne::destroyWorld()
+void LevelTwo::destroyWorld()
 {
 	for (unsigned i = 0; i < m_dotSceneLoader.staticObjects.size(); i++)
 		OgreCore::getSingleton().getSceneMgr()->destroyEntity(m_dotSceneLoader.staticObjects[i]);
@@ -75,14 +60,8 @@ void LevelOne::destroyWorld()
 		OgreCore::getSingleton().getSceneMgr()->destroyEntity(m_dotSceneLoader.dynamicObjects[i]);
 	m_environmentNode->removeAndDestroyAllChildren();
 }
-Real avgFps = 0.0;
-bool LevelOne::update()
+bool LevelTwo::update()
 {
-	/*if (avgFps != OgreCore::getSingleton().getWindow()->getAverageFPS())
-	{
-		avgFps = OgreCore::getSingleton().getWindow()->getAverageFPS();
-		cout << OgreCore::getSingleton().getWindow()->getAverageFPS() << endl;
-	}*/
 	m_time += MainUpdate::getSingleton().getDeltaTime();
 	m_pillarHider.update();
 	m_particleRefContainer->update();
@@ -90,11 +69,7 @@ bool LevelOne::update()
 	m_mutantContainer->update();
 	m_playerCamera.update();
 	m_environment.update();
-	m_tutorial.update();
 	TooltipUpdates::update();
-	if (m_tutorial.canSpawn())
-	    m_enemySpawner.update();
-	if (m_tutorial.plzChangeLevel())
-		MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL2);
+    m_enemySpawner.update();
 	return false;
 }

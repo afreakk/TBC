@@ -10,6 +10,7 @@ public:
 	~LevelManager();
 	void update();
 	void changeLevel(ILevel* nextLevel);
+	void deleteCurrenLevel();
 	const LevelID getCurrentLevelID();
 protected:
 	std::unique_ptr<ILevel> m_currentLevel;

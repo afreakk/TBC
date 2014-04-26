@@ -11,7 +11,7 @@ struct MutantStartingInfo
 class EnemySpawner 
 {
 public:
-	EnemySpawner();
+	EnemySpawner(const std::string& lvl);
 	void init(MutantContainer* mutantContainer, Player* player);
 	~EnemySpawner();
 	void update();
@@ -19,6 +19,7 @@ private:
 	Real m_spawnDistance;
 	MutantContainer* m_mutantContainer;
 	Player* m_player;
+	std::string m_lvlName;
 	
 	std::vector<MutantStartingInfo> m_mutantStartingPositions;
 

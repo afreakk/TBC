@@ -10,7 +10,6 @@
 ModelRecipePlayer::ModelRecipePlayer()
 : m_materialName("Examples/Ninja")
 {
-	m_name = "Player";
 }
 ModelRecipePlayer::~ModelRecipePlayer()
 {
@@ -24,6 +23,7 @@ BaseAnimation* ModelRecipePlayer::getPrepare(Ogre::Entity* entity)
 }
 Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
 {
+	cout << "initMesh: Player" << endl;
 	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("ninja.mesh", "Models") ;
 	auto mesh = resourcePtr.first.dynamicCast<Ogre::Mesh>();
 	unsigned short src, dest;

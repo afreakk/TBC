@@ -39,6 +39,7 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMenu.cpp" />
     <ClCompile Include="LevelOne.cpp" />
+    <ClCompile Include="LevelTwo.cpp" />
     <ClCompile Include="LightHandler.cpp" />
     <ClCompile Include="LineBillboardSet.cpp" />
     <ClCompile Include="LvlOneEnvironment.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="GameConsole.h" />
     <ClInclude Include="Gorilla.h" />
     <ClInclude Include="HDRCompositor.h" />
+    <ClInclude Include="LevelTwo.h" />
     <ClInclude Include="LineBillboardSet.h" />
     <ClInclude Include="CoreCompositor.h" />
     <ClInclude Include="Distancer.h" />

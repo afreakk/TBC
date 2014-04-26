@@ -15,7 +15,6 @@ ModelRecipeMutant::ModelRecipeMutant()
 , m_nodeName("MutantRanged"+boost::lexical_cast<string>(m_id))
 , m_hoveredName("HoveredRanged")
 {
-	m_name="MutantRanged";
 	cout << "MutantEntity: " << m_entityName << endl;
 }
 

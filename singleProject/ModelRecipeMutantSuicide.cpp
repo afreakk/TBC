@@ -15,7 +15,6 @@ ModelRecipeMutantSuicide::ModelRecipeMutantSuicide()
 , m_materialName("Examples/Robot")
 , m_hoveredName("HoveredSuicide")
 {
-	m_name = "MutantSuicide";
 }
 
 ModelRecipeMutantSuicide::~ModelRecipeMutantSuicide()

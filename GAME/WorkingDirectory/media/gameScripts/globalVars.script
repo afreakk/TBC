@@ -38,11 +38,17 @@ entity PlayerCameraLERP
 
 // ENEMIES
 
-entity Enemies
+entity EnemiesTutorial
 {
-	r 			0.8 1.2	1.8	2.5
-	lane 		1 	2	0  	0
-	weaponType	fireball fireball frostbolt suicide
+	r 			0.8 1.2	1.8	2.5 3.0 3.0
+	lane 		1 	2	0  	0   0   1
+	weaponType	fireball fireball frostbolt suicide frostbolt fireball
+}
+entity EnemiesLvlOne
+{
+	r 			0.8 1.2	1.8	2.5 3.0 3.0
+	lane 		1 	2	0  	0   0   1
+	weaponType	suicide suicide suicide suicide frostbolt fireball
 }
 entity EnemyStats 
 {

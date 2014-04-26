@@ -19,6 +19,9 @@ const LevelID LevelManager::getCurrentLevelID()
 }
 void LevelManager::changeLevel(ILevel* nextLevel)
 {
-	m_currentLevel.reset();
 	m_currentLevel = unique_ptr<ILevel>{ nextLevel };
+}
+void LevelManager::deleteCurrenLevel()
+{
+	m_currentLevel.reset();
 }

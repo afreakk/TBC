@@ -422,6 +422,9 @@
     <ClCompile Include="Tutorial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LevelTwo.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -810,6 +813,9 @@
     </ClInclude>
     <ClInclude Include="Tutorial.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelTwo.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

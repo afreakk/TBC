@@ -4,10 +4,11 @@
 #include "UnitCircleMovement.h"
 #include "ModelRecipeMutantSuicide.h"
 #include "ModelRecipeMutant.h"
-EnemySpawner::EnemySpawner() 
+EnemySpawner::EnemySpawner(const std::string& lvl) 
 : m_spawnDistance(Ogre::Math::PI / 4.0)
 , m_mutantContainer(nullptr)
 , m_player(nullptr)
+, m_lvlName(lvl)
 {
 }
 void EnemySpawner::init(MutantContainer* mutantContainer, Player* player)
@@ -15,7 +16,7 @@ void EnemySpawner::init(MutantContainer* mutantContainer, Player* player)
 	m_mutantContainer = mutantContainer;
 	m_player = player;
 
-	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "Enemies");
+	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "Enemies"+m_lvlName);
 	for (unsigned i = 0; i < rootNode->findChild("r")->getValues().size(); i++)
 	{
 		m_mutantStartingPositions.push_back(MutantStartingInfo());

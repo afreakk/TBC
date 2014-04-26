@@ -3,6 +3,7 @@
 #include "OgreCore.h"
 #include "OISCore.h"
 #include "GlobalVariables.h"
+#include "MainLevelSetter.h"
 template<> MainUpdate* Ogre::Singleton<MainUpdate>::msSingleton = 0;
 MainUpdate::MainUpdate(LevelManager* lvlMgr) :m_levelManager(lvlMgr), m_deltaTime(0.0)
 {
@@ -18,6 +19,7 @@ bool MainUpdate::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	m_scaledDeltaTime = m_deltaTime * GlobalVariables::getSingleton().getSpeed();
 	OISCore::getSingletonPtr()->capture();
 	m_levelManager->update();
+	MainLevelSetter::getSingleton().update();
 	return !OgreCore::getSingletonPtr()->getWindow()->isClosed(); 
 }
 const Ogre::Real& MainUpdate::getDeltaTime()
