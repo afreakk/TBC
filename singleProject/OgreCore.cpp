@@ -66,11 +66,8 @@ bool OgreCore::initResources()
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/soloMaterials/HDR/Programs", "FileSystem", "SoloMaterials");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/soloMaterials/HDR/Scripts", "FileSystem", "SoloMaterials");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/mesh", "FileSystem", "SceneOne");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/material", "FileSystem", "SceneOne");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/bitmap", "FileSystem", "SceneOne");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/program", "FileSystem", "SceneOne");
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery", "FileSystem", "SceneOne");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/SceneOne", "FileSystem", "SceneOne");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/environment/scenery/SceneTwo", "FileSystem", "SceneTwo");
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/menu/main", "FileSystem", "GUI");

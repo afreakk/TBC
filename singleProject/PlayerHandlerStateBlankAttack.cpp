@@ -14,7 +14,7 @@ PlayerHandlerStateBlankAttack::PlayerHandlerStateBlankAttack(Player* player)
 void PlayerHandlerStateBlankAttack::setState()
 {
 	PolarCoordinates pcoord = m_player->getPolarCoordinates();
-	pcoord.theta += m_player->getModelHandler().getNormalDirection() == NormalDirection::dirLeft ? -Math::PI / 480.0f : Math::PI / 480.0f;
+	pcoord.theta += (m_player->getModelHandler().getNormalDirection() == NormalDirection::dirLeft ? -Math::PI / 480.0f : Math::PI / 480.0f);
 	Vector3 targetPos = UnitCircleMovement::VectorFromPolar(pcoord);
 	m_lerpState = unique_ptr<BehaviourStateLERP>(new BehaviourStateLERP(nullptr
 		, &PlayerGlobalStats::getSingleton().getLERPSpeed_NoEnergy(), new LERPWalkAttack(), targetPos));

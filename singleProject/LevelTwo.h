@@ -1,7 +1,7 @@
 
 #pragma once
 #include "ILevel.h"
-#include "LvlOneEnvironment.h"
+#include "LvlTwoEnvironment.h"
 #include "PlayerCamera.h"
 #include "EnemySpawner.h"
 #include "PlayerGUI.h"
@@ -25,11 +25,10 @@ private:
 	PlayerCamera m_playerCamera;
 	Ogre::Real m_time;
 
-	LvlOneEnvironment m_environment;
+	LvlTwoEnvironment m_environment;
 	PlayerGUI m_playerGUI;
 	DotSceneLoader m_dotSceneLoader;
 	unique_ptr<GameConsole> m_console;
-	PillarHider m_pillarHider;
 
 	void destroyWorld();
 	void unLinkSubscribers();

@@ -425,6 +425,9 @@
     <ClCompile Include="LevelTwo.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="LvlTwoEnvironment.cpp">
+      <Filter>Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -816,6 +819,9 @@
     </ClInclude>
     <ClInclude Include="LevelTwo.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LvlTwoEnvironment.h">
+      <Filter>Environment</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

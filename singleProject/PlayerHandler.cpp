@@ -53,7 +53,7 @@ void PlayerHandler::switchState(PLAYER_HANDLER_STATE newState)
         m_currentState.reset();
 		if (closestMutant != nullptr)
 		{
-			if (closestMutant->getNode()->getPosition().distance(m_player->getNode()->getPosition()) > 200.0f)
+			if (closestMutant->getNode()->getPosition().distance(m_player->getNode()->getPosition()) > 300.0f)
 				closestMutant = nullptr;
 		}
 		m_currentState = (closestMutant == nullptr) ? unique_ptr<HandlerState<PLAYER_HANDLER_STATE>>(new PlayerHandlerStateBlankAttack(m_player))

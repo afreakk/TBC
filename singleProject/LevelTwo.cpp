@@ -2,14 +2,11 @@
 #include "stdafx.h"
 #include "LevelTwo.h"
 #include "OgreCore.h"
-#include "MainLevelSetter.h"
 #include "MainUpdate.h"
 #include "ParticleReferenceContainer.h"
 #include "PlayerContainer.h"
 #include "PlayerGlobalStats.h"
 #include "PlayerHandler.h"
-#include "CoreCompositor.h"
-#include "../procedural/ProceduralPlaneGenerator.h"
 LevelTwo::LevelTwo() 
 : ILevel(LevelID::LEVEL_ONE)
 , m_particleRefContainer(new ParticleReferenceContainer())
@@ -18,15 +15,15 @@ LevelTwo::LevelTwo()
 , m_environmentNode(OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode())
 , m_enemySpawner("LvlOne")
 , m_time(0.0)
-, m_pillarHider(m_environmentNode)
 {
 	Ogre::LogManager::getSingleton().logMessage("hnz: lvl2 Const");
 	m_console = unique_ptr<GameConsole>(new GameConsole());
 	m_enemySpawner.init(m_mutantContainer.get(), m_playerContainer->getPlayer());
 	m_playerCamera.init(m_playerContainer->getPlayer());
-	m_dotSceneLoader.parseDotScene("Tutorial_level01.scene", "SceneOne", OgreCore::getSingletonPtr()->getSceneMgr(), m_environmentNode );
-	m_environmentNode->rotate(Vector3::UNIT_Y, Radian(Degree(180)));
+	m_dotSceneLoader.parseDotScene("Mountainpath.scene", "SceneTwo", OgreCore::getSingletonPtr()->getSceneMgr(), m_environmentNode );
+//	m_environmentNode->rotate(Vector3::UNIT_Y, Radian(Degree(180)));
 //	m_environmentNode->setPosition(Vector3(0, -10.0, 0));
+	m_environmentNode->scale(Vector3(0.325));
 	linkSubscribers();
 }
 
@@ -63,13 +60,11 @@ void LevelTwo::destroyWorld()
 bool LevelTwo::update()
 {
 	m_time += MainUpdate::getSingleton().getDeltaTime();
-	m_pillarHider.update();
 	m_particleRefContainer->update();
 	m_playerContainer->update();
 	m_mutantContainer->update();
 	m_playerCamera.update();
 	m_environment.update();
-	TooltipUpdates::update();
     m_enemySpawner.update();
 	return false;
 }

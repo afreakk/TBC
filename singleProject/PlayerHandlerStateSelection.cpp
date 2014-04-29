@@ -25,6 +25,7 @@ PlayerHandlerStateSelection::PlayerHandlerStateSelection(Player* player)
 
 PlayerHandlerStateSelection::~PlayerHandlerStateSelection()
 {
+    PlayerGlobalStats::getSingleton().markEnergy(0);
     CoreCompositor::getSingleton().blackAndWhite(false);
 	MutantContainer::getSingleton().removeSubscriber("PlayerHandlerStateSelection");
 	GlobalVariables::getSingleton().setSpeed(1.0);
