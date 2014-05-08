@@ -26,7 +26,7 @@ entity GlobalStats
 
 entity PlayerCameraNormal
 {
-	distance 1.3
+	distance 1.5
 	height 300.0
 }
 entity PlayerCameraLERP

@@ -1,10 +1,12 @@
 #pragma once
 #include "BaseAnimation.h"
+#include "AudioHelpers.h"
 class AnimationWalk : public BaseAnimation
 {
 public:
-	AnimationWalk(std::vector<AnimationState*> animStates)
+	AnimationWalk(std::vector<AnimationState*> animStates, Skritt* footStepSound)
 		: BaseAnimation(animStates)
+		, m_footStepSound(footStepSound)
 	{}
 	~AnimationWalk()
 	{}
@@ -14,6 +16,7 @@ public:
 		if (!m_animStates[0]->getEnabled())
             m_animStates[0]->setEnabled(true);
 		m_animStates[0]->addTime(time);
+		m_footStepSound->playSkritt();
 		BaseAnimation::setStopped(false);
 	}
 	void endAnimation() override
@@ -25,5 +28,7 @@ public:
 	{
 		return false;
 	}
+private:
+	Skritt* m_footStepSound;
 };
 

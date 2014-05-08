@@ -8,7 +8,7 @@ public:
 	ModelRecipeMutantSuicide();
 	~ModelRecipeMutantSuicide();
 	Ogre::Entity* initMesh(Ogre::SceneManager* sMgr) override;
-	BaseAnimation* getWalk(Ogre::Entity*) override;
+	BaseAnimation* getWalk(Ogre::Entity*, Skritt* skritt) override;
 	BaseAnimation* getAttack(Ogre::Entity*) override;
 	BaseAnimation* getDie(Ogre::Entity*) override;
 	BaseAnimation* getPrepare(Ogre::Entity*)override;

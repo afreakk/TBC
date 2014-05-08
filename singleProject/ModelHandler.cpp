@@ -17,6 +17,7 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos, Mode
 , m_modelHandlerType(type)
 , m_freezeTimer(-0.5f)
 , m_tooltip(m_node)
+, m_skritt(m_node)
 {
 	parseScript();
 }
@@ -60,7 +61,7 @@ void ModelHandler::init()
 {
 	m_crRecipe->attachNode(m_node, m_entity);
 	m_animations[ANIMATIONS::ATTACK]= unique_ptr<BaseAnimation>(m_crRecipe->getAttack(m_entity) );
-	m_animations[ANIMATIONS::WALK]	= unique_ptr<BaseAnimation>(m_crRecipe->getWalk(m_entity) );
+	m_animations[ANIMATIONS::WALK]	= unique_ptr<BaseAnimation>(m_crRecipe->getWalk(m_entity, &m_skritt) );
 	m_animations[ANIMATIONS::DIE]	= unique_ptr<BaseAnimation>(m_crRecipe->getDie(m_entity) );
 	m_animations[ANIMATIONS::PREPARE] = unique_ptr<BaseAnimation>(m_crRecipe->getPrepare(m_entity));
 	m_animations[ANIMATIONS::TUMBLE]	= unique_ptr<BaseAnimation>(m_crRecipe->getTumble(m_entity) );

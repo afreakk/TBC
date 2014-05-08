@@ -61,11 +61,11 @@ BaseAnimation* ModelRecipeMutant::getDie(Ogre::Entity* entity)
 	return new AnimationDie(anims);
 }
 
-BaseAnimation* ModelRecipeMutant::getWalk(Ogre::Entity* entity)
+BaseAnimation* ModelRecipeMutant::getWalk(Ogre::Entity* entity, Skritt* skritt)
 {
 	std::vector<AnimationState*> anims;
 	anims.push_back(entity->getAnimationState("Walk"));
-	return new AnimationWalk(anims);
+	return new AnimationWalk(anims, skritt);
 }
 BaseAnimation* ModelRecipeMutant::getAttack(Ogre::Entity* entity)
 {

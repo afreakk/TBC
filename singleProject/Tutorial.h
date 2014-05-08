@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioHelpers.h"
 class Player;
 class ModelHandler;
 enum class TutorialScript
@@ -80,6 +81,7 @@ private:
 	int m_mutantSize;
 	bool m_canSpawn;
 	bool m_changeLevel;
+	IntroLoopListener m_music;
 
 	void showTooltipSlowMotion(ModelHandler& model,const  std::string& msg);
 	void showTooltipNormie(ModelHandler& model,const  std::string& msg);

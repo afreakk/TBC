@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationPrepare.cpp" />
+    <ClCompile Include="AudioHelpers.cpp" />
     <ClCompile Include="BaseAnimation.cpp" />
     <ClCompile Include="BeamWeaponHitTest.cpp" />
     <ClCompile Include="BehaviourObject.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="LaneSettings.cpp" />
     <ClCompile Include="LERPWalk.cpp" />
     <ClCompile Include="LERPWalkAttack.cpp" />
+    <ClCompile Include="LevelIntro.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMenu.cpp" />
     <ClCompile Include="LevelOne.cpp" />
@@ -47,6 +49,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainLevelSetter.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MainMenuButton.cpp" />
     <ClCompile Include="MainUpdate.cpp" />
     <ClCompile Include="ManualLine.cpp" />
     <ClCompile Include="MeshEmitter.cpp" />
@@ -127,6 +130,7 @@
     <ClInclude Include="AnimationPrepare.h" />
     <ClInclude Include="AnimationTumble.h" />
     <ClInclude Include="AnimationWalk.h" />
+    <ClInclude Include="AudioHelpers.h" />
     <ClInclude Include="BarTypes.h" />
     <ClInclude Include="BaseAnimation.h" />
     <ClInclude Include="BeamWeaponHitTest.h" />
@@ -148,6 +152,7 @@
     <ClInclude Include="GameConsole.h" />
     <ClInclude Include="Gorilla.h" />
     <ClInclude Include="HDRCompositor.h" />
+    <ClInclude Include="LevelIntro.h" />
     <ClInclude Include="LevelTwo.h" />
     <ClInclude Include="LvlTwoEnvironment.h" />
     <ClInclude Include="LineBillboardSet.h" />
@@ -175,6 +180,7 @@
     <ClInclude Include="LvlOneEnvironment.h" />
     <ClInclude Include="MainLevelSetter.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MainMenuButton.h" />
     <ClInclude Include="MainUpdate.h" />
     <ClInclude Include="ManualLine.h" />
     <ClInclude Include="MeshEmitter.h" />

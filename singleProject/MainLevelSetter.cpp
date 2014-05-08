@@ -4,6 +4,7 @@
 #include "LevelTwo.h"
 #include "LevelMenu.h"
 #include "LevelManager.h"
+#include "LevelIntro.h"
 
 template<> MainLevelSetter* Ogre::Singleton<MainLevelSetter>::msSingleton = 0;
 MainLevelSetter::MainLevelSetter(MainLevelEnums newLvl)
@@ -40,6 +41,8 @@ ILevel* MainLevelSetter::setLevel(MainLevelEnums newLvl)
 		return new LevelOne();
 	case MainLevelEnums::LVL2:
 		return new LevelTwo();
+	case MainLevelEnums::INTRO:
+		return new LevelIntro();
 	default:
 		assert(0);
 		return nullptr;

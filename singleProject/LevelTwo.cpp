@@ -23,7 +23,7 @@ LevelTwo::LevelTwo()
 	m_dotSceneLoader.parseDotScene("Mountainpath.scene", "SceneTwo", OgreCore::getSingletonPtr()->getSceneMgr(), m_environmentNode );
 //	m_environmentNode->rotate(Vector3::UNIT_Y, Radian(Degree(180)));
 //	m_environmentNode->setPosition(Vector3(0, -10.0, 0));
-	m_environmentNode->scale(Vector3(0.325));
+//	m_environmentNode->scale(Vector3(0.325));
 	linkSubscribers();
 }
 

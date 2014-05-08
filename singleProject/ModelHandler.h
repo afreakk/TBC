@@ -5,6 +5,7 @@
 #include "ENUMLERPState.h"
 #include "boost/noncopyable.hpp"
 #include "Tooltip.h"
+#include "AudioHelpers.h"
 enum class AttackReturn
 {
     NOT_KILLED,
@@ -52,6 +53,7 @@ protected:
 	ModelHandlerType m_modelHandlerType;
 	Ogre::Real m_freezeTimer;
 	TwoDTooltip m_tooltip;
+	Skritt m_skritt;
 
 
 	std::map<ANIMATIONS, unique_ptr<BaseAnimation> > m_animations;

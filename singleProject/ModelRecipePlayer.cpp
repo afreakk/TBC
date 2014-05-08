@@ -47,11 +47,11 @@ BaseAnimation* ModelRecipePlayer::getDie(Ogre::Entity* entity)
 	anims.push_back(entity->getAnimationState("Death2"));
 	return new AnimationDie(anims);
 }
-BaseAnimation* ModelRecipePlayer::getWalk(Ogre::Entity* entity)
+BaseAnimation* ModelRecipePlayer::getWalk(Ogre::Entity* entity, Skritt* skritt)
 {
 	std::vector<AnimationState*> anims;
 	anims.push_back(entity->getAnimationState("Walk"));
-	return new AnimationWalk(anims);
+	return new AnimationWalk(anims, skritt);
 }
 BaseAnimation* ModelRecipePlayer::getAttack(Ogre::Entity* entity)
 {

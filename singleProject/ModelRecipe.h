@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseAnimation.h"
+class Skritt;
 enum QueryMasks
 {
     PlayerMask = 1<<1,
@@ -13,7 +14,7 @@ public:
 	{
 	}
 	virtual Ogre::Entity* initMesh(Ogre::SceneManager* )=0;
-	virtual BaseAnimation* getWalk(Ogre::Entity*) = 0;
+	virtual BaseAnimation* getWalk(Ogre::Entity*, Skritt* skritt) = 0;
 	virtual BaseAnimation* getAttack(Ogre::Entity*) = 0;
 	virtual BaseAnimation* getDie(Ogre::Entity*) = 0;
 	virtual BaseAnimation* getPrepare(Ogre::Entity*) = 0;

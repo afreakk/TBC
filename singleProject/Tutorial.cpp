@@ -11,13 +11,14 @@
 
 Tutorial::Tutorial()
 : m_player(PlayerContainer::getSingleton().getPlayer())
-, m_tooltipIdx(/*TutorialScript::even_one*/TutorialScript::debug)
+, m_tooltipIdx(TutorialScript::even_one/*TutorialScript::debug*/)
 , m_enterReleased(true)
 , m_compositorOn(false)
 , m_pauseTimer(0.0f)
 , m_mutantSize(0)
 , m_canSpawn(false)
 , m_changeLevel(false)
+, m_music("music/tutorial")
 {
 }
 
@@ -28,6 +29,7 @@ Tutorial::~Tutorial()
 
 void Tutorial::update()
 {
+	m_music.update();
 	m_canSpawn = false;
 	if (m_enterReleased)
 	{
@@ -38,11 +40,11 @@ void Tutorial::update()
 			genericPress(TutorialScript::slowmo_allKilled_four);
             break;
         case TutorialScript::even_one:
-            showTooltipSlowMotion(m_player->getModelHandler(), "It looks like\nthe mission rests\non my shoulders.");
+            showTooltipSlowMotion(m_player->getModelHandler(), "It looks like the mission rests on my shoulders.");
 			genericPress(TutorialScript::even_two);
             break;
         case TutorialScript::even_two:
-            showTooltipSlowMotion(m_player->getModelHandler(), "I could never\nforgive myself if\nI were to fail my\ncountry and not\nleast my teammates now!");
+            showTooltipSlowMotion(m_player->getModelHandler(), "I could never forgive myself if I were to fail my\ncountry and not least my teammates now!");
 			genericPress(TutorialScript::even_three);
             break;
         case TutorialScript::even_three:
@@ -129,7 +131,7 @@ void Tutorial::update()
 			genericPress(TutorialScript::even_fireball_four);
 			break;
 		case TutorialScript::even_fireball_four:
-			showTooltipSlowMotion(m_player->getModelHandler(), "When fighting multiple monsters, tricking them into hitting each other is the key to an easy win!");
+			showTooltipSlowMotion(m_player->getModelHandler(), "When fighting multiple monsters, \ntricking them into hitting each other is the key to an easy win!");
 			genericPress(TutorialScript::even_fireball_waitForKill);
 			break;
 		case TutorialScript::even_fireball_waitForKill:
@@ -189,7 +191,7 @@ void Tutorial::update()
 			genericPress(TutorialScript::suicide_two);
 			break;
 		case TutorialScript::suicide_two:
-			showTooltipSlowMotion(m_player->getModelHandler(), "The radiation have been wreaking havoc on their minds and their bodies for too long.");
+			showTooltipSlowMotion(m_player->getModelHandler(), "The radiation have been wreaking havoc on \ntheir minds and their bodies for too long.");
 			genericPress(TutorialScript::suicide_three);
 			break;
 		case TutorialScript::suicide_three:
@@ -365,11 +367,13 @@ void Tutorial::showTooltipSlowMotion(ModelHandler& model, const std::string& msg
 ///
 void Tutorial::setCompositor(bool enabled)
 {
-	if (m_compositorOn != enabled)
+/*	if (m_compositorOn != enabled)
 	{
         CoreCompositor::getSingleton().getSingleton().tooltipComp(enabled);
 		m_compositorOn = enabled;
 	}
+    
+    */
 }
 void Tutorial::setSlowmotion(bool slowMotion)
 {
