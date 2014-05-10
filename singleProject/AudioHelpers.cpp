@@ -20,7 +20,7 @@ Skritt::Skritt(Ogre::Node* parentNode)
 : m_parentNode(parentNode)
 {
 	for (int i = 0; i < 6; i++)
-		m_walkNames.push_back("sfx/skritt_" + i);
+		m_walkNames.push_back("sfx/skritt_" + std::to_string(i) + ".ogg");
 }
 
 void Skritt::playSkritt()

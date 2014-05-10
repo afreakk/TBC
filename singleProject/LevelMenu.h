@@ -9,6 +9,6 @@ public:
 	bool update() override;
 private:
 	Ogre::Real m_time;
-	MainMenu m_menu;
+	std::unique_ptr<MenuBase> m_menu;
 };
 

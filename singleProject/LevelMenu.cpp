@@ -8,9 +8,8 @@
 LevelMenu::LevelMenu() 
 : ILevel(LevelID::LEVEL_MENU)
 , m_time(Real(0.0))
+, m_menu(new MainMenu())
 {
-	cout << "entering LevelMenu Constructor:" << endl;
-	cout << "exiting LevelMenu Construcotr:" << endl;
     //SoundFactory::getSingleton().playMusic("music/theme.ogg");
 }
 
@@ -21,7 +20,32 @@ LevelMenu::~LevelMenu()
 bool LevelMenu::update()
 {
 	m_time += MainUpdate::getSingleton().getDeltaTime();
-//	if (m_time > 1.0)
-	//	MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
+    ButtonType buttonClicked = m_menu->getButtonClicked();
+	if (buttonClicked != ButtonType::none)
+	{
+		switch (buttonClicked)
+		{
+		case ButtonType::play:
+			MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
+			break;
+		case ButtonType::options:
+            m_menu.reset();
+			m_menu = unique_ptr<MenuBase>(new OptionsMenu());
+			break;
+		case ButtonType::quit:
+			break;
+		case ButtonType::windowed:
+			break;
+		case ButtonType::music:
+			break;
+		case ButtonType::backToMenu:
+			m_menu.reset();
+			m_menu = unique_ptr<MenuBase>(new MainMenu());
+			break;
+		default:
+			assert(0);
+			break;
+		}
+	}
 	return false;
 }

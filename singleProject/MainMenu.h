@@ -2,18 +2,35 @@
 #include "MainMenuButton.h"
 #include <list>
 #include "OISKeyboard.h"
-class MainMenu : public OIS::KeyListener
+
+class MenuBase : public OIS::KeyListener
 {
 public:
-	MainMenu();
-	~MainMenu();
+	MenuBase(const std::string& gorillaFileName, const std::string& background);
+	virtual ~MenuBase();
     bool keyPressed(const OIS::KeyEvent &arg) override;
     bool keyReleased(const OIS::KeyEvent &arg) override;		
-private:
-	Gorilla::Screen* m_screen;
-	Gorilla::Layer* m_layer;
-	Gorilla::Rectangle* m_rBackground;
+	ButtonType getButtonClicked();
+protected:
 	std::list<MainMenuButton> m_buttons;
+	Gorilla::Layer* m_layer;
+	Gorilla::Screen* m_screen;
+	ButtonType m_buttonClicked;
+
+	void finalize();
+private:
+	Gorilla::Rectangle* m_rBackground;
 	std::list<MainMenuButton>::iterator m_selectedButton;
 };
 
+class MainMenu : public MenuBase
+{
+public:
+	MainMenu();
+};
+
+class OptionsMenu : public MenuBase
+{
+public:
+	OptionsMenu();
+};

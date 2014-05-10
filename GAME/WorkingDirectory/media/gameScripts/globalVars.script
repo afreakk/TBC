@@ -26,7 +26,7 @@ entity GlobalStats
 
 entity PlayerCameraNormal
 {
-	distance 1.5
+	distance 1.3
 	height 300.0
 }
 entity PlayerCameraLERP
@@ -78,6 +78,7 @@ entity PlayerStats
 	walkSpeed 0.100
 	energy_LERP 1000.0
 	normal_LERP 800.0
+
 	slowMotionPower 0.2
 	tumbleSpeed 2000.0
 }
