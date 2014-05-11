@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "MainMenuButton.h"
 
-
+Gorilla::Colours::Colour MainMenuButton::s_inactiveColor = Gorilla::Colours::Gray;
+Gorilla::Colours::Colour MainMenuButton::s_activeColour = Gorilla::Colours::Snow;
 MainMenuButton::MainMenuButton(Gorilla::Layer* layer, Ogre::Real left, Ogre::Real top, Ogre::Real width, Ogre::Real height, std::string spriteName, 
 	ButtonType buttonType)
 : m_rectangle ( layer->createRectangle(left,top, width, height) ) 
@@ -12,7 +13,7 @@ MainMenuButton::MainMenuButton(Gorilla::Layer* layer, Ogre::Real left, Ogre::Rea
 	m_currentSpriteName = m_spriteNames.begin();
 
 	m_rectangle->background_image(*m_currentSpriteName);
-    m_rectangle->background_colour(Gorilla::Colours::LimeGreen);
+    m_rectangle->background_colour(s_inactiveColor);
 }
 
 void MainMenuButton::animateClick()
@@ -42,7 +43,7 @@ ButtonType MainMenuButton::getType()
 void MainMenuButton::selected(bool selected)
 {
 	if (selected)
-		m_rectangle->background_colour(Gorilla::Colours::Azure);
+		m_rectangle->background_colour(s_activeColour);
 	else
-		m_rectangle->background_colour(Gorilla::Colours::LimeGreen);
+		m_rectangle->background_colour(s_inactiveColor);
 }

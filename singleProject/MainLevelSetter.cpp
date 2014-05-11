@@ -5,6 +5,7 @@
 #include "LevelMenu.h"
 #include "LevelManager.h"
 #include "LevelIntro.h"
+#include "LoadingScreen.h"
 
 template<> MainLevelSetter* Ogre::Singleton<MainLevelSetter>::msSingleton = 0;
 MainLevelSetter::MainLevelSetter(MainLevelEnums newLvl)
@@ -22,8 +23,11 @@ void MainLevelSetter::update()
 	if (m_nextLevel != MainLevelEnums::NONE)
 	{
         m_levelMgr->deleteCurrenLevel();
+		LevelLoaderBar levelLoad;
+		levelLoad.start(OgreCore::getSingleton().getWindow());
         m_levelMgr->changeLevel(setLevel(m_nextLevel));
 		m_nextLevel = MainLevelEnums::NONE;
+		levelLoad.finish();
 	}
 
 }

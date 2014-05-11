@@ -4,6 +4,7 @@
 
 template<> SoundFactory* Ogre::Singleton<SoundFactory>::msSingleton = 0;
 SoundFactory::SoundFactory()
+: m_musicOn(false)
 {
 }
 
@@ -13,11 +14,17 @@ SoundFactory::~SoundFactory()
 }
 
 
+void SoundFactory::setMusic(bool on)
+{
+	m_musicOn = on;
+}
 sf::Music* SoundFactory::playMusic(std::string filename)
 {
 	if (!m_musics.count(filename))
 		createNewMusic(filename);
 	m_musics[filename]->play();
+	if (!m_musicOn)
+	    m_musics[filename]->setVolume(0);
 	return m_musics[filename].get();
 }
 

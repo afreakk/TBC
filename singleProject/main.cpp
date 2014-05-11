@@ -14,19 +14,22 @@
 #include "PlayerGlobalStats.h"
 #include "CoreCompositor.h"
 #include "SoundFactory.h"
-
+#include "LoadingScreen.h"
 int main()
 {
 	try
 	{
+		LoadingBar loadingBar;
 		unique_ptr<SoundFactory> soundFactory(new SoundFactory());
 		unique_ptr<OgreCore> ogreCore(new OgreCore());
 		OgreCore::getSingletonPtr()->initRoot();
+        Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/OgreCore.zip", "Zip", "Bootstrap"); // 4 loadingbar
 		OgreCore::getSingletonPtr()->initWindow(1280,720,"TBC");
 		OgreCore::getSingletonPtr()->initSceneManager();
 		OgreCore::getSingletonPtr()->initCamera("MainCamera");
 		OgreCore::getSingletonPtr()->initViewport();
 		OgreCore::getSingletonPtr()->initOverlaySystem();
+		loadingBar.start(OgreCore::getSingleton().getWindow(), 8, 0,1.0f);
 		OgreCore::getSingletonPtr()->initScript();
 		OgreCore::getSingletonPtr()->initResources();
 		OgreCore::getSingleton().initShadowCasting();
@@ -50,6 +53,7 @@ int main()
 		unique_ptr<MainLevelSetter> lvlSetter = unique_ptr<MainLevelSetter>(new MainLevelSetter(MainLevelEnums::MENU));
 		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(lvlSetter->getLevelManager()));
         new CoreCompositor(OgreCore::getSingleton().getCamera()->getViewport());
+		loadingBar.finish();
 		Ogre::Root::getSingletonPtr()->startRendering();
 		cout << "rendering stopped ." << endl;
 	}

@@ -7,9 +7,8 @@
 
 static const std::string fontName = "StarWars";
 
-
-
 unsigned GUIBar::m_count = 0;
+
 GUIBar::GUIBar( Ogre::Real xPos, Ogre::Real yPos, Ogre::Real barWidth, Ogre::Real barHeight, std::string materialName)
 : m_barMaterial(materialName)
 , m_dynamicBarMarkerMaterial(materialName + "Marker")

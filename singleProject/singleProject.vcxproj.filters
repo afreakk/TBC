@@ -440,6 +440,9 @@
     <ClCompile Include="LevelIntro.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -843,6 +846,9 @@
     </ClInclude>
     <ClInclude Include="LevelIntro.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingScreen.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,7 +2,14 @@
 #include "MainMenuButton.h"
 #include <list>
 #include "OISKeyboard.h"
-
+class MenuControls
+{
+public:
+	bool up(const OIS::KeyCode& key);
+	bool down(const OIS::KeyCode& key);
+	bool select(const OIS::KeyCode& key);
+	bool back(const OIS::KeyCode& key);
+};
 class MenuBase : public OIS::KeyListener
 {
 public:
@@ -21,6 +28,7 @@ protected:
 private:
 	Gorilla::Rectangle* m_rBackground;
 	std::list<MainMenuButton>::iterator m_selectedButton;
+	MenuControls m_controls;
 };
 
 class MainMenu : public MenuBase

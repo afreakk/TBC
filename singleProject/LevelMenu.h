@@ -10,5 +10,7 @@ public:
 private:
 	Ogre::Real m_time;
 	std::unique_ptr<MenuBase> m_menu;
+
+	void handleButtonClicked(ButtonType buttonClicked);
 };
 

@@ -17,35 +17,37 @@ LevelMenu::LevelMenu()
 LevelMenu::~LevelMenu()
 {
 }
+void LevelMenu::handleButtonClicked(ButtonType buttonClicked)
+{
+    switch (buttonClicked)
+    {
+    case ButtonType::play:
+        MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
+        break;
+    case ButtonType::options:
+        m_menu.reset();
+        m_menu = unique_ptr<MenuBase>(new OptionsMenu());
+        break;
+    case ButtonType::quit:
+        break;
+    case ButtonType::windowed:
+        break;
+    case ButtonType::music:
+        break;
+    case ButtonType::backToMenu:
+        m_menu.reset();
+        m_menu = unique_ptr<MenuBase>(new MainMenu());
+        break;
+    default:
+        assert(0);
+        break;
+    }
+}
 bool LevelMenu::update()
 {
 	m_time += MainUpdate::getSingleton().getDeltaTime();
     ButtonType buttonClicked = m_menu->getButtonClicked();
 	if (buttonClicked != ButtonType::none)
-	{
-		switch (buttonClicked)
-		{
-		case ButtonType::play:
-			MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
-			break;
-		case ButtonType::options:
-            m_menu.reset();
-			m_menu = unique_ptr<MenuBase>(new OptionsMenu());
-			break;
-		case ButtonType::quit:
-			break;
-		case ButtonType::windowed:
-			break;
-		case ButtonType::music:
-			break;
-		case ButtonType::backToMenu:
-			m_menu.reset();
-			m_menu = unique_ptr<MenuBase>(new MainMenu());
-			break;
-		default:
-			assert(0);
-			break;
-		}
-	}
+		handleButtonClicked(buttonClicked);
 	return false;
 }

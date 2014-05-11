@@ -26,5 +26,7 @@ private:
 
 	std::vector<std::string> m_spriteNames;
 	std::vector<std::string>::iterator m_currentSpriteName;
+	static Gorilla::Colours::Colour s_inactiveColor;
+	static Gorilla::Colours::Colour s_activeColour;
 };
 

@@ -44,6 +44,7 @@
     <ClCompile Include="LevelTwo.cpp" />
     <ClCompile Include="LightHandler.cpp" />
     <ClCompile Include="LineBillboardSet.cpp" />
+    <ClCompile Include="LoadingScreen.cpp" />
     <ClCompile Include="LvlOneEnvironment.cpp" />
     <ClCompile Include="LvlTwoEnvironment.cpp" />
     <ClCompile Include="main.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="HDRCompositor.h" />
     <ClInclude Include="LevelIntro.h" />
     <ClInclude Include="LevelTwo.h" />
+    <ClInclude Include="LoadingScreen.h" />
     <ClInclude Include="LvlTwoEnvironment.h" />
     <ClInclude Include="LineBillboardSet.h" />
     <ClInclude Include="CoreCompositor.h" />
