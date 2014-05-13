@@ -16,7 +16,7 @@ ModelRecipeMutantSuicide::ModelRecipeMutantSuicide()
 , m_hoveredName("HoveredSuicide")
 {
 }
-string anvn = "Enemy_Anim_Walk";
+string anvn = "Walk";
 ModelRecipeMutantSuicide::~ModelRecipeMutantSuicide()
 {
 }
@@ -29,7 +29,7 @@ BaseAnimation* ModelRecipeMutantSuicide::getPrepare(Ogre::Entity* entity)
 }
 Ogre::Entity* ModelRecipeMutantSuicide::initMesh(Ogre::SceneManager* sMgr)
 {
-	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("enemy_anim_walk.mesh", "Models") ;
+	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("robot.mesh", "Models") ;
 	auto mesh = resourcePtr.first.dynamicCast<Ogre::Mesh>();
 	unsigned short src, dest;
 	if (!mesh->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
@@ -53,7 +53,7 @@ const std::string& ModelRecipeMutantSuicide::getMaterialName(const std::string& 
 BaseAnimation* ModelRecipeMutantSuicide::getDie(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState(anvn));
+	anims.push_back(entity->getAnimationState("Die"));
 	return new AnimationDie(anims);
 }
 
@@ -66,7 +66,7 @@ BaseAnimation* ModelRecipeMutantSuicide::getWalk(Ogre::Entity* entity, Skritt* s
 BaseAnimation* ModelRecipeMutantSuicide::getAttack(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState(anvn));
+	anims.push_back(entity->getAnimationState("Shoot"));
 	return new AnimationAttack(anims);
 }
 void ModelRecipeMutantSuicide::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
@@ -84,6 +84,6 @@ Ogre::SceneNode* ModelRecipeMutantSuicide::createNode()
 BaseAnimation* ModelRecipeMutantSuicide::getTumble(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back( entity->getAnimationState(anvn) ) ;
+	anims.push_back( entity->getAnimationState("Slump") ) ;
 	return new AnimationTumble(anims);
 }

@@ -1,13 +1,18 @@
 #pragma once
 enum class ButtonType
 {
-    play,
+    gotoPlayMenu,
+    newGame,
     options,
     quit,
     none,
     windowed,
     music,
     backToMenu,
+    gotoMainMenu,
+    resumeGame,
+    saveAndExit,
+    changeResolution,
 };
 class MainMenuButton
 {

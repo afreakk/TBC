@@ -4,6 +4,7 @@
 #include "UnitCircleMovement.h"
 #include "ModelRecipeMutantSuicide.h"
 #include "ModelRecipeMutant.h"
+#include "PlayerContainer.h"
 EnemySpawner::EnemySpawner(const std::string& lvl) 
 : m_spawnDistance(Ogre::Math::PI / 4.0)
 , m_mutantContainer(nullptr)
@@ -20,13 +21,16 @@ void EnemySpawner::init(MutantContainer* mutantContainer, Player* player)
 	for (unsigned i = 0; i < rootNode->findChild("r")->getValues().size(); i++)
 	{
 		m_mutantStartingPositions.push_back(MutantStartingInfo());
-		m_mutantStartingPositions[i].polar = polarFromStarting(rootNode->findChild("r")->getValueR(i), rootNode->findChild("lane")->getValueU(i) );
+		Ogre::Real theta = rootNode->findChild("r")->getValueR(i);
+		if (theta < PlayerContainer::getSingleton().getPlayer()->getPolarCoordinates().theta)
+			continue;
+		Ogre::Real lane = rootNode->findChild("lane")->getValueU(i);
+		m_mutantStartingPositions[i].polar = polarFromStarting(theta, lane );
 		m_mutantStartingPositions[i].weaponType = WeaponBase::weaponTypeFromString(rootNode->findChild("weaponType")->getValue(i));
 	}
 }
 EnemySpawner::~EnemySpawner()
 {
-	cout << "enemyhandler destrucotr" << endl;
 }
 
 

@@ -11,7 +11,10 @@ public:
 	bool frameStarted(const Ogre::FrameEvent &evt) override;
 	const Ogre::Real& getDeltaTime();
 	const Ogre::Real& getScaledDeltaTime();
+	void stopRendering();
+	LevelID getLevelID();
 private:
+	bool m_stopRendering;
 	LevelManager* m_levelManager;
 	Ogre::Real m_deltaTime;
 	Ogre::Real m_scaledDeltaTime;

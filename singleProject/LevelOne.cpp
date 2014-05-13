@@ -96,5 +96,6 @@ bool LevelOne::update()
 	    m_enemySpawner.update();
 	if (m_tutorial.plzChangeLevel())
 		MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL2);
+	m_menu.updateMenu();
 	return false;
 }

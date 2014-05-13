@@ -18,6 +18,7 @@ public:
     bool keyPressed(const OIS::KeyEvent &arg) override;
     bool keyReleased(const OIS::KeyEvent &arg) override;		
 	ButtonType getButtonClicked();
+	void resetButtonClicked();
 protected:
 	std::list<MainMenuButton> m_buttons;
 	Gorilla::Layer* m_layer;
@@ -41,4 +42,16 @@ class OptionsMenu : public MenuBase
 {
 public:
 	OptionsMenu();
+};
+
+class PauseMenu : public MenuBase
+{
+public:
+	PauseMenu();
+};
+
+class PlayGameMenu : public MenuBase
+{
+public:
+	PlayGameMenu();
 };

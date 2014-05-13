@@ -4,10 +4,18 @@
 #include "OISCore.h"
 #include "GlobalVariables.h"
 #include "MainLevelSetter.h"
+#include "SoundFactory.h"
 template<> MainUpdate* Ogre::Singleton<MainUpdate>::msSingleton = 0;
-MainUpdate::MainUpdate(LevelManager* lvlMgr) :m_levelManager(lvlMgr), m_deltaTime(0.0)
+MainUpdate::MainUpdate(LevelManager* lvlMgr) 
+: m_levelManager(lvlMgr)
+, m_deltaTime(0.0)
+, m_stopRendering(false)
 {
 	Ogre::Root::getSingletonPtr()->addFrameListener(this);
+}
+void MainUpdate::stopRendering()
+{
+	m_stopRendering = true;
 }
 bool MainUpdate::frameEnded(const Ogre::FrameEvent &evt)
 {
@@ -20,7 +28,10 @@ bool MainUpdate::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	OISCore::getSingletonPtr()->capture();
 	m_levelManager->update();
 	MainLevelSetter::getSingleton().update();
-	return !OgreCore::getSingletonPtr()->getWindow()->isClosed(); 
+	SoundFactory::getSingleton().update();
+	if (OgreCore::getSingleton().getWindow()->isClosed() || m_stopRendering)
+        return false; 
+	return true;
 }
 const Ogre::Real& MainUpdate::getDeltaTime()
 {
@@ -33,4 +44,9 @@ const Ogre::Real& MainUpdate::getScaledDeltaTime()
 bool MainUpdate::frameStarted(const Ogre::FrameEvent &evt)
 {
 	return true;
+}
+
+LevelID MainUpdate::getLevelID()
+{
+	return m_levelManager->getCurrentLevelID();
 }

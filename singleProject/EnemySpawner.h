@@ -24,6 +24,5 @@ private:
 	std::vector<MutantStartingInfo> m_mutantStartingPositions;
 
 	void instantiateNewEnemies();
-
 };
 

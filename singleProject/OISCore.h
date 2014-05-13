@@ -16,10 +16,14 @@ public:
 	bool keyPressed(const OIS::KeyEvent&evt) override;
 	bool keyReleased(const OIS::KeyEvent& evt) override;
 
+	void overrideKeyboard(OIS::KeyListener* listener);
+	void disableOverride();
+
 private:
 	OIS::InputManager* m_ois;
 	OIS::Keyboard* m_keyboard;
 	unsigned long m_hWnd;
 	std::map<std::string, OIS::KeyListener* > m_keyListeners;
+	OIS::KeyListener* m_keyboardOverrider;
 };
 

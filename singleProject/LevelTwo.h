@@ -8,6 +8,7 @@
 #include "DotSceneLoader.h"
 #include "GameConsole.h"
 #include "PillarHider.h"
+#include "InGameMenu.h"
 class PlayerContainer;
 class ParticleReferenceContainer;
 class LevelTwo : public ILevel
@@ -29,6 +30,7 @@ private:
 	PlayerGUI m_playerGUI;
 	DotSceneLoader m_dotSceneLoader;
 	unique_ptr<GameConsole> m_console;
+	InGameMenu m_menu;
 
 	void destroyWorld();
 	void unLinkSubscribers();

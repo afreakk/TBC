@@ -8,6 +8,7 @@
 #include "GameConsole.h"
 #include "PillarHider.h"
 #include "Tutorial.h"
+#include "InGameMenu.h"
 class PlayerContainer;
 class ParticleReferenceContainer;
 class LevelOne : public ILevel
@@ -31,6 +32,7 @@ private:
 	unique_ptr<GameConsole> m_console;
 	PillarHider m_pillarHider;
 	Tutorial m_tutorial;
+	InGameMenu m_menu;
 
 	void destroyWorld();
 	void unLinkSubscribers();

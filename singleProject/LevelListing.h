@@ -1,6 +1,7 @@
 #pragma once
 enum class LevelID
 {
+    NONE,
     LEVEL_INTRO,
 	LEVEL_ONE,
 	LEVEL_TWO,

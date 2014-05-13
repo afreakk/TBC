@@ -7,6 +7,7 @@
 #include "PlayerContainer.h"
 #include "PlayerGlobalStats.h"
 #include "PlayerHandler.h"
+
 LevelTwo::LevelTwo() 
 : ILevel(LevelID::LEVEL_ONE)
 , m_particleRefContainer(new ParticleReferenceContainer())
@@ -66,5 +67,6 @@ bool LevelTwo::update()
 	m_playerCamera.update();
 	m_environment.update();
     m_enemySpawner.update();
+	m_menu.updateMenu();
 	return false;
 }

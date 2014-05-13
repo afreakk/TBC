@@ -27,10 +27,9 @@ void Skritt::playSkritt()
 {
     increment();
     m_sound = SoundFactory::getSingleton().getSingleton().playSound3D(m_walkNames[m_soundIdx],m_walkNames[m_soundIdx], m_parentNode);
+	m_sound->setVolume(50.f);
 }
 void Skritt::increment()
 {
-    m_soundIdx++;
-    if (m_soundIdx == m_walkNames.size())
-        m_soundIdx = 0;
+	m_soundIdx = rand() % m_walkNames.size();
 }

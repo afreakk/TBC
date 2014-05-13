@@ -4,7 +4,11 @@
 
 template<> OISCore* Ogre::Singleton<OISCore>::msSingleton = 0;
 #include "OgreCore.h"
-OISCore::OISCore() : m_keyboard(nullptr), m_ois(nullptr), m_hWnd(0)
+OISCore::OISCore() 
+: m_keyboard(nullptr)
+, m_ois(nullptr)
+, m_hWnd(0)
+, m_keyboardOverrider(nullptr)
 {
 }
 
@@ -37,18 +41,37 @@ void OISCore::capture()
 }
 
 
+void OISCore::overrideKeyboard(OIS::KeyListener* listener)
+{
+	assert(!m_keyboardOverrider);
+	m_keyboardOverrider = listener;
+}
+void OISCore::disableOverride()
+{
+	m_keyboardOverrider = nullptr;
+}
 
 bool OISCore::keyPressed(const OIS::KeyEvent &evt)
 {
-	for (auto& listener: m_keyListeners)
-		listener.second->keyPressed(evt);
+	if (m_keyboardOverrider)
+		m_keyboardOverrider->keyPressed(evt);
+	else
+	{
+        for (auto& listener: m_keyListeners)
+            listener.second->keyPressed(evt);
+	}
 	return true;
 
 }
 bool OISCore::keyReleased(const OIS::KeyEvent &evt)
 {
-	for (auto& listener: m_keyListeners)
-		listener.second->keyReleased(evt);
+	if (m_keyboardOverrider)
+		m_keyboardOverrider->keyReleased(evt);
+	else
+	{
+		for (auto& listener : m_keyListeners)
+			listener.second->keyReleased(evt);
+	}
 	return true;
 
 }

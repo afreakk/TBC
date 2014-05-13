@@ -30,10 +30,12 @@
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="GameConsole.cpp" />
+    <ClCompile Include="GameStarter.cpp" />
     <ClCompile Include="GlowMaterialListener.cpp" />
     <ClCompile Include="Gorilla.cpp" />
     <ClCompile Include="GUIResources.cpp" />
     <ClCompile Include="HDRCompositor.cpp" />
+    <ClCompile Include="InGameMenu.cpp" />
     <ClCompile Include="LaneSettings.cpp" />
     <ClCompile Include="LERPWalk.cpp" />
     <ClCompile Include="LERPWalkAttack.cpp" />
@@ -81,6 +83,7 @@
     <ClCompile Include="PlayerHandlerStateSingleAttack.cpp" />
     <ClCompile Include="DynamicTubes.cpp" />
     <ClCompile Include="PlayerSelectionLine.cpp" />
+    <ClCompile Include="SaveGameIO.cpp" />
     <ClCompile Include="SoundFactory.cpp" />
     <ClCompile Include="StapledLine.cpp" />
     <ClCompile Include="SimpleShadow.cpp" />
@@ -151,8 +154,10 @@
     <ClInclude Include="ContainerLogic.h" />
     <ClInclude Include="DetonateWeaponHitTest.h" />
     <ClInclude Include="GameConsole.h" />
+    <ClInclude Include="GameStarter.h" />
     <ClInclude Include="Gorilla.h" />
     <ClInclude Include="HDRCompositor.h" />
+    <ClInclude Include="InGameMenu.h" />
     <ClInclude Include="LevelIntro.h" />
     <ClInclude Include="LevelTwo.h" />
     <ClInclude Include="LoadingScreen.h" />
@@ -214,6 +219,7 @@
     <ClInclude Include="PlayerHandlerStateBlankAttack.h" />
     <ClInclude Include="PlayerHandlerStateSingleAttack.h" />
     <ClInclude Include="PlayerSelectionLine.h" />
+    <ClInclude Include="SaveGameIO.h" />
     <ClInclude Include="SoundFactory.h" />
     <ClInclude Include="StapledLine.h" />
     <ClInclude Include="PlayerStatus.h" />

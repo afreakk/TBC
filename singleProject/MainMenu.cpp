@@ -55,6 +55,10 @@ ButtonType MenuBase::getButtonClicked()
 {
 	return m_buttonClicked;
 }
+void MenuBase::resetButtonClicked()
+{
+	m_buttonClicked = ButtonType::none;
+}
 bool MenuBase::keyPressed(const OIS::KeyEvent &arg)
 {
 	if (m_controls.up(arg.key))
@@ -100,7 +104,7 @@ MainMenu::MainMenu()
 	Real width = vpW / 4.0f;
 	Real height = vpH / 10.0f;
 	Real xPos = vpW / 2.0f - width / 2.0f;
-	m_buttons.push_back(MainMenuButton(m_layer, xPos, vpH / 2.0f,               width, height, "play",      ButtonType::play));
+	m_buttons.push_back(MainMenuButton(m_layer, xPos, vpH / 2.0f,               width, height, "play",      ButtonType::gotoPlayMenu));
 	m_buttons.push_back(MainMenuButton(m_layer, xPos, vpH / 2.0f + height*1.5f, width, height, "options",   ButtonType::options));
 	m_buttons.push_back(MainMenuButton(m_layer, xPos, vpH / 2.0f + height*3.0f, width, height, "quit",      ButtonType::quit));
 	finalize();
@@ -114,10 +118,43 @@ OptionsMenu::OptionsMenu()
 	Real width = vpW / 4.0f;
 	Real height = vpH / 10.0f;
 	Real xPos = vpW / 2.0f - width / 2.0f;
-	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Options_Music_Off",      ButtonType::music));
-	m_buttons.back().addSpriteName("Options_Music_On");
-	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Options_Windowed_off",   ButtonType::windowed));
-	m_buttons.back().addSpriteName("Options_Windowed_On");
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Options_Music_On",      ButtonType::music));
+	m_buttons.back().addSpriteName("Options_Music_Off");
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Options_Windowed_On",   ButtonType::windowed));
+	m_buttons.back().addSpriteName("Options_Windowed_Off");
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "resolution_1280x720",   ButtonType::changeResolution));
+	m_buttons.back().addSpriteName("resolution_1920x1080");
 	finalize();
 }
+//################################################################
+
+PauseMenu::PauseMenu()
+: MenuBase("pauseMenu", "Pause_Menu_Plate")
+{
+	Ogre::Real vpW = m_screen->getWidth(); 
+	Ogre::Real vpH = m_screen->getHeight();
+	Real width = vpW / 4.0f;
+	Real height = vpH / 10.0f;
+	Real xPos = vpW / 2.0f - width / 2.0f;
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Pause_Main_Menu_Button",      ButtonType::gotoMainMenu));
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Pause_Resume_Button",   ButtonType::resumeGame));
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Pause_Save_Button",   ButtonType::saveAndExit));
+	finalize();
+}
+//################################################################
+
+PlayGameMenu::PlayGameMenu()
+: MenuBase("startMenu", "Start_Menu_Plate")
+{
+	Ogre::Real vpW = m_screen->getWidth(); 
+	Ogre::Real vpH = m_screen->getHeight();
+	Real width = vpW / 4.0f;
+	Real height = vpH / 10.0f;
+	Real xPos = vpW / 2.0f - width / 2.0f;
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Start_Menu_NewGame_Button",   ButtonType::newGame));
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Start_Menu_Continue_Button",   ButtonType::resumeGame));
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Start_Menu_back_button",      ButtonType::backToMenu));
+	finalize();
+}
+
 //################################################################

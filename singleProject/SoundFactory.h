@@ -10,7 +10,10 @@ public:
 	sf::Music* playMusic(std::string);
 	sf::Sound* playSound(std::string filename, std::string soundID);
 	sf::Sound* playSound3D(std::string filename, std::string soundID, Ogre::Node* positionalNode);
-	void setMusic(bool on);
+	void muteMusic(bool mute);
+	bool isMusicMuted();
+	void update();
+	void resetAllSound();
 private:
 	std::map<std::string, std::unique_ptr<sf::Music>> m_musics;
 	std::map<std::string, std::unique_ptr<sf::SoundBuffer>> m_buffers;
@@ -24,6 +27,6 @@ private:
 	void updateSoundPosition(std::string, Ogre::Node* positionalNode);
 	std::string fullPath(std::string filename);
 
-	bool m_musicOn;
+	bool m_musicMuted;
 };
 

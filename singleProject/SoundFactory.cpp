@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "SoundFactory.h"
+#include "OgreCore.h"
 
 
 template<> SoundFactory* Ogre::Singleton<SoundFactory>::msSingleton = 0;
 SoundFactory::SoundFactory()
-: m_musicOn(false)
+: m_musicMuted(false)
 {
 }
 
@@ -14,16 +15,44 @@ SoundFactory::~SoundFactory()
 }
 
 
-void SoundFactory::setMusic(bool on)
+void SoundFactory::resetAllSound()
 {
-	m_musicOn = on;
+	for (auto& music : m_musics)
+		music.second.reset();
+	m_musics.clear();
+	for (auto& buffer : m_buffers)
+		buffer.second.reset();
+	m_buffers.clear();
+	for (auto& sound : m_sounds)
+		sound.second.reset();
+	m_sounds.clear();
+
+    //reset the fuck out of the sound 
+}
+void SoundFactory::muteMusic(bool mute)
+{
+	m_musicMuted = mute;
+	if (!m_musicMuted)
+	{
+		for (auto& m : m_musics)
+			m.second->setVolume(100);
+	}
+	else
+	{
+		for (auto& m : m_musics)
+			m.second->setVolume(0);
+	}
+}
+bool SoundFactory::isMusicMuted()
+{
+	return m_musicMuted;
 }
 sf::Music* SoundFactory::playMusic(std::string filename)
 {
 	if (!m_musics.count(filename))
 		createNewMusic(filename);
 	m_musics[filename]->play();
-	if (!m_musicOn)
+	if (m_musicMuted)
 	    m_musics[filename]->setVolume(0);
 	return m_musics[filename].get();
 }
@@ -74,4 +103,11 @@ void SoundFactory::prepareSound(std::string filename, std::string soundID)
 std::string SoundFactory::fullPath(std::string filename)
 {
 	return "../media/audio/"+filename;
+}
+void SoundFactory::update()
+{
+	auto& cPos = OgreCore::getSingleton().getCamera()->getPosition();
+	auto& cDir = OgreCore::getSingleton().getCamera()->getDirection();
+	sf::Listener::setPosition(cPos.x, cPos.y, cPos.z);
+	sf::Listener::setDirection(cDir.x, cDir.y, cDir.z);
 }

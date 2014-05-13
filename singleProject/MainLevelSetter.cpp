@@ -17,13 +17,14 @@ MainLevelSetter::MainLevelSetter(MainLevelEnums newLvl)
 MainLevelSetter::~MainLevelSetter()
 {
 }
-
+#include"SoundFactory.h"
 void MainLevelSetter::update()
 {
 	if (m_nextLevel != MainLevelEnums::NONE)
 	{
         m_levelMgr->deleteCurrenLevel();
 		LevelLoaderBar levelLoad;
+		SoundFactory::getSingleton().resetAllSound();
 		levelLoad.start(OgreCore::getSingleton().getWindow());
         m_levelMgr->changeLevel(setLevel(m_nextLevel));
 		m_nextLevel = MainLevelEnums::NONE;
