@@ -124,6 +124,7 @@ OptionsMenu::OptionsMenu()
 	m_buttons.back().addSpriteName("Options_Windowed_Off");
 	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "resolution_1280x720",   ButtonType::changeResolution));
 	m_buttons.back().addSpriteName("resolution_1920x1080");
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0, vpW, vpH, "Options_Menu_Back", ButtonType::backToMenu));
 	finalize();
 }
 //################################################################

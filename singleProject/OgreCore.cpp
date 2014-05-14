@@ -71,7 +71,7 @@ bool OgreCore::initResources()
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/intro", "FileSystem", "intro");
 
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/hud", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/menu/main", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/menu/options", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/menu/pause", "FileSystem", "GUI");

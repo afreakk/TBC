@@ -3,6 +3,7 @@ class TwoDTooltip
 {
 public:
 	TwoDTooltip(Ogre::Node* parentNode);
+	~TwoDTooltip();
 	void show(std::string& msg);
 	void hide();
 private:
@@ -21,6 +22,7 @@ private:
 	void makeBubble();
 	Ogre::Vector2 getDimensions(std::string& msg, unsigned fontSize);
 };
+
 class Tooltip
 {
 public:

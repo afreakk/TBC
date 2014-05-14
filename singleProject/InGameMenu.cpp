@@ -12,6 +12,8 @@ InGameMenu::InGameMenu()
 InGameMenu::~InGameMenu()
 {
 	OISCore::getSingleton().removeKeyListener("InGameMenuPassive");
+	if (m_menu)
+		deactivateMenu();
 }
 
 bool InGameMenu::keyPressed(const OIS::KeyEvent &arg)
@@ -32,7 +34,8 @@ bool InGameMenu::keyReleased(const OIS::KeyEvent &arg)
         m_menu->keyReleased(arg);
 	return true;
 }
-
+#include "MainLevelSetter.h"
+#include "MainUpdate.h"
 void InGameMenu::updateMenu()
 {
 	if (m_menu)
@@ -43,18 +46,24 @@ void InGameMenu::updateMenu()
 			switch (keyClicked)
 			{
 			case ButtonType::gotoMainMenu:
+				m_saveGame.saveToFile();
+				MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::MENU);
 				break;
 			case ButtonType::resumeGame:
 				deactivateMenu();
 				break;
 			case ButtonType::saveAndExit:
 				m_saveGame.saveToFile();
+				MainUpdate::getSingleton().stopRendering();
 				break;
+                //--------------------###########
 			case ButtonType::backToMenu:
+                // escape == backToMenu , this is Filler
 				break;
 			default:
 				assert(0);
 				break;
+                //---------------------|||||||||
 			}
 		}
 	}

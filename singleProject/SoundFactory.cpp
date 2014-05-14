@@ -5,7 +5,7 @@
 
 template<> SoundFactory* Ogre::Singleton<SoundFactory>::msSingleton = 0;
 SoundFactory::SoundFactory()
-: m_musicMuted(false)
+: m_musicMuted(true)
 {
 }
 
@@ -26,9 +26,7 @@ void SoundFactory::resetAllSound()
 	for (auto& sound : m_sounds)
 		sound.second.reset();
 	m_sounds.clear();
-
-    //reset the fuck out of the sound 
-}
+ }
 void SoundFactory::muteMusic(bool mute)
 {
 	m_musicMuted = mute;

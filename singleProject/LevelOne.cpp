@@ -20,7 +20,6 @@ LevelOne::LevelOne()
 , m_pillarHider(m_environmentNode)
 {
 	Ogre::LogManager::getSingleton().logMessage("hnz: lvl1 Const");
-	m_console = unique_ptr<GameConsole>(new GameConsole());
 	m_enemySpawner.init(m_mutantContainer.get(), m_playerContainer->getPlayer());
 	m_playerCamera.init(m_playerContainer->getPlayer());
 	m_dotSceneLoader.parseDotScene("Tutorial_level01.scene", "SceneOne", OgreCore::getSingletonPtr()->getSceneMgr(), m_environmentNode );
@@ -83,6 +82,7 @@ bool LevelOne::update()
 		avgFps = OgreCore::getSingleton().getWindow()->getAverageFPS();
 		cout << OgreCore::getSingleton().getWindow()->getAverageFPS() << endl;
 	}*/
+	m_menu.updateMenu();
 	m_time += MainUpdate::getSingleton().getDeltaTime();
 	m_pillarHider.update();
 	m_particleRefContainer->update();
@@ -96,6 +96,5 @@ bool LevelOne::update()
 	    m_enemySpawner.update();
 	if (m_tutorial.plzChangeLevel())
 		MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL2);
-	m_menu.updateMenu();
 	return false;
 }

@@ -15,6 +15,7 @@
 #include "CoreCompositor.h"
 #include "SoundFactory.h"
 #include "LoadingScreen.h"
+#include "GameConsole.h"
 int main()
 {
 	try
@@ -41,6 +42,8 @@ int main()
 
 		unique_ptr<OISCore> oisCore(new OISCore());
 		oisCore->init();
+
+		unique_ptr<GameConsole> gameConsole(new GameConsole());
 
 		unique_ptr<LaneSettings> laneSettings = unique_ptr<LaneSettings>(new LaneSettings() );
 		laneSettings->initLanes();

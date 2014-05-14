@@ -16,6 +16,10 @@ TwoDTooltip::TwoDTooltip(Node* node)
 {
 	
 }
+TwoDTooltip::~TwoDTooltip()
+{
+    Gorilla::Silverback::getSingleton().destroyScreen(m_screen);
+}
 void TwoDTooltip::show(std::string& msg)
 {
 	if (!m_created)
@@ -67,7 +71,7 @@ void TwoDTooltip::hide()
 	m_lineList = nullptr;
 	m_markup = nullptr;
 }
-
+//------------------------------------------------------------------------------------------------------------------------------------
 Tooltip::Tooltip(Ogre::SceneNode* parentNode)
 : m_tooltipSize(600.0f, 200.0f)
 , m_rectSize(m_tooltipSize.x*65.0f, m_tooltipSize.y*100.0f)

@@ -18,7 +18,6 @@ LevelTwo::LevelTwo()
 , m_time(0.0)
 {
 	Ogre::LogManager::getSingleton().logMessage("hnz: lvl2 Const");
-	m_console = unique_ptr<GameConsole>(new GameConsole());
 	m_enemySpawner.init(m_mutantContainer.get(), m_playerContainer->getPlayer());
 	m_playerCamera.init(m_playerContainer->getPlayer());
 	m_dotSceneLoader.parseDotScene("Mountainpath.scene", "SceneTwo", OgreCore::getSingletonPtr()->getSceneMgr(), m_environmentNode );
