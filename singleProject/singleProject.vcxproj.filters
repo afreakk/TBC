@@ -452,6 +452,9 @@
     <ClCompile Include="GameStarter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingScreenDisplayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -866,6 +869,9 @@
       <Filter>Tools</Filter>
     </ClInclude>
     <ClInclude Include="GameStarter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingScreenDisplayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

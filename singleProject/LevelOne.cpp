@@ -25,6 +25,7 @@ LevelOne::LevelOne()
 	m_dotSceneLoader.parseDotScene("Tutorial_level01.scene", "SceneOne", OgreCore::getSingletonPtr()->getSceneMgr(), m_environmentNode );
 	m_environmentNode->rotate(Vector3::UNIT_Y, Radian(Degree(180)));
 //	m_environmentNode->setPosition(Vector3(0, -10.0, 0));
+	m_playerGUI.init();
 	linkSubscribers();
 }
 

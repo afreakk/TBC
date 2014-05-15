@@ -1,27 +1,43 @@
 #pragma once
-class LevelLoaderBar
+#include "LoadingScreenDisplayer.h"
+class BaseLoadingBar
+{
+public:
+	BaseLoadingBar();
+	virtual void start(RenderWindow* window);
+	virtual void finish(void);
+protected:
+	virtual void animate();
+	const std::string& animatedDots();
+private:
+	std::unique_ptr<LoadingScreenDisplayer> m_background;
+	std::string m_animatedDots;
+};
+class LevelLoaderBar : public BaseLoadingBar, LogListener
 {
 public:
 	LevelLoaderBar() {}
 	virtual ~LevelLoaderBar(){}
-	virtual void start(RenderWindow* window );
-	virtual void finish(void);
-	void increment();
+	virtual void start(RenderWindow* window ) override;
+	virtual void finish(void) override;
+    virtual void messageLogged( const String& message, LogMessageLevel lml, bool maskDebug, const String &logName, bool& skipThisMessage ) override;
 protected:
+	Real mProgressBarInc;
 	RenderWindow* mWindow;
 	Overlay* mLoadOverlay;
 	OverlayElement* mLoadingBarElement;
 	OverlayElement* mLoadingDescriptionElement;
 	OverlayElement* mLoadingCommentElement;
+	void write1337Text();
 };
 
-class LoadingBar : public ResourceGroupListener
+class LoadingBar : public ResourceGroupListener, BaseLoadingBar
 {
 public:
 	LoadingBar() {}
 	virtual ~LoadingBar(){}
 	virtual void start(RenderWindow* window, unsigned short numGroupsInit = 1, unsigned short numGroupsLoad = 1, Real initProportion = 0.70f);
-	virtual void finish(void);
+	virtual void finish(void) override;
 	// ResourceGroupListener callbacks
 	void resourceGroupScriptingStarted(const String& groupName, size_t scriptCount);
 	void scriptParseStarted(const String& scriptName, bool &skipThisScript);

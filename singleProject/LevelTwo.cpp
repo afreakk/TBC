@@ -24,6 +24,8 @@ LevelTwo::LevelTwo()
 //	m_environmentNode->rotate(Vector3::UNIT_Y, Radian(Degree(180)));
 //	m_environmentNode->setPosition(Vector3(0, -10.0, 0));
 //	m_environmentNode->scale(Vector3(0.325));
+	m_playerGUI.init();
+    //bec00z0ff loadingbar need exclusive 0000000000000Layer
 	linkSubscribers();
 }
 

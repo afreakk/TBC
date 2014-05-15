@@ -9,6 +9,11 @@ PlayerGUI::~PlayerGUI()
 {
 }
 
+void PlayerGUI::init()
+{
+	m_energyBar.setupBar();
+	m_healthBar.setupBar();
+}
 
 void PlayerGUI::notify(PlayerStatus playerStatus)
 {

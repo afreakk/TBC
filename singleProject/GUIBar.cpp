@@ -27,12 +27,11 @@ GUIBar::GUIBar( Ogre::Real xPos, Ogre::Real yPos, Ogre::Real barWidth, Ogre::Rea
 , m_id(" Count: "+boost::lexical_cast<std::string>(++m_count))
 , m_energy(0)
 {
-	setupBar();
 }
 GUIBar::~GUIBar()
 {
 	if (m_ramme)
-		GUIResources::getSingleton().removeOverlayContainer(m_ramme);
+		RootOverlay::getSingleton().removeOverlayContainer(m_ramme);
 }
 void GUIBar::setValue(unsigned energy)
 {
@@ -87,7 +86,7 @@ void GUIBar::setupBar()
 	m_glass->setDimensions(m_barMaxWidth, m_barHeight);
 	static_cast<OverlayContainer*>(m_ramme)->addChild(m_glass);
 
-	GUIResources::getSingleton().addOverlayContainer(m_ramme);
+	RootOverlay::getSingleton().addOverlayContainer(m_ramme);
 }
 void GUIBar::initText(Ogre::OverlayContainer* parent)
 {

@@ -8,6 +8,7 @@ public:
 	PlayerGUI();
 	~PlayerGUI();
 	void notify(PlayerStatus) override;
+	void init();
 private:
 	EnergyBar m_energyBar;
 	HealthBar m_healthBar;

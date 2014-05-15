@@ -1,8 +1,47 @@
 #include "stdafx.h"
 #include "LoadingScreen.h"
+#include "OgreCore.h"
 
+BaseLoadingBar::BaseLoadingBar()
+: m_animatedDots("")
+{
+
+}
+void BaseLoadingBar::start(RenderWindow* window)
+{
+	m_background = unique_ptr<LoadingScreenDisplayer>(new LoadingScreenDisplayer());
+	auto smgr = OgreCore::getSingleton().getSceneMgr();
+	smgr->clearSpecialCaseRenderQueues();
+	smgr->addSpecialCaseRenderQueue(RENDER_QUEUE_OVERLAY);
+	smgr->setSpecialCaseRenderQueueMode(SceneManager::SCRQM_INCLUDE);
+
+}
+
+const std::string& BaseLoadingBar::animatedDots()
+{
+    if (m_animatedDots.length() < 3)
+        m_animatedDots += ".";
+    else
+        m_animatedDots = "";
+	return m_animatedDots;
+}
+void BaseLoadingBar::finish(void)
+{
+	auto smgr = OgreCore::getSingleton().getSceneMgr();
+	smgr->clearSpecialCaseRenderQueues();
+	smgr->setSpecialCaseRenderQueueMode(SceneManager::SCRQM_EXCLUDE);
+	m_background.reset();
+}
+void BaseLoadingBar::animate()
+{
+	assert(m_background);
+	m_background->animate();
+}
+//----------#######################################################|||||||||||||||||||||||||||||||||||
 void LevelLoaderBar::start(RenderWindow* window)
 {
+	BaseLoadingBar::start(window);
+    //----------
     mWindow = window;
     ResourceGroupManager::getSingleton().initialiseResourceGroup("Bootstrap");
 
@@ -10,22 +49,53 @@ void LevelLoaderBar::start(RenderWindow* window)
     mLoadOverlay = (Overlay*)omgr.getByName("Core/LoadOverlay");
     mLoadOverlay->show();
 
+    mLoadingBarElement = omgr.getOverlayElement("Core/LoadPanel/Bar/Progress");
     mLoadingCommentElement = omgr.getOverlayElement("Core/LoadPanel/Comment");
-	mLoadingCommentElement->setCaption("Loading new level..");
     mLoadingDescriptionElement = omgr.getOverlayElement("Core/LoadPanel/Description");
-	mLoadingDescriptionElement->setCaption("--Please==wait--");
 
+    OverlayElement* barContainer = omgr.getOverlayElement("Core/LoadPanel/Bar");
+    mLoadingBarElement->setWidth(0);
+	mProgressBarInc = 6.5f;
+	write1337Text();
+	animate();
 	mWindow->update();
+    //----------#######################################################
+	LogManager::getSingleton().getDefaultLog()->addListener(this);
 }
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 void LevelLoaderBar::finish(void)
 {
+	BaseLoadingBar::finish();
+    //----------
     mLoadOverlay->hide();
+	LogManager::getSingleton().getDefaultLog()->removeListener(this);
 }
 
+static unsigned detailDropper = 0;
+void LevelLoaderBar::messageLogged(const String& message, LogMessageLevel lml, bool maskDebug, const String &logName, bool& skipThisMessage)
+{
+	if (detailDropper < 20)
+		detailDropper++;
+	else
+		write1337Text();
+}
 
+void LevelLoaderBar::write1337Text()
+{
+    mLoadingBarElement->setWidth(mLoadingBarElement->getWidth() + mProgressBarInc);
+	const std::string& dots = animatedDots();
+	mLoadingCommentElement->setCaption("--==[##UR G4M3");
+	mLoadingDescriptionElement->setCaption( "--==[##L04D1N6"+dots );
+    animate();
+    mWindow->update();
+    detailDropper = 0;
+}
 void LoadingBar::start(RenderWindow* window, unsigned short numGroupsInit , unsigned short numGroupsLoad , Real initProportion )
 {
+	BaseLoadingBar::start(window);
+    //----------
     mWindow = window;
     mNumGroupsInit = numGroupsInit;
     mNumGroupsLoad = numGroupsLoad;
@@ -36,7 +106,6 @@ void LoadingBar::start(RenderWindow* window, unsigned short numGroupsInit , unsi
     mLoadOverlay = (Overlay*)omgr.getByName("Core/LoadOverlay");
     mLoadOverlay->show();
 
-    // Save links to the bar and to the loading text, for updates as we go
     mLoadingBarElement = omgr.getOverlayElement("Core/LoadPanel/Bar/Progress");
     mLoadingCommentElement = omgr.getOverlayElement("Core/LoadPanel/Comment");
     mLoadingDescriptionElement = omgr.getOverlayElement("Core/LoadPanel/Description");
@@ -46,17 +115,20 @@ void LoadingBar::start(RenderWindow* window, unsigned short numGroupsInit , unsi
     mLoadingBarElement->setWidth(0);
 
     ResourceGroupManager::getSingleton().addResourceGroupListener(this);
-
+	animate();
 	mWindow->update();
 }
 
 void LoadingBar::finish(void)
 {
+	BaseLoadingBar::finish();
+    //----------
     mLoadOverlay->hide();
     ResourceGroupManager::getSingleton().removeResourceGroupListener(this);
 }
 
 
+    //----------#######################################################
 void LoadingBar::resourceGroupScriptingStarted(const String& groupName, size_t scriptCount)
 {
     assert(mNumGroupsInit > 0 && "You stated you were not going to init "
@@ -64,7 +136,9 @@ void LoadingBar::resourceGroupScriptingStarted(const String& groupName, size_t s
 
     mProgressBarInc = mProgressBarMaxSize * mInitProportion / (Real)scriptCount;
     mProgressBarInc /= mNumGroupsInit;
-    mLoadingDescriptionElement->setCaption("Parsing scripts...");
+	const std::string& dots = animatedDots();
+    mLoadingDescriptionElement->setCaption("Parsing scripts"+dots);
+	animate();
     mWindow->update();
 }
 void LoadingBar::scriptParseStarted(const String& scriptName, bool &skipThisScript)
@@ -76,6 +150,7 @@ void LoadingBar::scriptParseEnded(const String& scriptName, bool skipped)
 {
     mLoadingBarElement->setWidth(
         mLoadingBarElement->getWidth() + mProgressBarInc);
+	animate();
     mWindow->update();
 }
 void LoadingBar::resourceGroupScriptingEnded(const String& groupName)
@@ -88,12 +163,15 @@ void LoadingBar::resourceGroupLoadStarted(const String& groupName, size_t resour
     mProgressBarInc = mProgressBarMaxSize * (1 - mInitProportion) /
         (Real)resourceCount;
     mProgressBarInc /= mNumGroupsLoad;
-    mLoadingDescriptionElement->setCaption("Loading resources...");
+	const std::string& dots = animatedDots();
+    mLoadingDescriptionElement->setCaption("Loading resources"+dots);
+	animate();
     mWindow->update();
 }
 void LoadingBar::resourceLoadStarted(const ResourcePtr& resource)
 {
     mLoadingCommentElement->setCaption(resource->getName());
+	animate();
     mWindow->update();
 }
 void LoadingBar::resourceLoadEnded(void)
@@ -102,12 +180,14 @@ void LoadingBar::resourceLoadEnded(void)
 void LoadingBar::worldGeometryStageStarted(const String& description)
 {
     mLoadingCommentElement->setCaption(description);
+	animate();
     mWindow->update();
 }
 void LoadingBar::worldGeometryStageEnded(void)
 {
     mLoadingBarElement->setWidth(
         mLoadingBarElement->getWidth() + mProgressBarInc);
+	animate();
     mWindow->update();
 }
 void LoadingBar::resourceGroupLoadEnded(const String& groupName)
@@ -123,3 +203,6 @@ bool LoadingBar::resourceCollision(ResourcePtr &resource, ResourceManager *resou
 {
     return false;
 }
+
+    //----------#######################################################
+

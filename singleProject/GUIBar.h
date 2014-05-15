@@ -6,9 +6,9 @@ public:
 	virtual ~GUIBar();
 	void setValue(unsigned newEnergy);
 	void markBar(unsigned newEnergy);
+	void setupBar();
 protected:
 	void updateBar(unsigned);
-	void setupBar();
 	Ogre::Real m_barMaxWidth;
 	Ogre::Real m_barHeight;
 	Ogre::Real m_xPos;
