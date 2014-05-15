@@ -8,14 +8,10 @@ public:
 	~PlayerCameraStateNormal();
 	void update() override;
 private:
-	Ogre::Camera* m_camera;
 	Player* m_player;
 	Ogre::Real m_distance;
 	Ogre::Real m_height;
 	Ogre::Real m_lerp;
-	Ogre::Real m_playerThetaLerp;
-	static Ogre::Vector3 m_lerpedPlayerPos;
 
-	void lerpPlayerPos(const Ogre::Real& dt);
 };
 

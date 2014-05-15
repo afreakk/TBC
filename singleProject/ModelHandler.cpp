@@ -135,6 +135,7 @@ Ogre::Real ModelHandler::scaleTime(const Ogre::Real& time, bool rad)
 	}
 	return sTime;
 }
+#include "LaneSettings.h"
 bool ModelHandler::lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive)
 {
 	if (!isRecursive)

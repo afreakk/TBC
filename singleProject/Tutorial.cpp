@@ -288,7 +288,7 @@ bool Tutorial::canSpawn()
 }
 bool Tutorial::mutantIsClose()
 {
-	return float_compare(MutantContainer::getSingleton().getMutantIt().back()->getPolarCoordinates().theta, m_player->getPolarCoordinates().theta, 0.1f);
+	return float_compare(MutantContainer::getSingleton().getMutantIt().back()->getPolarCoordinates().theta, m_player->getPolarCoordinates().theta, 0.3f);
 }
 bool Tutorial::mutantSpawned()
 {

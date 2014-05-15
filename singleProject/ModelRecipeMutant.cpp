@@ -78,6 +78,7 @@ BaseAnimation* ModelRecipeMutant::getAttack(Ogre::Entity* entity)
 void ModelRecipeMutant::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 {
 	node->attachObject(ent);
+	node->setScale(Vector3(2.0f));
 }
 
 Ogre::SceneNode* ModelRecipeMutant::createNode()

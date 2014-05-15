@@ -71,6 +71,7 @@ void ModelRecipePlayer::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 	cNode->scale(Vector3(1.0));
 	cNode->attachObject(p);*/
 	node->attachObject(ent);
+	node->setScale(Vector3(2.0f));
 }
 BaseAnimation* ModelRecipePlayer::getTumble(Ogre::Entity* entity)
 {

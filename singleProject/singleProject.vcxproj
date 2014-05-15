@@ -80,6 +80,7 @@
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
     <ClCompile Include="PillarHider.cpp" />
+    <ClCompile Include="PlayerCameraState.cpp" />
     <ClCompile Include="PlayerHandlerStateBlankAttack.cpp" />
     <ClCompile Include="PlayerHandlerStateSingleAttack.cpp" />
     <ClCompile Include="DynamicTubes.cpp" />

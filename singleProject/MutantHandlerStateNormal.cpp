@@ -20,11 +20,11 @@ MutantHandlerStateNormal::MutantHandlerStateNormal(Mutant* mutant,const PolarCoo
 MutantHandlerStateNormal::~MutantHandlerStateNormal()
 {
 }
-
 void MutantHandlerStateNormal::update()
 {
 	steerTowardsPlayer();
-	if (Math::Abs(m_mutant->getPolarCoordinates().theta - m_playerCoords.theta) < MutantGlobalStats::getSingleton().getAttackDistance())
+	if (Math::Abs(m_mutant->getPolarCoordinates().theta - m_playerCoords.theta) < MutantGlobalStats::getSingleton().getAttackDistance()
+		|| static_cast<ModelHandlerMutant&>(m_mutant->getModelHandler()).getWeaponType() == WeaponType::SUICIDE_BOMB )
 		goAttack();
 	if (!m_normalState->getSuccess())
 		m_state = MUTANT_HANDLER_STATE::TUMBLE;
