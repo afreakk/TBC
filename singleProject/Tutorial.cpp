@@ -8,10 +8,9 @@
 #include "OISCore.h"
 #include "MainUpdate.h"
 #include "MutantContainer.h"
-
+TutorialScript Tutorial::m_tooltipIdx = TutorialScript::even_one;
 Tutorial::Tutorial()
 : m_player(PlayerContainer::getSingleton().getPlayer())
-, m_tooltipIdx(TutorialScript::even_one/*TutorialScript::debug*/)
 , m_enterReleased(true)
 , m_compositorOn(false)
 , m_pauseTimer(0.0f)
@@ -20,6 +19,7 @@ Tutorial::Tutorial()
 , m_changeLevel(false)
 , m_music("music/tutorial")
 {
+	m_tooltipIdx = TutorialScript::even_one;
 }
 
 
@@ -27,6 +27,16 @@ Tutorial::~Tutorial()
 {
 }
 
+TutorialScript Tutorial::getTooltipIdx()
+{
+	return m_tooltipIdx;
+}
+
+void Tutorial::setTooltipIdx(TutorialScript newIdx)
+{
+	m_tooltipIdx = newIdx;
+
+}
 void Tutorial::update()
 {
 	m_music.update();

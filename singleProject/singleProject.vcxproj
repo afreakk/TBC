@@ -234,6 +234,7 @@
     <ClInclude Include="Tooltip.h" />
     <ClInclude Include="Tubes.h" />
     <ClInclude Include="Tutorial.h" />
+    <ClInclude Include="TutorialEnums.h" />
     <ClInclude Include="WeaponTypes.h" />
     <ClInclude Include="BillboardNumber.h" />
     <ClInclude Include="OgreCore.h" />

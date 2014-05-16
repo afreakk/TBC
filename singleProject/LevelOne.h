@@ -35,6 +35,7 @@ private:
 	void destroyWorld();
 	void unLinkSubscribers();
 	void linkSubscribers();
+	void loadTutorialPosition();
 
 
 };

@@ -38,7 +38,9 @@ public:
 		return m_isInstantiated;
 	}
 	void destroyHandlers();
+	unsigned getMutantsKilled();
 private:
+	unsigned m_mutantsKilled;
 	static bool m_isInstantiated;
 	Ogre::Real m_despawnTime;
 	std::map<std::string, std::shared_ptr<MutantPair>> m_aliveMutants;

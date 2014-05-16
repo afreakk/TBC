@@ -7,6 +7,7 @@ struct MutantStartingInfo
 {
 	PolarCoordinates polar;
 	WeaponType weaponType;
+	bool instantSpawn;
 };
 class EnemySpawner 
 {

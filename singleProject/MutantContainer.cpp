@@ -6,12 +6,13 @@
 #include "LaneSettings.h"
 #include "ContainerLogic.h"
 #include "boost/algorithm/string/predicate.hpp"
-template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
 static const unsigned energyPerMutant = 40;
+template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
 bool MutantContainer::m_isInstantiated = false;
 MutantContainer::MutantContainer()
 : m_despawnTime(2.0)
 {
+	m_mutantsKilled = 0;
 	m_isInstantiated = true;
 }
 MutantContainer::~MutantContainer()
@@ -27,6 +28,11 @@ void MutantContainer::destroyHandlers()
         i.second->handler.reset();
 	for (auto& i : m_aliveMutants)
         i.second->handler.reset();
+}
+
+unsigned MutantContainer::getMutantsKilled()
+{
+    return m_mutantsKilled;
 }
 
 const std::string MutantContainer::message()
@@ -69,6 +75,7 @@ void MutantContainer::moveMutant(const std::string& id)
 	m_aliveMutants.erase(id);
 	m_lastDeadMutant = id;
 	notifySubscribers();
+	m_mutantsKilled++;
 
 }
 void MutantContainer::addMutant(MutantHandler* mutantHandler, Mutant* mutant)

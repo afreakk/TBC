@@ -877,5 +877,8 @@
     <ClInclude Include="LoadingScreenDisplayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialEnums.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

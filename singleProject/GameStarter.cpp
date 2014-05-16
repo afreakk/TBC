@@ -4,11 +4,17 @@
 #include "MainLevelSetter.h"
 #include "PlayerContainer.h"
 #include "Player.h"
+
 SaveGameIO GameStarter::m_savedData;
 bool GameStarter::resume = false;
 Ogre::Real GameStarter::resumePos = 0.0f;
+TutorialScript  GameStarter::savedTutPoint = TutorialScript::none;
+unsigned GameStarter::mutantsAlreadyKilled = 0;
+unsigned GameStarter::mutantsAlreadyAlive = 0;
+
 void GameStarter::startNewGame()
 {
+	resume = false;
 	MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
 }
 
@@ -16,12 +22,15 @@ bool GameStarter::resumeGame()
 {
 	resume = true;
 	auto data = m_savedData.loadFromFile();
-	if (data.first == LevelID::NONE)
+	if (data.error)
 		return false;
     //--- NPZ !!| 
-	resumePos = data.second;
-	MainLevelSetter::getSingleton().changeLevel(translateEnum(data.first));
-
+	resumePos = data.theta;
+	savedTutPoint = data.tutorialPos;
+	mutantsAlreadyKilled = data.mutantsKilled;
+	mutantsAlreadyAlive = data.mutantsAlive;
+	MainLevelSetter::getSingleton().changeLevel(translateEnum(data.levelID));
+	return true;
 }
 MainLevelEnums GameStarter::translateEnum(LevelID id)
 {

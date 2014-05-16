@@ -4,6 +4,7 @@
 #include "SoundFactory.h"
 #include "OgreCore.h"
 #include "GameStarter.h"
+#include "SoundFactory.h"
 LevelMenu::LevelMenu() 
 : ILevel(LevelID::LEVEL_MENU)
 , m_time(Real(0.0))
@@ -23,10 +24,12 @@ void LevelMenu::handleButtonClicked(ButtonType buttonClicked)
 	case ButtonType::changeResolution:
 		break;
 	case ButtonType::resumeGame:
-		GameStarter::resumeGame();
+		if (!GameStarter::resumeGame())
+			SoundFactory::getSingleton().playSound("sfx/error.wav", "error");
 		break;
 	case ButtonType::newGame:
 		GameStarter::startNewGame();
+		break;
 	case ButtonType::gotoPlayMenu:
         m_menu.reset();
         m_menu = unique_ptr<MenuBase>(new PlayGameMenu());

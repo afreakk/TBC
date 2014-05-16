@@ -8,7 +8,7 @@
 #include "PlayerGlobalStats.h"
 #include "PlayerHandler.h"
 #include "CoreCompositor.h"
-#include "../procedural/ProceduralPlaneGenerator.h"
+#include "GameStarter.h"
 LevelOne::LevelOne() 
 : ILevel(LevelID::LEVEL_ONE)
 , m_particleRefContainer(new ParticleReferenceContainer())
@@ -27,9 +27,19 @@ LevelOne::LevelOne()
 //	m_environmentNode->setPosition(Vector3(0, -10.0, 0));
 	m_playerGUI.init();
 	linkSubscribers();
+	loadTutorialPosition();
 }
 
 
+void LevelOne::loadTutorialPosition()
+{
+	if (GameStarter::resume)
+	{
+		m_tutorial.setTooltipIdx(GameStarter::savedTutPoint);
+		m_enemySpawner.update();
+	}
+
+}
 LevelOne::~LevelOne()
 {
 	Ogre::LogManager::getSingleton().logMessage("hnz: lvl1 Dest");

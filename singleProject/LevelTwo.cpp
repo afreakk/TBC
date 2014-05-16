@@ -9,7 +9,7 @@
 #include "PlayerHandler.h"
 
 LevelTwo::LevelTwo() 
-: ILevel(LevelID::LEVEL_ONE)
+: ILevel(LevelID::LEVEL_TWO)
 , m_particleRefContainer(new ParticleReferenceContainer())
 , m_playerContainer(new PlayerContainer())
 , m_mutantContainer(new MutantContainer())

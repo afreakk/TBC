@@ -5,6 +5,7 @@
 #include "ModelRecipeMutantSuicide.h"
 #include "ModelRecipeMutant.h"
 #include "PlayerContainer.h"
+#include "GameStarter.h"
 EnemySpawner::EnemySpawner(const std::string& lvl) 
 : m_spawnDistance(Ogre::Math::PI / 4.0)
 , m_mutantContainer(nullptr)
@@ -20,13 +21,23 @@ void EnemySpawner::init(MutantContainer* mutantContainer, Player* player)
 	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "Enemies"+m_lvlName);
 	for (unsigned i = 0; i < rootNode->findChild("r")->getValues().size(); i++)
 	{
-		m_mutantStartingPositions.push_back(MutantStartingInfo());
 		Ogre::Real theta = rootNode->findChild("r")->getValueR(i);
-		if (theta < PlayerContainer::getSingleton().getPlayer()->getPolarCoordinates().theta)
-			continue;
 		Ogre::Real lane = rootNode->findChild("lane")->getValueU(i);
-		m_mutantStartingPositions[i].polar = polarFromStarting(theta, lane );
-		m_mutantStartingPositions[i].weaponType = WeaponBase::weaponTypeFromString(rootNode->findChild("weaponType")->getValue(i));
+
+		bool instantSpawn = false;
+		if (GameStarter::resume)
+		{
+			if (i < GameStarter::mutantsAlreadyKilled)
+				continue;
+			else if (i < GameStarter::mutantsAlreadyKilled + GameStarter::mutantsAlreadyAlive)
+				instantSpawn = true;
+		}
+
+
+		m_mutantStartingPositions.push_back(MutantStartingInfo());
+		m_mutantStartingPositions.back().polar = polarFromStarting(theta, lane );
+		m_mutantStartingPositions.back().instantSpawn = instantSpawn;
+		m_mutantStartingPositions.back().weaponType = WeaponBase::weaponTypeFromString(rootNode->findChild("weaponType")->getValue(i));
 	}
 }
 EnemySpawner::~EnemySpawner()
@@ -42,7 +53,7 @@ void EnemySpawner::instantiateNewEnemies()
 {
 	for (std::vector<MutantStartingInfo>::iterator posIter = begin(m_mutantStartingPositions); posIter != end(m_mutantStartingPositions); ++posIter)
 	{
-		if (isWithinRange(m_player->getPolarCoordinates().theta, (*posIter).polar.theta, m_spawnDistance))
+		if (isWithinRange(m_player->getPolarCoordinates().theta, (*posIter).polar.theta, m_spawnDistance) || posIter->instantSpawn)
 		{
 			ModelRecipe* modelRecipe = nullptr;
 			switch ((*posIter).weaponType)
