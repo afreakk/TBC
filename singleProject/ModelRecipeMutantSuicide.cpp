@@ -73,10 +73,9 @@ void ModelRecipeMutantSuicide::attachNode(Ogre::SceneNode* node, Ogre::Entity* e
 {
 	auto childNode = node->createChildSceneNode();
     childNode->rotate(Vector3(0.0, 1.0, 0.0), Angle(90.0));
-	childNode->scale(Vector3(3.0));
+	childNode->scale(Vector3(5.0));
 	childNode->attachObject(ent);
 
-	node->setScale(Vector3(2.0f));
 }
 
 Ogre::SceneNode* ModelRecipeMutantSuicide::createNode()

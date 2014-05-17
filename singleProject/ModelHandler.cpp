@@ -29,6 +29,7 @@ ModelHandler::~ModelHandler()
 	OgreCore::getSingleton().getSceneMgr()->destroyEntity(m_entity);
 	parent->removeAndDestroyAllChildren();
 	OgreCore::getSingleton().getSceneMgr()->destroySceneNode(parent);
+	OgreCore::getSingleton().getSceneMgr()->destroySceneNode(m_node);
 }
 void ModelHandler::tooltip(std::string msg)
 {

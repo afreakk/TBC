@@ -17,7 +17,7 @@ void GameStarter::startNewGame()
 	resume = false;
 	MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
 }
-
+#include "PlayerGlobalStats.h"
 bool GameStarter::resumeGame()
 {
 	resume = true;
@@ -29,6 +29,7 @@ bool GameStarter::resumeGame()
 	savedTutPoint = data.tutorialPos;
 	mutantsAlreadyKilled = data.mutantsKilled;
 	mutantsAlreadyAlive = data.mutantsAlive;
+	PlayerGlobalStats::getSingleton().setEnergy(data.energy);
 	MainLevelSetter::getSingleton().changeLevel(translateEnum(data.levelID));
 	return true;
 }

@@ -9,6 +9,7 @@ struct SaveGameData
 	TutorialScript tutorialPos;
 	unsigned mutantsKilled;
 	unsigned mutantsAlive;
+	unsigned energy;
 	SaveGameData() : error(false), levelID(LevelID::NONE), theta(0.0f), tutorialPos(TutorialScript::none), mutantsKilled(0), mutantsAlive(0)
 	{}
 };

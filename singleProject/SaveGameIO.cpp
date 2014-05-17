@@ -4,13 +4,15 @@
 #include "Player.h"
 #include "PlayerContainer.h"
 #include "MutantContainer.h"
+#include "PlayerGlobalStats.h"
 /*
 FileSpec:
 -levelID
 -theta
 -mutantsKilled
 -mutantsAlive
--tutorialIdx
+-tutorialIdx/0
+-energy
 */
 SaveGameIO::SaveGameIO()
 {
@@ -26,6 +28,7 @@ void SaveGameIO::saveToFile(const std::string& filename)
 	saveFile << thetaString << endl;
 	saveFile << MutantContainer::getSingleton().getMutantsKilled() << endl;
 	saveFile << MutantContainer::getSingleton().getMutantIt().size() << endl;
+	saveFile << PlayerGlobalStats::getSingleton().getEnergy() << endl;
 	writeTutorialData(saveFile, MainUpdate::getSingleton().getLevelID());
 	saveFile.close();
 }
@@ -33,7 +36,7 @@ SaveGameData SaveGameIO::loadFromFile(const std::string& filename)
 {
 	SaveGameData data;
 	std::vector<std::string> loadedStrings;
-	if (!stringsFromFile(loadedStrings, filename, 5))
+	if (!stringsFromFile(loadedStrings, filename, 6))
 	{
 		data.error = true;
 		return data;
@@ -43,7 +46,8 @@ SaveGameData SaveGameIO::loadFromFile(const std::string& filename)
 	data.theta = boost::lexical_cast<Ogre::Real, std::string>(loadedStrings[1]);
 	data.mutantsKilled = boost::lexical_cast<unsigned, std::string> (loadedStrings[2]);
 	data.mutantsAlive = boost::lexical_cast<unsigned, std::string> (loadedStrings[3]);
-	data.tutorialPos = static_cast<TutorialScript>(boost::lexical_cast<int, std::string>(loadedStrings[4]));
+	data.energy = boost::lexical_cast<unsigned, std::string> (loadedStrings[4]);
+	data.tutorialPos = static_cast<TutorialScript>(boost::lexical_cast<int, std::string>(loadedStrings[5]));
 	return data;
 }
 std::string SaveGameIO::levelIDToString(LevelID levelID)

@@ -38,6 +38,9 @@ void BaseLoadingBar::animate()
 	m_background->animate();
 }
 //----------#######################################################|||||||||||||||||||||||||||||||||||
+LevelLoaderBar::~LevelLoaderBar()
+{
+}
 void LevelLoaderBar::start(RenderWindow* window)
 {
 	BaseLoadingBar::start(window);

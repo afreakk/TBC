@@ -9,7 +9,7 @@ entity globalLanes
 {
 	laneCount 3
 	laneIncrement 750
-	firstLane 4750
+	firstLane 5000
 	laneHeight 0
 }
 

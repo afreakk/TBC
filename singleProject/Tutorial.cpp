@@ -271,7 +271,7 @@ void Tutorial::update()
 			break;
 		case TutorialScript::slowmo_allKilled_four:
 			hideTooltip(m_player->getModelHandler());
-			if (pauseTimer())
+			if (pauseTimer(5.0f))
 				m_tooltipIdx = TutorialScript::change_level;
 			break;
 		case TutorialScript::change_level:
@@ -302,22 +302,27 @@ bool Tutorial::mutantIsClose()
 }
 bool Tutorial::mutantSpawned()
 {
+	auto totalMutants = MutantContainer::getSingleton().getMutantIt().size();
+	cout << m_mutantSize << " " << totalMutants;
 	m_canSpawn = true;
-	if (m_mutantSize < MutantContainer::getSingleton().getMutantIt().size())
+	if (m_mutantSize < totalMutants)
 	{
-	    m_mutantSize = MutantContainer::getSingleton().getMutantIt().size();
+	    m_mutantSize = totalMutants;
 		return true;
 	}
+    m_mutantSize = totalMutants;
 	return false;
 }
 bool Tutorial::mutantDied()
 {
-	cout << m_mutantSize << " " << MutantContainer::getSingleton().getMutantIt().size();
-	if (m_mutantSize > MutantContainer::getSingleton().getMutantIt().size())
+	auto totalMutants = MutantContainer::getSingleton().getMutantIt().size();
+	cout << m_mutantSize << " " << totalMutants;
+	if (m_mutantSize > totalMutants)
 	{
-	    m_mutantSize = MutantContainer::getSingleton().getMutantIt().size();
+	    m_mutantSize = totalMutants;
 		return true;
 	}
+    m_mutantSize = totalMutants;
 	return false;
 }
 void Tutorial::genericPress(TutorialScript changeTo, OIS::KeyCode keyCode)
@@ -328,10 +333,10 @@ void Tutorial::genericPress(TutorialScript changeTo, OIS::KeyCode keyCode)
         enterPressed();
     }
 }
-bool Tutorial::pauseTimer()
+bool Tutorial::pauseTimer(Ogre::Real time)
 {
 	m_pauseTimer += MainUpdate::getSingleton().getDeltaTime();
-	if (m_pauseTimer > 2.0f)
+	if (m_pauseTimer > time)
 	{
 		m_pauseTimer = 0.0f;
 		return true;

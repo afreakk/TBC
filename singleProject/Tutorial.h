@@ -32,7 +32,7 @@ private:
 	void setCompositor(bool enabled);
 	void setSlowmotion(bool slowMotion);
 
-	bool pauseTimer();
+	bool pauseTimer(Ogre::Real time=2.0f);
 	bool mutantSpawned();
 	bool mutantDied();
 	bool mutantIsClose();

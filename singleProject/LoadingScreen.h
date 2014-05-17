@@ -17,7 +17,7 @@ class LevelLoaderBar : public BaseLoadingBar, LogListener
 {
 public:
 	LevelLoaderBar() {}
-	virtual ~LevelLoaderBar(){}
+	virtual ~LevelLoaderBar();
 	virtual void start(RenderWindow* window ) override;
 	virtual void finish(void) override;
     virtual void messageLogged( const String& message, LogMessageLevel lml, bool maskDebug, const String &logName, bool& skipThisMessage ) override;
