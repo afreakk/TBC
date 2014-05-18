@@ -29,19 +29,22 @@ TBCRay::TBCRay(Ogre::SceneManager* sceneMgr)
 																			 * @param[out] result	Result ( ONLY if return TRUE )
 																			 * @return TRUE if somethings found => {result} NOT EMPTY
 																			 */
+#define DEBUG_RAY 0
 void TBCRay::debugRay(const Ogre::Vector3& point, const Ogre::Vector3& normal)
 {
-	//m_line.update(point, point + normal);
+	m_line.update(point, point + normal);
 }
 void TBCRay::debugHit(const Ogre::Vector3& point, const Ogre::Vector3& endPoint)
 {
-	//m_hitLine.update(point, endPoint);
+	m_hitLine.update(point, endPoint);
 }
 
 bool TBCRay::raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, const BehaviourObject* gameObject)
 {
 	Vector3 normalised = normal.normalisedCopy();
+#if DEBUG_RAY > 0
 	debugRay(point, normalised*80000.0);
+#endif
 	ray.setOrigin(point);
 	ray.setDirection(normalised);
 
@@ -58,6 +61,7 @@ bool TBCRay::raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, co
 	boundingBox.transform(mat);
 
 	const std::pair<bool, Real>& result = OgreFix::intersects(ray,boundingBox);
+#if DEBUG_RAY > 0
 	if (result.first)
 	{
 		debugHit(point, point+normalised*80000.0);
@@ -68,11 +72,16 @@ bool TBCRay::raycast(const Ogre::Vector3& point, const Ogre::Vector3& normal, co
 		debugHit(point, point);
 		return false;
 	}
-
+#endif
+	return result.first;
 }
+
+//--- not currently being used
 bool TBCRay::RaycastFromPoint(const Ogre::Vector3& point, const Ogre::Vector3& normal, Ogre::Vector3& result)
 {
+#if DEBUG_RAY > 0
 	debugRay(point, normal);
+#endif
 	// create the ray to test
 	Ogre::Ray ray(point, normal.normalisedCopy());
 
@@ -106,13 +115,17 @@ bool TBCRay::RaycastFromPoint(const Ogre::Vector3& point, const Ogre::Vector3& n
 		if (query_result[qr_idx].movable->getName() == "PlayerEntity")
 		{
 			result = query_result[qr_idx].movable->getParentNode()->getPosition();
+#if DEBUG_RAY > 0
             debugHit(point, query_result[qr_idx].movable->getParentNode()->getPosition());
+#endif
 			return true;
 		}
 		if (checkVertex(query_result[qr_idx], closest_result, ray, closest_distance))
 		{
             closest_result = ray.getPoint(closest_distance);
+#if DEBUG_RAY > 0
             debugHit(point, query_result[qr_idx].movable->getParentNode()->getPosition());
+#endif
 		}
 	}
 

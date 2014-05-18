@@ -16,6 +16,7 @@ public:
 	void notify(PlayerStatus) override;
 	void destroyHandlers();
 	void respawnPlayer();
+	bool isPlayerDead();
 private:
 	void killPlayer();
 

@@ -9,7 +9,7 @@
 
 BehaviourStateAttackRanged::BehaviourStateAttackRanged()
 : BehaviourState(BEHAVOUR_STATE::RANGED_ATTACK)
-, m_phase(AttackRangedPhase::reloading)
+, m_phase(AttackRangedPhase::aiming)
 , m_delayedPlayerPos(Vector3::ZERO)
 , m_directionToPlayer(Quaternion::ZERO)
 , m_lerp(Real(0.0))
@@ -35,9 +35,9 @@ void BehaviourStateAttackRanged::update(ModelHandler& modelHandler)
 		m_phase = shootingPhase(modelHandler, dt);
         modelHandler.playAnimation(ANIMATIONS::ATTACK);
 		break;
-	case AttackRangedPhase::reloading:
+	case AttackRangedPhase::aiming:
         modelHandler.playAnimation(ANIMATIONS::PREPARE);
-		m_phase = reloadPhase(modelHandler, dt);
+		m_phase = aimingPhase(modelHandler, dt);
 		break;
         //waiting
 	default:
@@ -52,14 +52,8 @@ AttackRangedPhase BehaviourStateAttackRanged::waiting(ModelHandler& modelHandler
 	if (m_localTime >= m_shootDelay)
 	{
 		m_localTime = 0.0;
-		m_stoppedPS = false;
-		return AttackRangedPhase::reloading;
-	}
-	else if (m_localTime >= m_shootDelay - 1.0f && ! m_stoppedPS)
-	{
-
-		m_stoppedPS = true;
-		static_cast<ModelHandlerMutant&>(modelHandler).fire(false);
+        static_cast<ModelHandlerMutant&>(modelHandler).fire(false);
+		return AttackRangedPhase::aiming;
 	}
 	return AttackRangedPhase::waiting;
 
@@ -69,7 +63,7 @@ AttackRangedPhase BehaviourStateAttackRanged::shootingPhase(ModelHandler& modelH
     static_cast<ModelHandlerMutant&>(modelHandler).fire();
     return AttackRangedPhase::waiting;
 }
-AttackRangedPhase BehaviourStateAttackRanged::reloadPhase(ModelHandler& modelHandler, const Ogre::Real& dt)
+AttackRangedPhase BehaviourStateAttackRanged::aimingPhase(ModelHandler& modelHandler, const Ogre::Real& dt)
 {
 	if (m_localTime >= m_shootDelay)
 	{
@@ -79,7 +73,7 @@ AttackRangedPhase BehaviourStateAttackRanged::reloadPhase(ModelHandler& modelHan
 	aim(modelHandler);
     Quaternion interpolatedLookAt = Math::lerp<Quaternion,Real>(m_originalDirection, m_directionToPlayer, Real(dt*2.0));
 	modelHandler.getNode()->setOrientation(interpolatedLookAt);
-	return AttackRangedPhase::reloading;
+	return AttackRangedPhase::aiming;
 }
 void BehaviourStateAttackRanged::aim(ModelHandler& modelHandler)
 {

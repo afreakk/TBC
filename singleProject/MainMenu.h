@@ -55,3 +55,9 @@ class PlayGameMenu : public MenuBase
 public:
 	PlayGameMenu();
 };
+
+class DeathMenu : public MenuBase
+{
+public:
+	DeathMenu();
+};

@@ -20,9 +20,7 @@ PlayerCameraStateNormal::~PlayerCameraStateNormal()
 }
 void PlayerCameraStateNormal::update()
 {
-    const Ogre::Real& dt = MainUpdate::getSingleton().getDeltaTime();
-	if (m_lerp < 1.0)
-		m_lerp += dt;
+    const Ogre::Real& dt = MainUpdate::getSingleton().getScaledDeltaTime();
 	setCameraPos(m_height, m_distance);
 	m_camera->lookAt(getTiltedLerpedPlayerPos(dt));
 }

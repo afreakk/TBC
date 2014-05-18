@@ -458,6 +458,9 @@
     <ClCompile Include="PlayerCameraState.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="DeathScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -879,6 +882,9 @@
     </ClInclude>
     <ClInclude Include="TutorialEnums.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathScreen.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

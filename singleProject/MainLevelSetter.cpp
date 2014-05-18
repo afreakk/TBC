@@ -38,19 +38,27 @@ void MainLevelSetter::changeLevel(MainLevelEnums newLvl)
 }
 ILevel* MainLevelSetter::setLevel(MainLevelEnums newLvl)
 {
-	switch (newLvl)
+	try
 	{
-	case MainLevelEnums::MENU:
-		return new LevelMenu();
-	case MainLevelEnums::LVL1:
-		return new LevelOne();
-	case MainLevelEnums::LVL2:
-		return new LevelTwo();
-	case MainLevelEnums::INTRO:
-		return new LevelIntro();
-	default:
-		assert(0);
-		return nullptr;
+        switch (newLvl)
+        {
+        case MainLevelEnums::MENU:
+            return new LevelMenu();
+        case MainLevelEnums::LVL1:
+            return new LevelOne();
+        case MainLevelEnums::LVL2:
+            return new LevelTwo();
+        case MainLevelEnums::INTRO:
+            return new LevelIntro();
+        default:
+            assert(0);
+            return nullptr;
+        }
+	}
+	catch (Ogre::Exception& e)
+	{
+		cout << "setLevel:" << endl;
+		cout << e.what() << endl;
 	}
 }
 LevelManager* MainLevelSetter::getLevelManager()

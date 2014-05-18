@@ -3,9 +3,10 @@
 #include "ModelHandlerMutant.h"
 #include "MutantContainer.h"
 #include "MainUpdate.h"
+#include "PlayerContainer.h"
+#include "Player.h"
 PlayerCameraStateSelection::PlayerCameraStateSelection() 
-: m_camera(OgreCore::getSingleton().getCamera())
-, m_lookAt(Vector3::ZERO)
+: m_lookAt(Vector3::ZERO)
 {
 }
 
@@ -13,10 +14,14 @@ PlayerCameraStateSelection::PlayerCameraStateSelection()
 PlayerCameraStateSelection::~PlayerCameraStateSelection()
 {
 }
-
+#include "UnitCircleMovement.h"
 void PlayerCameraStateSelection::update()
 {
 	auto dt = MainUpdate::getSingleton().getDeltaTime();
+	PolarCoordinates leftOfPlayer = PlayerContainer::getSingleton().getPlayer()->getPolarCoordinates();
+	leftOfPlayer.theta -= 0.2f;
+	Ogre::Vector3 leftOfPlayerVec = UnitCircleMovement::VectorFromPolar(leftOfPlayer);
+	m_camera->setPosition(Math::lerp(m_camera->getPosition(), leftOfPlayerVec*1.2f+Vector3(0,2400,0),dt));
 	for (const auto& mutant : MutantContainer::getSingleton().getMutantIt())
 	{
 		ModelHandlerMutant& mutantModelHandler = static_cast<ModelHandlerMutant&>(mutant->getModelHandler());

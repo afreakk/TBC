@@ -1,6 +1,7 @@
 #pragma once
 enum class ButtonType
 {
+    retry,
     gotoPlayMenu,
     newGame,
     options,

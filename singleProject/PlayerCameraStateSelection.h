@@ -8,7 +8,6 @@ public:
 	~PlayerCameraStateSelection();
 	void update() override ;
 private:
-	Ogre::Camera* m_camera;
 	Vector3 m_lookAt;
 };
 

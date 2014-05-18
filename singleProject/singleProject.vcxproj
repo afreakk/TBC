@@ -26,6 +26,7 @@
     <ClCompile Include="ConfigScriptLoader.cpp" />
     <ClCompile Include="ContainerLogic.cpp" />
     <ClCompile Include="CoreCompositor.cpp" />
+    <ClCompile Include="DeathScreen.cpp" />
     <ClCompile Include="DetonateWeaponHitTest.cpp" />
     <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="CameraBase.h" />
     <ClInclude Include="ConfigScriptLoader.h" />
     <ClInclude Include="ContainerLogic.h" />
+    <ClInclude Include="DeathScreen.h" />
     <ClInclude Include="DetonateWeaponHitTest.h" />
     <ClInclude Include="GameConsole.h" />
     <ClInclude Include="GameStarter.h" />

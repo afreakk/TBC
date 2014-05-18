@@ -69,5 +69,6 @@ bool LevelTwo::update()
 	m_environment.update();
     m_enemySpawner.update();
 	m_menu.updateMenu();
+	m_deathScreen.updateDeathMenu();
 	return false;
 }

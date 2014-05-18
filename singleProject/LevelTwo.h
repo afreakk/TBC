@@ -8,6 +8,7 @@
 #include "DotSceneLoader.h"
 #include "PillarHider.h"
 #include "InGameMenu.h"
+#include "DeathScreen.h"
 class PlayerContainer;
 class ParticleReferenceContainer;
 class LevelTwo : public ILevel
@@ -29,6 +30,7 @@ private:
 	PlayerGUI m_playerGUI;
 	DotSceneLoader m_dotSceneLoader;
 	InGameMenu m_menu;
+	DeathScreen m_deathScreen;
 
 	void destroyWorld();
 	void unLinkSubscribers();

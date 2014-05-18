@@ -2,16 +2,18 @@
 #include "MainMenu.h"
 #include "OgreCore.h"
 #include "OISCore.h"
+
 //------ Controls--------------------------------------------|||||||||||||||||||||||||||||||||
+
 bool MenuControls::up(const OIS::KeyCode& key)
 {
-	if (key == OIS::KeyCode::KC_W || key == OIS::KeyCode::KC_UP)
+	if (key == OIS::KeyCode::KC_W || key == OIS::KeyCode::KC_UP || key == OIS::KeyCode::KC_A)
 		return true;
 	return false;
 }
 bool MenuControls::down(const OIS::KeyCode& key)
 {
-	if (key == OIS::KeyCode::KC_S || key == OIS::KeyCode::KC_DOWN)
+	if (key == OIS::KeyCode::KC_S || key == OIS::KeyCode::KC_DOWN || key == OIS::KeyCode::KC_D)
 		return true;
 	return false;
 }
@@ -27,7 +29,9 @@ bool MenuControls::back(const OIS::KeyCode& key)
 		return true;
 	return false;
 }
+
 //###############################################################################################
+
 MenuBase::MenuBase(const std::string& gorillaFileName,const std::string& background)
 : m_buttonClicked(ButtonType::none)
 {
@@ -157,5 +161,19 @@ PlayGameMenu::PlayGameMenu()
 	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "Start_Menu_back_button",      ButtonType::backToMenu));
 	finalize();
 }
-
 //################################################################
+
+
+DeathMenu::DeathMenu()
+: MenuBase("deathMenu", "deathBG")
+{
+	Ogre::Real vpW = m_screen->getWidth(); 
+	Ogre::Real vpH = m_screen->getHeight();
+	Real width = vpW / 4.0f;
+	Real height = vpH / 10.0f;
+	Real xPos = vpW / 2.0f - width / 2.0f;
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "yes",   ButtonType::retry));
+	m_buttons.push_back(MainMenuButton(m_layer, 0, 0,               vpW, vpH, "no",   ButtonType::gotoMainMenu));
+	finalize();
+}
+//###############################################################

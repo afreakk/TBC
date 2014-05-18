@@ -56,14 +56,14 @@ void InGameMenu::updateMenu()
 				m_saveGame.saveToFile();
 				MainUpdate::getSingleton().stopRendering();
 				break;
-                //--------------------###########
 			case ButtonType::backToMenu:
+                //---------------------|||||||||========
                 // escape == backToMenu , this is Filler
 				break;
 			default:
 				assert(0);
 				break;
-                //---------------------|||||||||
+                //---------------------|||||||||========
 			}
 		}
 	}

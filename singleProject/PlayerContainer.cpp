@@ -61,3 +61,7 @@ void PlayerContainer::respawnPlayer()
 	PlayerGlobalStats::getSingleton().setHealth(100);
 	m_handler->switchState(PLAYER_HANDLER_STATE::NORMAL);
 }
+bool PlayerContainer::isPlayerDead()
+{
+	return m_player->getState() == BEHAVOUR_STATE::DEAD;
+}

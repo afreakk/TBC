@@ -4,7 +4,7 @@
 
 LineBillboardSet::LineBillboardSet(Ogre::SceneNode* parentNode)
 : m_billboardSet(OgreCore::getSingleton().getSceneMgr()->createBillboardSet())
-, m_sceneNode(parentNode->createChildSceneNode())
+, m_sceneNode(parentNode)
 , m_dimension(100.0)
 {
     m_billboardSet->setBillboardType(BBT_PERPENDICULAR_COMMON);
@@ -12,6 +12,7 @@ LineBillboardSet::LineBillboardSet(Ogre::SceneNode* parentNode)
     m_billboardSet->setCommonDirection(Vector3(0, 1, 0));
     m_billboardSet->setDefaultDimensions(m_dimension, m_dimension);
     m_billboardSet->setMaterialName("selectionLine");
+	m_billboardSet->setBounds(Ogre::AxisAlignedBox::BOX_INFINITE, 0.0f);
     m_sceneNode->attachObject(m_billboardSet);
 }
 

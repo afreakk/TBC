@@ -22,10 +22,5 @@ PlayerCameraStateLERP::~PlayerCameraStateLERP()
 #include "LaneSettings.h"
 void PlayerCameraStateLERP::update()
 {
-	setCameraPos(m_height, m_distance);
-	if (m_lerp < 1.0)
-		m_lerp += MainUpdate::getSingleton().getDeltaTime();
-	m_r += MainUpdate::getSingleton().getDeltaTime()*m_spinSpeed;
-	m_camera->setPosition( Ogre::Math::lerp(m_camera->getPosition(), m_playerNode->getPosition()+Vector3(sin(m_r)*m_distance,m_height,cos(m_r)*m_distance),m_lerp ));
 	m_camera->lookAt(getTiltedLerpedPlayerPos(MainUpdate::getSingleton().getScaledDeltaTime()));
 }

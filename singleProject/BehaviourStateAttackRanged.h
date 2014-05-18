@@ -6,7 +6,7 @@ enum class AttackRangedPhase
 {
     shooting,
     waiting,
-    reloading
+    aiming
 };
 class BehaviourStateAttackRanged : public BehaviourState
 {
@@ -17,7 +17,7 @@ public:
 private:
 	AttackRangedPhase m_phase;
 	AttackRangedPhase shootingPhase(ModelHandler& modelHandler, const Ogre::Real& dt);
-	AttackRangedPhase reloadPhase(ModelHandler& modelHandler, const Ogre::Real& dt);
+	AttackRangedPhase aimingPhase(ModelHandler& modelHandler, const Ogre::Real& dt);
 	AttackRangedPhase waiting(ModelHandler& modelHandler, const Ogre::Real& dt);
 	Vector3 m_delayedPlayerPos;
 	Quaternion m_directionToPlayer;
