@@ -10,5 +10,6 @@ public:
 private:
 	std::unique_ptr<DeathMenu> m_deathMenu;
 	SaveGameIO m_saveGame;
+	uint8 m_playerRenderQueueGroup;
 };
 

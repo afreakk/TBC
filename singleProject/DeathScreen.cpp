@@ -12,7 +12,10 @@ DeathScreen::DeathScreen()
 DeathScreen::~DeathScreen()
 {
 }
-
+#include "OgreCore.h"
+#include "PlayerContainer.h"
+#include "Player.h"
+#include "ModelHandler.h"
 void DeathScreen::updateDeathMenu()
 {
 	if (m_deathMenu)
@@ -20,6 +23,10 @@ void DeathScreen::updateDeathMenu()
 		auto keyClicked = m_deathMenu->getButtonClicked();
 		if (keyClicked != ButtonType::none)
 		{
+            auto smgr = OgreCore::getSingleton().getSceneMgr();
+            smgr->clearSpecialCaseRenderQueues();
+            smgr->setSpecialCaseRenderQueueMode(SceneManager::SCRQM_EXCLUDE);
+            PlayerContainer::getSingleton().getPlayer()->getModelHandler().getEntity()->setRenderQueueGroup(m_playerRenderQueueGroup);
 			switch (keyClicked)
 			{
 			case ButtonType::gotoMainMenu:
@@ -43,8 +50,14 @@ void DeathScreen::updateDeathMenu()
 	}
 	else if (PlayerContainer::getSingleton().isPlayerDead())
 	{
+		m_playerRenderQueueGroup = PlayerContainer::getSingleton().getPlayer()->getModelHandler().getEntity()->getRenderQueueGroup();
+		PlayerContainer::getSingleton().getPlayer()->getModelHandler().getEntity()->setRenderQueueGroup(RENDER_QUEUE_OVERLAY);
+        auto smgr = OgreCore::getSingleton().getSceneMgr();
+        smgr->clearSpecialCaseRenderQueues();
+        smgr->addSpecialCaseRenderQueue(RENDER_QUEUE_OVERLAY);
+        smgr->setSpecialCaseRenderQueueMode(SceneManager::SCRQM_INCLUDE);
+
 		m_deathMenu.reset();
 		m_deathMenu = unique_ptr<DeathMenu>(new DeathMenu());
 	}
-
 }
