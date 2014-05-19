@@ -11,6 +11,7 @@ public:
 	static TutorialScript savedTutPoint;
 	static unsigned mutantsAlreadyKilled;
 	static unsigned mutantsAlreadyAlive;
+	static unsigned energySaved;
 private:
 	static SaveGameIO m_savedData;
 	static MainLevelEnums translateEnum(LevelID id);

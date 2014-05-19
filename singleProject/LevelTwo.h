@@ -11,6 +11,8 @@
 #include "DeathScreen.h"
 class PlayerContainer;
 class ParticleReferenceContainer;
+class PlayerGlobalStats;
+class MutantGlobalStats;
 class LevelTwo : public ILevel
 {
 public:
@@ -18,6 +20,8 @@ public:
 	~LevelTwo();
 	bool update() override;
 private:
+    std::unique_ptr<PlayerGlobalStats> m_playerStats;
+    std::unique_ptr<MutantGlobalStats> m_mutantGlobalStats;
 	unique_ptr<ParticleReferenceContainer> m_particleRefContainer;
 	unique_ptr<PlayerContainer> m_playerContainer;
 	unique_ptr<MutantContainer> m_mutantContainer;

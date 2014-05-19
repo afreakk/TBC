@@ -6,11 +6,14 @@
 #include "ParticleReferenceContainer.h"
 #include "PlayerContainer.h"
 #include "PlayerGlobalStats.h"
+#include "MutantGlobalStats.h"
 #include "PlayerHandler.h"
 #include "CoreCompositor.h"
 #include "GameStarter.h"
 LevelOne::LevelOne() 
 : ILevel(LevelID::LEVEL_ONE)
+, m_playerStats(new PlayerGlobalStats())
+, m_mutantGlobalStats(new MutantGlobalStats())
 , m_particleRefContainer(new ParticleReferenceContainer())
 , m_playerContainer(new PlayerContainer())
 , m_mutantContainer(new MutantContainer())

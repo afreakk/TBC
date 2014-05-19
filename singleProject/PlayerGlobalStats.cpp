@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerGlobalStats.h"
-
 #include "ConfigScriptLoader.h"
+#include "GameStarter.h"
 
 template<> PlayerGlobalStats* Ogre::Singleton<PlayerGlobalStats>::msSingleton = 0;
 PlayerGlobalStats::PlayerGlobalStats() 
@@ -16,9 +16,13 @@ PlayerGlobalStats::PlayerGlobalStats()
 
 void PlayerGlobalStats::parseScript()
 {
+    //---
+	if (GameStarter::resume)
+		m_status.energy = GameStarter::energySaved;
+	else
+        m_status.energy = 0;
+    //xxx
 	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "PlayerStats");
-
-	m_status.energy = 0;
 	m_status.maxEnergy = rootNode->findChild("energy")->getValueU(0);
 	m_status.health = rootNode->findChild("healthPoints")->getValueU(0);
 	m_status.maxHealth = m_status.health;

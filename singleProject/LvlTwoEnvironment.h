@@ -2,6 +2,7 @@
 #include "LightHandler.h"
 #include "ParticleEffect.h"
 #include "WeatherSnow.h"
+#include "LightHandler.h"
 class LvlTwoEnvironment
 {
 public:
@@ -9,7 +10,8 @@ public:
 	~LvlTwoEnvironment();
 	void update();
 private:
+	LightHandler m_lightHandler;
 	std::vector<std::unique_ptr<WeatherSnow> >m_snowRenderers;
-	//std::unique_ptr<SnowInstance> m_snowParticles;
+	std::unique_ptr<SnowInstance> m_snowParticles;
 	void initSnow();
 };

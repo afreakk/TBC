@@ -11,6 +11,7 @@ Ogre::Real GameStarter::resumePos = 0.0f;
 TutorialScript  GameStarter::savedTutPoint = TutorialScript::none;
 unsigned GameStarter::mutantsAlreadyKilled = 0;
 unsigned GameStarter::mutantsAlreadyAlive = 0;
+unsigned GameStarter::energySaved = 0;
 
 void GameStarter::startNewGame()
 {
@@ -29,7 +30,7 @@ bool GameStarter::resumeGame()
 	savedTutPoint = data.tutorialPos;
 	mutantsAlreadyKilled = data.mutantsKilled;
 	mutantsAlreadyAlive = data.mutantsAlive;
-	PlayerGlobalStats::getSingleton().setEnergy(data.energy);
+	energySaved = data.energy;
 	MainLevelSetter::getSingleton().changeLevel(translateEnum(data.levelID));
 	return true;
 }

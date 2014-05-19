@@ -6,7 +6,7 @@
 #include "LevelManager.h"
 #include "LevelIntro.h"
 #include "LoadingScreen.h"
-
+#include "PlayerGlobalStats.h"
 template<> MainLevelSetter* Ogre::Singleton<MainLevelSetter>::msSingleton = 0;
 MainLevelSetter::MainLevelSetter(MainLevelEnums newLvl)
 : m_levelMgr( new LevelManager(setLevel(newLvl)) )

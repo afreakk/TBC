@@ -13,6 +13,11 @@ SnowInstance::SnowInstance()
 : m_systemCount(0)
 {
 }
+SnowInstance::~SnowInstance()
+{
+	for (auto& it : m_particleSystems)
+		ParticleUniverse::ParticleSystemManager::getSingleton().destroyParticleSystem(it.second, OgreCore::getSingleton().getSceneMgr() );
+}
 unsigned SnowInstance::getId()
 {
 	for (auto& it : m_leased)

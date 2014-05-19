@@ -7,9 +7,12 @@
 #include "PlayerContainer.h"
 #include "PlayerGlobalStats.h"
 #include "PlayerHandler.h"
+#include "MutantGlobalStats.h"
 
 LevelTwo::LevelTwo() 
 : ILevel(LevelID::LEVEL_TWO)
+, m_playerStats(new PlayerGlobalStats())
+, m_mutantGlobalStats(new MutantGlobalStats())
 , m_particleRefContainer(new ParticleReferenceContainer())
 , m_playerContainer(new PlayerContainer())
 , m_mutantContainer(new MutantContainer())

@@ -4,6 +4,7 @@ class SnowInstance : public Ogre::Singleton<SnowInstance>
 {
 public:
 	SnowInstance();
+	~SnowInstance();
 	unsigned getId();
 	ParticleUniverse::ParticleSystem* getSystem(unsigned id);
 	void returnSystem(unsigned id);

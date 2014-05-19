@@ -17,8 +17,8 @@ TBCRay::TBCRay(Ogre::SceneManager* sceneMgr)
 	m_raySceneQuery->setSortByDistance(true);
 
 	m_raySceneQuery->setRay(ray);*/
-	m_line.init(Vector3::ZERO, Vector3::ZERO, "Green");
-	m_hitLine.init(Vector3::ZERO, Vector3::ZERO, "Red");
+	m_line.init(Vector3::ZERO, Vector3::ZERO, "debug_ray_miss");
+	m_hitLine.init(Vector3::ZERO, Vector3::ZERO, "debug_ray_hit");
 }
 
 

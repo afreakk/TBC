@@ -9,7 +9,7 @@
 #include "ModelHandlerPlayer.h"
 #include "TBCRay.h"
 
-bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, ParticleUniverse::ParticleAffector* collisionObserver
+void BeamWeaponHitTest::fireBallUpdate(ParticleUniverse::BaseCollider* colliderObject, ParticleUniverse::ParticleAffector* collisionObserver
 	, ParticleUniverse::ParticleEmitter* emitter, Ogre::Node* node, int damage, const Ogre::Real& rayHeight, const Ogre::Real& mainMassZPos)
 {
 	bool BeamHitSomething = false;
@@ -22,16 +22,16 @@ bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
         if (rayCastTarget(player,node,rayHeight))
         {
             Real zPos = node->convertWorldToLocalPosition( player->getNode()->getPosition() ).z;
+            cout << isInFrontOfBall(zPos,mainMassZPos) << endl;
             if (isInFrontOfBall(zPos,mainMassZPos))
             {
                 rayHitSomething.first=true;
                 rayHitSomething.second = zPos;
+                //todo: fix this poopfuck
                 if (didItHit(zPos, colliderObject, collisionObserver))
                 {
                     PlayerGlobalStats::getSingleton().modifyHealth(-damage);
-					BeamHitSomething = true;
                     colliderObject->position.z = rayHitSomething.second;
-					return BeamHitSomething;
                 }
             }
         }
@@ -52,9 +52,7 @@ bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
 				if (didItHit(zPos, colliderObject, collisionObserver))
 				{
                     MutantContainer::getSingleton().killMutant(itt->getNode()->getName());
-					BeamHitSomething = true;
                     colliderObject->position.z = rayHitSomething.second;
-					return BeamHitSomething;
 				}
 			}
         }
@@ -64,7 +62,6 @@ bool BeamWeaponHitTest::hitTest(ParticleUniverse::BaseCollider* colliderObject, 
 		colliderObject->position.z = -40000.0;
 	else
 		colliderObject->position.z = rayHitSomething.second;
-	return BeamHitSomething;
 }
 bool BeamWeaponHitTest::rayCastTarget(const BehaviourObject* obj, Ogre::Node* node, const Ogre::Real& rayHeight)
 {
@@ -72,9 +69,10 @@ bool BeamWeaponHitTest::rayCastTarget(const BehaviourObject* obj, Ogre::Node* no
 		return true;
 	return false;
 }
+#include "MainUpdate.h"
 bool BeamWeaponHitTest::isInFrontOfBall(const Ogre::Real& zPos, const Ogre::Real& mainMassZPos)
 {
-	if (zPos <= mainMassZPos )
+	if (zPos <= mainMassZPos+60.0f )
 		return true;
 	return false;
 }

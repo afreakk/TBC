@@ -56,8 +56,6 @@ int main()
 		unique_ptr<TBCRay> raycasting = unique_ptr<TBCRay>(new TBCRay(OgreCore::getSingletonPtr()->getSceneMgr()));
     
 		unique_ptr<GlobalVariables> m_globalVars = unique_ptr<GlobalVariables>(new GlobalVariables());
-		unique_ptr<PlayerGlobalStats> m_playerStats = unique_ptr<PlayerGlobalStats>(new PlayerGlobalStats());
-        unique_ptr<MutantGlobalStats> m_mutantGlobalStats = unique_ptr<MutantGlobalStats>(new MutantGlobalStats());
 
 		unique_ptr<MainLevelSetter> lvlSetter = unique_ptr<MainLevelSetter>(new MainLevelSetter(MainLevelEnums::MENU));
 		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(lvlSetter->getLevelManager()));

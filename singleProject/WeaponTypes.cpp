@@ -90,13 +90,16 @@ void MutantFireBall::updateShadowPos()
     m_shadowPos.z -= particleVelocity * MainUpdate::getSingleton().getDeltaTime();
 	m_shadow.setPosition(m_shadowPos);
 }
+static int fucku = 0;
 void MutantFireBall::update()
 {
 	WeaponMissile::update();
 	updateShadowPos();
 	if (m_doHitTest)
 	{
-        if (BeamWeaponHitTest::hitTest(m_planeCollider, m_collisionObserver, m_emitter, m_node, m_weaponDamage, m_height, m_shadowPos.z))
+		cout << fucku++ << endl;
+		BeamWeaponHitTest::fireBallUpdate(m_planeCollider, m_collisionObserver, m_emitter, m_node, m_weaponDamage, m_height, m_shadowPos.z);
+		if (m_collisionObserver->isEnabled())
             disable();
 	}
 }
