@@ -8,6 +8,7 @@
 #include "PillarHider.h"
 #include "Tutorial.h"
 #include "InGameMenu.h"
+#include "DeathScreen.h"
 class PlayerContainer;
 class ParticleReferenceContainer;
 class PlayerGlobalStats;
@@ -35,6 +36,7 @@ private:
 	PillarHider m_pillarHider;
 	Tutorial m_tutorial;
 	InGameMenu m_menu;
+	DeathScreen m_deathScreen;
 
 	void destroyWorld();
 	void unLinkSubscribers();

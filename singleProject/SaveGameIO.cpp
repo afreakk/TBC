@@ -7,12 +7,15 @@
 #include "PlayerGlobalStats.h"
 /*
 FileSpec:
+========
 -levelID
 -theta
 -mutantsKilled
 -mutantsAlive
 -tutorialIdx/0
 -energy
+-time&date
+========
 */
 SaveGameIO::SaveGameIO()
 {
@@ -30,6 +33,9 @@ void SaveGameIO::saveToFile(const std::string& filename)
 	saveFile << MutantContainer::getSingleton().getMutantIt().size() << endl;
 	saveFile << PlayerGlobalStats::getSingleton().getEnergy() << endl;
 	writeTutorialData(saveFile, MainUpdate::getSingleton().getLevelID());
+	time_t timev;
+	std::time(&timev);
+	saveFile << timev << endl;
 	saveFile.close();
 }
 SaveGameData SaveGameIO::loadFromFile(const std::string& filename)

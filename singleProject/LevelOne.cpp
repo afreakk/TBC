@@ -89,6 +89,7 @@ void LevelOne::destroyWorld()
 	m_environmentNode->removeAndDestroyAllChildren();
 }
 Real avgFps = 0.0;
+#include "GameStarter.h"
 bool LevelOne::update()
 {
 	/*if (avgFps != OgreCore::getSingleton().getWindow()->getAverageFPS())
@@ -109,6 +110,10 @@ bool LevelOne::update()
 	if (m_tutorial.canSpawn())
 	    m_enemySpawner.update();
 	if (m_tutorial.plzChangeLevel())
+	{
+		GameStarter::resume = false;
 		MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL2);
+	}
+	m_deathScreen.updateDeathMenu();
 	return false;
 }

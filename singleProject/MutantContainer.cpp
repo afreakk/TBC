@@ -6,13 +6,14 @@
 #include "LaneSettings.h"
 #include "ContainerLogic.h"
 #include "boost/algorithm/string/predicate.hpp"
+#include "GameStarter.h"
 static const unsigned energyPerMutant = 40;
 template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
 bool MutantContainer::m_isInstantiated = false;
 MutantContainer::MutantContainer()
 : m_despawnTime(2.0)
+, m_mutantsKilled(GameStarter::resume ? GameStarter::mutantsAlreadyKilled : 0)
 {
-	m_mutantsKilled = 0;
 	m_isInstantiated = true;
 }
 MutantContainer::~MutantContainer()
