@@ -7,6 +7,7 @@
 #include "CoreCompositor.h"
 #include "OISCore.h"
 #include "MainUpdate.h"
+#include "OISHelp.h"
 #include "MutantContainer.h"
 TutorialScript Tutorial::m_tooltipIdx = TutorialScript::even_one;
 Tutorial::Tutorial()
@@ -18,6 +19,7 @@ Tutorial::Tutorial()
 , m_canSpawn(false)
 , m_changeLevel(false)
 , m_music("music/tutorial")
+, m_keyToClick(OIS::KeyCode::KC_0)
 {
 	m_tooltipIdx = TutorialScript::even_one;
 }
@@ -46,25 +48,25 @@ void Tutorial::update()
         switch (m_tooltipIdx)
         {
 		case TutorialScript::debug:
-            showTooltipSlowMotion(m_player->getModelHandler(), "debug..");
 			genericPress(TutorialScript::slowmo_allKilled_four);
+            showTooltipSlowMotion(m_player->getModelHandler(), "debug..");
             break;
         case TutorialScript::even_one:
-            showTooltipSlowMotion(m_player->getModelHandler(), "It looks like the mission rests on my shoulders.");
 			genericPress(TutorialScript::even_two);
+            showTooltipSlowMotion(m_player->getModelHandler(), "It looks like the mission rests on my shoulders.");
             break;
         case TutorialScript::even_two:
-            showTooltipSlowMotion(m_player->getModelHandler(), "I could never forgive myself if I were to fail my\ncountry and not least my teammates now!");
 			genericPress(TutorialScript::even_three);
+            showTooltipSlowMotion(m_player->getModelHandler(), "I could never forgive myself if I were to fail my\ncountry and not least my teammates now!");
             break;
         case TutorialScript::even_three:
-            showTooltipSlowMotion(m_player->getModelHandler(), "So I better get\nused to fighting\nin this suit again. \nIt’s been a long time since I\nused it on a mission.");
 			genericPress(TutorialScript::mov_even_one);
+            showTooltipSlowMotion(m_player->getModelHandler(), "So I better get\nused to fighting\nin this suit again. \nIt’s been a long time since I\nused it on a mission.");
             break;
 		case TutorialScript::mov_even_one:
-            showTooltipSlowMotion(m_player->getModelHandler(), "I can walk forwards and backwards\nusing the D and A keys.");
 			genericPress(TutorialScript::tutorial_pause_one,OIS::KC_A);
 			genericPress(TutorialScript::tutorial_pause_one,OIS::KC_D);
+            showTooltipSlowMotion(m_player->getModelHandler(), "I can walk forwards and backwards\nusing the D and A keys.");
             break;
 		case TutorialScript::tutorial_pause_one:
 			if (pauseTimer())
@@ -72,9 +74,9 @@ void Tutorial::update()
 			hideTooltip(m_player->getModelHandler());
 			break;
 		case TutorialScript::tumble_even:
-            showTooltipSlowMotion(m_player->getModelHandler(), "By pressing W or S\nI can jump either left or right\nin the hallway here.");
 			genericPress(TutorialScript::tutorial_pause_two,OIS::KC_S);
 			genericPress(TutorialScript::tutorial_pause_two,OIS::KC_W);
+            showTooltipSlowMotion(m_player->getModelHandler(), "By pressing W or S\nI can jump either left or right\nin the hallway here.");
 			break;
 		case TutorialScript::tutorial_pause_two:
 			if (mutantSpawned())
@@ -86,12 +88,12 @@ void Tutorial::update()
 				m_tooltipIdx = TutorialScript::even_attack_one;
 			break;
 		case TutorialScript::even_attack_one:
-            showTooltipSlowMotion(m_player->getModelHandler(), "Slicing up these mutants won’t be hard with my sword!");
 			genericPress(TutorialScript::even_attack_two);
+            showTooltipSlowMotion(m_player->getModelHandler(), "Slicing up these mutants won’t be hard with my sword!");
 			break;
 		case TutorialScript::even_attack_two:
+			genericPress(TutorialScript::even_attack_four,OIS::KC_SPACE);
             showTooltipSlowMotion(m_player->getModelHandler(), "I’ll just press space_bar!");
-			genericPress(TutorialScript::even_attack_four);
             break;
             //skip One enum
 		case TutorialScript::even_attack_four:
@@ -104,20 +106,20 @@ void Tutorial::update()
 				m_tooltipIdx = TutorialScript::even_feels_energy;
 			break;
 		case TutorialScript::even_feels_energy:
-            showTooltipSlowMotion(m_player->getModelHandler(), "I can feel the energy flowing into me after defeating that monster.");
 			genericPress(TutorialScript::even_feels_two);
+            showTooltipSlowMotion(m_player->getModelHandler(), "I can feel the energy flowing into me after defeating that monster.");
 			break;
 		case TutorialScript::even_feels_two:
-            showTooltipSlowMotion(m_player->getModelHandler(), "The more monsters I beat, the more energy I can harvest into my powersuit.");
 			genericPress(TutorialScript::even_teleport);
+            showTooltipSlowMotion(m_player->getModelHandler(), "The more monsters I beat, the more energy I can \nharvest into my powersuit.");
 			break;
 		case TutorialScript::even_teleport:
-            showTooltipSlowMotion(m_player->getModelHandler(), "By spending a small amount of energy I can teleport short distances.");
 			genericPress(TutorialScript::even_teleport_two);
+            showTooltipSlowMotion(m_player->getModelHandler(), "By spending a small amount of energy I \ncan teleport short distances.");
 			break;
 		case TutorialScript::even_teleport_two:
-            showTooltipSlowMotion(m_player->getModelHandler(), "Press e to teleport");
 			genericPress(TutorialScript::even_teleportBreak, OIS::KeyCode::KC_E);
+            showTooltipSlowMotion(m_player->getModelHandler(), "Press e to teleport");
 			break;
 		case TutorialScript::even_teleportBreak:
 			hideTooltip(m_player->getModelHandler());
@@ -129,20 +131,20 @@ void Tutorial::update()
 				m_tooltipIdx = TutorialScript::even_fireball_one;
 			break;
 		case TutorialScript::even_fireball_one:
-			showTooltipSlowMotion(m_player->getModelHandler(), "Looks like this guy isn’t a pushover like that last one.");
 			genericPress(TutorialScript::even_fireball_two);
+			showTooltipSlowMotion(m_player->getModelHandler(), "Looks like this guy isn’t a pushover like that last one.");
 			break;
 		case TutorialScript::even_fireball_two:
-			showTooltipSlowMotion(m_player->getModelHandler(), "According to the mission briefing it should be one of those Firebreathers.");
 			genericPress(TutorialScript::even_fireball_three);
+			showTooltipSlowMotion(m_player->getModelHandler(), "According to the mission briefing it \nshould be one of those Firebreathers.");
 			break;
 		case TutorialScript::even_fireball_three:
-			showTooltipSlowMotion(m_player->getModelHandler(), "I should dodge his fireballs while moving towards him and go for the kill!");
 			genericPress(TutorialScript::even_fireball_four);
+			showTooltipSlowMotion(m_player->getModelHandler(), "I should dodge his fireballs while moving \ntowards him and go for the kill!");
 			break;
 		case TutorialScript::even_fireball_four:
-			showTooltipSlowMotion(m_player->getModelHandler(), "When fighting multiple monsters, \ntricking them into hitting each other is the key to an easy win!");
 			genericPress(TutorialScript::even_fireball_waitForKill);
+			showTooltipSlowMotion(m_player->getModelHandler(), "When fighting multiple monsters, \ntricking them into hitting each other is the key to an easy win!");
 			break;
 		case TutorialScript::even_fireball_waitForKill:
 			hideTooltip(m_player->getModelHandler());
@@ -154,8 +156,8 @@ void Tutorial::update()
 				m_tooltipIdx = TutorialScript::even_fireball_end_pt_two;
 			break;
 		case TutorialScript::even_fireball_end_pt_two:
-			showTooltipSlowMotion(m_player->getModelHandler(), "That wasn’t too hard! These guys will be extinct before you can say brown cheese!");
 			genericPress(TutorialScript::even_fireball_end_pt_three);
+			showTooltipSlowMotion(m_player->getModelHandler(), "That wasn’t too hard! These guys will be extinct \nbefore you can say brown cheese!");
 			break;
 		case TutorialScript::even_fireball_end_pt_three:
 			hideTooltip(m_player->getModelHandler());
@@ -167,12 +169,12 @@ void Tutorial::update()
 				m_tooltipIdx = TutorialScript::even_frostbolt_one;
 			break;
 		case TutorialScript::even_frostbolt_one:
-			showTooltipSlowMotion(m_player->getModelHandler(), "If memory serves me right, this is a Freezer.");
 			genericPress(TutorialScript::even_frostbolt_two);
+			showTooltipSlowMotion(m_player->getModelHandler(), "If memory serves me right, this is a Freezer.");
 			break;
 		case TutorialScript::even_frostbolt_two:
-			showTooltipSlowMotion(m_player->getModelHandler(), "Their frostbolts will slow down my movements.");
 			genericPress(TutorialScript::even_frostbolt_killListen);
+			showTooltipSlowMotion(m_player->getModelHandler(), "Their frostbolts will slow down my movements.");
 			break;
 		case TutorialScript::even_frostbolt_killListen:
 			hideTooltip(m_player->getModelHandler());
@@ -184,8 +186,8 @@ void Tutorial::update()
 				m_tooltipIdx = TutorialScript::even_frostbolt_end;
 			break;
 		case TutorialScript::even_frostbolt_end:
-			showTooltipSlowMotion(m_player->getModelHandler(), "See ya!");
 			genericPress(TutorialScript::suicide_listen);
+			showTooltipSlowMotion(m_player->getModelHandler(), "See ya!");
 			break;
 		case TutorialScript::suicide_listen:
 			hideTooltip(m_player->getModelHandler());
@@ -197,20 +199,20 @@ void Tutorial::update()
 				m_tooltipIdx = TutorialScript::suicide_one;
 			break;
 		case TutorialScript::suicide_one:
-			showTooltipSlowMotion(m_player->getModelHandler(), "This guy doesn’t look too good. That’s an Exploder!");
 			genericPress(TutorialScript::suicide_two);
+			showTooltipSlowMotion(m_player->getModelHandler(), "This guy doesn’t look too good. That’s an Exploder!");
 			break;
 		case TutorialScript::suicide_two:
-			showTooltipSlowMotion(m_player->getModelHandler(), "The radiation have been wreaking havoc on \ntheir minds and their bodies for too long.");
 			genericPress(TutorialScript::suicide_three);
+			showTooltipSlowMotion(m_player->getModelHandler(), "The radiation have been wreaking havoc on \ntheir minds and their bodies for too long.");
 			break;
 		case TutorialScript::suicide_three:
-			showTooltipSlowMotion(m_player->getModelHandler(), "Their so unstable they could explode any minute!");
 			genericPress(TutorialScript::suicide_four);
+			showTooltipSlowMotion(m_player->getModelHandler(), "Their so unstable they could explode any minute!");
 			break;
 		case TutorialScript::suicide_four:
-			showTooltipSlowMotion(m_player->getModelHandler(), "Better stay away from it until it’s out of its misery.");
 			genericPress(TutorialScript::suicide_listen_two);
+			showTooltipSlowMotion(m_player->getModelHandler(), "Better stay away from it until it’s out of its misery.");
 			break;
 		case TutorialScript::suicide_listen_two:
 			hideTooltip(m_player->getModelHandler());
@@ -222,8 +224,8 @@ void Tutorial::update()
 				m_tooltipIdx = TutorialScript::suicide_six;
 			break;
 		case TutorialScript::suicide_six:
-			showTooltipSlowMotion(m_player->getModelHandler(), "Phew. Hope I don’t have to meet too many of those bastards.");
 			genericPress(TutorialScript::slowmo_one);
+			showTooltipSlowMotion(m_player->getModelHandler(), "Phew. Hope I don’t have to meet \ntoo many of those bastards.");
 			break;
 		case TutorialScript::slowmo_one:
 			if (mutantSpawned())
@@ -231,13 +233,13 @@ void Tutorial::update()
 			hideTooltip(m_player->getModelHandler());
 			break;
 		case TutorialScript::slowmo_two:
-			showTooltipSlowMotion(m_player->getModelHandler(), "My powersuit is overflowing with power!");
 			genericPress(TutorialScript::slowmo_three);
+			showTooltipSlowMotion(m_player->getModelHandler(), "My powersuit is overflowing with power!");
 			break;
 		case TutorialScript::slowmo_three:
-			showTooltipSlowMotion(m_player->getModelHandler(), "With this much energy I can enter a state of superhuman senses by pressing shift+space.");
 			if(OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift))
 			    genericPress(TutorialScript::slowmo_four,OIS::KC_SPACE);
+			showTooltipSlowMotion(m_player->getModelHandler(), "With this much energy I can enter a state of \nsuperhuman senses by pressing shift+space.");
 			break;
 		case TutorialScript::slowmo_four:
 			if (pauseTimer())
@@ -245,12 +247,12 @@ void Tutorial::update()
 			hideTooltip(m_player->getModelHandler());
 			break;
 		case TutorialScript::slowmo_five:
-			showTooltipSlowMotion(m_player->getModelHandler(), "I can then focus on picking my next targets and easily take them out with super speed!");
 			genericPress(TutorialScript::slowmo_six);
+			showTooltipSlowMotion(m_player->getModelHandler(), "I can then focus on picking my next targets and \neasily take them out with super speed!");
 			break;
 		case TutorialScript::slowmo_six:
-			showTooltipSlowMotion(m_player->getModelHandler(), "I’ll test it out on those mutants over there!");
 			genericPress(TutorialScript::slowmo_seven);
+			showTooltipSlowMotion(m_player->getModelHandler(), "I’ll test it out on those mutants over there!");
 			break;
 		case TutorialScript::slowmo_seven:
 			hideTooltip(m_player->getModelHandler());
@@ -258,16 +260,16 @@ void Tutorial::update()
 				m_tooltipIdx = TutorialScript::slowmo_allKilled;
 			break;
 		case TutorialScript::slowmo_allKilled:
-			showTooltipSlowMotion(m_player->getModelHandler(), "Easy peasy, lemon squeezy!");
 			genericPress(TutorialScript::slowmo_allKilled_two);
+			showTooltipSlowMotion(m_player->getModelHandler(), "Easy peasy, lemon squeezy!");
 			break;
 		case TutorialScript::slowmo_allKilled_two:
-			showTooltipSlowMotion(m_player->getModelHandler(), "I should get out of this lab and follow the mutants trail into the forest.");
 			genericPress(TutorialScript::slowmo_allKilled_three);
+			showTooltipSlowMotion(m_player->getModelHandler(), "I should get out of this lab and follow the \nmutants trail into the forest.");
 			break;
 		case TutorialScript::slowmo_allKilled_three:
-			showTooltipSlowMotion(m_player->getModelHandler(), "Guys! I won’t let your deaths be in vain!");
 			genericPress(TutorialScript::slowmo_allKilled_four);
+			showTooltipSlowMotion(m_player->getModelHandler(), "Guys! I won’t let your deaths be in vain!");
 			break;
 		case TutorialScript::slowmo_allKilled_four:
 			hideTooltip(m_player->getModelHandler());
@@ -327,6 +329,7 @@ bool Tutorial::mutantDied()
 }
 void Tutorial::genericPress(TutorialScript changeTo, OIS::KeyCode keyCode)
 {
+	m_keyToClick = keyCode;
     if (OISCore::getSingleton().getKeyboard()->isKeyDown(keyCode))
     {
         m_tooltipIdx = changeTo;
@@ -366,7 +369,7 @@ void Tutorial::showTooltipNormie(ModelHandler& model, const  std::string& msg)
         m_currentMsg = msg;
 		setCompositor(true);
 		setSlowmotion(false);
-        model.tooltip(m_currentMsg);
+        model.tooltip(m_currentMsg, OISHelp::keyCodeToString( m_keyToClick ));
 	}
 }
 void Tutorial::showTooltipSlowMotion(ModelHandler& model, const std::string& msg)
@@ -376,7 +379,7 @@ void Tutorial::showTooltipSlowMotion(ModelHandler& model, const std::string& msg
         m_currentMsg = msg;
 		setCompositor(true);
 		setSlowmotion(true);
-        model.tooltip(m_currentMsg);
+        model.tooltip(m_currentMsg, OISHelp::keyCodeToString( m_keyToClick ) );
 	}
 }
 ///

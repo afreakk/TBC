@@ -31,9 +31,9 @@ ModelHandler::~ModelHandler()
 	OgreCore::getSingleton().getSceneMgr()->destroySceneNode(parent);
 	OgreCore::getSingleton().getSceneMgr()->destroySceneNode(m_node);
 }
-void ModelHandler::tooltip(std::string msg)
+void ModelHandler::tooltip(const std::string& msg, const std::string& caption)
 {
-	m_tooltip.show(msg);
+	m_tooltip.show(msg, caption);
 }
 void ModelHandler::hideTooltip()
 {

@@ -80,6 +80,7 @@
     <ClCompile Include="OgreConsoleForGorilla.cpp" />
     <ClCompile Include="OgreCore.cpp" />
     <ClCompile Include="OgreFix.cpp" />
+    <ClCompile Include="OISHelp.cpp" />
     <ClCompile Include="PillarHider.cpp" />
     <ClCompile Include="PlayerCameraState.cpp" />
     <ClCompile Include="PlayerHandlerStateBlankAttack.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Occupado.h" />
     <ClInclude Include="OgreConsoleForGorilla.h" />
     <ClInclude Include="OgreFix.h" />
+    <ClInclude Include="OISHelp.h" />
     <ClInclude Include="PillarHider.h" />
     <ClInclude Include="PlayerHandlerStateBlankAttack.h" />
     <ClInclude Include="PlayerHandlerStateSingleAttack.h" />

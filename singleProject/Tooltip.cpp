@@ -8,7 +8,8 @@ TwoDTooltip::TwoDTooltip(Node* node)
 : m_node(node)
 , m_screen ( nullptr )
 , m_layer(nullptr)
-, m_markup(nullptr)
+, m_mainTextMarkup(nullptr)
+, m_keyToPressCaption(nullptr)
 , m_lineList(nullptr)
 , m_created(false)
 , m_offset(100,100)
@@ -20,36 +21,50 @@ TwoDTooltip::~TwoDTooltip()
 {
     Gorilla::Silverback::getSingleton().destroyScreen(m_screen);
 }
-void TwoDTooltip::show(std::string& msg)
+void TwoDTooltip::show(const std::string& msg, const std::string& caption)
 {
 	if (!m_created)
 		create();
-	updateText(msg);
+	updateText(msg, caption);
     makeBubble();
 }
-void TwoDTooltip::updateText(std::string& msg)
+void TwoDTooltip::updateText(const std::string& msg, const std::string& caption)
 {
 	m_rectSize = getDimensions(msg, 24);
-	if (m_markup)
-	    m_layer->destroyMarkupText(m_markup);
+	if (m_keyToPressCaption)
+		m_layer->destroyCaption(m_keyToPressCaption);
+	if (m_mainTextMarkup)
+	    m_layer->destroyMarkupText(m_mainTextMarkup);
 	m_rectSize.y += m_offset.y;
-    m_markup = m_layer->createMarkupText(24, m_offset.x, OgreCore::getSingleton().getViewport()->getActualHeight()-m_rectSize.y, msg);
+	auto vpH = OgreCore::getSingleton().getViewport()->getActualHeight();
+	auto vpW = OgreCore::getSingleton().getViewport()->getActualWidth();
+    m_mainTextMarkup = m_layer->createMarkupText(24, m_offset.x, vpH-m_rectSize.y, msg);
+	m_keyToPressCaption = m_layer->createCaption(14, m_offset.x+m_rectSize.x+vpW/60.0f, vpH-(m_offset.y+vpH/30.0f), caption);
 }
 void TwoDTooltip::makeBubble()
 {
-	Vector2 comp(m_markup->left()-m_bubbleTextOffset.x, m_markup->top()- m_bubbleTextOffset.y);
+	Vector2 comp(m_mainTextMarkup->left()-m_bubbleTextOffset.x, m_mainTextMarkup->top()- m_bubbleTextOffset.y);
 	if (m_lineList)
 	    m_layer->destroyLineList(m_lineList);
 	m_lineList = m_layer->createLineList();
 	m_lineList->begin(1.0f, Gorilla::Colours::Aquamarine);
-	m_lineList->position(comp+ Vector2(0.0f           , 0.0f));
-	m_lineList->position(comp+ Vector2(0.0f           , m_rectSize.y-m_offset.y+m_bubbleTextOffset.y*2.0f));
-	m_lineList->position( comp+Vector2(m_rectSize.x   +m_bubbleTextOffset.x*2.0f, m_rectSize.y-m_offset.y+m_bubbleTextOffset.y*2.0f));
-	m_lineList->position( comp+Vector2(m_rectSize.x   +m_bubbleTextOffset.x*2.0f, 0.0f));
-	m_lineList->position( comp+Vector2(0.0f           , 0.0f));
+	Vector2 topLeft(    0.0f                                     , 0.0f);
+	Vector2 topRight(   m_rectSize.x + m_bubbleTextOffset.x*2.0f , 0.0f);
+	Vector2 bottomLeft( 0.0f                                     , m_rectSize.y - m_offset.y + m_bubbleTextOffset.y*2.0f);
+	Vector2 bottomRight(m_rectSize.x + m_bubbleTextOffset.x*2.0f, m_rectSize.y - m_offset.y + m_bubbleTextOffset.y*2.0f);
+	m_lineList->position( comp+topLeft);
+	m_lineList->position( comp+bottomLeft);
+	m_lineList->position( comp+bottomRight);
+	auto boxSize = 100.0f;
+	m_lineList->position(comp + bottomRight + Vector2(boxSize, 0.0f));
+	m_lineList->position(comp + bottomRight + Vector2(boxSize, -boxSize/2.0f));
+	m_lineList->position(comp + bottomRight + Vector2(0.0f, -boxSize/2.0f));
+	m_lineList->position( comp+bottomRight);
+	m_lineList->position( comp+topRight);
+	m_lineList->position( comp+topLeft);
 	m_lineList->end();
 }
-Ogre::Vector2 TwoDTooltip::getDimensions(std::string& msg, unsigned fontSize)
+Ogre::Vector2 TwoDTooltip::getDimensions(const std::string& msg, unsigned fontSize)
 {
 	auto temp = m_layer->createMarkupText(fontSize, 0, 0, msg);
 	Ogre::Vector2 dimensions;
@@ -67,9 +82,11 @@ void TwoDTooltip::create()
 void TwoDTooltip::hide()
 {
     m_layer->destroyLineList(m_lineList);
-    m_layer->destroyMarkupText(m_markup);
+    m_layer->destroyMarkupText(m_mainTextMarkup);
+	m_layer->destroyCaption(m_keyToPressCaption);
 	m_lineList = nullptr;
-	m_markup = nullptr;
+	m_mainTextMarkup = nullptr;
+	m_keyToPressCaption = nullptr;
 }
 //------------------------------------------------------------------------------------------------------------------------------------
 Tooltip::Tooltip(Ogre::SceneNode* parentNode)

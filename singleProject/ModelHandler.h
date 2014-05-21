@@ -34,7 +34,7 @@ public:
 	void playAnimation(ANIMATIONS);
 	bool tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt);
 	void freeze();
-	void tooltip(std::string msg);
+	void tooltip(const std::string& msg, const std::string& caption);
 	void hideTooltip();
 	void move(const Ogre::Vector3& to);
 protected:

@@ -24,6 +24,7 @@ private:
 	bool m_canSpawn;
 	bool m_changeLevel;
 	IntroLoopListener m_music;
+	OIS::KeyCode m_keyToClick;
 
 	void showTooltipSlowMotion(ModelHandler& model,const  std::string& msg);
 	void showTooltipNormie(ModelHandler& model,const  std::string& msg);

@@ -4,13 +4,14 @@ class TwoDTooltip
 public:
 	TwoDTooltip(Ogre::Node* parentNode);
 	~TwoDTooltip();
-	void show(std::string& msg);
+	void show(const std::string& msg, const std::string& caption);
 	void hide();
 private:
 	Ogre::Node*m_node;
 	Gorilla::Screen* m_screen;
 	Gorilla::Layer* m_layer;
-	Gorilla::MarkupText* m_markup;
+	Gorilla::MarkupText* m_mainTextMarkup;
+	Gorilla::Caption* m_keyToPressCaption;
 	Gorilla::LineList* m_lineList;
 	bool m_created;
 	Ogre::Vector2 m_rectSize;
@@ -18,9 +19,9 @@ private:
 	Ogre::Vector2 m_bubbleTextOffset;
 
 	void create();
-	void updateText(std::string& msg);
+	void updateText(const std::string& msg, const std::string& caption);
 	void makeBubble();
-	Ogre::Vector2 getDimensions(std::string& msg, unsigned fontSize);
+	Ogre::Vector2 getDimensions(const std::string& msg, unsigned fontSize);
 };
 
 class Tooltip
