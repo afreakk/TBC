@@ -14,6 +14,7 @@
     <ClCompile Include="AnimationPrepare.cpp" />
     <ClCompile Include="AudioHelpers.cpp" />
     <ClCompile Include="BaseAnimation.cpp" />
+    <ClCompile Include="BaseGameLevel.cpp" />
     <ClCompile Include="BeamWeaponHitTest.cpp" />
     <ClCompile Include="BehaviourObject.cpp" />
     <ClCompile Include="BehaviourStateAttackRanged.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="GlowMaterialListener.cpp" />
     <ClCompile Include="Gorilla.cpp" />
     <ClCompile Include="GUIResources.cpp" />
+    <ClCompile Include="GUIUtils.cpp" />
     <ClCompile Include="HDRCompositor.cpp" />
     <ClCompile Include="InGameMenu.cpp" />
     <ClCompile Include="LaneSettings.cpp" />
@@ -141,6 +143,7 @@
     <ClInclude Include="AudioHelpers.h" />
     <ClInclude Include="BarTypes.h" />
     <ClInclude Include="BaseAnimation.h" />
+    <ClInclude Include="BaseGameLevel.h" />
     <ClInclude Include="BeamWeaponHitTest.h" />
     <ClInclude Include="BehaviourObject.h" />
     <ClInclude Include="BehaviourState.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="GameConsole.h" />
     <ClInclude Include="GameStarter.h" />
     <ClInclude Include="Gorilla.h" />
+    <ClInclude Include="GUIUtils.h" />
     <ClInclude Include="HDRCompositor.h" />
     <ClInclude Include="InGameMenu.h" />
     <ClInclude Include="LevelIntro.h" />
@@ -191,6 +195,7 @@
     <ClInclude Include="LevelOne.h" />
     <ClInclude Include="LightHandler.h" />
     <ClInclude Include="LvlOneEnvironment.h" />
+    <ClInclude Include="MainLevelEnums.h" />
     <ClInclude Include="MainLevelSetter.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MainMenuButton.h" />

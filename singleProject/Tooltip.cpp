@@ -1,8 +1,33 @@
 #include "stdafx.h"
 #include "Tooltip.h"
 #include "OgreCore.h"
+#include "MainUpdate.h"
 
-std::vector<Tooltip*> TooltipUpdates::m_tooltips;
+std::vector<TooltipBase*> TooltipUpdates::m_tooltips;
+//--------------------------------------------------------------TooltipBase-----------------
+TooltipBase::TooltipBase()
+:m_addedToUpdate(false)
+{
+
+}
+void TooltipBase::addToUpdate()
+{
+	if (!m_addedToUpdate)
+	{
+        TooltipUpdates::addTooltip(this);
+		m_addedToUpdate = true;
+	}
+}
+void TooltipBase::removeFromUpdate()
+{
+	if (m_addedToUpdate)
+	{
+        TooltipUpdates::removeTooltip(this);
+		m_addedToUpdate = false;
+	}
+}
+
+//--------------------------------------------------------------2DTooltip-----------------
 
 TwoDTooltip::TwoDTooltip(Node* node)
 : m_node(node)
@@ -14,32 +39,64 @@ TwoDTooltip::TwoDTooltip(Node* node)
 , m_created(false)
 , m_offset(100,100)
 , m_bubbleTextOffset(10,10)
+, m_captionString("fucku")
 {
 	
 }
 TwoDTooltip::~TwoDTooltip()
 {
     Gorilla::Silverback::getSingleton().destroyScreen(m_screen);
+	removeFromUpdate();
 }
-void TwoDTooltip::show(const std::string& msg, const std::string& caption)
+void TwoDTooltip::show(const std::string& markup, const std::string& caption)
 {
+	if (m_markupString == markup && caption == m_captionString)
+		return;
+	m_markupString = markup;
+	m_captionString = caption;
 	if (!m_created)
 		create();
-	updateText(msg, caption);
+	updateText(m_markupString);
+	updateCaption(m_captionString);
     makeBubble();
+	addToUpdate();
 }
-void TwoDTooltip::updateText(const std::string& msg, const std::string& caption)
+void TwoDTooltip::hide()
 {
-	m_rectSize = getDimensions(msg, 24);
+    m_layer->destroyLineList(m_lineList);
+    m_layer->destroyMarkupText(m_mainTextMarkup);
+	m_layer->destroyCaption(m_keyToPressCaption);
+	m_lineList = nullptr;
+	m_mainTextMarkup = nullptr;
+	m_keyToPressCaption = nullptr;
+	removeFromUpdate();
+}
+void TwoDTooltip::update()
+{
+	if (m_timeSinceLastUpdate<1.0f)
+	    m_timeSinceLastUpdate += MainUpdate::getSingleton().getDeltaTime();
+	else
+        updateCaption(m_captionString + m_stringDotter.getDot() );
+}
+//---------------------------------------------privates-----------------------------------------------------------
+void TwoDTooltip::updateCaption(const std::string& caption)
+{
+    m_timeSinceLastUpdate = 0.0f;
+	auto vpH = OgreCore::getSingleton().getViewport()->getActualHeight();
+	auto vpW = OgreCore::getSingleton().getViewport()->getActualWidth();
 	if (m_keyToPressCaption)
 		m_layer->destroyCaption(m_keyToPressCaption);
+	m_keyToPressCaption = m_layer->createCaption(14, m_offset.x+m_rectSize.x+vpW/60.0f, vpH-(m_offset.y+vpH/30.0f), caption);
+}
+void TwoDTooltip::updateText(const std::string& msg)
+{
+	m_rectSize = getDimensions(msg, 24);
 	if (m_mainTextMarkup)
 	    m_layer->destroyMarkupText(m_mainTextMarkup);
 	m_rectSize.y += m_offset.y;
 	auto vpH = OgreCore::getSingleton().getViewport()->getActualHeight();
 	auto vpW = OgreCore::getSingleton().getViewport()->getActualWidth();
     m_mainTextMarkup = m_layer->createMarkupText(24, m_offset.x, vpH-m_rectSize.y, msg);
-	m_keyToPressCaption = m_layer->createCaption(14, m_offset.x+m_rectSize.x+vpW/60.0f, vpH-(m_offset.y+vpH/30.0f), caption);
 }
 void TwoDTooltip::makeBubble()
 {
@@ -79,17 +136,10 @@ void TwoDTooltip::create()
     m_layer = m_screen->createLayer(0);
 	m_created = true;
 }
-void TwoDTooltip::hide()
-{
-    m_layer->destroyLineList(m_lineList);
-    m_layer->destroyMarkupText(m_mainTextMarkup);
-	m_layer->destroyCaption(m_keyToPressCaption);
-	m_lineList = nullptr;
-	m_mainTextMarkup = nullptr;
-	m_keyToPressCaption = nullptr;
-}
-//------------------------------------------------------------------------------------------------------------------------------------
-Tooltip::Tooltip(Ogre::SceneNode* parentNode)
+
+//-----------------------------------------------3DTooltip-------------------------------------------------------
+
+ThreeDTooltip::ThreeDTooltip(Ogre::SceneNode* parentNode)
 : m_tooltipSize(600.0f, 200.0f)
 , m_rectSize(m_tooltipSize.x*65.0f, m_tooltipSize.y*100.0f)
 , m_screen ( Gorilla::Silverback::getSingleton().createScreenRenderable(m_tooltipSize, "dejavu") )
@@ -97,17 +147,16 @@ Tooltip::Tooltip(Ogre::SceneNode* parentNode)
 , m_markup(nullptr)
 , m_lineList(nullptr)
 , m_node ( parentNode->createChildSceneNode(Vector3(0.0f, 450.0f, 0.0f)) ) 
-, m_addedToUpdate(false)
 , m_created(false)
 , m_shown(false)
 {
 }
-Tooltip::~Tooltip()
+ThreeDTooltip::~ThreeDTooltip()
 {
 	removeFromUpdate();
 	destroyScreenRenderable();
 }
-void Tooltip::hide()
+void ThreeDTooltip::hide()
 {
 	removeFromUpdate();
 	if (m_shown)
@@ -117,21 +166,11 @@ void Tooltip::hide()
 	}
 }
 
-void Tooltip::destroyScreenRenderable()
+void ThreeDTooltip::destroyScreenRenderable()
 {
     Gorilla::Silverback::getSingleton().destroyScreenRenderable(m_screen);
 }
-void Tooltip::addToUpdate()
-{
-	if (!m_addedToUpdate)
-        TooltipUpdates::addTooltip(this);
-}
-void Tooltip::removeFromUpdate()
-{
-	if (m_addedToUpdate)
-        TooltipUpdates::removeTooltip(this);
-}
-Ogre::Vector2 Tooltip::updateText(std::string& msg)
+Ogre::Vector2 ThreeDTooltip::updateText(std::string& msg)
 {
 	Gorilla::MarkupText::TEXTSIZEHACK = 200.0f;
 	const Ogre::Vector2 dimensions = getDimensions(msg,24);
@@ -144,7 +183,7 @@ Ogre::Vector2 Tooltip::updateText(std::string& msg)
 	m_rectSize = dimensions;
 	return compensation;
 }
-Ogre::Vector2 Tooltip::getDimensions(std::string& msg, unsigned fontSize)
+Ogre::Vector2 ThreeDTooltip::getDimensions(std::string& msg, unsigned fontSize)
 {
 	auto temp = m_layer->createMarkupText(fontSize, 0, 0, msg);
 	Ogre::Vector2 dimensions;
@@ -153,7 +192,7 @@ Ogre::Vector2 Tooltip::getDimensions(std::string& msg, unsigned fontSize)
 	m_layer->destroyMarkupText(temp);
 	return dimensions;
 }
-void Tooltip::show(std::string& msg)
+void ThreeDTooltip::show(std::string& msg)
 {
 	if (!m_created)
 	{
@@ -169,7 +208,7 @@ void Tooltip::show(std::string& msg)
 		m_shown = true;
 	}
 }
-void Tooltip::makeBubble(Ogre::Vector2& compensation)
+void ThreeDTooltip::makeBubble(Ogre::Vector2& compensation)
 {
 	if (m_lineList)
 	    m_layer->destroyLineList(m_lineList);
@@ -187,26 +226,25 @@ void Tooltip::makeBubble(Ogre::Vector2& compensation)
 	m_lineList->position( Vector2(0.0f, 0.0f));
 	m_lineList->end();
 }
-void Tooltip::update()
+void ThreeDTooltip::update()
 {
 	m_node->lookAt(Vector3(0,100,0),Node::TransformSpace::TS_WORLD);
 }
 
+//------------------------------------TooltipUpdates--------------------------------------------------------------
 
 void TooltipUpdates::update()
 {
     for (auto& tooltip : m_tooltips)
         tooltip->update();
 }
-void TooltipUpdates::addTooltip(Tooltip* tooltip)
+void TooltipUpdates::addTooltip(TooltipBase* tooltip)
 {
     m_tooltips.push_back(tooltip);
 }
-void TooltipUpdates::removeTooltip(Tooltip* tooltip)
+void TooltipUpdates::removeTooltip(TooltipBase* tooltip)
 {
     auto it = std::find(m_tooltips.begin(), m_tooltips.end(), tooltip);
     if (it != m_tooltips.end())
         m_tooltips.erase(it);
-    else
-        assert(0);
 }

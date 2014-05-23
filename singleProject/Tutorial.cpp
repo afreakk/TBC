@@ -22,6 +22,7 @@ Tutorial::Tutorial()
 , m_keyToClick(OIS::KeyCode::KC_0)
 {
 	m_tooltipIdx = TutorialScript::even_one;
+	fillJustPassedKilledCheckpoints();
 }
 
 
@@ -29,12 +30,20 @@ Tutorial::~Tutorial()
 {
 }
 
+void Tutorial::fillJustPassedKilledCheckpoints()
+{
+	m_justPassedKilledCheckpoints.push_back(TutorialScript::pauseKillMutant);
+	m_justPassedKilledCheckpoints.push_back(TutorialScript::even_fireball_end);
+	m_justPassedKilledCheckpoints.push_back(TutorialScript::even_frostbolt_wait_two);
+    //biggest index last is req
+    m_justPassedKilledCheckpoints.push_back(TutorialScript::suicide_five);
+}
 TutorialScript Tutorial::getTooltipIdx()
 {
 	return m_tooltipIdx;
 }
 
-void Tutorial::setTooltipIdx(TutorialScript newIdx)
+void Tutorial::setTooltipIdx(TutorialScript newIdx) 
 {
 	m_tooltipIdx = newIdx;
 
@@ -43,6 +52,7 @@ void Tutorial::update()
 {
 	m_music.update();
 	m_canSpawn = false;
+	TutorialScript oldTooltipIdx = m_tooltipIdx;
 	if (m_enterReleased)
 	{
         switch (m_tooltipIdx)
@@ -283,6 +293,9 @@ void Tutorial::update()
             break;
         }
 	}
+	if (m_tooltipIdx == oldTooltipIdx && mutantDied() && m_tooltipIdx < m_justPassedKilledCheckpoints.back())
+		m_tooltipIdx = getNearestKilledCheckpointIdx();
+
 	if (!OISCore::getSingleton().getKeyboard()->isKeyDown(OIS::KeyCode::KC_RETURN))
 		m_enterReleased = true;
 }
@@ -293,6 +306,14 @@ bool Tutorial::plzChangeLevel()
 bool Tutorial::allKilled()
 {
 	return MutantContainer::getSingleton().getMutantIt().size() == 0;
+}
+TutorialScript Tutorial::getNearestKilledCheckpointIdx()
+{
+	int currentIdx = static_cast<int>(m_tooltipIdx);
+	int i = 0;
+	while (currentIdx > static_cast<int>(m_justPassedKilledCheckpoints[i]))
+		i++;
+	return m_justPassedKilledCheckpoints[i];
 }
 bool Tutorial::canSpawn()
 {
@@ -305,7 +326,6 @@ bool Tutorial::mutantIsClose()
 bool Tutorial::mutantSpawned()
 {
 	auto totalMutants = MutantContainer::getSingleton().getMutantIt().size();
-	cout << m_mutantSize << " " << totalMutants;
 	m_canSpawn = true;
 	if (m_mutantSize < totalMutants)
 	{
@@ -318,7 +338,6 @@ bool Tutorial::mutantSpawned()
 bool Tutorial::mutantDied()
 {
 	auto totalMutants = MutantContainer::getSingleton().getMutantIt().size();
-	cout << m_mutantSize << " " << totalMutants;
 	if (m_mutantSize > totalMutants)
 	{
 	    m_mutantSize = totalMutants;
@@ -396,7 +415,7 @@ void Tutorial::setCompositor(bool enabled)
 void Tutorial::setSlowmotion(bool slowMotion)
 {
 	if (slowMotion)
-        GlobalVariables::getSingleton().setSpeed(0.001f);
+        GlobalVariables::getSingleton().setSpeed(0.1f);
 	else
         GlobalVariables::getSingleton().setSpeed(1.0f);
 }

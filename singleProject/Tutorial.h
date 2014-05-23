@@ -25,6 +25,7 @@ private:
 	bool m_changeLevel;
 	IntroLoopListener m_music;
 	OIS::KeyCode m_keyToClick;
+	std::vector<TutorialScript> m_justPassedKilledCheckpoints;
 
 	void showTooltipSlowMotion(ModelHandler& model,const  std::string& msg);
 	void showTooltipNormie(ModelHandler& model,const  std::string& msg);
@@ -40,5 +41,7 @@ private:
 	bool allKilled();
 
 	void genericPress(TutorialScript changeTo, OIS::KeyCode keyCode = OIS::KeyCode::KC_RETURN);
+	void fillJustPassedKilledCheckpoints();
+	TutorialScript getNearestKilledCheckpointIdx();
 };
 

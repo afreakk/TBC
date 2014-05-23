@@ -42,11 +42,12 @@ void FrostBolt::activate()
 	WeaponBall::activate();
 }
 #include "MutantGlobalStats.h"
+static Ogre::Real BoltSpeed = 2500;
 void FrostBolt::update()
 {
 	if (!m_detonation.deactivated)
 	{
-		Vector3 lforce = Vector3(0, 0, 1500);
+		Vector3 lforce = Vector3(0, 0, BoltSpeed);
         setForce(lforce);
 	}
 	else
@@ -86,18 +87,16 @@ void MutantFireBall::resetShadow()
 }
 void MutantFireBall::updateShadowPos()
 {
-    Ogre::Real particleVelocity = 1500.0f * m_particleSystem->getScaleTime(); // 1500 = velocity in this particular prticlesystem
+    Ogre::Real particleVelocity = BoltSpeed * m_particleSystem->getScaleTime(); // 1500 = velocity in this particular prticlesystem
     m_shadowPos.z -= particleVelocity * MainUpdate::getSingleton().getDeltaTime();
 	m_shadow.setPosition(m_shadowPos);
 }
-static int fucku = 0;
 void MutantFireBall::update()
 {
 	WeaponMissile::update();
 	updateShadowPos();
 	if (m_doHitTest)
 	{
-		cout << fucku++ << endl;
 		BeamWeaponHitTest::fireBallUpdate(m_planeCollider, m_collisionObserver, m_emitter, m_node, m_weaponDamage, m_height, m_shadowPos.z);
 		if (m_collisionObserver->isEnabled())
             disable();

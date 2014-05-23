@@ -45,10 +45,6 @@ EnemySpawner::~EnemySpawner()
 }
 
 
-void EnemySpawner::update()
-{
-	instantiateNewEnemies();
-}
 void EnemySpawner::instantiateNewEnemies()
 {
 	for (std::vector<MutantStartingInfo>::iterator posIter = begin(m_mutantStartingPositions); posIter != end(m_mutantStartingPositions); ++posIter)

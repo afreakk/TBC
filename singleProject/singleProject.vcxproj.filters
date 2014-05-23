@@ -111,6 +111,9 @@
     <Filter Include="Audio">
       <UniqueIdentifier>{057bc34d-333e-4fc7-81c1-09a16fdd4758}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\utils">
+      <UniqueIdentifier>{0b0f8df5-147d-4c82-ba23-601516386f98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -463,6 +466,12 @@
     </ClCompile>
     <ClCompile Include="OISHelp.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseGameLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIUtils.cpp">
+      <Filter>GUI\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -891,6 +900,15 @@
     </ClInclude>
     <ClInclude Include="OISHelp.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGameLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLevelEnums.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIUtils.h">
+      <Filter>GUI\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

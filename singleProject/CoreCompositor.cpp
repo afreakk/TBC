@@ -14,6 +14,8 @@ CoreCompositor::CoreCompositor(Ogre::Viewport* viewport)
 	CompositorManager::getSingleton().addCompositor(m_vp, "blurStuff");
 	CompositorManager::getSingleton().setCompositorEnabled(m_vp, "blurStuff", true);
 	CompositorManager::getSingleton().addCompositor(m_vp, "tooltipShow");
+	CompositorManager::getSingleton().addCompositor(m_vp, "MotionBlur");
+	CompositorManager::getSingleton().setCompositorEnabled(m_vp, "MotionBlur", true);
 }
 void CoreCompositor::tooltipComp(bool enabled)
 {

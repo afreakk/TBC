@@ -9,7 +9,7 @@
 #include "PlayerContainer.h"
 #include "MutantContainer.h"
 #include "Player.h"
-const Real LaunchHeight = 100.0f;
+const Real LaunchHeight = 200.0f;
 
 //WeaponBase
 

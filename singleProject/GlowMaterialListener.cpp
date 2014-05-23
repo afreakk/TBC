@@ -12,7 +12,7 @@ GlowMaterialListener::GlowMaterialListener()
 }
 static std::string particleMaterialPrefix = "mp_";
 static std::string gorillaMat = "Gorilla3D";
-Ogre::Technique* GlowMaterialListener::handleSchemeNotFound(unsigned short, const Ogre::String& schemeName, Ogre::Material*mat, unsigned short, const Ogre::Renderable*)
+Ogre::Technique* GlowMaterialListener::handleSchemeNotFound(unsigned short, const Ogre::String& schemeName, Ogre::Material*mat, unsigned short, const Ogre::Renderable* rndr)
 {
     if (schemeName == "blood")
     {

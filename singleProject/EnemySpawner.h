@@ -15,7 +15,7 @@ public:
 	EnemySpawner(const std::string& lvl);
 	void init(MutantContainer* mutantContainer, Player* player);
 	~EnemySpawner();
-	void update();
+	void instantiateNewEnemies();
 private:
 	Real m_spawnDistance;
 	MutantContainer* m_mutantContainer;
@@ -24,6 +24,5 @@ private:
 	
 	std::vector<MutantStartingInfo> m_mutantStartingPositions;
 
-	void instantiateNewEnemies();
 };
 
