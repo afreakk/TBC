@@ -7,7 +7,7 @@
 #include "PlayerContainer.h"
 #include "PlayerHandler.h"
 
-BehaviourStateLERP::BehaviourStateLERP(BehaviourObject* target, const Real* speed, LERPBase* mode, const Ogre::Vector3& targetPosition) 
+BehaviourStateLERP::BehaviourStateLERP(bool hit, BehaviourObject* target, const Real* speed, LERPBase* mode, const Ogre::Vector3& targetPosition) 
 : BehaviourState(BEHAVOUR_STATE::LERP)
 , m_lerpReturn(LerpTowardsReturn::RUNNING)
 , m_target(target)
@@ -18,6 +18,8 @@ BehaviourStateLERP::BehaviourStateLERP(BehaviourObject* target, const Real* spee
 , m_lerpMode(mode)
 , m_usingTargetPosition((m_targetPos != Vector3::ZERO)?true:false)
 , m_pause(false)
+, m_hit(hit)
+, m_swordSwung(false)
 {
 	assert(m_target||m_usingTargetPosition);
 	assert(!(m_target&&m_usingTargetPosition));
@@ -39,6 +41,7 @@ void BehaviourStateLERP::setPause(bool enabled)
 {
 	m_pause = enabled;
 }
+#include "SoundFactory.h"
 void BehaviourStateLERP::update(ModelHandler& modelHandler)
 {
 	if (m_pause)
@@ -49,6 +52,14 @@ void BehaviourStateLERP::update(ModelHandler& modelHandler)
     case LerpTowardsReturn::RUNNING:
         break;
     case LerpTowardsReturn::ATTACKING:
+		if (!m_swordSwung)
+		{
+			if (m_hit)
+				SoundFactory::getSingleton().playSound("sfx/sverd/sverd_treff.ogg","sfx/sverd/sverd_treff.ogg");
+			else
+				SoundFactory::getSingleton().playSound("sfx/sverd/sverd_bom.ogg","sfx/sverd/sverd_bom.ogg");
+			m_swordSwung = true;
+		}
         break;
     case LerpTowardsReturn::HIT:
         m_killed = true;

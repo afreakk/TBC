@@ -18,6 +18,7 @@ ModelHandler::ModelHandler(ModelRecipe* recipe, PolarCoordinates normalPos, Mode
 , m_freezeTimer(-0.5f)
 , m_tooltip(m_node)
 , m_skritt(m_node)
+, m_bloodSplat(m_node, this)
 {
 	parseScript();
 }
@@ -50,13 +51,20 @@ void ModelHandler::parseScript()
 	m_startAttackDistance = rootNode->findChild("startAttackDistance")->getValueR(0);
 
 }
+#include "SoundFactory.h"
+void ModelHandler::damage(Vector3 direction)
+{
+	m_bloodSplat.setDirection(direction);
+	m_bloodSplat.activate();
+	SoundFactory::getSingleton().playSound("sfx/gore/blood.ogg", "sfx/gore/blood.ogg");
+}
 bool ModelHandler::tumble(const Ogre::Vector3& nextPosition, const Ogre::Real& dt)
 {
 	return !lerp(nextPosition, dt, ANIMATIONS::TUMBLE, m_LERPPrecision, GlobalVariables::getSingleton().getLERPAnimTumblekRatio());
 }
 void ModelHandler::freeze()
 {
-	m_freezeTimer = 8.0;
+	m_freezeTimer = 128.0;
 }
 void ModelHandler::init() 
 {

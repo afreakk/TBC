@@ -23,7 +23,7 @@ private:
 	int m_mutantSize;
 	bool m_canSpawn;
 	bool m_changeLevel;
-	IntroLoopListener m_music;
+	MusicLoopHandler m_music;
 	OIS::KeyCode m_keyToClick;
 	std::vector<TutorialScript> m_justPassedKilledCheckpoints;
 

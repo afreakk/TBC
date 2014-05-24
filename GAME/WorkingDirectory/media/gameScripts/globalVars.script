@@ -63,7 +63,7 @@ entity EnemyStats
 entity Player
 {
 	lane 1
-	r 0.05
+	r 0.1
 }
 
 player ModelInfo

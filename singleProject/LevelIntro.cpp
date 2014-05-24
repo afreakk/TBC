@@ -24,7 +24,7 @@ LevelIntro::LevelIntro()
 }
 LevelIntro::~LevelIntro()
 {
-
+	Gorilla::Silverback::getSingleton().destroyScreen(m_screen);
 }
 void LevelIntro::setNewFrame(bool increment)
 {
@@ -32,14 +32,20 @@ void LevelIntro::setNewFrame(bool increment)
 		m_currentSprite++;
 	m_rBackground->background_image(*m_currentSprite);
 }
+#include "MainLevelSetter.h"
 bool LevelIntro::update()
 {
 	m_timeElapsed += MainUpdate::getSingleton().getDeltaTime();
-	if (m_timeElapsed > *m_currentTime)
+	if (m_currentTime != m_frameTimings.end())
 	{
-		setNewFrame();
-		m_currentTime++;
+        if (m_timeElapsed > *m_currentTime)
+        {
+            setNewFrame();
+            m_currentTime++;
+        }
 	}
+	else
+        MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
 	return true;
 }
 void LevelIntro::initSheetNames()

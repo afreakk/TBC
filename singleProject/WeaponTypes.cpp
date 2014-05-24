@@ -67,6 +67,7 @@ MutantFireBall::MutantFireBall(SceneNode* parentNode, ModelHandler* model)
 , m_shadow(parentNode)
 , m_shadowPos(Vector3::ZERO)
 , m_doHitTest(false)
+, m_soundLoopHandler("Frostbolt", "_start", "_midt", "_hit")
 {
 	m_collisionObserver = static_cast<ParticleUniverse::ParticleAffector*>(m_particleSystem->getTechnique(0)->getAffector("boolman"));
 	m_planeCollider = static_cast<ParticleUniverse::SphereCollider*>(m_particleSystem->getTechnique(0)->getAffector("planecollider"));
@@ -79,6 +80,7 @@ void MutantFireBall::activate()
 	m_shadow.setVisible(true);
 	m_doHitTest = true;
 	WeaponMissile::activate();
+	m_soundLoopHandler.begin();
 }
 void MutantFireBall::resetShadow()
 {
@@ -99,7 +101,12 @@ void MutantFireBall::update()
 	{
 		BeamWeaponHitTest::fireBallUpdate(m_planeCollider, m_collisionObserver, m_emitter, m_node, m_weaponDamage, m_height, m_shadowPos.z);
 		if (m_collisionObserver->isEnabled())
-            disable();
+		{
+			disable();
+			m_soundLoopHandler.end();
+		}
+		else
+			m_soundLoopHandler.loop();
 	}
 }
 void MutantFireBall::disable()
@@ -115,7 +122,7 @@ void MutantFireBall::stop(bool v)
 
 MutantSuicide::MutantSuicide(Ogre::SceneNode* parentNode, ModelHandler* model)
 : WeaponBomb(parentNode, model, "suicideExploisionnn", "suicideExplosion" )
-, m_weaponRadius(200.0)
+, m_weaponRadius(800.0)
 , m_detonated(false)
 {
 	m_node->setPosition(0.0, 150.0, 0.0);

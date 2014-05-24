@@ -16,12 +16,7 @@ PlayerGlobalStats::PlayerGlobalStats()
 
 void PlayerGlobalStats::parseScript()
 {
-    //---
-	if (GameStarter::resume)
-		m_status.energy = GameStarter::energySaved;
-	else
-        m_status.energy = 0;
-    //xxx
+    m_status.energy = 0;
 	ConfigNode* rootNode = ConfigScriptLoader::getSingleton().getConfigScript("entity", "PlayerStats");
 	m_status.maxEnergy = rootNode->findChild("energy")->getValueU(0);
 	m_status.health = rootNode->findChild("healthPoints")->getValueU(0);

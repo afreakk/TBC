@@ -22,7 +22,7 @@ bool DetonateWeaponHitTest::detonate(Ogre::Node* m_node, const Ogre::Real& radiu
 			if ( isBall)
                 player->getModelHandler().freeze();
 			else
-                PlayerGlobalStats::getSingleton().modifyHealth(-50);
+                PlayerGlobalStats::getSingleton().modifyHealth(-100);
 		}
           
 	}

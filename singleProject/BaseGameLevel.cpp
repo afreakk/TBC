@@ -8,11 +8,10 @@
 #include "MainUpdate.h"
 #include "GameStarter.h"
 #include "MainLevelSetter.h"
+#include "AudioHelpers.h"
 BaseGameLevel::BaseGameLevel(const std::string& sceneFileName, const std::string& groupName, LevelID level, const std::string& enemyspawnerConfig) 
 : ILevel(level)
 , m_environmentNode(OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode())
-, m_playerStats(new PlayerGlobalStats())
-, m_mutantGlobalStats(new MutantGlobalStats())
 , m_particleRefContainer(new ParticleReferenceContainer())
 , m_playerContainer(new PlayerContainer())
 , m_mutantContainer(new MutantContainer())
@@ -23,7 +22,6 @@ BaseGameLevel::BaseGameLevel(const std::string& sceneFileName, const std::string
 	m_enemySpawner.init(m_mutantContainer.get(), m_playerContainer->getPlayer());
 	m_playerCamera.init(m_playerContainer->getPlayer());
 	m_dotSceneLoader.parseDotScene(sceneFileName, groupName, OgreCore::getSingletonPtr()->getSceneMgr(), m_environmentNode );
-	m_environmentNode->rotate(Vector3::UNIT_Y, Radian(Degree(180)));
 	m_playerGUI.init();
 	linkSubscribers();
 }
@@ -55,8 +53,10 @@ void BaseGameLevel::unLinkSubscribers()
 	PlayerGlobalStats::getSingletonPtr()->removeSubscriber("PlayerGUI");
 	PlayerGlobalStats::getSingletonPtr()->removeSubscriber("PlayerContainer");
 }
+#include "GlobalVariables.h"
 bool BaseGameLevel::update()
 {
+	GlobalVariables::getSingleton().updateLerp();
 	m_time += MainUpdate::getSingleton().getDeltaTime();
 	m_particleRefContainer->update();
 	m_playerContainer->update();
@@ -64,6 +64,7 @@ bool BaseGameLevel::update()
 	m_playerCamera.update();
 	m_menu.updateMenu();
 	m_deathScreen.updateDeathMenu();
+	SoundUpdater::updateSound();
 	TooltipUpdates::update();
 	if (m_spawnEnemies)
         m_enemySpawner.instantiateNewEnemies();

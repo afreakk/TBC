@@ -21,7 +21,7 @@ void PlayerCameraStateSelection::update()
 	PolarCoordinates leftOfPlayer = PlayerContainer::getSingleton().getPlayer()->getPolarCoordinates();
 	leftOfPlayer.theta -= 0.2f;
 	Ogre::Vector3 leftOfPlayerVec = UnitCircleMovement::VectorFromPolar(leftOfPlayer);
-	m_camera->setPosition(Math::lerp(m_camera->getPosition(), leftOfPlayerVec*1.2f+Vector3(0,2400,0),dt));
+	m_camera->setPosition(Math::lerp(m_camera->getPosition(), leftOfPlayerVec+Vector3(0,1000,0),dt));
 	for (const auto& mutant : MutantContainer::getSingleton().getMutantIt())
 	{
 		ModelHandlerMutant& mutantModelHandler = static_cast<ModelHandlerMutant&>(mutant->getModelHandler());

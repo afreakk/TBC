@@ -18,11 +18,12 @@ Tutorial::Tutorial()
 , m_mutantSize(0)
 , m_canSpawn(false)
 , m_changeLevel(false)
-, m_music("music/tutorial")
+, m_music("music/tutorial", "_intro", "_loop", "_loop")
 , m_keyToClick(OIS::KeyCode::KC_0)
 {
 	m_tooltipIdx = TutorialScript::even_one;
 	fillJustPassedKilledCheckpoints();
+	m_music.begin();
 }
 
 
@@ -35,8 +36,8 @@ void Tutorial::fillJustPassedKilledCheckpoints()
 	m_justPassedKilledCheckpoints.push_back(TutorialScript::pauseKillMutant);
 	m_justPassedKilledCheckpoints.push_back(TutorialScript::even_fireball_end);
 	m_justPassedKilledCheckpoints.push_back(TutorialScript::even_frostbolt_wait_two);
-    //biggest index last is req
     m_justPassedKilledCheckpoints.push_back(TutorialScript::suicide_five);
+    //int cast value order
 }
 TutorialScript Tutorial::getTooltipIdx()
 {
@@ -46,11 +47,10 @@ TutorialScript Tutorial::getTooltipIdx()
 void Tutorial::setTooltipIdx(TutorialScript newIdx) 
 {
 	m_tooltipIdx = newIdx;
-
 }
 void Tutorial::update()
 {
-	m_music.update();
+	m_music.loop();
 	m_canSpawn = false;
 	TutorialScript oldTooltipIdx = m_tooltipIdx;
 	if (m_enterReleased)

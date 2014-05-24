@@ -473,6 +473,12 @@
     <ClCompile Include="GUIUtils.cpp">
       <Filter>GUI\utils</Filter>
     </ClCompile>
+    <ClCompile Include="SoundOfSpeed.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalVariables.cpp">
+      <Filter>Stats</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -909,6 +915,9 @@
     </ClInclude>
     <ClInclude Include="GUIUtils.h">
       <Filter>GUI\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundOfSpeed.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -33,6 +33,7 @@
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="GameConsole.cpp" />
     <ClCompile Include="GameStarter.cpp" />
+    <ClCompile Include="GlobalVariables.cpp" />
     <ClCompile Include="GlowMaterialListener.cpp" />
     <ClCompile Include="Gorilla.cpp" />
     <ClCompile Include="GUIResources.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="PlayerSelectionLine.cpp" />
     <ClCompile Include="SaveGameIO.cpp" />
     <ClCompile Include="SoundFactory.cpp" />
+    <ClCompile Include="SoundOfSpeed.cpp" />
     <ClCompile Include="StapledLine.cpp" />
     <ClCompile Include="SimpleShadow.cpp" />
     <ClCompile Include="SlowMotionParticle.cpp" />
@@ -233,6 +235,7 @@
     <ClInclude Include="PlayerSelectionLine.h" />
     <ClInclude Include="SaveGameIO.h" />
     <ClInclude Include="SoundFactory.h" />
+    <ClInclude Include="SoundOfSpeed.h" />
     <ClInclude Include="StapledLine.h" />
     <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="DynamicTubes.h" />

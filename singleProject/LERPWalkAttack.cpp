@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "LERPWalkAttack.h"
 #include "ModelHandler.h"
-
+#include "SoundFactory.h"
 LerpTowardsReturn LERPWalkAttack::update(ModelHandler& modelHandler, const Vector3& targetPos, const Ogre::Real& speed)
 {
     m_lerpValue = lerpTowardsTarget(modelHandler, m_lerpValue, targetPos, speed);

@@ -14,6 +14,7 @@ ParticleEffect::ParticleEffect(SceneNode* parentNode, const int id, const Ogre::
 {
     m_node->attachObject(m_particleSystem);
 	m_particleSystem->prepare();
+	m_particleSystem->setRenderQueueGroup(RENDER_QUEUE_9);
 }
 ParticleEffect::~ParticleEffect()
 {

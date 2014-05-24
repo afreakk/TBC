@@ -46,7 +46,7 @@ unsigned energyCostOf(PolarCoordinates a, PolarCoordinates b)
 {
 	keepWithinMax(&a.theta);
 	keepWithinMax(&b.theta);
-	return static_cast<unsigned>(round( Ogre::Math::Abs(a.theta - b.theta)*200.0 ));
+	return static_cast<unsigned>(round( Ogre::Math::Abs(a.theta - b.theta)*110.0 ));
 }
 bool isWithinRange(Real r1, Real r2, Real distance)
 {

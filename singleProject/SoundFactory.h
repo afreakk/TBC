@@ -7,9 +7,9 @@ class SoundFactory : public Ogre::Singleton<SoundFactory>
 public:
 	SoundFactory();
 	~SoundFactory();
-	sf::Music* playMusic(std::string);
-	sf::Sound* playSound(std::string filename, std::string soundID);
-	sf::Sound* playSound3D(std::string filename, std::string soundID, Ogre::Node* positionalNode);
+	sf::Music* playMusic(const std::string& );
+	sf::Sound* playSound(const std::string& filename, const std::string& soundID);
+	sf::Sound* playSound3D(const std::string& filename, const std::string& soundID, Ogre::Node* positionalNode);
 	void muteMusic(bool mute);
 	bool isMusicMuted();
 	void update();

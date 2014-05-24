@@ -3,9 +3,10 @@
 #include "OgreCore.h"
 
 
+
 template<> SoundFactory* Ogre::Singleton<SoundFactory>::msSingleton = 0;
 SoundFactory::SoundFactory()
-: m_musicMuted(true)
+: m_musicMuted(false)
 {
 }
 
@@ -45,7 +46,7 @@ bool SoundFactory::isMusicMuted()
 {
 	return m_musicMuted;
 }
-sf::Music* SoundFactory::playMusic(std::string filename)
+sf::Music* SoundFactory::playMusic(const std::string& filename)
 {
 	if (!m_musics.count(filename))
 		createNewMusic(filename);
@@ -55,13 +56,13 @@ sf::Music* SoundFactory::playMusic(std::string filename)
 	return m_musics[filename].get();
 }
 
-sf::Sound* SoundFactory::playSound(std::string filename, std::string soundID)
+sf::Sound* SoundFactory::playSound(const std::string& filename, const std::string& soundID)
 {
 	prepareSound(filename, soundID);
 	m_sounds[soundID]->play();
 	return m_sounds[soundID].get();
 }
-sf::Sound* SoundFactory::playSound3D(std::string filename, std::string soundID, Ogre::Node* positionalNode)
+sf::Sound* SoundFactory::playSound3D(const std::string& filename, const std::string& soundID, Ogre::Node* positionalNode)
 {
 	prepareSound(filename, soundID);
 	updateSoundPosition(soundID, positionalNode);
@@ -81,13 +82,13 @@ void SoundFactory::createNewBuffer(std::string filename)
 {
 	m_buffers[filename] =std::unique_ptr<sf::SoundBuffer>(new  sf::SoundBuffer());
 	if (!m_buffers[filename]->loadFromFile(fullPath(filename)))
-		assert(0);
+		assert(0 && "COULD NOT FIND FILENAME");
 }
 void SoundFactory::createNewMusic(std::string filename)
 {
 	m_musics[filename] = std::unique_ptr<sf::Music>(new sf::Music());
 	if (!m_musics[filename]->openFromFile(fullPath(filename)))
-		assert(0);
+		assert(0 && "COULD NOT FIND FILENAME");
 }
 void SoundFactory::prepareSound(std::string filename, std::string soundID)
 {

@@ -7,6 +7,7 @@ LevelOne::LevelOne()
 {
 	setAutoSpawnEnemies(false);
 	Ogre::LogManager::getSingleton().logMessage("hnz: lvl1 Const");
+	m_environmentNode->rotate(Vector3::UNIT_Y, Radian(Degree(210)));
 	loadTutorialPosition();
 }
 
@@ -18,7 +19,6 @@ void LevelOne::loadTutorialPosition()
 		m_tutorial.setTooltipIdx(GameStarter::savedTutPoint);
 		spawnEnemies();
 	}
-
 }
 LevelOne::~LevelOne()
 {
@@ -31,8 +31,11 @@ bool LevelOne::update()
 		goLevel(MainLevelEnums::LVL2);
 	return BaseGameLevel::update();
 }
+#include "PlayerContainer.h"
 bool LevelOne::tutorialUpdate()
 {
+	cout << "FPS: " << OgreCore::getSingleton().getWindow()->getAverageFPS() << endl;
+	/*cout << PlayerContainer::getSingleton().getPlayer()->getPolarCoordinates().theta << endl;*/
 	m_tutorial.update();
 	if (m_tutorial.canSpawn())
 		spawnEnemies();

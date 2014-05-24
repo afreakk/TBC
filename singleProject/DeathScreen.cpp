@@ -55,6 +55,7 @@ void DeathScreen::updateDeathMenu()
         auto smgr = OgreCore::getSingleton().getSceneMgr();
         smgr->clearSpecialCaseRenderQueues();
         smgr->addSpecialCaseRenderQueue(RENDER_QUEUE_OVERLAY);
+        smgr->addSpecialCaseRenderQueue(RENDER_QUEUE_9);
         smgr->setSpecialCaseRenderQueueMode(SceneManager::SCRQM_INCLUDE);
 
 		m_deathMenu.reset();

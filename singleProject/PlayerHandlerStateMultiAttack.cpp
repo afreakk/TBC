@@ -74,7 +74,7 @@ void PlayerHandlerStateMultiAttack::setNewState( const Ogre::Vector3& targetPos)
 		lerpConfiguration = new LERPWalk();
     m_currentLerpState.reset();
     m_currentLerpState = unique_ptr<BehaviourStateLERP>{ 
-		new BehaviourStateLERP(targetObject, &PlayerGlobalStats::getSingleton().getLERPSpeed_Energy(), lerpConfiguration, targetPos) };
+		new BehaviourStateLERP(true, targetObject, &PlayerGlobalStats::getSingleton().getLERPSpeed_Energy(), lerpConfiguration, targetPos) };
     m_player->setState(m_currentLerpState.get());
 	if (targetObject != nullptr)
 		m_teleporter.teleport( (m_player->getNode()->getPosition() - targetObject->getNode()->getPosition()).normalisedCopy()*200.0 + targetObject->getNode()->getPosition() );

@@ -23,15 +23,13 @@ bool MainUpdate::frameEnded(const Ogre::FrameEvent &evt)
 }
 bool MainUpdate::frameRenderingQueued(const Ogre::FrameEvent &evt)
 { 
-	m_deltaTime = evt.timeSinceLastFrame > 1.0f ? 1.0f : evt.timeSinceLastFrame;
+	m_deltaTime = (evt.timeSinceLastFrame > 1.0f) ? 1.0f : evt.timeSinceLastFrame;
 	m_scaledDeltaTime = m_deltaTime * GlobalVariables::getSingleton().getSpeed();
 	OISCore::getSingletonPtr()->capture();
 	m_levelManager->update();
 	MainLevelSetter::getSingleton().update();
 	SoundFactory::getSingleton().update();
-	if (OgreCore::getSingleton().getWindow()->isClosed() || m_stopRendering)
-        return false; 
-	return true;
+	return !(OgreCore::getSingleton().getWindow()->isClosed() || m_stopRendering);
 }
 const Ogre::Real& MainUpdate::getDeltaTime()
 {

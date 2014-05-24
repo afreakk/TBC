@@ -1,35 +1,134 @@
 #include "stdafx.h"
 #include "AudioHelpers.h"
 #include "SoundFactory.h"
-bool MuteIntroLoop = false;
-IntroLoopListener::IntroLoopListener(const std::string& name)
+
+static std::string audioFileTypeEnding = ".ogg";
+
+//---------------------Sound-Updater----------------------------
+std::map<std::string, BaseSound*> SoundUpdater::ms_soundToUpdate;
+void SoundUpdater::updateSound()
+{
+	for (auto& sound : ms_soundToUpdate)
+		sound.second->updateSound();
+}
+void SoundUpdater::addSound(const std::string& id, BaseSound* instance)
+{
+	ms_soundToUpdate[id] = instance;
+}
+void SoundUpdater::removeSound(const std::string& id)
+{
+	ms_soundToUpdate.erase(id);
+}
+
+//-----------------------Audio-LOOP-----------------------------
+AudioLoopHandler::AudioLoopHandler(const std::string& name, const std::string& introPrefix, const std::string& loopPrefix
+	, const std::string& endPrefix)
 : m_name(name)
-, m_pIntro("_intro.ogg")
-, m_pLoop("_loop.ogg")
-, m_current(SoundFactory::getSingleton().playMusic(m_name+m_pIntro))
+, m_introPrefix(introPrefix)
+, m_loopPrefix(loopPrefix)
+, m_endPrefix(endPrefix)
 {
 }
-void IntroLoopListener::update()
+
+//----------------------Sound-Loop---------------------------------
+SoundLoopHandler::SoundLoopHandler(const std::string& name, const std::string& introPrefix, const std::string& loopPrefix
+	, const std::string& endPrefix)
+: AudioLoopHandler(name, introPrefix, loopPrefix, endPrefix)
+, m_current(nullptr)
 {
-    if (m_current->getStatus() != sf::Music::Playing)
-        m_current = SoundFactory::getSingleton().playMusic(m_name + m_pLoop);
 }
-
-
+bool SoundLoopHandler::begin()
+{
+	std::string fileName = m_name + m_introPrefix + audioFileTypeEnding;
+	m_current =     SoundFactory::getSingleton().playSound(fileName, fileName);
+	return true;
+}
+bool SoundLoopHandler::loop(bool force)
+{
+	assert(m_current && " MusicLoopHandler::begin() first");
+	std::string fileName = m_name + m_loopPrefix + audioFileTypeEnding;
+	if (m_current->getStatus() != sf::Music::Playing || force)
+	{
+		if (force)
+			m_current->stop();
+        m_current = SoundFactory::getSingleton().playSound(fileName, fileName);
+		return true;
+	}
+	return false;
+}
+bool SoundLoopHandler::end(bool force)
+{
+	assert(m_current && " MusicLoopHandler::begin() first");
+	std::string fileName = m_name + m_endPrefix + audioFileTypeEnding;
+	if (m_current->getStatus() != sf::Music::Playing || force)
+	{
+		if (force)
+			m_current->stop();
+        m_current = SoundFactory::getSingleton().playSound(fileName, fileName);
+		return true;
+	}
+	return false;
+}
+//-----------------------MUSIC-LOOP-----------------------------
+MusicLoopHandler::MusicLoopHandler(const std::string& name, const std::string& introPrefix, const std::string& loopPrefix
+	, const std::string& endPrefix)
+: AudioLoopHandler(name, introPrefix, loopPrefix, endPrefix)
+, m_current(nullptr)
+{
+}
+bool MusicLoopHandler::begin()
+{
+	m_current =     SoundFactory::getSingleton().playMusic(m_name + m_introPrefix + audioFileTypeEnding);
+	return true;
+}
+bool MusicLoopHandler::loop(bool force)
+{
+	assert(m_current && " MusicLoopHandler::begin() first");
+	if (m_current->getStatus() != sf::Music::Playing || force)
+	{
+		if (force)
+			m_current->stop();
+        m_current = SoundFactory::getSingleton().playMusic(m_name + m_loopPrefix + audioFileTypeEnding);
+		return true;
+	}
+	return false;
+}
+bool MusicLoopHandler::end(bool force)
+{
+	assert(m_current && " MusicLoopHandler::begin() first");
+	if (m_current->getStatus() != sf::Music::Playing || force)
+	{
+		if (force)
+			m_current->stop();
+        m_current = SoundFactory::getSingleton().playMusic(m_name + m_endPrefix + audioFileTypeEnding);
+		return true;
+	}
+	return false;
+}
+//-----------------------FOOTSTEPZ-----------------------------
+#include "LevelManager.h"
+#include "MainUpdate.h"
+std::string Skritt::ms_prefix = "sfx/walk/";
 Skritt::Skritt(Ogre::Node* parentNode)
 : m_parentNode(parentNode)
 {
-	for (int i = 0; i < 6; i++)
-		m_walkNames.push_back("sfx/skritt_" + std::to_string(i) + ".ogg");
+	for (unsigned i = 0; i < 2; i++)
+		m_walkOutdoor.push_back(ms_prefix+"skritt_" + std::to_string(i) + audioFileTypeEnding);
+	for (unsigned i = 0; i < 4; i++)
+		m_walkMetal.push_back(  ms_prefix+"skrittMetal_" + std::to_string(i) + audioFileTypeEnding);
 }
-
 void Skritt::playSkritt()
 {
-    increment();
-    m_sound = SoundFactory::getSingleton().getSingleton().playSound3D(m_walkNames[m_soundIdx],m_walkNames[m_soundIdx], m_parentNode);
+	bool metal = (MainUpdate::getSingleton().getLevelID() == LevelID::LEVEL_ONE);
+	const std::string& stepSound = metal ? m_walkMetal[getRandMetalIndex()] : m_walkOutdoor[getRandOutdoorIndex()];
+    m_sound = SoundFactory::getSingleton().getSingleton().playSound3D(stepSound, stepSound, m_parentNode);
 	m_sound->setVolume(50.f);
 }
-void Skritt::increment()
+unsigned Skritt::getRandOutdoorIndex()
 {
-	m_soundIdx = rand() % m_walkNames.size();
+	return rand() % m_walkOutdoor.size();
+}
+unsigned Skritt::getRandMetalIndex()
+{
+	return rand() % m_walkMetal.size();
 }

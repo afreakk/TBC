@@ -1,7 +1,6 @@
 #pragma once
 #include "ModelHandler.h"
 #include "SelectedTag.h"
-#include "BloodSplat.h"
 #include "Weapon.h"
 enum class selectedType
 {
@@ -19,12 +18,10 @@ public:
 	void setHovered(selectedType);
 	void fire(bool run=true);
 	void init() override;
-	void damage(Vector3 direction);
 	WeaponType getWeaponType();
 	bool isHovered();
 private:
 	SelectedTag m_selectedTag;
-	BloodSplat m_bloodSplat;
 	unique_ptr<WeaponBase> m_weapon;
 	WeaponType m_type;
 	bool m_hovered;

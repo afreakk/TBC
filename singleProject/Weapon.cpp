@@ -76,7 +76,7 @@ void WeaponBomb::update()
 
 WeaponBall::WeaponBall(SceneNode* parentNode, ModelHandler* model, String id, String templateName, String emitterName)
 : WeaponBase(parentNode, model, id, templateName, emitterName)
-, m_ballDamageRadius(200.0f)
+, m_ballDamageRadius(400.0f)
 , m_detonation(0.0f, false, false)
 , m_startingPos(0.0f,LaunchHeight,0.0f)
 , m_shadow(m_node)

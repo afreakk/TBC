@@ -6,6 +6,7 @@
 #include "boost/noncopyable.hpp"
 #include "Tooltip.h"
 #include "AudioHelpers.h"
+#include "BloodSplat.h"
 enum class AttackReturn
 {
     NOT_KILLED,
@@ -37,6 +38,7 @@ public:
 	void tooltip(const std::string& msg, const std::string& caption);
 	void hideTooltip();
 	void move(const Ogre::Vector3& to);
+	void damage(Vector3 direction);
 protected:
 	void updateNormalPos();
 	bool lerp(const Ogre::Vector3& nextPosition, Ogre::Real dt, const ANIMATIONS& animation, const Real& minDistance, const Real& animLerpRatio, bool isRecursive=false);
@@ -54,6 +56,7 @@ protected:
 	Ogre::Real m_freezeTimer;
 	TwoDTooltip m_tooltip;
 	Skritt m_skritt;
+	BloodSplat m_bloodSplat;
 
 
 	std::map<ANIMATIONS, unique_ptr<BaseAnimation> > m_animations;

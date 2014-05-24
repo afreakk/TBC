@@ -37,7 +37,7 @@ private:
 	void handleSound(const Ogre::Real& time)
 	{
 		m_stepTimer += time;
-		if (m_stepTimer > 0.75f)
+		if (m_stepTimer > 0.55f)
 		{
 			cout << "skirtt" << endl;
 		    m_footStepSound->playSkritt();

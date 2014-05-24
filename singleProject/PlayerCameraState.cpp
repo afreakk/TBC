@@ -15,10 +15,9 @@ PlayerCameraState::PlayerCameraState()
 }
 void PlayerCameraState::setCameraPos(const Ogre::Real& height, const Ogre::Real& distance)
 {
-
-    m_camera->setPosition( Ogre::Math::lerp<Ogre::Vector3>(m_camera->getPosition(),
-        LaneSettings::getSingleton().getVectorOf(1,getTiltedPlayerPos() ,height)*distance, 
-        MainUpdate::getSingleton().getScaledDeltaTime()* 2.0)  );
+	Ogre::Vector3 destination = LaneSettings::getSingleton().getVectorOf(1, getTiltedPlayerPos(), height)*distance;
+	Ogre::Real weight = MainUpdate::getSingleton().getScaledDeltaTime()* 2.0;
+    m_camera->setPosition( Ogre::Math::lerp<Ogre::Vector3>(m_camera->getPosition(),destination, weight)  );
 }
 const Ogre::Vector3& PlayerCameraState::getTiltedLerpedPlayerPos(const Ogre::Real& dt)
 {

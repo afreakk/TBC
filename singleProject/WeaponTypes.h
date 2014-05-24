@@ -57,6 +57,7 @@ private:
 	SimpleShadow m_shadow;
 	Ogre::Vector3 m_shadowPos;
 	bool m_doHitTest;
+	SoundLoopHandler m_soundLoopHandler;
 
 
 	void resetShadow();

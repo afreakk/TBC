@@ -7,7 +7,7 @@
 #include "ContainerLogic.h"
 #include "boost/algorithm/string/predicate.hpp"
 #include "GameStarter.h"
-static const unsigned energyPerMutant = 40;
+static const unsigned energyPerMutant = 20;
 template<> MutantContainer* Ogre::Singleton<MutantContainer>::msSingleton = 0;
 bool MutantContainer::m_isInstantiated = false;
 MutantContainer::MutantContainer()

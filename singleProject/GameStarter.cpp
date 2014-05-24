@@ -4,6 +4,7 @@
 #include "MainLevelSetter.h"
 #include "PlayerContainer.h"
 #include "Player.h"
+#include "PlayerGlobalStats.h"
 
 SaveGameIO GameStarter::m_savedData;
 bool GameStarter::resume = false;
@@ -16,9 +17,8 @@ unsigned GameStarter::energySaved = 0;
 void GameStarter::startNewGame()
 {
 	resume = false;
-	MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
+	MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::INTRO);
 }
-#include "PlayerGlobalStats.h"
 bool GameStarter::resumeGame()
 {
 	resume = true;
@@ -30,7 +30,7 @@ bool GameStarter::resumeGame()
 	savedTutPoint = data.tutorialPos;
 	mutantsAlreadyKilled = data.mutantsKilled;
 	mutantsAlreadyAlive = data.mutantsAlive;
-	energySaved = data.energy;
+	PlayerGlobalStats::getSingleton().setEnergy( data.energy );
 	MainLevelSetter::getSingleton().changeLevel(translateEnum(data.levelID));
 	return true;
 }
