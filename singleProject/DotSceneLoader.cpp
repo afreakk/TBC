@@ -680,6 +680,7 @@ void DotSceneLoader::processEntity(TiXmlElement *XMLNode, SceneNode *pParent)
 	{
 		MeshPtr pMesh= MeshManager::getSingleton().load(meshFile, m_sGroupName);
 		pEntity = mSceneMgr->createEntity(name, meshFile);
+//		pEntity->getMesh()->setAutoBuildEdgeLists(true);
 		pEntity->setCastShadows(castShadows);
 		if (id == "1")
 			pEntity->setQueryFlags(QueryMasks::None);

@@ -8,12 +8,13 @@
 #include "AnimationTumble.h"
 
 int ModelRecipeMutant::s_count = 0;
-ModelRecipeMutant::ModelRecipeMutant()
+ModelRecipeMutant::ModelRecipeMutant(bool suicide)
 : m_id(++s_count)
-, m_materialName("NinjaEnemy")
+, m_materialName("enemy_rigg_animasjonEnemy_UVmap_2lambert5")
 , m_entityName("MutantRanged"+boost::lexical_cast<string>(m_id))
 , m_nodeName("MutantRanged"+boost::lexical_cast<string>(m_id))
-, m_hoveredName("HoveredRanged")
+, m_hoveredName("enemy_fireball_selected")
+, m_suicide(suicide)
 {
 	cout << "MutantEntity: " << m_entityName << endl;
 }
@@ -25,22 +26,23 @@ ModelRecipeMutant::~ModelRecipeMutant()
 
 Ogre::Entity* ModelRecipeMutant::initMesh(Ogre::SceneManager* sMgr)
 {
-	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("ninja.mesh", "Models") ;
+	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("monster.mesh", "Models") ;
 	auto mesh = resourcePtr.first.dynamicCast<Ogre::Mesh>();
 	unsigned short src, dest;
 	if (!mesh->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
 		mesh->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
 	auto ent = sMgr->createEntity(m_entityName, mesh);
 	ent->setUpdateBoundingBoxFromSkeleton(true);
-	ent->setMaterialName(m_materialName);
+	ent->setMaterialName( m_suicide ? "suzide" :  m_materialName);
+//	ent->getMesh()->buildEdgeList();
 	return ent;
 }
 
 BaseAnimation* ModelRecipeMutant::getPrepare(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState("Stealth"));
-	return new AnimationPrepare(anims);
+	anims.push_back(entity->getAnimationState("monster"));
+	return new AnimationPrepareMonster(anims);
 }
 const std::string& ModelRecipeMutant::getMaterialName(const std::string& type)
 {
@@ -56,39 +58,38 @@ const std::string& ModelRecipeMutant::getMaterialName(const std::string& type)
 BaseAnimation* ModelRecipeMutant::getDie(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState("Death1"));
-	anims.push_back(entity->getAnimationState("Death2"));
-	return new AnimationDie(anims);
+	anims.push_back(entity->getAnimationState("monster"));
+	return new AnimationDieMonster(anims);
 }
 
 BaseAnimation* ModelRecipeMutant::getWalk(Ogre::Entity* entity, Skritt* skritt)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState("Walk"));
-	return new AnimationWalk(anims, skritt);
+	anims.push_back(entity->getAnimationState("monster"));
+	return new AnimationWalkMonster(anims, skritt);
 }
 BaseAnimation* ModelRecipeMutant::getAttack(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState("Attack1"));
-	anims.push_back(entity->getAnimationState("Attack2"));
-	anims.push_back(entity->getAnimationState("Attack3"));
-	return new AnimationAttack(anims);
+	anims.push_back(entity->getAnimationState("monster"));
+	return new AnimationAttackMonster(anims);
 }
 void ModelRecipeMutant::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 {
 	auto entNode = node->createChildSceneNode();
 	entNode->attachObject(ent);
-	entNode->setScale(Vector3(2.5f));
+	entNode->setScale(Vector3( m_suicide ? 30.0f : 40.0f));
+	entNode->translate(Vector3(0, 0, 0));
+	entNode->rotate(Vector3::UNIT_Y, Ogre::Radian(Math::PI));
 }
 
 Ogre::SceneNode* ModelRecipeMutant::createNode()
 {
 	return OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode(m_nodeName);
 }
-BaseAnimation* ModelRecipeMutant::getTumble(Ogre::Entity* entity)
+BaseAnimation* ModelRecipeMutant::getTumble(Ogre::Entity* entity, Skritt* skritt)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back( entity->getAnimationState("Backflip") ) ;
-	return new AnimationTumble(anims);
+	anims.push_back(entity->getAnimationState("monster"));
+	return new AnimationWalkMonster(anims, skritt);
 }

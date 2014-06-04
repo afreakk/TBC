@@ -247,6 +247,7 @@ void Tutorial::update()
 			showTooltipSlowMotion(m_player->getModelHandler(), "My powersuit is overflowing with power!");
 			break;
 		case TutorialScript::slowmo_three:
+            m_keyToClick = OIS::KC_SPACE;
 			if(OISCore::getSingleton().getKeyboard()->isModifierDown(OIS::Keyboard::Modifier::Shift))
 			    genericPress(TutorialScript::slowmo_four,OIS::KC_SPACE);
 			showTooltipSlowMotion(m_player->getModelHandler(), "With this much energy I can enter a state of \nsuperhuman senses by pressing shift+space.");
@@ -258,11 +259,11 @@ void Tutorial::update()
 			break;
 		case TutorialScript::slowmo_five:
 			genericPress(TutorialScript::slowmo_six);
-			showTooltipSlowMotion(m_player->getModelHandler(), "I can then focus on picking my next targets and \neasily take them out with super speed!");
+			showTooltipSlowMotion(m_player->getModelHandler(), "I can then focus on picking my next targets and \neasily take them out with super speed!\n (select mutants by pressing space)");
 			break;
 		case TutorialScript::slowmo_six:
 			genericPress(TutorialScript::slowmo_seven);
-			showTooltipSlowMotion(m_player->getModelHandler(), "I’ll test it out on those mutants over there!");
+			showTooltipSlowMotion(m_player->getModelHandler(), "I’ll test it out on those mutants over there!\nPress ENTER to preform the selected attack\nRemember you can exit selection \nmode by pressing Q!");
 			break;
 		case TutorialScript::slowmo_seven:
 			hideTooltip(m_player->getModelHandler());
@@ -414,7 +415,7 @@ void Tutorial::setCompositor(bool enabled)
 }
 void Tutorial::setSlowmotion(bool slowMotion)
 {
-	if (slowMotion)
+	if (slowMotion && GlobalVariables::getSingleton().getSpeed() > 0.5f)
         GlobalVariables::getSingleton().setSpeed(0.1f);
 	else
         GlobalVariables::getSingleton().setSpeed(1.0f);

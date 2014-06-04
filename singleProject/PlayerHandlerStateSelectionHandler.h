@@ -8,7 +8,7 @@ public:
 	PlayerHandlerStateSelectionHandler(const std::vector<std::string>& attackList);
 	~PlayerHandlerStateSelectionHandler();
 	void handleKeys(const OIS::KeyEvent&);
-	bool updateMarked(const PolarCoordinates& currentNode);
+	bool updateMarked(const Vector3& markedVec3);
 	const std::string& getMarked()const ;
 	Mutant* getCurrentMarkedMutant() const;
 	int getEnergyCostOfMarked() const;

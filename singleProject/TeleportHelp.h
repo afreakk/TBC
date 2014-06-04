@@ -2,6 +2,7 @@
 #include "ModelHandlerPlayer.h"
 #include "MainUpdate.h"
 #include "Player.h"
+#include "PlayerGlobalStats.h"
 enum class TeleportState
 {
     TELEPORT_IN,
@@ -17,6 +18,7 @@ private:
 	Player* m_player;
 	Ogre::Real m_teleportTimer;
 	Ogre::Vector3 m_toLoc;
+	int m_energyCost;
 
 public:
 	Teleporter(Player* player)
@@ -24,9 +26,15 @@ public:
 		, m_teleportState(TeleportState::NOTHING)
 		, m_teleportTimer(0.0f)
 		, m_toLoc(Vector3::ZERO)
+		, m_energyCost(5)
 	{}
+	int getEnergyCost()
+	{
+		return m_energyCost;
+	}
     void teleport(const Vector3& to = Vector3::ZERO)
     {
+		PlayerGlobalStats::getSingleton().modifyEnergy(-m_energyCost);
 		if (m_teleportState == TeleportState::NOTHING)
 		{
             m_teleportState = TeleportState::TELEPORT_IN;

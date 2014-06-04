@@ -5,7 +5,8 @@ enum class LevelID
     LEVEL_INTRO,
 	LEVEL_ONE,
 	LEVEL_TWO,
-	LEVEL_MENU
+	LEVEL_MENU,
+    LEVEL_END
 };
 inline std::ostream& operator<<(std::ostream& out, const LevelID value){
 	static std::map<LevelID, std::string> strings;

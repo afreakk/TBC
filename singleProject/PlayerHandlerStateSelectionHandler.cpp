@@ -27,7 +27,7 @@ PlayerHandlerStateSelectionHandler::~PlayerHandlerStateSelectionHandler()
         static_cast<ModelHandlerMutant&>(m_prevMarked->getModelHandler()).setHovered(selectedType::DEFAULT);
 }
 
-bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& markedPolarCoordinates)
+bool PlayerHandlerStateSelectionHandler::updateMarked(const Vector3& markedVec3)
 {
 	bool markedChanged = false;
 	if (m_prevMarked != m_currentMarked)
@@ -41,7 +41,7 @@ bool PlayerHandlerStateSelectionHandler::updateMarked(const PolarCoordinates& ma
 		}
 	}
 	if (m_currentMarked)
-        m_energyCostOfCurrentlyMarked = energyCostOf(markedPolarCoordinates, static_cast<ModelHandlerMutant&>(m_currentMarked->getModelHandler()).getPolarCoordinates());
+        m_energyCostOfCurrentlyMarked = energyCostOf(markedVec3, m_currentMarked->getNode()->getPosition());
 	m_prevMarked = m_currentMarked;
 	return markedChanged;
 }

@@ -8,7 +8,6 @@
 #include "AnimationPrepare.h"
 
 ModelRecipePlayer::ModelRecipePlayer()
-: m_materialName("Examples/Ninja")
 {
 }
 ModelRecipePlayer::~ModelRecipePlayer()
@@ -18,19 +17,19 @@ ModelRecipePlayer::~ModelRecipePlayer()
 BaseAnimation* ModelRecipePlayer::getPrepare(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState("Stealth"));
+	anims.push_back(entity->getAnimationState("all"));
 	return new AnimationPrepare(anims);
 }
 Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
 {
-	cout << "initMesh: Player" << endl;
-	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("ninja.mesh", "Models") ;
+	auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("All.mesh", "Models") ;
 	auto mesh = resourcePtr.first.dynamicCast<Ogre::Mesh>();
 	unsigned short src, dest;
 	if (!mesh->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
 		mesh->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
     Ogre::Entity* ent = sMgr->createEntity("PlayerEntity", mesh);
-	ent->setCastShadows(true);
+	ent->getMesh()->buildEdgeList();
+//	ent->setCastShadows(true);
 	ent->setUpdateBoundingBoxFromSkeleton(true);
 	ent->setQueryFlags(QueryMasks::PlayerMask);
 	return ent;
@@ -38,28 +37,27 @@ Ogre::Entity* ModelRecipePlayer::initMesh(Ogre::SceneManager* sMgr)
 
 const std::string& ModelRecipePlayer::getMaterialName(const std::string& typ)
 {
-	return m_materialName;
+	return "IDUNNOLOL";
 }
 BaseAnimation* ModelRecipePlayer::getDie(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState("Death1"));
-	anims.push_back(entity->getAnimationState("Death2"));
-	return new AnimationDie(anims);
+	anims.push_back(entity->getAnimationState("all"));
+	return new AnimationDieHero(anims);
 }
 BaseAnimation* ModelRecipePlayer::getWalk(Ogre::Entity* entity, Skritt* skritt)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState("Walk"));
-	return new AnimationWalk(anims, skritt);
+	anims.push_back(entity->getAnimationState("all"));
+	return new AnimationWalkHero(anims, skritt);
 }
 BaseAnimation* ModelRecipePlayer::getAttack(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState("Attack1"));
-	anims.push_back(entity->getAnimationState("Attack2"));
-	anims.push_back(entity->getAnimationState("Attack3"));
-	return new AnimationAttack(anims);
+	anims.push_back(entity->getAnimationState("all"));
+//	anims.push_back(entity->getAnimationState("Attack2"));
+//	anims.push_back(entity->getAnimationState("Attack3"));
+	return new AnimationAttackHero(anims);
 }
 void ModelRecipePlayer::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 {
@@ -73,12 +71,20 @@ void ModelRecipePlayer::attachNode(Ogre::SceneNode* node, Ogre::Entity* ent)
 	auto childNode = node->createChildSceneNode();
 	childNode->attachObject(ent);
 	childNode->setScale(Vector3(2.5f));
+	childNode->rotate(Vector3::UNIT_Y, Ogre::Radian(Math::PI));
 }
-BaseAnimation* ModelRecipePlayer::getTumble(Ogre::Entity* entity)
+#include "AnimationIdle.h"
+BaseAnimation* ModelRecipePlayer::getIdle(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back( entity->getAnimationState("Backflip") ) ;
-	return new AnimationTumble(anims);
+	anims.push_back( entity->getAnimationState("all") ) ;
+	return new AnimationIdleHero(anims);
+}
+BaseAnimation* ModelRecipePlayer::getTumble(Ogre::Entity* entity, Skritt* skritt)
+{
+	std::vector<AnimationState*> anims;
+	anims.push_back( entity->getAnimationState("all") ) ;
+	return new AnimationWalkHero(anims, skritt);
 }
 Ogre::SceneNode* ModelRecipePlayer::createNode()
 {

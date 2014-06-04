@@ -35,12 +35,15 @@ SoundLoopHandler::SoundLoopHandler(const std::string& name, const std::string& i
 	, const std::string& endPrefix)
 : AudioLoopHandler(name, introPrefix, loopPrefix, endPrefix)
 , m_current(nullptr)
+, m_endSound(nullptr)
+, m_endPlayedOnce(false)
 {
 }
 bool SoundLoopHandler::begin()
 {
 	std::string fileName = m_name + m_introPrefix + audioFileTypeEnding;
 	m_current =     SoundFactory::getSingleton().playSound(fileName, fileName);
+	m_endPlayedOnce = false;
 	return true;
 }
 bool SoundLoopHandler::loop(bool force)
@@ -64,7 +67,11 @@ bool SoundLoopHandler::end(bool force)
 	{
 		if (force)
 			m_current->stop();
-        m_current = SoundFactory::getSingleton().playSound(fileName, fileName);
+		if (!m_endPlayedOnce)
+		{
+            m_endSound = SoundFactory::getSingleton().playSound(fileName, fileName);
+			m_endPlayedOnce = true;
+		}
 		return true;
 	}
 	return false;
@@ -122,7 +129,7 @@ void Skritt::playSkritt()
 	bool metal = (MainUpdate::getSingleton().getLevelID() == LevelID::LEVEL_ONE);
 	const std::string& stepSound = metal ? m_walkMetal[getRandMetalIndex()] : m_walkOutdoor[getRandOutdoorIndex()];
     m_sound = SoundFactory::getSingleton().getSingleton().playSound3D(stepSound, stepSound, m_parentNode);
-	m_sound->setVolume(50.f);
+	m_sound->setVolume(20.f);
 }
 unsigned Skritt::getRandOutdoorIndex()
 {

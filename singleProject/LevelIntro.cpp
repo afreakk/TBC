@@ -33,6 +33,7 @@ void LevelIntro::setNewFrame(bool increment)
 	m_rBackground->background_image(*m_currentSprite);
 }
 #include "MainLevelSetter.h"
+#include "OISCore.h"
 bool LevelIntro::update()
 {
 	m_timeElapsed += MainUpdate::getSingleton().getDeltaTime();
@@ -45,6 +46,8 @@ bool LevelIntro::update()
         }
 	}
 	else
+        MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
+	if (OISCore::getSingleton().getKeyboard()->isKeyDown(OIS::KeyCode::KC_ESCAPE))
         MainLevelSetter::getSingleton().changeLevel(MainLevelEnums::LVL1);
 	return true;
 }

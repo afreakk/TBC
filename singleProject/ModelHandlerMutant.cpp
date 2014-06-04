@@ -93,3 +93,13 @@ WeaponType ModelHandlerMutant::getWeaponType()
 {
 	return m_type;
 }
+
+
+const Vector3 ModelHandlerMutant::getBonePos() const
+{
+	return m_entity->getSkeleton()->getBone("enemy_rigg_animasjon:be_spE01")->_getDerivedPosition();
+}
+const Vector3 ModelHandlerMutant::getBoneOrientation() const
+{
+	return m_entity->getSkeleton()->getBone("enemy_rigg_animasjon:be_spE01")->_getDerivedOrientation().yAxis();
+}

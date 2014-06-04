@@ -20,6 +20,7 @@ BehaviourStateLERP::BehaviourStateLERP(bool hit, BehaviourObject* target, const 
 , m_pause(false)
 , m_hit(hit)
 , m_swordSwung(false)
+, m_killTimer(0.0f)
 {
 	assert(m_target||m_usingTargetPosition);
 	assert(!(m_target&&m_usingTargetPosition));
@@ -62,7 +63,9 @@ void BehaviourStateLERP::update(ModelHandler& modelHandler)
 		}
         break;
     case LerpTowardsReturn::HIT:
-        m_killed = true;
+		m_killTimer += MainUpdate::getSingleton().getScaledDeltaTime();
+		if (m_killTimer > 0.4f)
+            m_killed = true;
         break;
     case LerpTowardsReturn::ANIMATION_END:
         m_goNextTarget = true;

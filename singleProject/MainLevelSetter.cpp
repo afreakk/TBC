@@ -7,6 +7,7 @@
 #include "LevelIntro.h"
 #include "LoadingScreen.h"
 #include "PlayerGlobalStats.h"
+#include "LevelEnd.h"
 template<> MainLevelSetter* Ogre::Singleton<MainLevelSetter>::msSingleton = 0;
 MainLevelSetter::MainLevelSetter(MainLevelEnums newLvl)
 : m_levelMgr( new LevelManager(setLevel(newLvl)) )
@@ -50,6 +51,8 @@ ILevel* MainLevelSetter::setLevel(MainLevelEnums newLvl)
             return new LevelTwo();
         case MainLevelEnums::INTRO:
             return new LevelIntro();
+		case MainLevelEnums::LVLEND:
+			return new LevelEnd();
         default:
             assert(0);
             return nullptr;
@@ -59,6 +62,11 @@ ILevel* MainLevelSetter::setLevel(MainLevelEnums newLvl)
 	{
 		cout << "setLevel:" << endl;
 		cout << e.what() << endl;
+		assert(0 && "you dun goofed in constructor");
+	}
+    catch (...)
+	{
+		assert(0 && "you dun goofed in constructor");
 	}
 }
 LevelManager* MainLevelSetter::getLevelManager()

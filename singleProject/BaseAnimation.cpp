@@ -14,11 +14,12 @@ void BaseAnimation::disableOtherAnims(std::map<ANIMATIONS, std::unique_ptr<BaseA
     {
         if (!it.second->isStopped() && it.second.get() != this)
             it.second->endAnimation();
-    }
+	}
 }
 void BaseAnimation::setStopped(bool val)
 {
 	m_stopped = val;
+
 }
 bool BaseAnimation::isStopped()
 {

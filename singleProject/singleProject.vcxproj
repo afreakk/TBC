@@ -11,7 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationAttack.cpp" />
+    <ClCompile Include="AnimationDie.cpp" />
+    <ClCompile Include="AnimationIdle.cpp" />
     <ClCompile Include="AnimationPrepare.cpp" />
+    <ClCompile Include="AnimationTumble.cpp" />
+    <ClCompile Include="AnimationWalk.cpp" />
     <ClCompile Include="AudioHelpers.cpp" />
     <ClCompile Include="BaseAnimation.cpp" />
     <ClCompile Include="BaseGameLevel.cpp" />
@@ -39,10 +44,12 @@
     <ClCompile Include="GUIResources.cpp" />
     <ClCompile Include="GUIUtils.cpp" />
     <ClCompile Include="HDRCompositor.cpp" />
+    <ClCompile Include="HeroTimings.cpp" />
     <ClCompile Include="InGameMenu.cpp" />
     <ClCompile Include="LaneSettings.cpp" />
     <ClCompile Include="LERPWalk.cpp" />
     <ClCompile Include="LERPWalkAttack.cpp" />
+    <ClCompile Include="LevelEnd.cpp" />
     <ClCompile Include="LevelIntro.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelMenu.cpp" />
@@ -139,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="AnimationAttack.h" />
     <ClInclude Include="AnimationDie.h" />
+    <ClInclude Include="AnimationIdle.h" />
     <ClInclude Include="AnimationPrepare.h" />
     <ClInclude Include="AnimationTumble.h" />
     <ClInclude Include="AnimationWalk.h" />
@@ -168,7 +176,9 @@
     <ClInclude Include="Gorilla.h" />
     <ClInclude Include="GUIUtils.h" />
     <ClInclude Include="HDRCompositor.h" />
+    <ClInclude Include="HeroTimings.h" />
     <ClInclude Include="InGameMenu.h" />
+    <ClInclude Include="LevelEnd.h" />
     <ClInclude Include="LevelIntro.h" />
     <ClInclude Include="LevelTwo.h" />
     <ClInclude Include="LoadingScreen.h" />
@@ -357,7 +367,7 @@
       <AdditionalIncludeDirectories>$(TBCDEP)\include\OIS;$(TBCDEP)\include\OGRE\Overlay;$(TBCDEP)\include\OGRE;$(TBCDEP)\include\boost;$(TBCDEP)\include\SFML;$(TBCDEP)\include\particleu</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>

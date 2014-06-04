@@ -66,6 +66,7 @@ void ModelHandler::freeze()
 {
 	m_freezeTimer = 128.0;
 }
+#include "ModelRecipePlayer.h"
 void ModelHandler::init() 
 {
 	m_crRecipe->attachNode(m_node, m_entity);
@@ -73,7 +74,9 @@ void ModelHandler::init()
 	m_animations[ANIMATIONS::WALK]	= unique_ptr<BaseAnimation>(m_crRecipe->getWalk(m_entity, &m_skritt) );
 	m_animations[ANIMATIONS::DIE]	= unique_ptr<BaseAnimation>(m_crRecipe->getDie(m_entity) );
 	m_animations[ANIMATIONS::PREPARE] = unique_ptr<BaseAnimation>(m_crRecipe->getPrepare(m_entity));
-	m_animations[ANIMATIONS::TUMBLE]	= unique_ptr<BaseAnimation>(m_crRecipe->getTumble(m_entity) );
+	m_animations[ANIMATIONS::TUMBLE]	= unique_ptr<BaseAnimation>(m_crRecipe->getTumble(m_entity, &m_skritt) );
+	if (m_modelHandlerType == ModelHandlerType::Player)
+		m_animations[ANIMATIONS::IDLE] = unique_ptr<BaseAnimation>( static_cast<ModelRecipePlayer*> (m_crRecipe.get())->getIdle(m_entity) );
 	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
 }
 
@@ -89,12 +92,21 @@ bool ModelHandler::normalWalk(const Ogre::Real& speed, const NormalDirection& ac
 	m_animations[ANIMATIONS::WALK]->addTime(Ogre::Math::Abs(rInc)*GlobalVariables::getSingleton().getNormalAnimWalkSpeed(), m_animations);
 	if (Occupado::isOccupiedVelocity(m_normalPosition, rInc))
 		return false;
-	m_normalPosition.theta += rInc;
-	UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
+	bool returnVal = false;
+	if (m_normalPosition.theta + rInc > 0.1f  || rInc > 0.0f)
+	{
+        m_normalPosition.theta += rInc;
+        UnitCircleMovement::polarSetPosition(m_node, m_normalPosition);
+		returnVal = true;
+	}
 	UnitCircleMovement::polarSetDirection(m_node, m_normalPosition, activeDirection);
-	return true;
+	return returnVal;
 }
 
+void ModelHandler::setEntity(Ogre::Entity * entity)
+{
+	m_entity = entity;
+}
 void ModelHandler::fallAndDie()
 {
 	Real animVel = scaleTime(1.0f) * GlobalVariables::getSingleton().getAnimDieSpeed();
@@ -108,7 +120,7 @@ AttackReturn ModelHandler::lerpAttack( const Ogre::Vector3& nextPosition, const 
 {
 	if (!m_hasLerpAttacked)
 	{
-		if (!lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision+75.0f, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
+		if (!lerp(nextPosition, dt, ANIMATIONS::ATTACK, m_LERPPrecision+7050.0f, GlobalVariables::getSingleton().getLERPAnimAttackRatio()))
 			m_hasLerpAttacked = true;
 		return AttackReturn::NOT_KILLED;
 	}
@@ -203,12 +215,14 @@ void ModelHandler::updateNormalPos()
 {
 	vectorToPolar(m_node->getPosition(), m_normalPosition);
 }
+/*
 const Vector3 ModelHandler::getBonePos() const
 {
-	return (*(m_entity->getSkeleton()->getBoneIterator().begin() + 5))->_getDerivedPosition();
+	return m_entity->getSkeleton()->getBone("bn_spB01")->_getDerivedPosition();
 }
 const Vector3 ModelHandler::getBoneOrientation() const
 {
-	return (*(m_entity->getSkeleton()->getBoneIterator().begin() + 5))->_getDerivedOrientation().yAxis();
+	return m_entity->getSkeleton()->getBone("bn_spB01")->_getDerivedOrientation().yAxis();
 }
 
+*/

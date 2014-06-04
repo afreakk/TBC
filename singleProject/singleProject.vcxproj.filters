@@ -479,6 +479,27 @@
     <ClCompile Include="GlobalVariables.cpp">
       <Filter>Stats</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationAttack.cpp">
+      <Filter>Model\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationWalk.cpp">
+      <Filter>Model\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationDie.cpp">
+      <Filter>Model\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationTumble.cpp">
+      <Filter>Model\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationIdle.cpp">
+      <Filter>Model\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroTimings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -817,9 +838,6 @@
     <ClInclude Include="BillboardNumber.h">
       <Filter>Props\concrete</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationPrepare.h">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="MutantHandlerStateTumble.h">
       <Filter>BehaviourStateHandler\Mutant</Filter>
     </ClInclude>
@@ -917,6 +935,18 @@
       <Filter>GUI\utils</Filter>
     </ClInclude>
     <ClInclude Include="SoundOfSpeed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationPrepare.h">
+      <Filter>Model\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationIdle.h">
+      <Filter>Model\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroTimings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

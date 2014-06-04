@@ -20,7 +20,7 @@ BloodSplat::~BloodSplat()
 
 void BloodSplat::update()
 {
-	m_emitter->position = m_model->getBonePos();
+	m_emitter->position = m_model->getBonePos() ;
       
 	ParticleEffect::update();
 }

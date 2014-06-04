@@ -10,8 +10,8 @@ public:
 	~LvlTwoEnvironment();
 	void update();
 private:
-	LightHandler m_lightHandler;
-	std::vector<std::unique_ptr<WeatherSnow> >m_snowRenderers;
+	LightHandlerTwo m_lightHandler;
+/*	std::vector<std::unique_ptr<WeatherSnow> >m_snowRenderers;
 	std::unique_ptr<SnowInstance> m_snowParticles;
-	void initSnow();
+	void initSnow();*/
 };

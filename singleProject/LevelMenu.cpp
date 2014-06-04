@@ -10,7 +10,7 @@ LevelMenu::LevelMenu()
 , m_time(Real(0.0))
 , m_menu(new MainMenu())
 {
-    SoundFactory::getSingleton().playMusic("music/intro.ogg");
+    SoundFactory::getSingleton().playMusic("music/menu.ogg");  
 }
 
 
@@ -22,6 +22,7 @@ void LevelMenu::handleButtonClicked(ButtonType buttonClicked)
     switch (buttonClicked)
     {
 	case ButtonType::changeResolution:
+//		OgreCore::getSingleton().getWindow()->resize(800, 600);
 		break;
 	case ButtonType::resumeGame:
 		if (!GameStarter::resumeGame())

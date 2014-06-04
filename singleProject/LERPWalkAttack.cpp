@@ -9,7 +9,7 @@ LerpTowardsReturn LERPWalkAttack::update(ModelHandler& modelHandler, const Vecto
 }
 LerpTowardsReturn LERPWalkAttack::lerpTowardsTarget(ModelHandler& modelHandler, LerpTowardsReturn oldEnumValue, const Vector3& tPos, const Ogre::Real& speed)
 {
-    if (oldEnumValue == LerpTowardsReturn::RUNNING)
+/*    if (oldEnumValue == LerpTowardsReturn::RUNNING)
     {
         if (modelHandler.lerpWalk(tPos, speed))
             return LerpTowardsReturn::RUNNING;
@@ -17,7 +17,7 @@ LerpTowardsReturn LERPWalkAttack::lerpTowardsTarget(ModelHandler& modelHandler, 
             return LerpTowardsReturn::ATTACKING;
     }
     else
-    {
+    {*/
         switch (modelHandler.lerpAttack(tPos, speed))
         {
         case AttackReturn::NOT_KILLED:
@@ -30,5 +30,5 @@ LerpTowardsReturn LERPWalkAttack::lerpTowardsTarget(ModelHandler& modelHandler, 
             assert(0);
             return LerpTowardsReturn::ANIMATION_END;
         }
-    }
+    /*}*/
 }

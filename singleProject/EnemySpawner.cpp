@@ -55,10 +55,10 @@ void EnemySpawner::instantiateNewEnemies()
 			switch ((*posIter).weaponType)
 			{
 			case WeaponType::SUICIDE_BOMB:
-                modelRecipe = new ModelRecipeMutantSuicide();
+                modelRecipe = new ModelRecipeMutant(true);
 				break;
 			default:
-				modelRecipe = new ModelRecipeMutant();
+				modelRecipe = new ModelRecipeMutant(false);
 				break;
 			}
 			Mutant* mutant = new Mutant((*posIter).polar,(*posIter).weaponType , modelRecipe );

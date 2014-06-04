@@ -12,7 +12,7 @@ CoreCompositor::CoreCompositor(Ogre::Viewport* viewport)
     Ogre::MaterialManager::getSingleton().addListener(gml.get());
     CompositorManager::getSingleton().addCompositor(m_vp, "B&W");
 	CompositorManager::getSingleton().addCompositor(m_vp, "blurStuff");
-	CompositorManager::getSingleton().setCompositorEnabled(m_vp, "blurStuff", true);
+//	CompositorManager::getSingleton().setCompositorEnabled(m_vp, "blurStuff", true);
 	CompositorManager::getSingleton().addCompositor(m_vp, "tooltipShow");
 	CompositorManager::getSingleton().addCompositor(m_vp, "MotionBlur");
 	CompositorManager::getSingleton().setCompositorEnabled(m_vp, "MotionBlur", true);

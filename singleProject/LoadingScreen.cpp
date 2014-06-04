@@ -58,7 +58,7 @@ void LevelLoaderBar::start(RenderWindow* window)
 
     OverlayElement* barContainer = omgr.getOverlayElement("Core/LoadPanel/Bar");
     mLoadingBarElement->setWidth(0);
-	mProgressBarInc = 6.5f;
+	mProgressBarInc = 12.5f;
 	write1337Text();
 	animate();
 	mWindow->update();
@@ -79,7 +79,7 @@ void LevelLoaderBar::finish(void)
 static unsigned detailDropper = 0;
 void LevelLoaderBar::messageLogged(const String& message, LogMessageLevel lml, bool maskDebug, const String &logName, bool& skipThisMessage)
 {
-	if (detailDropper < 20)
+	if (detailDropper < 10)
 		detailDropper++;
 	else
 		write1337Text();

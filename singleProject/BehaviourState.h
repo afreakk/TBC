@@ -6,7 +6,9 @@ class ModelHandler;
 class BehaviourState : public boost::noncopyable
 {
 public:
-	BehaviourState(BEHAVOUR_STATE state) :m_state(state), m_nextState(m_state)
+	BehaviourState(BEHAVOUR_STATE state) 
+		:m_state(state)
+		, m_nextState(m_state)
 	{
 	}
 	virtual ~BehaviourState()

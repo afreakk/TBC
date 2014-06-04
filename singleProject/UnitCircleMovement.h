@@ -14,7 +14,7 @@ public:
 };
 void keepWithinMax(Ogre::Real*);
 bool isWithinRange(Ogre::Real, Ogre::Real, Ogre::Real);
-unsigned energyCostOf(PolarCoordinates, PolarCoordinates);
+unsigned energyCostOf(const Ogre::Vector3& a, const Ogre::Vector3& b);
 void vectorToPolar(const Ogre::Vector3 vec, PolarCoordinates&);
 Ogre::Vector3 vectorFromTumbleDirection(Ogre::Vector3 playerPos, TUMBLE_DIRECTION direction);
 PolarCoordinates polarFromStarting(Ogre::Real r, unsigned laneIdx);

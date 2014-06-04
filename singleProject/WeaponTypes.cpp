@@ -34,12 +34,14 @@ void MutantFlameThrower::update()
 FrostBolt::FrostBolt(Ogre::SceneNode* parentNode, ModelHandler* model)
 :WeaponBall(parentNode, model, "MutantFrostBolt", "frostbolt", "")
 , m_lForceAffector(static_cast<ParticleUniverse::LinearForceAffector*>(m_particleSystem->getTechnique(1)->getAffector("force")))
+, m_soundLoopHandler("sfx/Frostbolt", "_start", "_midt", "_hit")
 {
 //    static_cast<ParticleUniverse::LinearForceAffector*>(m_particleSystem->getTechniquedd(1)->
 }
 void FrostBolt::activate()
 {
 	WeaponBall::activate();
+	m_soundLoopHandler.begin();
 }
 #include "MutantGlobalStats.h"
 static Ogre::Real BoltSpeed = 2500;
@@ -49,9 +51,11 @@ void FrostBolt::update()
 	{
 		Vector3 lforce = Vector3(0, 0, BoltSpeed);
         setForce(lforce);
+		m_soundLoopHandler.loop();
 	}
 	else
 	{
+		m_soundLoopHandler.end(true);
 		m_lForceAffector->setEnabled(false);
 	}
 	WeaponBall::update();
@@ -63,11 +67,11 @@ void FrostBolt::setForce(const Ogre::Vector3& localForceDirection)
 //MutantFireBall
 MutantFireBall::MutantFireBall(SceneNode* parentNode, ModelHandler* model)
 : WeaponMissile(parentNode, model, "MutantFireBall", "FireBall", "FireEmitter" )
-, m_weaponDamage(40)
+, m_weaponDamage(50)
 , m_shadow(parentNode)
 , m_shadowPos(Vector3::ZERO)
 , m_doHitTest(false)
-, m_soundLoopHandler("Frostbolt", "_start", "_midt", "_hit")
+, m_soundLoopHandler("sfx/Frostbolt", "_start", "_midt", "_hit")
 {
 	m_collisionObserver = static_cast<ParticleUniverse::ParticleAffector*>(m_particleSystem->getTechnique(0)->getAffector("boolman"));
 	m_planeCollider = static_cast<ParticleUniverse::SphereCollider*>(m_particleSystem->getTechnique(0)->getAffector("planecollider"));
@@ -103,7 +107,7 @@ void MutantFireBall::update()
 		if (m_collisionObserver->isEnabled())
 		{
 			disable();
-			m_soundLoopHandler.end();
+			m_soundLoopHandler.end(true);
 		}
 		else
 			m_soundLoopHandler.loop();
@@ -122,7 +126,7 @@ void MutantFireBall::stop(bool v)
 
 MutantSuicide::MutantSuicide(Ogre::SceneNode* parentNode, ModelHandler* model)
 : WeaponBomb(parentNode, model, "suicideExploisionnn", "suicideExplosion" )
-, m_weaponRadius(800.0)
+, m_weaponRadius(700.0)
 , m_detonated(false)
 {
 	m_node->setPosition(0.0, 150.0, 0.0);

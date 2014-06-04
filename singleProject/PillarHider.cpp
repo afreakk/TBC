@@ -34,7 +34,7 @@ void PillarHider::update()
 
                         auto roofPipeEnt = envObjs.getNext();
                         PolarCoordinates polarPos = UnitCircleMovement::PolarFromVector(node->_getDerivedPosition());
-						if (float_compare(polarPos.theta, PlayerContainer::getSingleton().getPlayer()->getPolarCoordinates().theta, 0.2f))
+						if (float_compare(polarPos.theta, PlayerContainer::getSingleton().getPlayer()->getPolarCoordinates().theta, 0.3f))
 							static_cast<Entity*>(roofPipeEnt)->setVisible(false);
 						else
 							static_cast<Entity*>(roofPipeEnt)->setVisible(true);

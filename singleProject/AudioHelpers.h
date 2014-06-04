@@ -58,6 +58,8 @@ public:
 	bool end(bool force=false) override;
 private:
 	sf::Sound* m_current;
+	sf::Sound* m_endSound;
+	bool m_endPlayedOnce;
 };
 //-----------------------FOOTSTEPZ-----------------------------
 class Skritt

@@ -30,6 +30,7 @@ private:
 	bool m_pause;
 	bool m_hit;
 	bool m_swordSwung;
+	Real m_killTimer;
 
 };
 

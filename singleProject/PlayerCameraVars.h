@@ -28,8 +28,12 @@ public:
 	{
 		return m_playerCameraLerp;
 	}
-private:
+	void setCameraDistance(Ogre::Real distance)
+	{
+		m_playerCameraNormal.distance = distance;
+	}
 	void parseScript();
+private:
 	PlayerCameraNormalVars m_playerCameraNormal;
 	PlayerCameraLERPVars m_playerCameraLerp;
 };

@@ -30,7 +30,6 @@ BaseGameLevel::~BaseGameLevel()
 	destroyWorld();
 	m_mutantContainer->destroyHandlers();
 	m_playerContainer->destroyHandlers();
-	destroyWorld();
 	unLinkSubscribers();
 }
 void BaseGameLevel::destroyWorld()
@@ -56,6 +55,7 @@ void BaseGameLevel::unLinkSubscribers()
 #include "GlobalVariables.h"
 bool BaseGameLevel::update()
 {
+//	cout << OgreCore::getSingleton().getWindow()->getAverageFPS() << endl;
 	GlobalVariables::getSingleton().updateLerp();
 	m_time += MainUpdate::getSingleton().getDeltaTime();
 	m_particleRefContainer->update();

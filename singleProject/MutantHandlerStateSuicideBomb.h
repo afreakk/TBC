@@ -5,6 +5,10 @@ class BehaviourObject;
 class BehaviourState;
 #include "ENUMTumbleDirection.h"
 #include "ENUMNormalDirection.h"
+namespace sf
+{
+	class Sound;
+}
 enum class SUICIDE_STATE
 {
     NORMAL,
@@ -38,5 +42,8 @@ private:
 	void handleTumble();
 	void setState(SUICIDE_STATE state);
 	void clickClicker();
+
+	sf::Sound* m_tickSound;
+	sf::Sound* m_screamSound;
 
 };

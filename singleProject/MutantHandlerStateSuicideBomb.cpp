@@ -9,6 +9,7 @@
 #include "MutantContainer.h"
 #include "LERPWalkAttack.h"
 #include "BehaviourStateTumble.h"
+#include "SoundFactory.h"
 // playerObject, &MutantGlobalStats::getSingleton().getLERPSpeed(),new LERPWalkAttack()
 MutantHandlerStateSuicideBomb::MutantHandlerStateSuicideBomb(BehaviourObject* mutant, BehaviourObject* playerObject)
 : HandlerState(MUTANT_HANDLER_STATE::RANGED_ATTACK)
@@ -21,6 +22,8 @@ MutantHandlerStateSuicideBomb::MutantHandlerStateSuicideBomb(BehaviourObject* mu
 , m_player(playerObject)
 , m_tumbleDirection(TUMBLE_DIRECTION::DIRECTION_NONE)
 , m_mutantState(SUICIDE_STATE::NORMAL)
+, m_tickSound(nullptr)
+, m_screamSound(nullptr)
 {
 	m_mutant->setState(m_mutState.get());
 }
@@ -28,14 +31,23 @@ MutantHandlerStateSuicideBomb::MutantHandlerStateSuicideBomb(BehaviourObject* mu
 
 MutantHandlerStateSuicideBomb::~MutantHandlerStateSuicideBomb()
 {
+	if (m_tickSound)
+        m_tickSound->stop();
+	if (m_screamSound)
+        m_screamSound->stop();
+	SoundFactory::getSingleton().playSound3D("sfx/Suicide_BANG.ogg", "sfx/Suicide_BANG.ogg", m_mutant->getNode());
 }
 
 void MutantHandlerStateSuicideBomb::update()
 {
+	if (!m_tickSound&& m_detonationTimer <= 2.0f)
+        m_tickSound = SoundFactory::getSingleton().playSound3D("sfx/Suicide_Tikk.ogg", "sfx/Suicide_Tikk.ogg", m_mutant->getNode());
+	if (!m_screamSound&& m_detonationTimer <= 4.0f)
+        m_screamSound = SoundFactory::getSingleton().playSound3D("sfx/Suicide_Skrik.ogg", "sfx/Suicide_Skrik.ogg", m_mutant->getNode());
 	handleTumble();
 	steerTowardsPlayer();
 	handleDetonationTimer();
-	if (m_player->getNode()->getPosition().distance(m_mutant->getNode()->getPosition()) < 200.0)
+	if (m_player->getNode()->getPosition().distance(m_mutant->getNode()->getPosition()) < 300.0)
 		clickClicker();
 }
 

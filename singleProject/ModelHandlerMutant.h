@@ -20,6 +20,8 @@ public:
 	void init() override;
 	WeaponType getWeaponType();
 	bool isHovered();
+	virtual const Vector3 getBonePos() const ;
+	virtual const Vector3 getBoneOrientation()  const ;
 private:
 	SelectedTag m_selectedTag;
 	unique_ptr<WeaponBase> m_weapon;

@@ -19,7 +19,7 @@ bool MenuControls::down(const OIS::KeyCode& key)
 }
 bool MenuControls::select(const OIS::KeyCode& key)
 {
-	if (key == OIS::KeyCode::KC_SPACE || key == OIS::KeyCode::KC_RETURN || key == OIS::KeyCode::KC_C )
+	if (key == OIS::KeyCode::KC_RETURN || key == OIS::KeyCode::KC_C )
 		return true;
 	return false;
 }
@@ -63,10 +63,12 @@ void MenuBase::resetButtonClicked()
 {
 	m_buttonClicked = ButtonType::none;
 }
+#include "SoundFactory.h"
 bool MenuBase::keyPressed(const OIS::KeyEvent &arg)
 {
 	if (m_controls.up(arg.key))
 	{
+		SoundFactory::getSingleton().playSound("sfx/Menyklikk_1.ogg", "sfx/Menyklikk_1.ogg");
 		m_selectedButton->selected(false);
 		if (m_selectedButton != m_buttons.begin())
 			m_selectedButton --;
@@ -76,6 +78,7 @@ bool MenuBase::keyPressed(const OIS::KeyEvent &arg)
 	}
 	else if (m_controls.down(arg.key))
 	{
+		SoundFactory::getSingleton().playSound("sfx/Menyklikk_1.ogg", "sfx/Menyklikk_1.ogg");
 		m_selectedButton->selected(false);
 		if (m_selectedButton != (--m_buttons.end()))
 			m_selectedButton++;
@@ -85,11 +88,13 @@ bool MenuBase::keyPressed(const OIS::KeyEvent &arg)
 	}
 	else if (m_controls.select(arg.key))
 	{
+        SoundFactory::getSingleton().playSound("sfx/Menyklikk_2.ogg", "sfx/Menyklikk_2.ogg");
 		m_buttonClicked = m_selectedButton->getType();
 		m_selectedButton->animateClick();
 	}
 	else if (m_controls.back(arg.key))
 	{
+		SoundFactory::getSingleton().playSound("sfx/Menyklikk_1.ogg", "sfx/Menyklikk_1.ogg");
 		m_buttonClicked = ButtonType::backToMenu;
 	}
 	return true;

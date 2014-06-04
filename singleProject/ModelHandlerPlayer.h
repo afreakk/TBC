@@ -14,6 +14,8 @@ public:
 	void teleportMove(const Ogre::Vector3& to);
 	void teleportOut();
 	bool isTeleporting();
+	virtual const Vector3 getBonePos() const ;
+	virtual const Vector3 getBoneOrientation()  const ;
 protected:
 	SlowMotionParticle m_slowMoParticle;
 	TeleportParticle m_teleportParticle;

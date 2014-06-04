@@ -73,6 +73,7 @@ bool OgreCore::initResources()
 
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/hud", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/deathscreen", "FileSystem", "GUI");
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/endlevel", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/menu/main", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/menu/options", "FileSystem", "GUI");
 	Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media/gui/menu/pause", "FileSystem", "GUI");
@@ -103,7 +104,7 @@ bool OgreCore::initWindow(const int xResolution, const int yResolution, const Og
 	m_resolution.x = Ogre::Math::Floor(static_cast<Ogre::Real>(xResolution));
 	m_resolution.y = Ogre::Math::Floor(static_cast<Ogre::Real>(yResolution));
 	Ogre::NameValuePairList opts;
-	opts["title"] = "www";
+	opts["title"] = "Even";
 	opts["vsync"] = "false";
 	opts["FSAA"] = "4";
 	bool fullscreen = false;

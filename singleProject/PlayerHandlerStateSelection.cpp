@@ -48,9 +48,9 @@ void PlayerHandlerStateSelection::newMarked()
 bool PlayerHandlerStateSelection::updateMarked()
 {
 	if (m_markedList.size() > 0)
-		return m_selectionHandler.updateMarked(getLatestMarkedPolar());
+		return m_selectionHandler.updateMarked(MutantContainer::getSingleton().getMutant(*(m_markedList.end()-1))->getNode()->getPosition());
 	else
-		return m_selectionHandler.updateMarked(m_player->getPolarCoordinates());
+		return m_selectionHandler.updateMarked(m_player->getNode()->getPosition());
 }
 void PlayerHandlerStateSelection::notify(std::string victim)
 {

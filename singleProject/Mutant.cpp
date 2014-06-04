@@ -14,3 +14,4 @@ Mutant::~Mutant()
 {
 	cout << "mutant destrocutor" << endl;
 }
+

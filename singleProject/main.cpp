@@ -13,10 +13,14 @@
 #include "SoundFactory.h"
 #include "LoadingScreen.h"
 #include "GameConsole.h"
-int main()
+int WINAPI wWinMain(
+	HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	LPWSTR lpCmdLine,
+	int nCmdShow)
 {
-	try
-	{
+//	try
+//	{
 		LoadingBar loadingBar;
 		unique_ptr<SoundFactory> soundFactory(new SoundFactory());
 		unique_ptr<OgreCore> ogreCore(new OgreCore());
@@ -63,9 +67,16 @@ int main()
 		unique_ptr<MainUpdate> mainUpdate(new MainUpdate(lvlSetter->getLevelManager()));
         new CoreCompositor(OgreCore::getSingleton().getCamera()->getViewport());
 		loadingBar.finish();
+
+        //-- preload enemy
+        auto resourcePtr =  MeshManager::getSingleton().createOrRetrieve("monster.mesh", "Models") ;
+        auto mesh = resourcePtr.first.dynamicCast<Ogre::Mesh>();
+        unsigned short src, dest;
+        if (!mesh->suggestTangentVectorBuildParams(Ogre::VertexElementSemantic::VES_TANGENT, src,dest))
+            mesh->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
 		Ogre::Root::getSingletonPtr()->startRendering();
 		cout << "rendering stopped ." << endl;
-	}
+/*	}
 	catch (Ogre::Exception &e)
 	{
 		std::cout << "!!!!Ogre::Exception!!!!\n" << e.what() << std::endl;
@@ -76,6 +87,6 @@ int main()
 	}
 	std::cout << std::endl << "Exiting main." << std::endl;
 	char p;
-	std::cin >> p;
+	std::cin >> p;*/
 	return 0;
 }

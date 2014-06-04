@@ -12,11 +12,10 @@ ModelRecipeMutantSuicide::ModelRecipeMutantSuicide()
 : m_id(++s_count)
 , m_entityName("MutantSuicide"+boost::lexical_cast<string>(m_id))
 , m_nodeName("MutantSuicide"+boost::lexical_cast<string>(m_id))
-, m_materialName("Examples/Robot")
-, m_hoveredName("HoveredSuicide")
+, m_materialName("suzidet")
+, m_hoveredName("suzide")
 {
 }
-string anvn = "Walk";
 ModelRecipeMutantSuicide::~ModelRecipeMutantSuicide()
 {
 }
@@ -24,7 +23,7 @@ ModelRecipeMutantSuicide::~ModelRecipeMutantSuicide()
 BaseAnimation* ModelRecipeMutantSuicide::getPrepare(Ogre::Entity* entity)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState(anvn)); // doeznthaveitz
+	anims.push_back(entity->getAnimationState("Slump")); // doeznthaveitz
 	return new AnimationPrepare(anims);
 }
 Ogre::Entity* ModelRecipeMutantSuicide::initMesh(Ogre::SceneManager* sMgr)
@@ -36,6 +35,7 @@ Ogre::Entity* ModelRecipeMutantSuicide::initMesh(Ogre::SceneManager* sMgr)
 		mesh->buildTangentVectors(Ogre::VertexElementSemantic::VES_TANGENT,src, dest);
 	auto ent = sMgr->createEntity(m_entityName, mesh);
 	ent->setUpdateBoundingBoxFromSkeleton(true);
+	ent->setMaterialName("suzide");
 	return ent;
 }
 
@@ -60,7 +60,7 @@ BaseAnimation* ModelRecipeMutantSuicide::getDie(Ogre::Entity* entity)
 BaseAnimation* ModelRecipeMutantSuicide::getWalk(Ogre::Entity* entity, Skritt* skritt)
 {
 	std::vector<AnimationState*> anims;
-	anims.push_back(entity->getAnimationState(anvn));
+	anims.push_back(entity->getAnimationState("Walk"));
 	return new AnimationWalk(anims, skritt);
 }
 BaseAnimation* ModelRecipeMutantSuicide::getAttack(Ogre::Entity* entity)
@@ -73,7 +73,7 @@ void ModelRecipeMutantSuicide::attachNode(Ogre::SceneNode* node, Ogre::Entity* e
 {
 	auto childNode = node->createChildSceneNode();
     childNode->rotate(Vector3(0.0, 1.0, 0.0), Angle(90.0));
-	childNode->scale(Vector3(5.0));
+	childNode->scale(Vector3(2.5));
 	childNode->attachObject(ent);
 
 }
@@ -82,7 +82,7 @@ Ogre::SceneNode* ModelRecipeMutantSuicide::createNode()
 {
 	return OgreCore::getSingleton().getSceneMgr()->getRootSceneNode()->createChildSceneNode(m_nodeName);
 }
-BaseAnimation* ModelRecipeMutantSuicide::getTumble(Ogre::Entity* entity)
+BaseAnimation* ModelRecipeMutantSuicide::getTumble(Ogre::Entity* entity, Skritt*)
 {
 	std::vector<AnimationState*> anims;
 	anims.push_back( entity->getAnimationState("Slump") ) ;

@@ -1,6 +1,5 @@
 #pragma once
 #include "boost/noncopyable.hpp"
-static Real S_CAMERA_RIGHT_TILT = 0.1f;
 class PlayerCameraState : boost::noncopyable
 {
 public:

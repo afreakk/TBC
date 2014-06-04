@@ -41,6 +41,7 @@ public:
 private:
 	void setForce(const Ogre::Vector3& localForceDirection);
 	ParticleUniverse::LinearForceAffector* m_lForceAffector;
+	SoundLoopHandler m_soundLoopHandler;
 };
 //FireBall
 class MutantFireBall : public WeaponMissile

@@ -50,3 +50,14 @@ bool ModelHandlerPlayer::isTeleporting()
 {
 	return m_isTeleporting;
 }
+
+
+
+const Vector3 ModelHandlerPlayer::getBonePos() const
+{
+	return m_entity->getSkeleton()->getBone("main_Char_rig_skinned_NEW05:be_spE01")->_getDerivedPosition();
+}
+const Vector3 ModelHandlerPlayer::getBoneOrientation() const
+{
+	return m_entity->getSkeleton()->getBone("main_Char_rig_skinned_NEW05:be_spE01")->_getDerivedOrientation().yAxis();
+}

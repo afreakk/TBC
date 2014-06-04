@@ -9,7 +9,7 @@
 #include "PlayerContainer.h"
 #include "MutantContainer.h"
 #include "Player.h"
-const Real LaunchHeight = 200.0f;
+const Real LaunchHeight = 460.0f;
 
 //WeaponBase
 
@@ -78,12 +78,12 @@ WeaponBall::WeaponBall(SceneNode* parentNode, ModelHandler* model, String id, St
 : WeaponBase(parentNode, model, id, templateName, emitterName)
 , m_ballDamageRadius(400.0f)
 , m_detonation(0.0f, false, false)
-, m_startingPos(0.0f,LaunchHeight,0.0f)
+, m_startingPos(0.0f,LaunchHeight-50.0f,0.0f)
 , m_shadow(m_node)
 {
 	m_shadow.create();
 	m_shadow.setVisible(false);
-	m_shadow.setPosition(Vector3(0.0f, -LaunchHeight, 0.0f));
+	m_shadow.setPosition(Vector3(0.0f, -LaunchHeight-50.0f, 0.0f));
 	m_node->setPosition(m_startingPos);
 }
 WeaponBall::~WeaponBall()

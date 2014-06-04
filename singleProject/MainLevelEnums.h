@@ -5,5 +5,6 @@ enum class MainLevelEnums
     MENU,
     LVL1,
     LVL2,
-    INTRO
+    INTRO,
+    LVLEND,
 };

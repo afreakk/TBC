@@ -42,11 +42,9 @@ void keepWithinMax(Real* d)
 	while (*d < 0.0)
 		*d += Math::PI*2.0f;
 }
-unsigned energyCostOf(PolarCoordinates a, PolarCoordinates b)
+unsigned energyCostOf(const Ogre::Vector3& a, const Ogre::Vector3& b)
 {
-	keepWithinMax(&a.theta);
-	keepWithinMax(&b.theta);
-	return static_cast<unsigned>(round( Ogre::Math::Abs(a.theta - b.theta)*110.0 ));
+	return static_cast<unsigned>(round( a.distance(b)/100.0 ));
 }
 bool isWithinRange(Real r1, Real r2, Real distance)
 {
